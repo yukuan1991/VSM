@@ -40,19 +40,9 @@ flow_main::~flow_main()
 void flow_main::file_new()
 {
     canvas_body *canvs = create_canvas_body();
-  //  file_new _tile(canvs);
     canvs->show();
-
 }
 
-//flow_main::file_new_tile(canvas_body *window)
-//{
-//    is_untitled_ = true;//设置为未命名
-//    cur_file_ = tr("图片文档 %1").arg(sequence_number_);//将当前文件命名为文档加编号的形式
-//    sequence_number_++;
-
-//    setWindowTitle(cur_file_ + "[*]"+ tr("echo"));//文档被改之后显示*这个标志被修改
-//}
 
 canvas_body *flow_main::create_canvas_body()
 {

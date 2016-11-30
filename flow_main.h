@@ -31,7 +31,6 @@ private slots:
 private:
     canvas_body *create_canvas_body();
     void file_new();
- //   static void file_new_tile(canvas_body* window);
 private:
     Ui::flow_main *ui;
     std::unique_ptr<QDockWidget> drawer_ = std::make_unique<QDockWidget> (this);
