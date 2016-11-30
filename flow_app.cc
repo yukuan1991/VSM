@@ -14,7 +14,7 @@ flow_app::flow_app(int argc, char **argv)
 
 bool flow_app::run()
 {
-    main_ = std::make_unique<main_widget> (nullptr, std::make_unique<canvas_scene> ());
+    main_ = std::make_unique<flow_main> ();
 
     QDir svg_dir ("svg");
 
@@ -31,7 +31,7 @@ bool flow_app::run()
         path_list.push_back (it.absoluteFilePath ());
     }
 
-    main_->set_drawer (path_list);
+    //main_->set_drawer (path_list);
 
     main_->show ();
     return true;
