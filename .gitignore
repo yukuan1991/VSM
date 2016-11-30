@@ -11,3 +11,5 @@
 !/**/*.pri
 !/svg
 !/svg/*.svg
+!/image
+!/image/*.png
