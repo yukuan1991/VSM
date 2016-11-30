@@ -9,6 +9,7 @@
 #include <QDragMoveEvent>
 #include <QDropEvent>
 #include <QMimeData>
+#include "flow_utility.h"
 #include <QGraphicsSvgItem>
 
 
@@ -192,6 +193,8 @@ void canvas_view::svg_drop_action(QDropEvent *event)
 
     auto new_center = raw_svg_item->mapRectToScene (raw_svg_item->boundingRect ()).center ();
     auto diff = new_center - mouse_pos;
+
+    add_svg_to_scene (path, scene (), mapToScene (event->pos ()));
 
     raw_svg_item->moveBy (- diff.x (), - diff.y ());
 }

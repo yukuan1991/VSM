@@ -29,6 +29,9 @@ private slots:
     ///新建文件
     void file_new();
     canvas_body *create_canvas_body();
+private:
+    void set_mdi_area ();
+    void init_conn ();
 
 private:
     Ui::flow_main *ui;

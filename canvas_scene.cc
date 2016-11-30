@@ -8,6 +8,29 @@ void canvas_scene::init()
     setSceneRect ({0, 0, 10000, 10000});
 }
 
+bool canvas_scene::load(const nlohmann::json &data) try
+{
+    if (!data.is_array ())
+    {
+        return false;
+    }
+
+    for (auto & it : data)
+    {
+
+    }
+    return true;
+}
+catch (const std::exception& e)
+{
+    return false;
+}
+
+nlohmann::json canvas_scene::dump()
+{
+    return {};
+}
+
 void canvas_scene::on_selection_changed()
 {
     auto selected = selectedItems ();

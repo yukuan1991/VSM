@@ -9,14 +9,10 @@ flow_main::flow_main(QWidget *parent) :
     ui(new Ui::flow_main)
 {
     ui->setupUi(this);
-    mdi_area_->setHorizontalScrollBarPolicy(Qt::ScrollBarAsNeeded);
-    mdi_area_->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
-    setCentralWidget(mdi_area_);
 
-    connect (drawer_.get (), &QDockWidget::visibilityChanged, [this] (bool){ on_drawer_visibility_changed (); });
-    connect(ui->action_file_new, SIGNAL(triggered()), this, SLOT(file_new()));
+    set_mdi_area ();
 
-
+    init_conn ();
 }
 
 void flow_main::set_drawer(const QStringList& data)
@@ -41,18 +37,29 @@ flow_main::~flow_main()
 
 void flow_main::file_new()
 {
-    canvas_body *canvs = create_canvas_body();
-    qDebug () << __func__;
-    canvs->show();
-
+    canvas_body *canvas = create_canvas_body();
+    canvas->show();
 }
 
 canvas_body *flow_main::create_canvas_body()
 {
     canvas_body* canvas = new canvas_body();
     mdi_area_->addSubWindow(canvas);
-    canvas->setWindowState(Qt::WindowMaximized);//使得创建的新窗口默认为最大化
+    canvas->setWindowState(Qt::WindowMaximized);
     return canvas;
+}
+
+void flow_main::set_mdi_area()
+{
+    mdi_area_->setHorizontalScrollBarPolicy(Qt::ScrollBarAsNeeded);
+    mdi_area_->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
+    setCentralWidget(mdi_area_);
+}
+
+void flow_main::init_conn()
+{
+    connect (drawer_.get (), &QDockWidget::visibilityChanged, [this] (bool){ on_drawer_visibility_changed (); });
+    connect(ui->action_file_new, SIGNAL(triggered()), this, SLOT(file_new()));
 }
 
 
