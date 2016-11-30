@@ -36,9 +36,9 @@
     <property name="title">
      <string>编辑</string>
     </property>
-    <addaction name="action_brow_up"/>
-    <addaction name="zoom_out_action"/>
-    <addaction name="back_out_actiopn"/>
+    <addaction name="action_zoom_in"/>
+    <addaction name="action_zoom_out"/>
+    <addaction name="action_back_out"/>
    </widget>
    <addaction name="file_menu"/>
    <addaction name="edit_menu"/>
@@ -92,7 +92,7 @@
     <string>另存为</string>
    </property>
   </action>
-  <action name="action_brow_up">
+  <action name="action_zoom_in">
    <property name="icon">
     <iconset>
      <normaloff>C:/Users/Administrator/Desktop/放大.png</normaloff>C:/Users/Administrator/Desktop/放大.png</iconset>
@@ -104,7 +104,7 @@
     <string>放大 图片</string>
    </property>
   </action>
-  <action name="zoom_out_action">
+  <action name="action_zoom_out">
    <property name="icon">
     <iconset>
      <normaloff>C:/Users/Administrator/Desktop/缩小.png</normaloff>C:/Users/Administrator/Desktop/缩小.png</iconset>
@@ -116,7 +116,7 @@
     <string>缩小图片</string>
    </property>
   </action>
-  <action name="back_out_actiopn">
+  <action name="action_back_out">
    <property name="icon">
     <iconset>
      <normaloff>image/editundo.png</normaloff>image/editundo.png</iconset>
