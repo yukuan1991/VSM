@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>flow_main</class>
  <widget class="QMainWindow" name="flow_main">
@@ -23,35 +23,35 @@
      <height>17</height>
     </rect>
    </property>
-   <widget class="QMenu" name="menu">
+   <widget class="QMenu" name="file_menu">
     <property name="title">
      <string>文件</string>
     </property>
-    <addaction name="action"/>
-    <addaction name="action_2"/>
-    <addaction name="action_3"/>
-    <addaction name="action_4"/>
+    <addaction name="action_file_new"/>
+    <addaction name="action_file_open"/>
+    <addaction name="action_file_save"/>
+    <addaction name="action_file_save_other"/>
    </widget>
-   <widget class="QMenu" name="menu_2">
+   <widget class="QMenu" name="edit_menu">
     <property name="title">
      <string>编辑</string>
     </property>
-    <addaction name="action_5"/>
-    <addaction name="action_6"/>
-    <addaction name="action_7"/>
+    <addaction name="action_zoom_in"/>
+    <addaction name="action_zoom_out"/>
+    <addaction name="action_back_out"/>
    </widget>
-   <widget class="QMenu" name="menu_3">
+   <widget class="QMenu" name="menu_window">
     <property name="title">
      <string>窗口</string>
     </property>
     <addaction name="action_drawer"/>
    </widget>
-   <addaction name="menu"/>
-   <addaction name="menu_2"/>
-   <addaction name="menu_3"/>
+   <addaction name="file_menu"/>
+   <addaction name="edit_menu"/>
+   <addaction name="menu_window"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
-  <action name="action">
+  <action name="action_file_new">
    <property name="icon">
     <iconset>
      <normaloff>image/filenew.png</normaloff>image/filenew.png</iconset>
@@ -63,7 +63,7 @@
     <string>新建文件</string>
    </property>
   </action>
-  <action name="action_2">
+  <action name="action_file_open">
    <property name="icon">
     <iconset>
      <normaloff>image/fileopen.png</normaloff>image/fileopen.png</iconset>
@@ -75,7 +75,7 @@
     <string>打开文件</string>
    </property>
   </action>
-  <action name="action_3">
+  <action name="action_file_save">
    <property name="icon">
     <iconset>
      <normaloff>image/filesave.png</normaloff>image/filesave.png</iconset>
@@ -87,7 +87,7 @@
     <string>保存图片</string>
    </property>
   </action>
-  <action name="action_4">
+  <action name="action_file_save_other">
    <property name="icon">
     <iconset>
      <normaloff>image/filesave.png</normaloff>image/filesave.png</iconset>
@@ -99,17 +99,31 @@
     <string>另存为</string>
    </property>
   </action>
-  <action name="action_5">
+  <action name="action_zoom_in">
+   <property name="icon">
+    <iconset>
+     <normaloff>C:/Users/Administrator/Desktop/放大.png</normaloff>C:/Users/Administrator/Desktop/放大.png</iconset>
+   </property>
    <property name="text">
     <string>放大</string>
    </property>
+   <property name="statusTip">
+    <string>放大 图片</string>
+   </property>
   </action>
-  <action name="action_6">
+  <action name="action_zoom_out">
+   <property name="icon">
+    <iconset>
+     <normaloff>C:/Users/Administrator/Desktop/缩小.png</normaloff>C:/Users/Administrator/Desktop/缩小.png</iconset>
+   </property>
    <property name="text">
     <string>缩小</string>
    </property>
+   <property name="statusTip">
+    <string>缩小图片</string>
+   </property>
   </action>
-  <action name="action_7">
+  <action name="action_back_out">
    <property name="icon">
     <iconset>
      <normaloff>image/editundo.png</normaloff>image/editundo.png</iconset>
@@ -129,7 +143,7 @@
     <bool>true</bool>
    </property>
    <property name="text">
-    <string>是否显示抽屉</string>
+    <string>显示抽屉</string>
    </property>
   </action>
  </widget>
