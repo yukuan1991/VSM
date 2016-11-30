@@ -27,16 +27,16 @@
     <property name="title">
      <string>文件</string>
     </property>
-    <addaction name="file_new_action"/>
-    <addaction name="file_open_action"/>
-    <addaction name="file_save_action"/>
-    <addaction name="file_save_other_action"/>
+    <addaction name="action_file_new"/>
+    <addaction name="action_file_open"/>
+    <addaction name="action_file_save"/>
+    <addaction name="action_file_save_other"/>
    </widget>
    <widget class="QMenu" name="edit_menu">
     <property name="title">
      <string>编辑</string>
     </property>
-    <addaction name="brow_up_action"/>
+    <addaction name="action_brow_up"/>
     <addaction name="zoom_out_action"/>
     <addaction name="back_out_actiopn"/>
    </widget>
@@ -44,7 +44,7 @@
    <addaction name="edit_menu"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
-  <action name="file_new_action">
+  <action name="action_file_new">
    <property name="icon">
     <iconset>
      <normaloff>image/filenew.png</normaloff>image/filenew.png</iconset>
@@ -56,7 +56,7 @@
     <string>新建文件</string>
    </property>
   </action>
-  <action name="file_open_action">
+  <action name="action_file_open">
    <property name="icon">
     <iconset>
      <normaloff>image/fileopen.png</normaloff>image/fileopen.png</iconset>
@@ -68,7 +68,7 @@
     <string>打开文件</string>
    </property>
   </action>
-  <action name="file_save_action">
+  <action name="action_file_save">
    <property name="icon">
     <iconset>
      <normaloff>image/filesave.png</normaloff>image/filesave.png</iconset>
@@ -80,7 +80,7 @@
     <string>保存图片</string>
    </property>
   </action>
-  <action name="file_save_other_action">
+  <action name="action_file_save_other">
    <property name="icon">
     <iconset>
      <normaloff>image/filesave.png</normaloff>image/filesave.png</iconset>
@@ -92,18 +92,28 @@
     <string>另存为</string>
    </property>
   </action>
-  <action name="brow_up_action">
+  <action name="action_brow_up">
+   <property name="icon">
+    <iconset>
+     <normaloff>C:/Users/Administrator/Desktop/放大.png</normaloff>C:/Users/Administrator/Desktop/放大.png</iconset>
+   </property>
    <property name="text">
     <string>放大</string>
+   </property>
+   <property name="statusTip">
+    <string>放大 图片</string>
    </property>
   </action>
   <action name="zoom_out_action">
    <property name="icon">
     <iconset>
-     <normaloff>image/DSC_0959_副本.jpg</normaloff>image/DSC_0959_副本.jpg</iconset>
+     <normaloff>C:/Users/Administrator/Desktop/缩小.png</normaloff>C:/Users/Administrator/Desktop/缩小.png</iconset>
    </property>
    <property name="text">
     <string>缩小</string>
+   </property>
+   <property name="statusTip">
+    <string>缩小图片</string>
    </property>
   </action>
   <action name="back_out_actiopn">
