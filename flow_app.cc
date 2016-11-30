@@ -1,6 +1,7 @@
 ﻿#include "flow_app.h"
 #include <QDir>
 #include <QDebug>
+#include "canvas_scene.h"
 
 APP_REGISTER (flow_app)
 
@@ -13,6 +14,8 @@ flow_app::flow_app(int argc, char **argv)
 
 bool flow_app::run()
 {
+    main_ = std::make_unique<main_widget> (nullptr, std::make_unique<canvas_scene> ());
+
     QDir svg_dir ("svg");
 
     if (!svg_dir.exists ())
@@ -21,16 +24,15 @@ bool flow_app::run()
         flow_app::exit (-1);
     }
 
-    auto file_list = svg_dir.entryList (QStringList () << "*.svg");
-    std::vector<std::string> str_file_list;
-    str_file_list.reserve (static_cast<size_t> (file_list.size ()));
-
+    auto file_list = svg_dir.entryInfoList (QStringList () << "*.svg");
+    QStringList path_list;
     for (auto & it : file_list)
     {
-        str_file_list.emplace_back (it.toStdString ());
-        qDebug () << it;
+        path_list.push_back (it.absoluteFilePath ());
     }
 
+    main_->set_drawer (path_list);
 
-    return false;
+    main_->show ();
+    return true;
 }

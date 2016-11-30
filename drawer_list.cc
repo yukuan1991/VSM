@@ -3,6 +3,7 @@
 #include <QMouseEvent>
 #include <QSvgWidget>
 #include <QSvgRenderer>
+#include <QFileInfo>
 #include <QPainter>
 #include <QDrag>
 #include <QMimeData>
@@ -26,14 +27,15 @@ void drawer_list::set_data(const QStringList& data)
 
 
         QByteArray arr (it.toUtf8 ());
-        qDebug () << arr;
+        qDebug () << QString (arr);
+
         raw_item->setData (path_role, arr);
 
         addItem (new_item.release ());
 
         auto svg_item = std::make_unique<QSvgWidget> (it, this);
         raw_item->setSizeHint ({50, 50});
-        raw_item->setToolTip (it);
+        raw_item->setToolTip (QFileInfo (it).baseName ());
         setItemWidget (raw_item, svg_item.release ());
     }
 
@@ -78,7 +80,6 @@ void drawer_list::mousePressEvent(QMouseEvent *event)
     drag.setMimeData (data.release ());
     drag.setPixmap (pm);
     drag.setHotSpot ({pm.width () / 2, pm.height () / 2});
-    qDebug () << "before";
-    qDebug () << drag.exec (Qt::CopyAction);
-    qDebug () << "after";
+
+    drag.exec (Qt::CopyAction);
 }

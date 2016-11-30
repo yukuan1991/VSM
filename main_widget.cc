@@ -20,7 +20,6 @@ main_widget::main_widget(QWidget *parent, std::unique_ptr<QGraphicsScene> scene)
 {
     ui->setupUi(this);
     init_canvas ();
-    init_drawer ();
     connect (ui->view, &canvas_view::scale_changed, ui->drawer, &drawer_list::set_scale);
 }
 
@@ -34,8 +33,8 @@ void main_widget::init_canvas()
     ui->view->setScene (scene_.get ());
 }
 
-void main_widget::init_drawer()
+void main_widget::set_drawer(const QStringList& data)
 {
-
+    ui->drawer->set_data (data);
 }
 

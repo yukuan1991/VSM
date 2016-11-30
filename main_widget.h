@@ -18,9 +18,9 @@ class main_widget : public QWidget
 public:
     explicit main_widget(QWidget *parent = nullptr, std::unique_ptr<QGraphicsScene> scene = std::make_unique<QGraphicsScene> ());
     ~main_widget();
+    void set_drawer (const QStringList& data);
 private: /// UI
-        void init_canvas ();
-        void init_drawer ();
+    void init_canvas ();
 private:
     std::unique_ptr<Ui::main_widget> ui;
     std::unique_ptr<QGraphicsScene> scene_;
