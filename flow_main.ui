@@ -95,7 +95,7 @@
   <action name="action_zoom_in">
    <property name="icon">
     <iconset>
-     <normaloff>C:/Users/Administrator/Desktop/放大.png</normaloff>C:/Users/Administrator/Desktop/放大.png</iconset>
+     <normaloff>image/放大.png</normaloff>image/放大.png</iconset>
    </property>
    <property name="text">
     <string>放大</string>
@@ -107,7 +107,7 @@
   <action name="action_zoom_out">
    <property name="icon">
     <iconset>
-     <normaloff>C:/Users/Administrator/Desktop/缩小.png</normaloff>C:/Users/Administrator/Desktop/缩小.png</iconset>
+     <normaloff>image/缩小.png</normaloff>image/缩小.png</iconset>
    </property>
    <property name="text">
     <string>缩小</string>
