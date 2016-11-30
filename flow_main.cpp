@@ -41,9 +41,10 @@ void flow_main::file_new()
     canvas->show();
 }
 
+
 canvas_body *flow_main::create_canvas_body()
 {
-    canvas_body* canvas = new canvas_body();
+    canvas_body* canvas = new canvas_body(mdi_area_);
     mdi_area_->addSubWindow(canvas);
     canvas->setWindowState(Qt::WindowMaximized);
     return canvas;

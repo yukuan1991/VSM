@@ -5,3 +5,9 @@ canvas_body::canvas_body(QWidget *parent)
 {
     setScene (&scene_);
 }
+
+void canvas_body::file_new_tile()
+{
+
+
+}
