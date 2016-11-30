@@ -31,6 +31,8 @@ private:
     static void hold_position (QGraphicsItem* item, CALLABLE&& c);
 private:
     constexpr static double rotate_arg = 90;
+private:
+
 };
 
 

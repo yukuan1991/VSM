@@ -21,7 +21,8 @@ SOURCES += \
     canvas_scene.cc \
     canvas_view.cc \
     drawer_list.cc \
-    flow_main.cpp
+    flow_main.cpp \
+    canvas_body.cc
 
 HEADERS += \
     flow_app.h \
@@ -29,7 +30,8 @@ HEADERS += \
     canvas_view.h \
     drawer_list.h \
     defs.hpp \
-    flow_main.h
+    flow_main.h \
+    canvas_body.h
 
 FORMS += \
     flow_main.ui
