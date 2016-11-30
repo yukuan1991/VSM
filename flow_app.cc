@@ -31,7 +31,7 @@ bool flow_app::run()
         path_list.push_back (it.absoluteFilePath ());
     }
 
-    //main_->set_drawer (path_list);
+    main_->set_drawer (path_list);
 
     main_->show ();
     return true;

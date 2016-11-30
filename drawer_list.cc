@@ -25,9 +25,7 @@ void drawer_list::set_data(const QStringList& data)
         auto raw_item = new_item.get ();
         raw_item->setFlags (new_item->flags () & (~ Qt::ItemIsSelectable));
 
-
         QByteArray arr (it.toUtf8 ());
-        qDebug () << QString (arr);
 
         raw_item->setData (path_role, arr);
 
