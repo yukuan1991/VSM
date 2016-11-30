@@ -27,15 +27,18 @@ private slots:
 
     void on_action_drawer_triggered();
     ///新建文件
-    void file_new();
-    canvas_body *create_canvas_body();
 
+private:
+    canvas_body *create_canvas_body();
+    void file_new();
+ //   static void file_new_tile(canvas_body* window);
 private:
     Ui::flow_main *ui;
     std::unique_ptr<QDockWidget> drawer_ = std::make_unique<QDockWidget> (this);
     std::unique_ptr<drawer_list> drawer_content_ = std::make_unique<drawer_list> (drawer_.get ());
 
     QMdiArea *mdi_area_ = new QMdiArea (this);//是一个多文档显示窗口
+    int sequence_number_ = 1;
 };
 
 #endif // FLOW_MAIN_H
