@@ -1,7 +1,6 @@
 ﻿#pragma once
 
 #include "qt-tools/application.h"
-#include <main_widget.h>
 #include <flow_main.h>
 
 class flow_app : public application

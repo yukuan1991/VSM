@@ -36,6 +36,7 @@ void drawer_list::set_data(const QStringList& data)
         raw_item->setToolTip (QFileInfo (it).baseName ());
         setItemWidget (raw_item, svg_item.release ());
     }
+    setCurrentItem (nullptr);
 
 }
 
