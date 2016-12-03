@@ -47,5 +47,4 @@ void canvas_scene::on_selection_changed()
             it->setZValue (0);
         }
     }
-
 }

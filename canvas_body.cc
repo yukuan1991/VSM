@@ -9,5 +9,4 @@ canvas_body::canvas_body(QWidget *parent)
 void canvas_body::file_new_tile()
 {
 
-
 }

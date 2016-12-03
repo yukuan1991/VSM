@@ -3,6 +3,7 @@
 #include <QDebug>
 #include "canvas_body.h"
 #include <QAction>
+#include "utility/raii.hpp"
 
 flow_main::flow_main(QWidget *parent) :
     QMainWindow(parent),
@@ -44,10 +45,14 @@ void flow_main::file_new()
 
 canvas_body *flow_main::create_canvas_body()
 {
-    canvas_body* canvas = new canvas_body(mdi_area_);
-    mdi_area_->addSubWindow(canvas);
+    auto canvas = std::make_unique<canvas_body> (mdi_area_);
+    auto raw_canvas = canvas.get ();
+
+    canvas->setAttribute (Qt::WA_DeleteOnClose);
     canvas->setWindowState(Qt::WindowMaximized);
-    return canvas;
+    mdi_area_->addSubWindow(canvas.release ());
+
+    return raw_canvas;
 }
 
 void flow_main::set_mdi_area()
@@ -55,14 +60,14 @@ void flow_main::set_mdi_area()
     mdi_area_->setHorizontalScrollBarPolicy(Qt::ScrollBarAsNeeded);
     mdi_area_->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
     setCentralWidget(mdi_area_);
+    mdi_area_->setViewMode (QMdiArea::TabbedView);
 }
 
 void flow_main::init_conn()
 {
     connect (drawer_.get (), &QDockWidget::visibilityChanged, [this] (bool){ on_drawer_visibility_changed (); });
-    connect(ui->action_file_new, SIGNAL(triggered()), this, SLOT(file_new()));
+    connect(ui->action_file_new, &QAction::triggered, this, &flow_main::file_new);
 }
-
 
 void flow_main::on_drawer_visibility_changed()
 {
