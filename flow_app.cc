@@ -1,6 +1,7 @@
 ﻿#include "flow_app.h"
 #include <QDir>
 #include <QDebug>
+#include <QMessageBox>
 #include "canvas_scene.h"
 
 APP_REGISTER (flow_app)
@@ -20,8 +21,8 @@ bool flow_app::run()
 
     if (!svg_dir.exists ())
     {
-        assert (false);
-        flow_app::exit (-1);
+        QMessageBox::information (nullptr, "错误", "找不到svg文件夹");
+        ::exit(-1);
     }
 
     auto file_list = svg_dir.entryInfoList (QStringList () << "*.svg");

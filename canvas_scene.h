@@ -13,7 +13,6 @@ public:
     canvas_scene(ARGS&& ... args) :QGraphicsScene (std::forward<ARGS> (args)...) { init (); }
     void init ();
     bool load (const nlohmann::json & data);
-    nlohmann::json dump ();
 private:
     void on_selection_changed ();
 };

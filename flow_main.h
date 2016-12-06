@@ -34,6 +34,8 @@ private:
     canvas_body *create_canvas_body();
     /// 新建文件
     void file_new();
+    void file_open ();
+    void file_save ();
 private:
     Ui::flow_main *ui;
     std::unique_ptr<QDockWidget> drawer_ = std::make_unique<QDockWidget> (this);

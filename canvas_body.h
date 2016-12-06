@@ -9,6 +9,7 @@ class canvas_body : public canvas_view
 public:
     canvas_body(QWidget* parent = nullptr);
     void file_new_tile();
+    std::string dump();
 private:
     canvas_scene scene_;
 

@@ -1,5 +1,6 @@
 ﻿#include "canvas_scene.h"
 #include <QGraphicsItem>
+#include "utility/raii.hpp"
 
 
 void canvas_scene::init()
@@ -26,10 +27,6 @@ catch (const std::exception& e)
     return false;
 }
 
-nlohmann::json canvas_scene::dump()
-{
-    return {};
-}
 
 void canvas_scene::on_selection_changed()
 {
