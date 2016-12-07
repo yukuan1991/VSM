@@ -30,15 +30,12 @@ void canvas_view::init()
 {
     setDragMode (RubberBandDrag);
     setRubberBandSelectionMode (Qt::IntersectsItemShape);
-    //setViewport (new QGLWidget (this));
 }
 
 void canvas_view::wheelEvent(QWheelEvent *event)
 {
-
     if (event->modifiers() & Qt::ControlModifier)
     {
-
         if (event->delta() > 0)
         {
             scale_object (1.1);

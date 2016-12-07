@@ -16,6 +16,10 @@ include (../3rd-party/3rd-party.pri)
 include (../utility/utility.pri)
 include (../qt-tools/qt-tools.pri)
 
+DEFINES += SOFTWARE_NAME=\\\"flow-app\\\"
+DEFINES += SERVER_ADDR=\\\"116.62.10.199\\\"
+DEFINES += UPDATE_PATH=\\\"schedule/update\\\"
+
 SOURCES += \
     flow_app.cc \
     canvas_scene.cc \

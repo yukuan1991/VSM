@@ -16,7 +16,6 @@ flow_main::flow_main(QWidget *parent) :
     ui->setupUi(this);
 
     set_mdi_area ();
-
     init_conn ();
 }
 
@@ -71,7 +70,6 @@ void flow_main::file_save()
     }
 
     auto w = dynamic_cast<canvas_body*> (sub_window->widget()); assert(w);
-    //::write_buffer (w->dump();
     ::write_buffer (::utf_to_sys(path.toStdString()).data(), w->dump());
 }
 

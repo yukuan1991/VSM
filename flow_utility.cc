@@ -11,6 +11,5 @@ QGraphicsSvgItem* add_svg_to_scene(const QString &path, not_null<QGraphicsScene 
     auto item = std::make_unique<QGraphicsSvgItem> (path);
     auto raw_item = item.get ();
 
-
     return raw_item;
 }

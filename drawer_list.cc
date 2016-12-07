@@ -14,7 +14,6 @@ drawer_list::drawer_list(QWidget *parent)
         :QListWidget (parent)
 {
     setVerticalScrollBarPolicy (Qt::ScrollBarAlwaysOff);
-    set_data ({});
 }
 
 void drawer_list::set_data(const QStringList& data)
@@ -37,13 +36,11 @@ void drawer_list::set_data(const QStringList& data)
         setItemWidget (raw_item, svg_item.release ());
     }
     setCurrentItem (nullptr);
-
 }
 
 void drawer_list::mousePressEvent(QMouseEvent *event)
 {
     auto pos = event->pos ();
-
     auto item = itemAt (pos);
 
     if (item == nullptr)

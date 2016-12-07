@@ -8,6 +8,7 @@ class flow_app : public application
 public:
     flow_app(int argc, char** argv);
     bool run () override;
+    static void update_check ();
 private:
     std::unique_ptr<flow_main> main_;
 };
