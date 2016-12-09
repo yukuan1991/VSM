@@ -8,13 +8,18 @@
 #include <QMessageBox>
 #include <QMdiSubWindow>
 #include "utility/file.hpp"
+#include <QDebug>
+#include <QMdiSubWindow>
 
 flow_main::flow_main(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::flow_main)
 {
     ui->setupUi(this);
-
+    create_toolbar();
+     //更新活动窗口
+    connect(mdi_area_, SIGNAL(subWindowActivated(QMdiSubWindow*)), this, SLOT(set_tool_action()));
+    set_tool_action();
     set_mdi_area ();
     init_conn ();
 }
@@ -71,6 +76,55 @@ void flow_main::file_save()
 
     auto w = dynamic_cast<canvas_body*> (sub_window->widget()); assert(w);
     ::write_buffer (::utf_to_sys(path.toStdString()).data(), w->dump());
+}
+
+void flow_main::create_toolbar()
+{
+    qDebug()<<"hhh";
+    toolbar_file->addActions({ui->action_file_new,ui->action_file_open,ui->action_file_save,ui->action_file_save_other});
+    toolbar_file->addSeparator();///添加一条分割线
+    toolbar_edit->addActions({ui->action_zoom_in,ui->action_zoom_out,ui->action_back_out});
+}
+
+canvas_body* flow_main::activity_canvas_body()
+{
+    if(QMdiSubWindow *active_subwindow = mdi_area_->activeSubWindow())
+    {
+        canvas_body *canvas_ptr = dynamic_cast<canvas_body*> (active_subwindow->widget());
+        assert (canvas_ptr);
+        return canvas_ptr;
+    }
+    else
+    {
+        return 0;
+    }
+}
+
+void flow_main::set_tool_action()
+{
+    bool has_canvas_body = (activity_canvas_body() != 0);
+    qDebug() <<has_canvas_body;
+    if(has_canvas_body == true)
+    {
+        ui->action_file_save->setEnabled(has_canvas_body);
+        ui->action_file_save_other->setEnabled(has_canvas_body);
+        ui->action_file_save_other->setEnabled(has_canvas_body);
+        ui->action_zoom_in->setEnabled(has_canvas_body);
+        ui->action_zoom_out->setEnabled(has_canvas_body);
+        ui->action_back_out->setEnabled(has_canvas_body);
+    }
+    else
+    {
+        ui->action_file_save->setEnabled(false);
+        ui->action_file_save_other->setEnabled(false);
+        ui->action_file_save_other->setEnabled(false);
+        ui->action_zoom_in->setEnabled(false);
+        ui->action_zoom_out->setEnabled(false);
+        ui->action_back_out->setEnabled(false);
+    }
+    ui->action_file_new->setEnabled(true);
+    ui->action_file_open->setEnabled(true);
+
 }
 
 

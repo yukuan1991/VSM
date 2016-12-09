@@ -5,6 +5,7 @@
 #include <QDockWidget>
 #include <memory>
 #include <QMdiArea>
+#include <QToolBar>
 #include "drawer_list.h"
 #include "canvas_body.h"
 
@@ -25,6 +26,8 @@ public:
 private slots:
     void on_drawer_visibility_changed ();
 
+    void set_tool_action();///当窗口没有新建窗口是，显示为灰色
+
     void on_action_drawer_triggered();
 private:
     void set_mdi_area ();
@@ -36,6 +39,11 @@ private:
     void file_new();
     void file_open ();
     void file_save ();
+    ///新建工具栏
+    void create_toolbar();
+    canvas_body* activity_canvas_body();///查看活动窗口
+
+
 private:
     Ui::flow_main *ui;
     std::unique_ptr<QDockWidget> drawer_ = std::make_unique<QDockWidget> (this);
@@ -43,6 +51,11 @@ private:
 
     QMdiArea *mdi_area_ = new QMdiArea (this);//是一个多文档显示窗口
     int sequence_number_ = 1;
+    ///创建工具栏
+private:
+    QToolBar *toolbar_file = addToolBar(tr("文件"));
+    QToolBar *toolbar_edit = addToolBar(tr("编辑"));
+
 };
 
 #endif // FLOW_MAIN_H
