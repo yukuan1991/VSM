@@ -20,7 +20,7 @@ bool flow_app::run()
 {
     main_ = std::make_unique<flow_main> ();
 
-    QDir svg_dir ("svg");
+    QDir svg_dir (SVG_DIR);
 
     if (!svg_dir.exists ())
     {
