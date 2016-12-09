@@ -17,6 +17,7 @@ include (../utility/utility.pri)
 include (../qt-tools/qt-tools.pri)
 
 DEFINES += SOFTWARE_NAME=\\\"flow-app\\\"
+DEFINES += SVG_DIR=\\\"svg\\\"
 DEFINES += SERVER_ADDR=\\\"116.62.10.199\\\"
 DEFINES += UPDATE_PATH=\\\"schedule/update\\\"
 
