@@ -2,6 +2,7 @@
 #include <QWheelEvent>
 #include <QMatrix>
 #include <QDebug>
+#include <QFileInfo>
 #include <QKeyEvent>
 #include "utility/raii.hpp"
 #include <QTransform>
@@ -10,6 +11,7 @@
 #include <QDropEvent>
 #include <QMimeData>
 #include "flow_utility.h"
+#include "defs.hpp"
 #include <QGraphicsSvgItem>
 
 
@@ -185,13 +187,12 @@ void canvas_view::svg_drop_action(QDropEvent *event)
     svg_item->setFlags (QGraphicsSvgItem::ItemIsSelectable | QGraphicsSvgItem::ItemIsMovable);
     auto mouse_pos = mapToScene (event->pos ());
     svg_item->setPos (mouse_pos);
-    svg_item->setZValue (-1);
+    svg_item->setZValue (0);
+    svg_item->setData(path_role, QFileInfo (path).baseName());
     scene ()->addItem (svg_item.release ());
 
     auto new_center = raw_svg_item->mapRectToScene (raw_svg_item->boundingRect ()).center ();
     auto diff = new_center - mouse_pos;
-
-    add_svg_to_scene (path, scene (), mapToScene (event->pos ()));
 
     raw_svg_item->moveBy (- diff.x (), - diff.y ());
 }

@@ -10,6 +10,7 @@ public:
     canvas_body(QWidget* parent = nullptr);
     void file_new_tile();
     std::string dump();
+    bool load (const std::string& data);
 private:
     canvas_scene scene_;
 

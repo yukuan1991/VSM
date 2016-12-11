@@ -24,20 +24,24 @@ public:
 
 
 private slots:
-    void on_drawer_visibility_changed ();
-
-    void set_tool_action();///当窗口没有新建窗口是，显示为灰色
+    ///当窗口没有新建窗口是，显示为灰色
+    void set_tool_action();
 
     void on_action_drawer_triggered();
 private:
     void set_mdi_area ();
     void init_conn ();
+    void zoom_in_active ();
+    void zoom_out_active ();
 
 private:
+    void on_drawer_visibility_changed ();
     canvas_body *create_canvas_body();
     /// 新建文件
     void file_new();
+    /// 打开文件
     void file_open ();
+    /// 保存文件
     void file_save ();
     ///新建工具栏
     void create_toolbar();

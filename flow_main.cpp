@@ -141,6 +141,24 @@ void flow_main::init_conn()
     connect(ui->action_file_new, &QAction::triggered, this, &flow_main::file_new);
     connect(ui->action_file_open, &QAction::triggered, this, &flow_main::file_open);
     connect(ui->action_file_save, &QAction::triggered, this, &flow_main::file_save);
+    connect (ui->action_zoom_in, &QAction::triggered, this, &flow_main::zoom_in_active);
+    connect (ui->action_zoom_out, &QAction::triggered, this, &flow_main::zoom_out_active);
+}
+
+void flow_main::zoom_in_active()
+{
+    auto sub = mdi_area_->activeSubWindow(); assert(sub);
+    auto widget = sub->widget(); assert (widget);
+    auto view = dynamic_cast<canvas_body*>(widget); assert (view);
+    view->scale_object(1.1);
+}
+
+void flow_main::zoom_out_active()
+{
+    auto sub = mdi_area_->activeSubWindow(); assert(sub);
+    auto widget = sub->widget(); assert (widget);
+    auto view = dynamic_cast<canvas_body*>(widget); assert (view);
+    view->scale_object(1 / 1.1);
 }
 
 void flow_main::on_drawer_visibility_changed()
