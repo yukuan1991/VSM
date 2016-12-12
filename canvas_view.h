@@ -10,6 +10,7 @@ signals:
     void scale_changed (double);
 public:
     constexpr static auto path_role = Qt::UserRole + 100;
+    constexpr static auto remark_role = Qt::UserRole + 101;
 public:
     canvas_view(QWidget* parent = nullptr);
     canvas_view(QGraphicsScene* scene, QWidget* parent = nullptr);

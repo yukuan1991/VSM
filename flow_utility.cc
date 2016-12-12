@@ -12,7 +12,7 @@ using namespace flow_utility_detail;
 
 QGraphicsSvgItem* add_svg_to_scene(const QString &path, not_null<QGraphicsScene *> scene, QPointF pos)
 {
-    if (QFile (path).exists ())
+    if (!QFile (path).exists ())
     {
         return nullptr;
     }

@@ -6,7 +6,7 @@
 void canvas_scene::init()
 {
     connect (this, &canvas_scene::selectionChanged, [this] { on_selection_changed (); });
-    setSceneRect ({0, 0, 10000, 10000});
+    setSceneRect ({0, 0, 500, 500});
 }
 
 
