@@ -9,11 +9,12 @@
 APP_REGISTER (flow_app)
 
 using namespace std;
+using json = nlohmann::json;
 
 flow_app::flow_app(int argc, char **argv)
     :application (argc, argv)
 {
-    go update_check;
+    go  [this] { update_check (); };
 }
 
 bool flow_app::run()
@@ -41,11 +42,41 @@ bool flow_app::run()
     return true;
 }
 
+void flow_app::exec_update(std::vector<std::pair<string, string>> file_info)
+{
+    if (!::ask (nullptr, "更新", "有新的版本，是否更新"))
+    {
+        return;
+    }
+
+    auto json_file_info = json::array ();
+    for (auto & it : file_info)
+    {
+        json_file_info.push_back ({{"path", it.first}, {"md5", it.second}});
+    }
+
+    nlohmann::json json_param {
+        {"prefix", UPDATE_FILE_PATH},
+        {"files", ::move (json_file_info)},
+        {"exec", EXEC_FILE},
+        {"server_addr", SERVER_ADDR}
+    };
+
+    auto parameter = ::binary_to_base64 (json_param.dump ());
+    ::system (("start "s + UPDATE_PATH + " " + parameter).data ());
+    flow_app::exit (0);
+}
+
 void flow_app::update_check()
 {
-    auto update_list = ::check_for_update (SERVER_ADDR, UPDATE_PATH, SOFTWARE_NAME);
-    if (!update_list.empty())
+    auto files = ::check_for_update (SERVER_ADDR, "/schedule/update", SOFTWARE_NAME);
+    if (files.empty ())
     {
-
+        return;
     }
+
+    call_after [this, files = ::move (files)] () mutable
+    {
+        this->exec_update (::move (files));
+    };
 }
