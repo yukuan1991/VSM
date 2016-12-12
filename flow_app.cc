@@ -5,6 +5,7 @@
 #include <algorithm>
 #include "canvas_scene.h"
 #include "qt-tools/common.hpp"
+#include "qt-tools/screen_saver.h"
 
 APP_REGISTER (flow_app)
 
@@ -14,7 +15,7 @@ using json = nlohmann::json;
 flow_app::flow_app(int argc, char **argv)
     :application (argc, argv)
 {
-    go  [this] { update_check (); };
+    //go  [this] { update_check (); };
 }
 
 bool flow_app::run()

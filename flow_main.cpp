@@ -126,11 +126,27 @@ void flow_main::file_save()
 
     ///这里进行判断
     ::write_buffer (::utf_to_sys(path.toStdString()).data(), w->dump());
+    w->set_attached_file(::move (path));
+}
+
+void flow_main::file_save_as()
+{
+    auto sub_window = mdi_area_->activeSubWindow();
+    assert (sub_window);
+
+    auto w = dynamic_cast<canvas_body*> (sub_window->widget()); assert(w); ///获取到当前要保存的窗口
+
+    auto path = QFileDialog::getSaveFileName(this, "文件保存", ".", "Flow format (*.fc");
+    if (path.isEmpty())
+    {
+        return;
+    }
+    ::write_buffer (::utf_to_sys(path.toStdString()).data(), w->dump());
 }
 
 void flow_main::create_toolbar()
 {
-    toolbar_file->addActions({ui->action_file_new,ui->action_file_open,ui->action_file_save,ui->action_file_save_other});
+    toolbar_file->addActions({ui->action_file_new,ui->action_file_open,ui->action_file_save,ui->action_file_save_as});
     toolbar_file->addSeparator();///添加一条分割线
     toolbar_edit->addActions({ui->action_zoom_in,ui->action_zoom_out, ui->action_drawer});
 }
@@ -155,8 +171,7 @@ void flow_main::set_tool_action()
     bool has_canvas_body = (active_canvas_body() != nullptr);
 
     ui->action_file_save->setEnabled(has_canvas_body);
-    ui->action_file_save_other->setEnabled(has_canvas_body);
-    ui->action_file_save_other->setEnabled(has_canvas_body);
+    ui->action_file_save_as->setEnabled(has_canvas_body);
     ui->action_zoom_in->setEnabled(has_canvas_body);
     ui->action_zoom_out->setEnabled(has_canvas_body);
     ui->action_back_out->setEnabled(has_canvas_body);
@@ -194,6 +209,7 @@ void flow_main::init_conn()
     connect(ui->action_file_new, &QAction::triggered, this, &flow_main::file_new);
     connect(ui->action_file_open, &QAction::triggered, this, &flow_main::file_open);
     connect(ui->action_file_save, &QAction::triggered, this, &flow_main::file_save);
+    connect(ui->action_file_save_as, &QAction::triggered, this, &flow_main::file_save_as);
     connect (ui->action_zoom_in, &QAction::triggered, this, &flow_main::zoom_in_active);
     connect (ui->action_zoom_out, &QAction::triggered, this, &flow_main::zoom_out_active);
     connect(attribute_content_.get (), &remark_widget::text_changed, this, &flow_main::update_remark);
@@ -214,7 +230,11 @@ void flow_main::zoom_out_active()
 
 void flow_main::set_attribute()
 {
-    auto active_canvas = active_canvas_body(); assert (active_canvas);
+    auto active_canvas = active_canvas_body();
+    if (active_canvas == nullptr)
+    {
+        return;
+    }
 
     auto remark = active_canvas->remark();
     attribute_content_->set_remark(remark);

@@ -20,7 +20,7 @@
      <x>0</x>
      <y>0</y>
      <width>800</width>
-     <height>23</height>
+     <height>25</height>
     </rect>
    </property>
    <widget class="QMenu" name="menu_file">
@@ -30,7 +30,7 @@
     <addaction name="action_file_new"/>
     <addaction name="action_file_open"/>
     <addaction name="action_file_save"/>
-    <addaction name="action_file_save_other"/>
+    <addaction name="action_file_save_as"/>
    </widget>
    <widget class="QMenu" name="menu_edit">
     <property name="title">
@@ -86,7 +86,7 @@
     <string>保存图片</string>
    </property>
   </action>
-  <action name="action_file_save_other">
+  <action name="action_file_save_as">
    <property name="icon">
     <iconset>
      <normaloff>image/filesave.png</normaloff>image/filesave.png</iconset>
