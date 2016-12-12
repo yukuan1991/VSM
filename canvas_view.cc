@@ -2,6 +2,7 @@
 #include <QWheelEvent>
 #include <QMatrix>
 #include <QDebug>
+#include <QFileInfo>
 #include <QKeyEvent>
 #include "utility/raii.hpp"
 #include <QTransform>
@@ -10,7 +11,9 @@
 #include <QDropEvent>
 #include <QMimeData>
 #include "flow_utility.h"
+#include "defs.hpp"
 #include <QGraphicsSvgItem>
+#include <assert.h>
 
 
 
@@ -179,21 +182,14 @@ void canvas_view::scale_object(double factor)
 void canvas_view::svg_drop_action(QDropEvent *event)
 {
     QString path = event->mimeData ()->data ("svg");
-    auto svg_item = std::make_unique<QGraphicsSvgItem> (path);
-    auto raw_svg_item = svg_item.get ();
 
-    svg_item->setFlags (QGraphicsSvgItem::ItemIsSelectable | QGraphicsSvgItem::ItemIsMovable);
-    auto mouse_pos = mapToScene (event->pos ());
-    svg_item->setPos (mouse_pos);
-    svg_item->setZValue (-1);
-    scene ()->addItem (svg_item.release ());
 
-    auto new_center = raw_svg_item->mapRectToScene (raw_svg_item->boundingRect ()).center ();
+    auto mouse_pos = mapToScene(event->pos());
+    auto item = add_svg_to_scene(path, scene (), mouse_pos); assert (item);
+    auto new_center = item->mapRectToScene (item->boundingRect ()).center ();
+
     auto diff = new_center - mouse_pos;
-
-    add_svg_to_scene (path, scene (), mapToScene (event->pos ()));
-
-    raw_svg_item->moveBy (- diff.x (), - diff.y ());
+    item->moveBy (- diff.x (), - diff.y ());
 }
 
 void canvas_view::delete_selected()
