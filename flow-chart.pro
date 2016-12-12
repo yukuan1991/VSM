@@ -28,7 +28,8 @@ SOURCES += \
     drawer_list.cc \
     flow_main.cpp \
     canvas_body.cc \
-    flow_utility.cc
+    flow_utility.cc \
+    remark_widget.cpp
 
 HEADERS += \
     flow_app.h \
@@ -38,8 +39,10 @@ HEADERS += \
     defs.hpp \
     flow_main.h \
     canvas_body.h \
-    flow_utility.h
+    flow_utility.h \
+    remark_widget.h
 
 FORMS += \
-    flow_main.ui
+    flow_main.ui \
+    remark_widget.ui
 

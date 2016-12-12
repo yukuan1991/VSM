@@ -15,6 +15,7 @@ public:
     void set_scale (double scale) { view_scale_ = scale; }
 private:
     double view_scale_ = 1.0;
+    constexpr static auto path_role = Qt::UserRole + 100;
 };
 
 #endif // DRAWER_LIST_H

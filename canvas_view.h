@@ -9,10 +9,13 @@ class canvas_view : public QGraphicsView
 signals:
     void scale_changed (double);
 public:
+    constexpr static auto path_role = Qt::UserRole + 100;
+    constexpr static auto remark_role = Qt::UserRole + 101;
+public:
     canvas_view(QWidget* parent = nullptr);
     canvas_view(QGraphicsScene* scene, QWidget* parent = nullptr);
     void init ();
-    void wheelEvent (QWheelEvent* event) override;
+    void scale_object (double factor);
 
 protected:
     void keyPressEvent (QKeyEvent* event) override;
@@ -20,10 +23,10 @@ protected:
     void dragEnterEvent(QDragEnterEvent *event) override;
     void dragMoveEvent(QDragMoveEvent *event) override;
     void dropEvent (QDropEvent* event) override;
+    void wheelEvent (QWheelEvent* event) override;
 private:
     void select_all ();
     void rotate_selected ();
-    void scale_object (double factor);
     void svg_drop_action (QDropEvent* event);
     void delete_selected ();
 
