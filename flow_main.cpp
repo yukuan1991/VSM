@@ -74,6 +74,7 @@ flow_main::~flow_main()
 void flow_main::file_new()
 {
     canvas_body *canvas = create_canvas_body();
+    canvas->file_new_title();
     canvas->show();
 }
 
@@ -98,24 +99,32 @@ void flow_main::file_open()
         QMessageBox::information(this, "打开", "打开文件失败，文件已经损坏");
         return;
     }
+
+    canvas->set_attached_file(::move (file_name));
 }
 
 void flow_main::file_save()
 {
     auto sub_window = mdi_area_->activeSubWindow();
-    if (sub_window == nullptr)
+    assert (sub_window);
+
+    auto w = dynamic_cast<canvas_body*> (sub_window->widget()); assert(w); ///获取到当前要保存的窗口
+
+    QString path;
+    if (w->attached_file().isEmpty())
     {
-        QMessageBox::information(this, "保存", "暂无可保存数据");
-        return;
+        path = QFileDialog::getSaveFileName(this, "文件保存", ".", "Flow format (*.fc");
+        if (path.isEmpty())
+        {
+            return;
+        }
+    }
+    else
+    {
+        path = w->attached_file();
     }
 
-    auto path = QFileDialog::getSaveFileName(this, "文件保存", ".", "Flow format (*.fc");
-    if (path.isEmpty())
-    {
-        return;
-    }
-
-    auto w = dynamic_cast<canvas_body*> (sub_window->widget()); assert(w);
+    ///这里进行判断
     ::write_buffer (::utf_to_sys(path.toStdString()).data(), w->dump());
 }
 
