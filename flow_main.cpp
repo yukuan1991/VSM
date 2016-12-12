@@ -82,7 +82,7 @@ void flow_main::create_toolbar()
 {
     toolbar_file->addActions({ui->action_file_new,ui->action_file_open,ui->action_file_save,ui->action_file_save_other});
     toolbar_file->addSeparator();///添加一条分割线
-    toolbar_edit->addActions({ui->action_zoom_in,ui->action_zoom_out,ui->action_back_out, ui->action_drawer});
+    toolbar_edit->addActions({ui->action_zoom_in,ui->action_zoom_out, ui->action_drawer});
 }
 
 canvas_body* flow_main::activity_canvas_body()

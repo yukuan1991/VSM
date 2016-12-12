@@ -20,7 +20,7 @@
      <x>0</x>
      <y>0</y>
      <width>800</width>
-     <height>25</height>
+     <height>23</height>
     </rect>
    </property>
    <widget class="QMenu" name="menu_file">
@@ -38,7 +38,6 @@
     </property>
     <addaction name="action_zoom_in"/>
     <addaction name="action_zoom_out"/>
-    <addaction name="action_back_out"/>
    </widget>
    <widget class="QMenu" name="menu_window">
     <property name="title">
@@ -142,7 +141,14 @@
    <property name="checked">
     <bool>true</bool>
    </property>
+   <property name="icon">
+    <iconset>
+     <normaloff>image/未标题-1.png</normaloff>image/未标题-1.png</iconset>
+   </property>
    <property name="text">
+    <string>显示抽屉</string>
+   </property>
+   <property name="statusTip">
     <string>显示抽屉</string>
    </property>
   </action>
