@@ -17,18 +17,7 @@ canvas_body::canvas_body(QWidget *parent, QString svg_dir)
 
 void canvas_body::file_new_title()
 {
-<<<<<<< HEAD
-    static int sequence_number = 1;
-    is_untitled_ = true;//设置为未命名
-    cur_file_ = tr("图示 %1").arg(sequence_number++);
-    setWindowTitle(cur_file_ + "[*]" );//文档被改之后显示*这个标志被修改
-<<<<<<< HEAD
 
-=======
-    //connect(textChanged())
->>>>>>> master
-=======
->>>>>>> master
 
 }
 
