@@ -46,6 +46,8 @@ private:
     void file_open ();
     /// 保存文件
     void file_save ();
+    /// 另存为
+    void file_save_as ();
     ///新建工具栏
     void create_toolbar();
     ///查看活动窗口
