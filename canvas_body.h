@@ -18,8 +18,8 @@ public:
     QString get_path_from_name (const QString& name);
     void set_remark (const QString& remark);
     QString remark ();
-    const QString& attached_file () { return attached_file_; }
-    void set_attached_file (QString attached_file) { attached_file_ = ::move (attached_file); }
+    QString attached_file () { return windowTitle (); }
+    void set_attached_file (QString attached_file) { setWindowTitle(attached_file); }
 signals:
     void selection_changed ();
 public slots:

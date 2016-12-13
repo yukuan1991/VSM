@@ -4,7 +4,6 @@
 #include "defs.hpp"
 #include <QDir>
 #include "flow_utility.h"
-#include <QDebug>
 
 canvas_body::canvas_body(QWidget *parent, QString svg_dir)
     :canvas_view (parent)
@@ -18,6 +17,7 @@ canvas_body::canvas_body(QWidget *parent, QString svg_dir)
 
 void canvas_body::file_new_title()
 {
+<<<<<<< HEAD
     static int sequence_number = 1;
     is_untitled_ = true;//设置为未命名
     cur_file_ = tr("图示 %1").arg(sequence_number++);
@@ -26,6 +26,8 @@ void canvas_body::file_new_title()
 
 =======
     //connect(textChanged())
+>>>>>>> master
+=======
 >>>>>>> master
 
 }
@@ -101,7 +103,6 @@ bool canvas_body::load(const std::string &data) try
 }
 catch (const std::exception& e)
 {
-    qDebug () << e.what ();
     return false;
 }
 
