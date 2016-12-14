@@ -142,6 +142,8 @@ void flow_main::file_save_as()
         return;
     }
     ::write_buffer (::utf_to_sys(path.toStdString()).data(), w->dump());
+
+    w->set_attached_file (path);
 }
 
 void flow_main::create_toolbar()
