@@ -13,7 +13,21 @@
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
-  <widget class="QWidget" name="centralwidget"/>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QRadioButton" name="radioButton">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>130</y>
+      <width>89</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>RadioButton</string>
+    </property>
+   </widget>
+  </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
     <rect>
@@ -89,7 +103,7 @@
   <action name="action_file_save_as">
    <property name="icon">
     <iconset>
-     <normaloff>image/另存为.png</normaloff>image/另存为.png</iconset>
+     <normaloff>image/fileother_save.png</normaloff>image/fileother_save.png</iconset>
    </property>
    <property name="text">
     <string>另存为</string>
@@ -101,7 +115,7 @@
   <action name="action_zoom_in">
    <property name="icon">
     <iconset>
-     <normaloff>image/放大.png</normaloff>image/放大.png</iconset>
+     <normaloff>image/zoom_in.png</normaloff>image/zoom_in.png</iconset>
    </property>
    <property name="text">
     <string>放大</string>
@@ -113,7 +127,7 @@
   <action name="action_zoom_out">
    <property name="icon">
     <iconset>
-     <normaloff>image/缩小.png</normaloff>image/缩小.png</iconset>
+     <normaloff>image/zoom_out.png</normaloff>image/zoom_out.png</iconset>
    </property>
    <property name="text">
     <string>缩小</string>
@@ -143,7 +157,7 @@
    </property>
    <property name="icon">
     <iconset>
-     <normaloff>image/显示抽屉.png</normaloff>image/显示抽屉.png</iconset>
+     <normaloff>image/show_drawer.png</normaloff>image/show_drawer.png</iconset>
    </property>
    <property name="text">
     <string>显示抽屉</string>
