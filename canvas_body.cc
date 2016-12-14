@@ -18,6 +18,7 @@ canvas_body::canvas_body(QWidget *parent, QString svg_dir)
 void canvas_body::file_new_title()
 {
 
+
 }
 
 std::string canvas_body::dump()
