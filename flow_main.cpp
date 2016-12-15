@@ -80,7 +80,7 @@ void flow_main::file_new()
 
 void flow_main::file_open()
 {
-    auto file_name = QFileDialog::getOpenFileName(this, "打开文件", ".", "Images (*.fc)");
+    auto file_name = QFileDialog::getOpenFileName(this, "打开文件", ".", "Images (*.vsm)");
     if (file_name.isEmpty())
     {
         return;
@@ -113,7 +113,7 @@ void flow_main::file_save()
     QString path;
     if (w->attached_file().isEmpty())
     {
-        path = QFileDialog::getSaveFileName(this, "文件保存", ".", "Flow format (*.fc");
+        path = QFileDialog::getSaveFileName(this, "文件保存", ".", "Value Stream Mapping (*.vsm");
         if (path.isEmpty())
         {
             return;
@@ -136,7 +136,7 @@ void flow_main::file_save_as()
 
     auto w = dynamic_cast<canvas_body*> (sub_window->widget()); assert(w); ///获取到当前要保存的窗口
 
-    auto path = QFileDialog::getSaveFileName(this, "文件保存", ".", "Flow format (*.fc");
+    auto path = QFileDialog::getSaveFileName(this, "文件保存", ".", "Value Stream Mapping (*.vsm");
     if (path.isEmpty())
     {
         return;
@@ -220,7 +220,6 @@ void flow_main::init_conn()
 void flow_main::zoom_in_active()
 {
     auto active_canvas = active_canvas_body(); assert (active_canvas);
-
     active_canvas->scale_object(1.1);
 }
 
@@ -258,4 +257,3 @@ void flow_main::on_action_drawer_triggered()
         drawer_->hide ();
     }
 }
-

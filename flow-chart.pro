@@ -16,7 +16,7 @@ include (../3rd-party/3rd-party.pri)
 include (../utility/utility.pri)
 include (../qt-tools/qt-tools.pri)
 
-DEFINES += UPDATE_FILE_PATH=\\\"software/schedule-system\\\"
+DEFINES += UPDATE_FILE_PATH=\\\"software/flow-app\\\"
 DEFINES += SOFTWARE_NAME=\\\"flow-app\\\"
 DEFINES += SVG_DIR=\\\"svg\\\"
 DEFINES += SERVER_ADDR=\\\"116.62.10.199\\\"
