@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>Value Stream Mapping</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QRadioButton" name="radioButton">
@@ -34,7 +34,7 @@
      <x>0</x>
      <y>0</y>
      <width>800</width>
-     <height>23</height>
+     <height>25</height>
     </rect>
    </property>
    <widget class="QMenu" name="menu_file">
