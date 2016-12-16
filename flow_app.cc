@@ -64,7 +64,6 @@ void flow_app::exec_update(std::vector<std::pair<string, string>> file_info)
     };
 
     auto parameter = ::binary_to_base64 (json_param.dump ());
-    ::write_buffer ("update_param.log", parameter);
 
     ::system (("start "s + UPDATE_PATH + " " + parameter).data ());
     flow_app::exit (0);
