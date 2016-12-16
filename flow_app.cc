@@ -15,7 +15,10 @@ using json = nlohmann::json;
 flow_app::flow_app(int argc, char **argv)
     :application (argc, argv)
 {
-    go  [this] { update_check (); };
+    if (argc < 2)
+    {
+        go  [this] { update_check (); };
+    }
 }
 
 bool flow_app::run()
