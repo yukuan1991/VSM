@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui svg
+QT       += core gui svg opengl
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -19,6 +19,9 @@ include (../qt-tools/qt-tools.pri)
 DEFINES += UPDATE_FILE_PATH=\\\"software/flow-app\\\"
 DEFINES += SOFTWARE_NAME=\\\"flow-app\\\"
 DEFINES += SVG_DIR=\\\"svg\\\"
+DEFINES += ENTITY_DIR=\\\"entity\\\"
+DEFINES += MATERIAL_FLOW_DIR=\\\"material_flow\\\"
+DEFINES += INFO_FLOW_DIR=\\\"info_flow\\\"
 DEFINES += SERVER_ADDR=\\\"116.62.10.199\\\"
 DEFINES += UPDATE_PATH=\\\"update/update\\\"
 DEFINES += EXEC_FILE=\\\"$$TARGET\\\"
@@ -27,22 +30,26 @@ SOURCES += \
     flow_app.cc \
     canvas_scene.cc \
     canvas_view.cc \
-    drawer_list.cc \
-    flow_main.cpp \
     canvas_body.cc \
     flow_utility.cc \
-    remark_widget.cpp
+    flow_main.cc \
+    remark_widget.cc \
+    drawer/list.cc \
+    drawer/toolbox.cc \
+    drawer/info_flow.cc
 
 HEADERS += \
     flow_app.h \
     canvas_scene.h \
     canvas_view.h \
-    drawer_list.h \
     defs.hpp \
     flow_main.h \
     canvas_body.h \
     flow_utility.h \
-    remark_widget.h
+    remark_widget.h \
+    drawer/list.h \
+    drawer/toolbox.h \
+    drawer/info_flow.h
 
 FORMS += \
     flow_main.ui \

@@ -6,6 +6,7 @@
 #include "canvas_scene.h"
 #include "qt-tools/common.hpp"
 #include "qt-tools/screen_saver.h"
+#include "drawer/toolbox.h"
 
 APP_REGISTER (flow_app)
 
@@ -24,24 +25,7 @@ flow_app::flow_app(int argc, char **argv)
 bool flow_app::run()
 {
     main_ = std::make_unique<flow_main> ();
-
-    QDir svg_dir (SVG_DIR);
-
-    if (!svg_dir.exists ())
-    {
-        QMessageBox::information (nullptr, "错误", "找不到svg文件夹");
-        ::exit(-1);
-    }
-
-    auto file_list = svg_dir.entryInfoList (QStringList () << "*.svg");
-    QStringList path_list;
-    for (auto & it : file_list)
-    {
-        path_list.push_back (it.absoluteFilePath ());
-    }
-
-    main_->set_drawer (path_list);
-
+    main_->set_drawer ();
     main_->show ();
     return true;
 }

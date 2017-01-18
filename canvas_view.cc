@@ -14,6 +14,7 @@
 #include "defs.hpp"
 #include <QGraphicsSvgItem>
 #include <assert.h>
+#include <QGLWidget>
 
 
 
@@ -33,26 +34,28 @@ void canvas_view::init()
 {
     setDragMode (RubberBandDrag);
     setRubberBandSelectionMode (Qt::IntersectsItemShape);
+    setViewport(new QGLWidget(QGLFormat(QGL::SampleBuffers)));
 }
 
 void canvas_view::wheelEvent(QWheelEvent *event)
 {
-    if (event->modifiers() & Qt::ControlModifier)
+    SCOPE_EXIT { QGraphicsView::wheelEvent(event); };
+
+    if (! (event->modifiers() & Qt::ControlModifier))
     {
-        if (event->delta() > 0)
-        {
-            scale_object (1.1);
-        }
-        else
-        {
-            scale_object (1 / 1.1);
-        }
-        event->accept ();
+        return;
+    }
+
+    if (event->delta() > 0)
+    {
+        scale_object (1.1);
     }
     else
     {
-        QGraphicsView::wheelEvent (event);
+        scale_object (1 / 1.1);
     }
+
+    event->accept ();
 }
 
 void canvas_view::keyPressEvent(QKeyEvent *event)

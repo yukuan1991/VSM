@@ -9,7 +9,9 @@
 !/**/*.ui
 !/**/*.pro
 !/**/*.pri
-!/svg
-!/svg/*.svg
-!/image
-!/image/*.png
+!/**/
+!/**/*.svg
+!/**/*.png
+
+/debug
+/release

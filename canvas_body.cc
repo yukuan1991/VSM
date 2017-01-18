@@ -18,7 +18,6 @@ canvas_body::canvas_body(QWidget *parent, QString svg_dir)
 void canvas_body::file_new_title()
 {
 
-
 }
 
 std::string canvas_body::dump()
@@ -79,14 +78,6 @@ bool canvas_body::load(const std::string &data) try
         std::string remark = it ["remark"];
         item->setData(remark_role, remark.data());
     }
-
-    //double x, y, w, h;
-    //x = json_data ["area"]["x"];
-    //y = json_data ["area"]["y"];
-    //w = json_data ["area"]["w"];
-    //h = json_data ["area"]["h"];
-
-    //fitInView({x, y, w, h}, Qt::KeepAspectRatioByExpanding);
 
     return true;
 }

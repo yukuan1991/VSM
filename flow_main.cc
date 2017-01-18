@@ -51,16 +51,21 @@ void flow_main::update_remark()
     canvas->set_remark(remark);
 }
 
-void flow_main::set_drawer(const QStringList& data)
+void flow_main::on_drawer_status(const QString &status)
 {
-    drawer_content_->set_data (data);
-    drawer_content_->setMaximumWidth (60);
-    drawer_content_->setMinimumWidth (60);
+    qDebug () << "status change: " << status;
+}
 
-    drawer_->setMaximumWidth (60);
-    drawer_->setMinimumWidth (60);
+void flow_main::set_drawer()
+{
+    drawer_content_->setMaximumWidth (100);
+    drawer_content_->setMinimumWidth (100);
+
+    drawer_->setMaximumWidth (90);
+    drawer_->setMinimumWidth (90);
 
     drawer_->setWidget (drawer_content_.get ());
+    connect(drawer_content_.get (), &drawer::toolbox::status_changed, this, &flow_main::on_drawer_status);
 
     drawer_->setAllowedAreas (Qt::LeftDockWidgetArea);
     addDockWidget (Qt::LeftDockWidgetArea, drawer_.get ());
@@ -183,7 +188,7 @@ void flow_main::set_tool_action()
 }
 
 
-canvas_body *flow_main::create_canvas_body()
+not_null<canvas_body*> flow_main::create_canvas_body()
 {
     auto canvas = std::make_unique<canvas_body> (mdi_area_, SVG_DIR);
     auto raw_canvas = canvas.get ();

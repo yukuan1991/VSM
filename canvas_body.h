@@ -9,7 +9,7 @@ class canvas_body : public canvas_view
 {
     Q_OBJECT
 public:
-    canvas_body(QWidget* parent = nullptr, QString svg_dir = {});
+    explicit canvas_body(QWidget* parent = nullptr, QString svg_dir = {});
     void file_new_tile();
     ///新文件命名标题
     void file_new_title();

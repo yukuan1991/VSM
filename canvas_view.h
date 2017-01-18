@@ -12,8 +12,8 @@ public:
     constexpr static auto path_role = Qt::UserRole + 100;
     constexpr static auto remark_role = Qt::UserRole + 101;
 public:
-    canvas_view(QWidget* parent = nullptr);
-    canvas_view(QGraphicsScene* scene, QWidget* parent = nullptr);
+    explicit canvas_view(QWidget* parent = nullptr);
+    explicit canvas_view(QGraphicsScene* scene, QWidget* parent = nullptr);
     void init ();
     void scale_object (double factor);
 

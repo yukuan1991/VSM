@@ -1,4 +1,4 @@
-﻿#include "drawer_list.h"
+﻿#include "list.h"
 #include <assert.h>
 #include <QMouseEvent>
 #include <QSvgWidget>
@@ -9,14 +9,16 @@
 #include <QMimeData>
 #include <QDebug>
 
+namespace drawer
+<%
 
-drawer_list::drawer_list(QWidget *parent)
+list::list(QWidget *parent)
         :QListWidget (parent)
 {
     setVerticalScrollBarPolicy (Qt::ScrollBarAlwaysOff);
 }
 
-void drawer_list::set_data(const QStringList& data)
+void list::set_data(const QStringList& data)
 {
     for (auto & it : data)
     {
@@ -38,7 +40,7 @@ void drawer_list::set_data(const QStringList& data)
     setCurrentItem (nullptr);
 }
 
-void drawer_list::mousePressEvent(QMouseEvent *event)
+void list::mousePressEvent(QMouseEvent *event)
 {
     auto pos = event->pos ();
     auto item = itemAt (pos);
@@ -79,3 +81,5 @@ void drawer_list::mousePressEvent(QMouseEvent *event)
 
     drag.exec (Qt::CopyAction);
 }
+
+%>

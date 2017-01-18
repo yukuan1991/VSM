@@ -6,9 +6,10 @@
 #include <memory>
 #include <QMdiArea>
 #include <QToolBar>
-#include "drawer_list.h"
 #include "canvas_body.h"
 #include "remark_widget.h"
+#include "utility/interface.hpp"
+#include "drawer/toolbox.h"
 
 namespace Ui {
 class flow_main;
@@ -17,10 +18,9 @@ class flow_main;
 class flow_main : public QMainWindow
 {
     Q_OBJECT
-
 public:
     explicit flow_main(QWidget *parent = nullptr);
-    void set_drawer (const QStringList& data);
+    void set_drawer ();
     ~flow_main();
 
 
@@ -39,7 +39,7 @@ private:
 
 private:
     void on_drawer_visibility_changed ();
-    canvas_body *create_canvas_body();
+    not_null<canvas_body*> create_canvas_body();
     /// 新建文件
     void file_new();
     /// 打开文件
@@ -57,11 +57,13 @@ private:
     /// 更新属性信息
     void update_remark ();
 
+    void on_drawer_status (const QString& status);
 
 private:
     Ui::flow_main *ui;
     std::unique_ptr<QDockWidget> drawer_ = std::make_unique<QDockWidget> (this);
-    std::unique_ptr<drawer_list> drawer_content_ = std::make_unique<drawer_list> (drawer_.get ());
+    std::unique_ptr<drawer::toolbox> drawer_content_ = drawer::toolbox::make(ENTITY_DIR,
+                                                                             MATERIAL_FLOW_DIR, this);
 
     std::unique_ptr<QDockWidget> attribute_ = std::make_unique<QDockWidget> (this);
     std::unique_ptr<remark_widget> attribute_content_ = std::make_unique<remark_widget> (this);
