@@ -51,7 +51,8 @@ HEADERS += \
     canvas/body.h \
     canvas/scene.h \
     canvas/view.h \
-    item/item.h
+    item/item.h \
+    item/maker.hpp
 
 FORMS += \
     flow_main.ui \

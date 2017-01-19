@@ -4,6 +4,7 @@
 #include <QObject>
 #include <QGraphicsItem>
 #include "utility/raii.hpp"
+#include "json.hpp"
 
 namespace item
 <%
@@ -19,7 +20,7 @@ public:
     void set_name (QString s) { name_ = ::move (s);  emit name_changed (name_); }
     const QColor& color () { return color_; }
     void set_color (QColor c) { color_ = ::move (c); emit color_changed (c); }
-
+    virtual bool set_data (const nlohmann::json& data)  { Q_UNUSED (data); return true; }
 
 protected:
     explicit item(QObject *parent = 0);
