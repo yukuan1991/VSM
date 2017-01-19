@@ -1,7 +1,7 @@
 ﻿#include "flow_main.h"
 #include "ui_flow_main.h"
 #include <QDebug>
-#include "canvas_body.h"
+#include "canvas/body.h"
 #include <QAction>
 #include "utility/raii.hpp"
 #include <QFileDialog>
@@ -78,7 +78,7 @@ flow_main::~flow_main()
 
 void flow_main::file_new()
 {
-    canvas_body *canvas = create_canvas_body();
+    canvas::body *canvas = create_canvas_body();
     canvas->file_new_title();
     canvas->show();
 }
@@ -113,7 +113,7 @@ void flow_main::file_save()
     auto sub_window = mdi_area_->activeSubWindow();
     assert (sub_window);
 
-    auto w = dynamic_cast<canvas_body*> (sub_window->widget()); assert(w); ///获取到当前要保存的窗口
+    auto w = dynamic_cast<canvas::body*> (sub_window->widget()); assert(w); ///获取到当前要保存的窗口
 
     QString path;
     if (w->attached_file().isEmpty())
@@ -139,7 +139,7 @@ void flow_main::file_save_as()
     auto sub_window = mdi_area_->activeSubWindow();
     assert (sub_window);
 
-    auto w = dynamic_cast<canvas_body*> (sub_window->widget()); assert(w); ///获取到当前要保存的窗口
+    auto w = dynamic_cast<canvas::body*> (sub_window->widget()); assert(w); ///获取到当前要保存的窗口
 
     auto path = QFileDialog::getSaveFileName(this, "文件保存", ".", "Value Stream Mapping (*.vsm");
     if (path.isEmpty())
@@ -158,11 +158,11 @@ void flow_main::create_toolbar()
     toolbar_edit->addActions({ui->action_zoom_in,ui->action_zoom_out, ui->action_drawer});
 }
 
-canvas_body* flow_main::active_canvas_body()
+canvas::body* flow_main::active_canvas_body()
 {
     if(QMdiSubWindow *active_subwindow = mdi_area_->activeSubWindow())
     {
-        canvas_body *canvas_ptr = dynamic_cast<canvas_body*> (active_subwindow->widget());
+        canvas::body *canvas_ptr = dynamic_cast<canvas::body*> (active_subwindow->widget());
         assert (canvas_ptr);
         return canvas_ptr;
     }
@@ -188,16 +188,16 @@ void flow_main::set_tool_action()
 }
 
 
-not_null<canvas_body*> flow_main::create_canvas_body()
+not_null<canvas::body*> flow_main::create_canvas_body()
 {
-    auto canvas = std::make_unique<canvas_body> (mdi_area_, SVG_DIR);
+    auto canvas = std::make_unique<canvas::body> (mdi_area_, SVG_DIR);
     auto raw_canvas = canvas.get ();
 
     canvas->setAttribute (Qt::WA_DeleteOnClose);
     canvas->setWindowState(Qt::WindowMaximized);
     mdi_area_->addSubWindow(canvas.release ());
 
-    connect(raw_canvas, &canvas_body::selection_changed, this, &flow_main::set_attribute);
+    connect(raw_canvas, &canvas::body::selection_changed, this, &flow_main::set_attribute);
 
     return raw_canvas;
 }

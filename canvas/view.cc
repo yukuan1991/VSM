@@ -1,4 +1,4 @@
-﻿#include "canvas_view.h"
+﻿#include "canvas/view.h"
 #include <QWheelEvent>
 #include <QMatrix>
 #include <QDebug>
@@ -17,27 +17,29 @@
 #include <QGLWidget>
 
 
+namespace canvas
+<%
 
-canvas_view::canvas_view(QWidget *parent)
+view::view(QWidget *parent)
         :QGraphicsView (parent)
 {
     init ();
 }
 
-canvas_view::canvas_view(QGraphicsScene *scene, QWidget *parent)
+view::view(QGraphicsScene *scene, QWidget *parent)
         :QGraphicsView (scene, parent)
 {
     init ();
 }
 
-void canvas_view::init()
+void view::init()
 {
     setDragMode (RubberBandDrag);
     setRubberBandSelectionMode (Qt::IntersectsItemShape);
     setViewport(new QGLWidget(QGLFormat(QGL::SampleBuffers)));
 }
 
-void canvas_view::wheelEvent(QWheelEvent *event)
+void view::wheelEvent(QWheelEvent *event)
 {
     SCOPE_EXIT { QGraphicsView::wheelEvent(event); };
 
@@ -58,7 +60,7 @@ void canvas_view::wheelEvent(QWheelEvent *event)
     event->accept ();
 }
 
-void canvas_view::keyPressEvent(QKeyEvent *event)
+void view::keyPressEvent(QKeyEvent *event)
 {
     SCOPE_EXIT { QGraphicsView::keyPressEvent (event); };
 
@@ -81,7 +83,7 @@ void canvas_view::keyPressEvent(QKeyEvent *event)
     }
 }
 
-void canvas_view::mouseDoubleClickEvent(QMouseEvent *event)
+void view::mouseDoubleClickEvent(QMouseEvent *event)
 {
     SCOPE_EXIT { QGraphicsView::mouseDoubleClickEvent (event); };
 
@@ -94,7 +96,7 @@ void canvas_view::mouseDoubleClickEvent(QMouseEvent *event)
     hold_position (item, [] (auto&& item) { item->resetMatrix (); });
 }
 
-void canvas_view::dragEnterEvent(QDragEnterEvent *event)
+void view::dragEnterEvent(QDragEnterEvent *event)
 {
     if (event->mimeData ()->hasFormat ("svg") and event->source () != this)
     {
@@ -106,7 +108,7 @@ void canvas_view::dragEnterEvent(QDragEnterEvent *event)
     }
 }
 
-void canvas_view::dragMoveEvent(QDragMoveEvent *event)
+void view::dragMoveEvent(QDragMoveEvent *event)
 {
     if (event->mimeData ()->hasFormat ("svg") and event->source () != this)
     {
@@ -118,7 +120,7 @@ void canvas_view::dragMoveEvent(QDragMoveEvent *event)
     }
 }
 
-void canvas_view::dropEvent(QDropEvent *event)
+void view::dropEvent(QDropEvent *event)
 {
     if (event->mimeData ()->hasFormat ("svg") and event->source () != this)
     {
@@ -131,7 +133,7 @@ void canvas_view::dropEvent(QDropEvent *event)
     }
 }
 
-void canvas_view::select_all()
+void view::select_all()
 {
     auto list = items ();
     for (auto & item : list)
@@ -140,7 +142,7 @@ void canvas_view::select_all()
     }
 }
 
-void canvas_view::rotate_selected()
+void view::rotate_selected()
 {
     auto selected = scene ()->selectedItems ();
     for (auto & item : selected)
@@ -149,7 +151,7 @@ void canvas_view::rotate_selected()
     }
 }
 
-void canvas_view::scale_object(double factor)
+void view::scale_object(double factor)
 {
     auto set_scale = [factor, this] (auto&& obj)
     {
@@ -182,7 +184,7 @@ void canvas_view::scale_object(double factor)
     }
 }
 
-void canvas_view::svg_drop_action(QDropEvent *event)
+void view::svg_drop_action(QDropEvent *event)
 {
     QString path = event->mimeData ()->data ("svg");
 
@@ -195,10 +197,12 @@ void canvas_view::svg_drop_action(QDropEvent *event)
     item->moveBy (- diff.x (), - diff.y ());
 }
 
-void canvas_view::delete_selected()
+void view::delete_selected()
 {
     for (auto & it : scene ()->selectedItems ())
     {
         delete it;
     }
 }
+
+%>

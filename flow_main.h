@@ -6,7 +6,7 @@
 #include <memory>
 #include <QMdiArea>
 #include <QToolBar>
-#include "canvas_body.h"
+#include "canvas/body.h"
 #include "remark_widget.h"
 #include "utility/interface.hpp"
 #include "drawer/toolbox.h"
@@ -39,7 +39,7 @@ private:
 
 private:
     void on_drawer_visibility_changed ();
-    not_null<canvas_body*> create_canvas_body();
+    not_null<canvas::body*> create_canvas_body();
     /// 新建文件
     void file_new();
     /// 打开文件
@@ -51,7 +51,7 @@ private:
     ///新建工具栏
     void create_toolbar();
     ///查看活动窗口
-    canvas_body* active_canvas_body();
+    canvas::body* active_canvas_body();
     /// 初始化右边属性栏
     void set_attribute_window ();
     /// 更新属性信息

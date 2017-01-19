@@ -1,16 +1,18 @@
-﻿#include "canvas_scene.h"
+﻿#include "canvas/scene.h"
 #include <QGraphicsItem>
 #include "utility/raii.hpp"
 
+namespace canvas
+<%
 
-void canvas_scene::init()
+void scene::init()
 {
-    connect (this, &canvas_scene::selectionChanged, [this] { on_selection_changed (); });
+    connect (this, &scene::selectionChanged, [this] { on_selection_changed (); });
     setSceneRect ({0, 0, 500, 500});
 }
 
 
-void canvas_scene::on_selection_changed()
+void scene::on_selection_changed()
 {
     auto selected = selectedItems ();
     auto children = items ();
@@ -27,3 +29,5 @@ void canvas_scene::on_selection_changed()
         }
     }
 }
+
+%>

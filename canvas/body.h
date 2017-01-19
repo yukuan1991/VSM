@@ -1,15 +1,18 @@
-﻿#ifndef CANVAS_BODY_H
-#define CANVAS_BODY_H
+﻿#pragma once
 
-#include "canvas_view.h"
-#include "canvas_scene.h"
+
+#include "canvas/view.h"
+#include "canvas/scene.h"
 #include "utility/raii.hpp"
 
-class canvas_body : public canvas_view
+namespace canvas
+<%
+
+class body : public view
 {
     Q_OBJECT
 public:
-    explicit canvas_body(QWidget* parent = nullptr, QString svg_dir = {});
+    explicit body(QWidget* parent = nullptr, QString svg_dir = {});
     void file_new_tile();
     ///新文件命名标题
     void file_new_title();
@@ -27,7 +30,7 @@ public slots:
 private:
     void init_conn ();
 private:
-    canvas_scene scene_;
+    canvas::scene scene_;
 
     QString cur_file_;
     bool is_untitled_;//文件未被保存
@@ -35,4 +38,4 @@ private:
     QString attached_file_;
 };
 
-#endif // CANVAS_BODY_H
+%>

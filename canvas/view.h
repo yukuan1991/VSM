@@ -2,8 +2,10 @@
 
 #include <QGraphicsView>
 #include <QGraphicsItem>
+namespace canvas
+<%
 
-class canvas_view : public QGraphicsView
+class view : public QGraphicsView
 {
     Q_OBJECT
 signals:
@@ -12,8 +14,8 @@ public:
     constexpr static auto path_role = Qt::UserRole + 100;
     constexpr static auto remark_role = Qt::UserRole + 101;
 public:
-    explicit canvas_view(QWidget* parent = nullptr);
-    explicit canvas_view(QGraphicsScene* scene, QWidget* parent = nullptr);
+    explicit view(QWidget* parent = nullptr);
+    explicit view(QGraphicsScene* scene, QWidget* parent = nullptr);
     void init ();
     void scale_object (double factor);
 
@@ -38,7 +40,7 @@ private:
 
 
 template<typename CALLABLE>
-void canvas_view::hold_position (QGraphicsItem* item, CALLABLE&& c)
+void view::hold_position (QGraphicsItem* item, CALLABLE&& c)
 {
     auto old_center = item->mapRectToScene (item->boundingRect ()).center ();
     c (item);
@@ -47,3 +49,5 @@ void canvas_view::hold_position (QGraphicsItem* item, CALLABLE&& c)
 
     item->moveBy (- diff.x (), - diff.y ());
 }
+
+%>

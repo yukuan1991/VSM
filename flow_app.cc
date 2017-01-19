@@ -3,7 +3,6 @@
 #include <QDebug>
 #include <QMessageBox>
 #include <algorithm>
-#include "canvas_scene.h"
 #include "qt-tools/common.hpp"
 #include "qt-tools/screen_saver.h"
 #include "drawer/toolbox.h"

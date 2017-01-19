@@ -1,12 +1,15 @@
-﻿#include "canvas_body.h"
+﻿#include "canvas/body.h"
 #include "json.hpp"
 #include "utility/raii.hpp"
 #include "defs.hpp"
 #include <QDir>
 #include "flow_utility.h"
 
-canvas_body::canvas_body(QWidget *parent, QString svg_dir)
-    :canvas_view (parent)
+namespace canvas
+<%
+
+body::body(QWidget *parent, QString svg_dir)
+    :view (parent)
     ,svg_dir_ (::move (svg_dir))
 
 {
@@ -15,12 +18,12 @@ canvas_body::canvas_body(QWidget *parent, QString svg_dir)
     is_untitled_ = true;
 }
 
-void canvas_body::file_new_title()
+void body::file_new_title()
 {
 
 }
 
-std::string canvas_body::dump()
+std::string body::dump()
 {
     nlohmann::json data;
     nlohmann::json items = nlohmann::json::array();
@@ -47,7 +50,7 @@ std::string canvas_body::dump()
     return data.dump(4);
 }
 
-bool canvas_body::load(const std::string &data) try
+bool body::load(const std::string &data) try
 {
     this->scene()->clear();
 
@@ -86,7 +89,7 @@ catch (const std::exception& e)
     return false;
 }
 
-QString canvas_body::get_path_from_name(const QString &name)
+QString body::get_path_from_name(const QString &name)
 {
     QDir dir (svg_dir_);
     auto list = dir.entryInfoList();
@@ -102,7 +105,7 @@ QString canvas_body::get_path_from_name(const QString &name)
     return {};
 }
 
-void canvas_body::set_remark(const QString &remark)
+void body::set_remark(const QString &remark)
 {
     auto list = scene ()->selectedItems();
     if (list.size() != 1)
@@ -113,7 +116,7 @@ void canvas_body::set_remark(const QString &remark)
     list[0]->setData(remark_role, remark);
 }
 
-QString canvas_body::remark()
+QString body::remark()
 {
     auto list = scene ()->selectedItems();
     if (list.size() != 1)
@@ -125,13 +128,15 @@ QString canvas_body::remark()
     return remark;
 }
 
-void canvas_body::window_modified()
+void body::window_modified()
 {
     setWindowModified(true);
     setWindowTitle(cur_file_+"[*]");
 }
 
-void canvas_body::init_conn()
+void body::init_conn()
 {
-    connect(&scene_, &canvas_scene::selectionChanged, [this] { emit selection_changed (); });
+    connect(&scene_, &scene::selectionChanged, [this] { emit selection_changed (); });
 }
+
+%>
