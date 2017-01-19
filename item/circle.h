@@ -29,7 +29,7 @@ private:
     QPointF
     p1 {75,65},
     p2 {82,72},
-    p3 {90,60};
+    p3 {87,60};
 
 
 //    p1{width +x +5, heigth + y + 5},
