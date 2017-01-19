@@ -37,7 +37,8 @@ SOURCES += \
     canvas/body.cc \
     canvas/scene.cc \
     canvas/view.cc \
-    item/item.cc
+    item/item.cc \
+    item/material_flow.cc
 
 HEADERS += \
     flow_app.h \
@@ -52,7 +53,8 @@ HEADERS += \
     canvas/scene.h \
     canvas/view.h \
     item/item.h \
-    item/maker.hpp
+    item/maker.hpp \
+    item/material_flow.h
 
 FORMS += \
     flow_main.ui \
