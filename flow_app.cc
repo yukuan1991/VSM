@@ -21,12 +21,40 @@ flow_app::flow_app(int argc, char **argv)
     }
 }
 
+#include "item/circle.h"
+#include <QGraphicsView>
+#include <QMatrix>
+#include <QGraphicsScene>
+#include <QGLWidget>
+
 bool flow_app::run()
 {
-    main_ = std::make_unique<flow_main> ();
-    main_->set_drawer ();
-    main_->show ();
-    return true;
+    //main_ = std::make_unique<flow_main> ();
+    //main_->set_drawer ();
+    //main_->show ();
+    QGraphicsScene scene (0, 0, 800, 600);
+    QGraphicsView view;
+    view.setScene(&scene);
+    QMatrix matrix;
+    matrix.scale (2,2);
+    view.setMatrix (matrix);
+    view.setDragMode (decltype (view) :: RubberBandDrag);
+    view.setRubberBandSelectionMode (Qt::IntersectsItemShape);
+    view.setViewport(new QGLWidget(QGLFormat(QGL::SampleBuffers)));
+    view.show();
+    qDebug() << "main";
+
+   auto p_item =item::circle::make({150,150}, Qt::black);
+
+    if (p_item != nullptr)
+
+    {
+        qDebug() << "main if";
+
+        scene.addItem(p_item.release());
+    }
+    exec ();
+    return false;
 }
 
 void flow_app::exec_update(std::vector<std::pair<string, string>> file_info)

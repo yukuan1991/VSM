@@ -3,7 +3,8 @@
 #include <QPainter>
 #include <QPen>
 
-namespace item {
+namespace item
+<%
 
 item::item(QObject *parent) : QObject(parent)
 {
@@ -34,4 +35,4 @@ void item::set_dash(QPainter *painter)
     painter->setPen(pen);
 }
 
-} // namespace item
+%> // namespace item
