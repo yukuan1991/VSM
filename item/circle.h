@@ -27,16 +27,9 @@ private:
     constexpr static qreal heigth = 0.75 * item_height;
 
     QPointF
-    p1 {75,65},
-    p2 {82,72},
-    p3 {87,60};
-
-
-//    p1{width +x +5, heigth + y + 5},
-//    p2{width + x -8, heigth + y -8},
-//    p3{width + x + 10, heigth + y +10};
-
-
+    p1 {0.75 * item_width, 0.8125 * item_height},
+    p2 {0.82 * item_width, 0.9 * item_height},
+    p3 {0.87 * item_width,0.75 * item_height};
 
 };
 

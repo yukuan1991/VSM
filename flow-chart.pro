@@ -38,7 +38,8 @@ SOURCES += \
     canvas/scene.cc \
     canvas/view.cc \
     item/item.cc \
-    item/circle.cc
+    item/circle.cc \
+    item/improve.cc
 
 HEADERS += \
     flow_app.h \
@@ -54,7 +55,8 @@ HEADERS += \
     canvas/view.h \
     item/item.h \
     item/maker.hpp \
-    item/circle.h
+    item/circle.h \
+    item/improve.h
 
 FORMS += \
     flow_main.ui \

@@ -22,6 +22,7 @@ flow_app::flow_app(int argc, char **argv)
 }
 
 #include "item/circle.h"
+#include "item/improve.h"
 #include <QGraphicsView>
 #include <QMatrix>
 #include <QGraphicsScene>
@@ -44,7 +45,7 @@ bool flow_app::run()
     view.show();
     qDebug() << "main";
 
-   auto p_item =item::circle::make({150,150}, Qt::black);
+   auto p_item =item::improve::make({150,150}, Qt::black);
 
     if (p_item != nullptr)
 
