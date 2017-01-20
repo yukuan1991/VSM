@@ -2,8 +2,21 @@
 
 #include <QGraphicsView>
 #include <QGraphicsItem>
+#include <experimental/optional>
+#include <memory>
+#include "item/material_flow.h"
+
+
+
+namespace item
+{
+class material_flow;
+}
+
 namespace canvas
 <%
+using std::experimental::optional;
+using std::experimental::nullopt;
 
 class view : public QGraphicsView
 {
@@ -18,10 +31,16 @@ public:
     explicit view(QGraphicsScene* scene, QWidget* parent = nullptr);
     void init ();
     void scale_object (double factor);
+    void set_arrow_state (QString state) { arrow_state_ = ::move (state); }
 
 protected:
     void keyPressEvent (QKeyEvent* event) override;
     void mouseDoubleClickEvent(QMouseEvent *event) override;
+
+    void mousePressEvent (QMouseEvent* event) override;
+    void mouseMoveEvent (QMouseEvent* event) override;
+    void mouseReleaseEvent (QMouseEvent* event) override;
+
     void dragEnterEvent(QDragEnterEvent *event) override;
     void dragMoveEvent(QDragMoveEvent *event) override;
     void dropEvent (QDropEvent* event) override;
@@ -36,6 +55,10 @@ private:
     static void hold_position (QGraphicsItem* item, CALLABLE&& c);
 private:
     constexpr static double rotate_arg = 90;
+
+    optional<std::unique_ptr<item::item>> tmp_arrow_ = std::experimental::nullopt;
+    QString arrow_state_;
+    QPointF last_pressed_;
 };
 
 

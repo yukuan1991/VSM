@@ -17,17 +17,18 @@
 #include <QGLWidget>
 
 
+
 namespace canvas
 <%
 
 view::view(QWidget *parent)
-        :QGraphicsView (parent)
+    :QGraphicsView (parent)
 {
     init ();
 }
 
 view::view(QGraphicsScene *scene, QWidget *parent)
-        :QGraphicsView (scene, parent)
+    :QGraphicsView (scene, parent)
 {
     init ();
 }
@@ -43,7 +44,7 @@ void view::wheelEvent(QWheelEvent *event)
 {
     SCOPE_EXIT { QGraphicsView::wheelEvent(event); };
 
-    if (! (event->modifiers() & Qt::ControlModifier))
+    if (!(event->modifiers() & Qt::ControlModifier))
     {
         return;
     }
@@ -94,6 +95,49 @@ void view::mouseDoubleClickEvent(QMouseEvent *event)
     }
 
     hold_position (item, [] (auto&& item) { item->resetMatrix (); });
+}
+
+void view::mousePressEvent(QMouseEvent *event)
+{
+    if (!arrow_state_.isEmpty())
+    {
+        last_pressed_ = mapToScene(event->pos());
+        tmp_arrow_.emplace (nullptr);
+    }
+    else
+    {
+        QGraphicsView::mousePressEvent(event);
+    }
+}
+
+void view::mouseMoveEvent(QMouseEvent *event)
+{
+    if (tmp_arrow_)
+    {
+        auto end_ptr = mapToScene(event->pos ());
+        tmp_arrow_.emplace (item::material_flow::make(last_pressed_, end_ptr));
+
+        if (tmp_arrow_.value() != nullptr)
+        {
+            scene()->addItem(tmp_arrow_->get());
+        }
+    }
+    else
+    {
+        QGraphicsView::mouseMoveEvent(event);
+    }
+}
+
+
+void view::mouseReleaseEvent(QMouseEvent *event)
+{
+    if (tmp_arrow_)
+    {
+        tmp_arrow_.value().release();
+        tmp_arrow_ = nullopt;
+    }
+    else
+        QGraphicsView::mouseReleaseEvent(event);
 }
 
 void view::dragEnterEvent(QDragEnterEvent *event)

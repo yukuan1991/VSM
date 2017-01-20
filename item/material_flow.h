@@ -13,8 +13,10 @@ public:
 public:
     static std::unique_ptr<material_flow> make (QPointF p1, QPointF p2, QColor color = Qt::black,
                                                 item* parent = nullptr);
+    ~material_flow () override;
 protected:
     explicit material_flow (QPointF p1, QPointF p2, item* parent = nullptr);
+    bool init (QPointF, QPointF, QColor);
 
     void paint (QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = nullptr) override;
     QRectF boundingRect () const override;
@@ -29,7 +31,7 @@ private:
     constexpr static qreal width = 5;
     constexpr static qreal fill_distance = 8;
     constexpr static qreal head_ratio = 5;
-    constexpr static qreal outer_gap = 2;
+    constexpr static qreal outer_gap = 4;
 };
 
 } // namespace item
