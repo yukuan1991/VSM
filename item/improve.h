@@ -19,20 +19,29 @@ protected:
     explicit improve(item* parent=nullptr);
     void paint (QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = nullptr) override;
 private:
-//    int startAngle = 1 * item_width * 16;
-//    int spanAngle = 1.7 * item_width * 16;
-//    constexpr static qreal x = 0.2 * item_width;///20
-//    constexpr static qreal y = 0.25 * item_height; ///20
-//    constexpr static qreal width = 0.8 * item_width;
-//    constexpr static qreal heigth = 0.75 * item_height;
-
     QPointF
-    p1 {50, 60},
-    p2 {40,55};
-   // p3 {40,55};
+    p1 {40,60},
+    p2 {20,58},
+    p3 {40,55},
+    p4 {20,50},
+    p5 {35,45},
+    p6 {20,38},
+    p7 {45,40},
+    p8 {38,28},
+    p9 {50,40},
+    p10 {60,20},
+    p11 {60,40},
+    p12 {70,35},
+    p13 {68,40},
+    p14 {60,50},
+    p15 {70,50},
+    p16 {60,60},
+    p17 {70,68},
+    p18 {60,60},
+    p19 {50,65},
+    p20 {40,75};
 
 };
-
 
 }
 #endif // CIRCLE_H

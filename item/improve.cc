@@ -28,16 +28,32 @@ void improve::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, Q
 {
     auto the_pen = painter->pen();
     the_pen.setColor(color());
-    the_pen.setWidthF(2.0);
+    the_pen.setWidthF(1.0);
     painter->setPen(the_pen);
 
     //给定坐标
     painter->setBrush(Qt::white);
+    painter->drawLine(p1,p2);
+    painter->drawLine(p2,p3);
+    painter->drawLine(p3,p4);
+    painter->drawLine(p4,p5);
+    painter->drawLine(p5,p6);
+    painter->drawLine(p6,p7);
+    painter->drawLine(p7,p8);
+    painter->drawLine(p8,p9);
+    painter->drawLine(p9,p10);
+    painter->drawLine(p10,p11);
+    painter->drawLine(p11,p12);
+    painter->drawLine(p12,p13);
+    painter->drawLine(p13,p14);
+    painter->drawLine(p14,p15);
+    painter->drawLine(p15,p16);
+    painter->drawLine(p16,p17);
+    painter->drawLine(p17,p18);
+    painter->drawLine(p17,p19);
+    painter->drawLine(p19,p20);
+    painter->drawLine(p20,p1);
 
-   // painter->drawArc(QRectF{10, 0, 80, 80}, 45 * 16, 270 * 16);
-  //  painter->setBrush(Qt::black);
-
-    painter->drawPolygon({{p1,p2}},Qt::WindingFill);
 
     item::paint(painter, option, widget);
 }
