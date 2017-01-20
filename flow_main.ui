@@ -13,14 +13,28 @@
   <property name="windowTitle">
    <string>Value Stream Mapping</string>
   </property>
-  <widget class="QWidget" name="centralwidget"/>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QRadioButton" name="radioButton">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>130</y>
+      <width>89</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>RadioButton</string>
+    </property>
+   </widget>
+  </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
      <width>800</width>
-     <height>25</height>
+     <height>23</height>
     </rect>
    </property>
    <widget class="QMenu" name="menu_file">
@@ -38,6 +52,8 @@
     </property>
     <addaction name="action_zoom_in"/>
     <addaction name="action_zoom_out"/>
+    <addaction name="action_all_zoom_in"/>
+    <addaction name="action_all_zoom_back"/>
    </widget>
    <widget class="QMenu" name="menu_window">
     <property name="title">
@@ -89,7 +105,7 @@
   <action name="action_file_save_as">
    <property name="icon">
     <iconset>
-     <normaloff>image/另存为.png</normaloff>image/另存为.png</iconset>
+     <normaloff>image/fileother_save.png</normaloff>image/fileother_save.png</iconset>
    </property>
    <property name="text">
     <string>另存为</string>
@@ -101,25 +117,25 @@
   <action name="action_zoom_in">
    <property name="icon">
     <iconset>
-     <normaloff>image/放大.png</normaloff>image/放大.png</iconset>
+     <normaloff>image/zoom_in.png</normaloff>image/zoom_in.png</iconset>
    </property>
    <property name="text">
-    <string>放大</string>
+    <string>局部放大</string>
    </property>
    <property name="statusTip">
-    <string>放大 图片</string>
+    <string>局部放大</string>
    </property>
   </action>
   <action name="action_zoom_out">
    <property name="icon">
     <iconset>
-     <normaloff>image/缩小.png</normaloff>image/缩小.png</iconset>
+     <normaloff>image/zoom_out.png</normaloff>image/zoom_out.png</iconset>
    </property>
    <property name="text">
-    <string>缩小</string>
+    <string>局部缩小</string>
    </property>
    <property name="statusTip">
-    <string>缩小图片</string>
+    <string>局部缩小</string>
    </property>
   </action>
   <action name="action_back_out">
@@ -143,13 +159,37 @@
    </property>
    <property name="icon">
     <iconset>
-     <normaloff>image/显示抽屉.png</normaloff>image/显示抽屉.png</iconset>
+     <normaloff>image/show_drawer.png</normaloff>image/show_drawer.png</iconset>
    </property>
    <property name="text">
     <string>显示抽屉</string>
    </property>
    <property name="statusTip">
     <string>显示抽屉</string>
+   </property>
+  </action>
+  <action name="action_all_zoom_in">
+   <property name="icon">
+    <iconset>
+     <normaloff>image/all_zoom_in.png</normaloff>image/all_zoom_in.png</iconset>
+   </property>
+   <property name="text">
+    <string>全局放大</string>
+   </property>
+   <property name="statusTip">
+    <string>全局放大</string>
+   </property>
+  </action>
+  <action name="action_all_zoom_back">
+   <property name="icon">
+    <iconset>
+     <normaloff>image/all_zool_back.png</normaloff>image/all_zool_back.png</iconset>
+   </property>
+   <property name="text">
+    <string>全局缩小</string>
+   </property>
+   <property name="statusTip">
+    <string>全局缩小</string>
    </property>
   </action>
  </widget>
