@@ -22,7 +22,7 @@ private:
     p4{0.7 * item_width,0.875 * item_height},
     p5{0.3 * item_width,0.375 * item_height},
     p6{0.7 * item_width,0.375 * item_height},
-    p7{0.3 * item_width,0.375 * item_height},
+    p7{0.3 * item_width,0.625 * item_height},
     p8{0.7 * item_width,0.625 * item_height};
 };
 }
