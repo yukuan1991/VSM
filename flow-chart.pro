@@ -39,7 +39,22 @@ SOURCES += \
     canvas/view.cc \
     item/item.cc \
     item/circle.cc \
-    item/improve.cc
+    item/improve.cc \
+    item/reclaimer.cc \
+    item/board.cc \
+    item/convey.cc \
+    item/information.cc \
+    item/rectangles.cc \
+    item/round.cc \
+    item/square.cc \
+    item/square_text.cc \
+    item/supermarket_rectangles.cc \
+    item/three_rectangles.cc \
+    item/triangle.cc \
+    item/dispatch.cc \
+    item/buffer.cc \
+    item/communicate.cc \
+    item/polygon.cc
 
 HEADERS += \
     flow_app.h \
@@ -56,7 +71,22 @@ HEADERS += \
     item/item.h \
     item/maker.hpp \
     item/circle.h \
-    item/improve.h
+    item/improve.h \
+    item/reclaimer.h \
+    item/board.h \
+    item/convey.h \
+    item/information.h \
+    item/rectangles.h \
+    item/round.h \
+    item/square.h \
+    item/square_text.h \
+    item/supermarket_rectangles.h \
+    item/three_rectangles.h \
+    item/triangle.h \
+    item/dispatch.h \
+    item/buffer.h \
+    item/communicate.h \
+    item/polygon.h
 
 FORMS += \
     flow_main.ui \
