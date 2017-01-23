@@ -5,6 +5,7 @@
 #include <QStyleOptionGraphicsItem>
 #include <QPen>
 #include <QRectF>
+///改善
 
 namespace item {
 

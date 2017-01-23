@@ -1,5 +1,5 @@
-﻿#ifndef CIRCLE_H
-#define CIRCLE_H
+﻿#pragma once
+
 #include <memory>
 #include <QPointF>
 #include <QColor>
@@ -35,4 +35,3 @@ private:
 
 
 }
-#endif // CIRCLE_H

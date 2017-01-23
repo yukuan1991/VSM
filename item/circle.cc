@@ -5,6 +5,7 @@
 #include <QStyleOptionGraphicsItem>
 #include <QPen>
 #include <QRectF>
+///取料
 
 namespace item {
 

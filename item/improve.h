@@ -1,11 +1,11 @@
-﻿#ifndef CIRCLE_H
-#define CIRCLE_H
+﻿#pragma once
+
 #include <memory>
 #include <QPointF>
 #include <QColor>
 #include <QRectF>
 #include "item/item.h"
-///取料
+///改善
 
 namespace item {
 
@@ -20,28 +20,27 @@ protected:
     void paint (QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = nullptr) override;
 private:
     QPointF
-    p1 {40,60},
-    p2 {20,58},
-    p3 {40,55},
-    p4 {20,50},
-    p5 {35,45},
-    p6 {20,38},
-    p7 {45,40},
-    p8 {38,28},
-    p9 {50,40},
-    p10 {60,20},
-    p11 {60,40},
-    p12 {70,35},
-    p13 {68,40},
-    p14 {60,50},
-    p15 {70,50},
-    p16 {60,60},
-    p17 {70,68},
-    p18 {60,60},
-    p19 {50,65},
-    p20 {40,75};
+    p1 {0.4 * item_width,0.75 * item_height},
+    p2 {0.2 * item_width,0.725 * item_height},
+    p3 {0.4 * item_width,0.6875 * item_height},
+    p4 {0.2 * item_width,0.625 * item_height},
+    p5 {0.35 * item_width,0.5625 * item_height},
+    p6 {0.2 * item_width,0.475 * item_height},
+    p7 {0.45 * item_width,0.5 * item_height},
+    p8 {0.38 * item_height,0.35 * item_height},
+    p9 {0.5 * item_width,0.5 * item_height},
+    p10 {0.6 * item_width,0.25 * item_height},
+    p11 {0.6 * item_width,0.5 * item_height},
+    p12 {0.7 * item_width,0.4375 * item_height},
+    p13 {0.68 * item_width,0.5 * item_height},
+    p14 {0.6 * item_width,0.625 * item_height},
+    p15 {0.7 * item_width,0.625 * item_height},
+    p16 {0.6 * item_width,0.75 * item_height},
+    p17 {0.7 * item_width,0.85 * item_height},
+    p18 {0.6 * item_width,0.75 * item_height},
+    p19 {0.5* item_width,0.8125 * item_height},
+    p20 {0.4 * item_width,0.9375 * item_height};
 
 };
 
 }
-#endif // CIRCLE_H
