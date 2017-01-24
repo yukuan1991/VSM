@@ -53,6 +53,8 @@ void flow_main::update_remark()
 
 void flow_main::on_drawer_status(const QString &status)
 {
+    Q_UNUSED(status);
+
 
 }
 

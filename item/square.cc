@@ -10,12 +10,10 @@ namespace item {
 
 std::unique_ptr<square> square::make(QPointF pos, QColor color)
 {
-     qDebug()<< "wecome make";
     std::unique_ptr<square>ret(new square);
     ret->setPos(pos);
     ret->set_color( std::move (color));
     return ret;
-
 
 }
 
@@ -27,22 +25,12 @@ void square::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QW
     the_pen.setColor(color ());
     painter->setPen(the_pen);
     painter->drawRect(((item_width-square_length)/2),((item_height-square_heigth)/2),square_length,square_heigth);//这里面给一个长和宽
-    if (option->state bitand QStyle::State_Selected)
-    {
-        qDebug()<<"长方形被选中";
-        painter->setBrush(Qt::transparent);
-        QPen pen;
-        pen.setColor(Qt::black);
-        pen.setStyle(Qt::DashLine);
-        painter->setPen(pen);
-        painter->drawRect(boundingRect());
-    }
+   item::paint(painter, option, widget);
 }
 
 square::square(item *parent)
     :item(parent)
  {
-    qDebug() << "构造函数";
  }
 
 }

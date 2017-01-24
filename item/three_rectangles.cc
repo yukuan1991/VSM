@@ -24,18 +24,7 @@ void three_rectangles::paint(QPainter *painter, const QStyleOptionGraphicsItem *
     painter->drawLine(p5,p6);
     painter->drawLine(p7,p8);
     painter->drawLine(p9,p10);
-    if (option->state bitand QStyle::State_Selected)
-    {
-        qDebug()<<"长方形被选中";
-        painter->setBrush(Qt::transparent);
-        QPen pen;
-        pen.setColor(Qt::black);
-        pen.setStyle(Qt::DashLine);
-        painter->setPen(pen);
-        painter->drawRect(boundingRect());
-    }
-
-
+   item::paint(painter, option, widget);
 }
 
 std::unique_ptr<three_rectangles> three_rectangles::make(QPointF pos, QColor color)

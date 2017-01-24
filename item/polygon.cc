@@ -28,16 +28,7 @@ void polygon::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, Q
     //给定坐标
     painter->setBrush(Qt::white);
     painter->drawPolygon({{p1, p2, p3,p4,p5}}, Qt::WindingFill);
-
-    if(option->state bitand QStyle::State_Selected)
-    {
-        painter->setBrush(Qt::transparent);//画刷为空白
-        QPen pen;
-        pen.setColor(Qt::black);
-        pen.setStyle(Qt::DashLine);
-        painter->setPen(pen);
-        painter->drawRect(boundingRect ());
-    }
+    item::paint(painter, option, widget);
  }
 
 }

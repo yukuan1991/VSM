@@ -29,14 +29,6 @@ void round::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWi
     painter->setPen(Qt::black);
     painter->drawEllipse(0.1 * item_width, 10.0, 60.0, 60.0);
     painter->drawEllipse(25.0, 25.0, 30.0, 30.0);
-    if (option->state bitand QStyle::State_Selected)
-    {
-        painter->setBrush(Qt::transparent);
-        QPen pen;
-        pen.setColor(Qt::black);
-        pen.setStyle(Qt::DashLine);
-        painter->setPen(pen);
-        painter->drawRect(boundingRect());
-    }
+    item::paint(painter, option, widget);
   }
 }

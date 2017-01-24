@@ -37,18 +37,6 @@ void information::paint(QPainter *painter, const QStyleOptionGraphicsItem *optio
     painter->drawLine(p4,p5);
     painter->drawLine(p5,p6);
     painter->drawLine(p6,p4);
-
-
-    if (option->state bitand QStyle::State_Selected)
-    {
-        qDebug()<<"长方形被选中";
-        painter->setBrush(Qt::transparent);
-        QPen pen;
-        pen.setColor(Qt::black);
-        pen.setStyle(Qt::DashLine);
-        painter->setPen(pen);
-        painter->drawRect(boundingRect());
-    }
-
+    item::paint(painter, option, widget);
    }
 }

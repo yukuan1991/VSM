@@ -29,15 +29,6 @@ void rectangles::paint(QPainter *painter, const QStyleOptionGraphicsItem *option
     painter->setPen(the_pen);
     painter->drawPolygon({{p1, p2, p4, p3}},Qt::WindingFill);
     painter->drawLine(p5,p6);
-    if (option->state bitand QStyle::State_Selected)
-    {
-        qDebug()<<"长方形被选中";
-        painter->setBrush(Qt::transparent);
-        QPen pen;
-        pen.setColor(Qt::black);
-        pen.setStyle(Qt::DashLine);
-        painter->setPen(pen);
-        painter->drawRect(boundingRect());
-    }
+   item::paint(painter, option, widget);
   }
 }

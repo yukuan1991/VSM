@@ -31,16 +31,6 @@ void square_text::paint(QPainter *painter, const QStyleOptionGraphicsItem *optio
     QRectF text_rect {(square_length - text_square_length)/2 +10,
                  (square_heigth - text_square_heigth) / 2 +20, text_square_length, text_square_heigth};
     painter->drawText(text_rect,"OXOX", Qt::AlignVCenter | Qt::AlignCenter);
-
-    if (option->state bitand QStyle::State_Selected)
-    {
-        qDebug()<<"长方形被选中";
-        painter->setBrush(Qt::transparent);
-        QPen pen;
-        pen.setColor(Qt::black);
-        pen.setStyle(Qt::DashLine);
-        painter->setPen(pen);
-        painter->drawRect(boundingRect());
-    }
+    item::paint(painter, option, widget);
   }
 }

@@ -24,15 +24,7 @@ void triangle::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, 
     painter->drawLine(p1,p2);
     painter->drawLine(p1,p3);
     painter->drawLine(p2,p3);
-    if (option->state bitand QStyle::State_Selected)
-    {
-        painter->setBrush(Qt::transparent);
-        QPen pen;
-        pen.setColor(Qt::black);
-        pen.setStyle(Qt::DashLine);
-        painter->setPen(pen);
-        painter->drawRect(boundingRect());
-    }
+    item::paint(painter, option, widget);
 
 }
 

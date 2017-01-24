@@ -29,15 +29,7 @@ void convey::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QW
     painter->setBrush(Qt::white);
     painter->drawArc(x,y,width,heigth,startAngle,spanAngle);
     painter->drawEllipse(35.0, 40.0, 30.0, 30.0);
-    if(option->state bitand QStyle::State_Selected)
-    {
-        painter->setBrush(Qt::transparent);//画刷为空白
-        QPen pen;
-        pen.setColor(Qt::black);
-        pen.setStyle(Qt::DashLine);
-        painter->setPen(pen);
-        painter->drawRect(boundingRect ());
-    }
+    item::paint(painter, option, widget);
 
   }
 
