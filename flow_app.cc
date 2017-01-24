@@ -6,27 +6,6 @@
 #include "qt-tools/common.hpp"
 #include "qt-tools/screen_saver.h"
 #include "drawer/toolbox.h"
-
-#include "item/circle.h"
-#include "item/improve.h"
-#include "item/reclaimer.h"
-#include "item/board.h"
-#include "item/convey.h"
-#include "item/information.h"
-#include "item/rectangles.h"
-#include "item/round.h"
-#include "item/square.h"
-#include "item/square_text.h"
-#include "item/supermarket_rectangles.h"
-#include "item/three_rectangles.h"
-#include "item/triangle.h"
-#include "item/dispatch.h"
-#include "item/buffer.h"
-#include"item/communicate.h"
-
-
-
-
 APP_REGISTER (flow_app)
 
 using namespace std;
@@ -49,31 +28,10 @@ flow_app::flow_app(int argc, char **argv)
 
 bool flow_app::run()
 {
-    //main_ = std::make_unique<flow_main> ();
-    //main_->set_drawer ();
-    //main_->show ();
-    QGraphicsScene scene (0, 0, 800, 600);
-    QGraphicsView view;
-    view.setScene(&scene);
-    QMatrix matrix;
-    matrix.scale (2,2);
-    view.setMatrix (matrix);
-    view.setDragMode (decltype (view) :: RubberBandDrag);
-    view.setRubberBandSelectionMode (Qt::IntersectsItemShape);
-    view.setViewport(new QGLWidget(QGLFormat(QGL::SampleBuffers)));
-    view.show();
-    qDebug() << "main";
-
-   auto p_item = item::communicate::make({150,150}, Qt::black);
-
-    if (p_item != nullptr)
-
-    {
-        qDebug() << "main if";
-        scene.addItem(p_item.release());
-    }
-    exec ();
-    return false;
+    main_ = std::make_unique<flow_main> ();
+    main_->set_drawer ();
+    main_->show ();
+    return true;
 }
 
 void flow_app::exec_update(std::vector<std::pair<string, string>> file_info)
