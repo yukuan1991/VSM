@@ -15,6 +15,7 @@
 #include <QGraphicsSvgItem>
 #include <assert.h>
 #include <QGLWidget>
+#include "item/traditional_info_flow.h"
 
 
 
@@ -99,14 +100,14 @@ void view::mouseDoubleClickEvent(QMouseEvent *event)
 
 void view::mousePressEvent(QMouseEvent *event)
 {
-    if (!arrow_state_.isEmpty())
+    if (arrow_state_.isEmpty())
     {
-        last_pressed_ = mapToScene(event->pos());
-        tmp_arrow_.emplace (nullptr);
+        QGraphicsView::mousePressEvent(event);
     }
     else
     {
-        QGraphicsView::mousePressEvent(event);
+        last_pressed_ = mapToScene(event->pos());
+        tmp_arrow_.emplace (nullptr);
     }
 }
 
@@ -115,7 +116,7 @@ void view::mouseMoveEvent(QMouseEvent *event)
     if (tmp_arrow_)
     {
         auto end_ptr = mapToScene(event->pos ());
-        tmp_arrow_.emplace (item::material_flow::make(last_pressed_, end_ptr));
+        tmp_arrow_.emplace (item::traditional_info_flow::make(last_pressed_, end_ptr));
 
         if (tmp_arrow_.value() != nullptr)
         {
@@ -137,7 +138,9 @@ void view::mouseReleaseEvent(QMouseEvent *event)
         tmp_arrow_ = nullopt;
     }
     else
+    {
         QGraphicsView::mouseReleaseEvent(event);
+    }
 }
 
 void view::dragEnterEvent(QDragEnterEvent *event)
@@ -214,18 +217,8 @@ void view::scale_object(double factor)
         }
     };
 
-    auto selected = scene ()->selectedItems ();
-    if (selected.isEmpty ())
-    {
-        set_scale (this);
-    }
-    else
-    {
-        for (auto & item : selected)
-        {
-            hold_position (item, set_scale);
-        }
-    }
+    //auto selected = scene ()->selectedItems ();
+    set_scale (this);
 }
 
 void view::svg_drop_action(QDropEvent *event)
