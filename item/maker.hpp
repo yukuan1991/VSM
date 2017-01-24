@@ -32,6 +32,22 @@ inline std::unique_ptr<item> make_item (const QByteArray& classname, item* paren
     return constructor (parent);
 }
 
+inline std::unique_ptr<item> make_arrow (const QString& name, QPointF start, QPointF end)
+{
+    if (name == "传统信息流")
+    {
+
+    }
+    else if (name == "电子信息流")
+    {
+
+    }
+    else if (name == "物流")
+    {
+
+    }
+
+}
 
 
 %>

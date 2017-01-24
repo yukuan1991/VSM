@@ -49,7 +49,6 @@ bool info_flow::set_status(const QString& status)
         return true;
     }
 
-
     auto selected = find_if (begin (buttons_), end (buttons_),
                              [&] (auto && b) { return b->text () == status; });
 
@@ -68,6 +67,7 @@ bool info_flow::init(const std::initializer_list<QString> &buttons) try
     auto v_layout = new QVBoxLayout(this);
 
     buttons_.reserve(buttons.size());
+
     for (auto & it : buttons)
     {
         auto button = std::make_unique<QPushButton> (this);
@@ -121,7 +121,9 @@ void info_flow::button_clicked()
     emit status_changed (clicked->isChecked() ? clicked->text() : "");
 }
 
-info_flow::~info_flow() {  }
+info_flow::~info_flow()
+{
 
+}
 
 %>

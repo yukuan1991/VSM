@@ -15,19 +15,21 @@
 #include <QGraphicsSvgItem>
 #include <assert.h>
 #include <QGLWidget>
+#include "item/traditional_info_flow.h"
+
 
 
 namespace canvas
 <%
 
 view::view(QWidget *parent)
-        :QGraphicsView (parent)
+    :QGraphicsView (parent)
 {
     init ();
 }
 
 view::view(QGraphicsScene *scene, QWidget *parent)
-        :QGraphicsView (scene, parent)
+    :QGraphicsView (scene, parent)
 {
     init ();
 }
@@ -43,7 +45,7 @@ void view::wheelEvent(QWheelEvent *event)
 {
     SCOPE_EXIT { QGraphicsView::wheelEvent(event); };
 
-    if (! (event->modifiers() & Qt::ControlModifier))
+    if (!(event->modifiers() & Qt::ControlModifier))
     {
         return;
     }
@@ -94,6 +96,51 @@ void view::mouseDoubleClickEvent(QMouseEvent *event)
     }
 
     hold_position (item, [] (auto&& item) { item->resetMatrix (); });
+}
+
+void view::mousePressEvent(QMouseEvent *event)
+{
+    if (arrow_state_.isEmpty())
+    {
+        QGraphicsView::mousePressEvent(event);
+    }
+    else
+    {
+        last_pressed_ = mapToScene(event->pos());
+        tmp_arrow_.emplace (nullptr);
+    }
+}
+
+void view::mouseMoveEvent(QMouseEvent *event)
+{
+    if (tmp_arrow_)
+    {
+        auto end_ptr = mapToScene(event->pos ());
+        tmp_arrow_.emplace (item::traditional_info_flow::make(last_pressed_, end_ptr));
+
+        if (tmp_arrow_.value() != nullptr)
+        {
+            scene()->addItem(tmp_arrow_->get());
+        }
+    }
+    else
+    {
+        QGraphicsView::mouseMoveEvent(event);
+    }
+}
+
+
+void view::mouseReleaseEvent(QMouseEvent *event)
+{
+    if (tmp_arrow_)
+    {
+        tmp_arrow_.value().release();
+        tmp_arrow_ = nullopt;
+    }
+    else
+    {
+        QGraphicsView::mouseReleaseEvent(event);
+    }
 }
 
 void view::dragEnterEvent(QDragEnterEvent *event)
@@ -170,18 +217,8 @@ void view::scale_object(double factor)
         }
     };
 
-    auto selected = scene ()->selectedItems ();
-    if (selected.isEmpty ())
-    {
-        set_scale (this);
-    }
-    else
-    {
-        for (auto & item : selected)
-        {
-            hold_position (item, set_scale);
-        }
-    }
+    //auto selected = scene ()->selectedItems ();
+    set_scale (this);
 }
 
 void view::svg_drop_action(QDropEvent *event)

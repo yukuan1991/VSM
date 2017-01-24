@@ -28,3 +28,4 @@ QGraphicsSvgItem* add_svg_to_scene(const QString &path, not_null<QGraphicsScene 
 
     return raw_item;
 }
+

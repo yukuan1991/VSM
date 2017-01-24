@@ -22,6 +22,11 @@ std::unique_ptr<toolbox> toolbox::make(const QString &entity_dir,
     }
 }
 
+QString toolbox::status()
+{
+    return info_flow_->status();
+}
+
 toolbox::~toolbox()
 {
 

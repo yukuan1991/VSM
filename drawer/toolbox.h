@@ -16,6 +16,7 @@ signals:
     void status_changed (const QString&);
 public:
     static std::unique_ptr<toolbox> make (const QString & entity_dir, const QString&, QWidget* parent = nullptr);
+    QString status ();
     ~toolbox () override;
 protected:
     toolbox (QWidget* parent = nullptr, Qt::WindowFlags f = Qt::WindowFlags ());

@@ -53,7 +53,7 @@ void flow_main::update_remark()
 
 void flow_main::on_drawer_status(const QString &status)
 {
-    qDebug () << "status change: " << status;
+
 }
 
 void flow_main::set_drawer()
@@ -198,6 +198,9 @@ not_null<canvas::body*> flow_main::create_canvas_body()
     mdi_area_->addSubWindow(canvas.release ());
 
     connect(raw_canvas, &canvas::body::selection_changed, this, &flow_main::set_attribute);
+    connect (drawer_content_.get(), &drawer::toolbox::status_changed,
+             raw_canvas, &canvas::body::set_arrow_state);
+    raw_canvas->set_arrow_state(drawer_content_->status ());
 
     return raw_canvas;
 }

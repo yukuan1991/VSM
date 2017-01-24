@@ -54,7 +54,9 @@ SOURCES += \
     item/dispatch.cc \
     item/buffer.cc \
     item/communicate.cc \
-    item/polygon.cc
+    item/polygon.cc \
+    item/material_flow.cc \
+    item/traditional_info_flow.cc
 
 HEADERS += \
     flow_app.h \
@@ -86,7 +88,9 @@ HEADERS += \
     item/dispatch.h \
     item/buffer.h \
     item/communicate.h \
-    item/polygon.h
+    item/polygon.h \
+    item/material_flow.h \
+    item/traditional_info_flow.h
 
 FORMS += \
     flow_main.ui \
