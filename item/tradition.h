@@ -1,6 +1,6 @@
 ﻿#ifndef VS_ITEM_ELECTRON_H
 #define VS_ITEM_ELECTRON_H
-#include <vs_item.h>
+#include <item.h>
 #include <memory>
 
 ///传统信息流
