@@ -22,6 +22,7 @@ convey::convey(item* parent)
 
 void convey::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
+    Q_UNUSED (widget);
     auto the_pen = painter->pen();
     the_pen.setColor(color());
     painter->setPen(the_pen);
