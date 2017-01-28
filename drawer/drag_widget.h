@@ -1,4 +1,4 @@
-#ifndef DRAWER_DRAG_WIDGET_H
+﻿#ifndef DRAWER_DRAG_WIDGET_H
 #define DRAWER_DRAG_WIDGET_H
 
 #include <QWidget>
@@ -11,6 +11,8 @@ class drag_widget : public QWidget
 public:
     explicit drag_widget(QWidget *parent = 0);
 
+protected:
+    void mousePressEvent (QMouseEvent* event) override;
 signals:
 
 public slots:

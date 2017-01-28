@@ -13,8 +13,7 @@ class body : public view
     Q_OBJECT
 public:
     explicit body(QWidget* parent = nullptr, QString svg_dir = {});
-    void file_new_tile();
-    ///新文件命名标题
+    void file_new_tile(); ///新文件命名标题
     void file_new_title();
     std::string dump();
     bool load (const std::string& data);
@@ -33,7 +32,8 @@ private:
     canvas::scene scene_;
 
     QString cur_file_;
-    bool is_untitled_;//文件未被保存
+    bool is_untitled_;
+    //文件未被保存
     QString svg_dir_;
     QString attached_file_;
 };

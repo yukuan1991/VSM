@@ -56,7 +56,9 @@ SOURCES += \
     item/communicate.cc \
     item/polygon.cc \
     item/material_flow.cc \
-    item/traditional_info_flow.cc
+    item/traditional_info_flow.cc \
+    item/electric_info_flow.cc \
+    drawer/drag_widget.cc
 
 HEADERS += \
     flow_app.h \
@@ -90,7 +92,9 @@ HEADERS += \
     item/communicate.h \
     item/polygon.h \
     item/material_flow.h \
-    item/traditional_info_flow.h
+    item/traditional_info_flow.h \
+    item/electric_info_flow.h \
+    drawer/drag_widget.h
 
 FORMS += \
     flow_main.ui \
