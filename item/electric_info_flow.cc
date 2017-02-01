@@ -61,6 +61,7 @@ bool electric_info_flow::init()
 
 void electric_info_flow::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
+    Q_UNUSED (widget);
     QPen pen;
     pen.setWidthF (2.0);
     painter->setPen(pen);

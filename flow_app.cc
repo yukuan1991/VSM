@@ -6,6 +6,7 @@
 #include "qt-tools/common.hpp"
 #include "qt-tools/screen_saver.h"
 #include "drawer/toolbox.h"
+
 APP_REGISTER (flow_app)
 
 using namespace std;
@@ -19,12 +20,6 @@ flow_app::flow_app(int argc, char **argv)
         go  [this] { update_check (); };
     }
 }
-
-
-#include <QGraphicsView>
-#include <QMatrix>
-#include <QGraphicsScene>
-#include <QGLWidget>
 
 bool flow_app::run()
 {

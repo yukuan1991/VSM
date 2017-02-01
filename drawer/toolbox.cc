@@ -45,6 +45,7 @@ toolbox::toolbox(QWidget *parent, Qt::WindowFlags f)
 
 bool toolbox::init (const QString &entity_dir, const QString& material_flow_dir)
 {
+    Q_UNUSED (entity_dir);
     material_flow_ = std::make_unique<list> (this);
     info_flow_ = info_flow::make(this, {"传统信息流", "电子信息流", "看板用信息流"});
 
