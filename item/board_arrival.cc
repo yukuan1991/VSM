@@ -24,6 +24,7 @@ board_arrival::board_arrival(item* parent)
 void board_arrival::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
     auto polygon_shape = polygon_shape_;
+
     auto the_pen = painter->pen();
     the_pen.setColor(Qt::black);
     the_pen.setWidthF(item_width / 50);

@@ -59,11 +59,11 @@ void flow_main::on_drawer_status(const QString &status)
 
 void flow_main::set_drawer()
 {
-    drawer_content_->setMaximumWidth (100);
-    drawer_content_->setMinimumWidth (100);
+    drawer_content_->setMaximumWidth (120);
+    drawer_content_->setMinimumWidth (120);
 
-    drawer_->setMaximumWidth (90);
-    drawer_->setMinimumWidth (90);
+    drawer_->setMaximumWidth (120);
+    drawer_->setMinimumWidth (120);
 
     drawer_->setWidget (drawer_content_.get ());
     connect(drawer_content_.get (), &drawer::toolbox::status_changed, this, &flow_main::on_drawer_status);

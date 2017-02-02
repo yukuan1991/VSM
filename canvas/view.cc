@@ -17,6 +17,7 @@
 #include <QGLWidget>
 #include "item/traditional_info_flow.h"
 #include "item/electric_info_flow.h"
+#include "item/maker.hpp"
 
 
 
@@ -158,7 +159,7 @@ void view::dropEvent(QDropEvent *event)
 {
     if (event->mimeData ()->hasFormat ("item") and event->source () != this)
     {
-        svg_drop_action (event);
+        item_drop_action (event);
         event->accept ();
     }
     else
@@ -203,18 +204,25 @@ void view::scale_object(double factor)
     set_scale (this);
 }
 
-void view::svg_drop_action(QDropEvent *event)
+void view::item_drop_action(QDropEvent *event)
 {
-    return;
-    QString path = event->mimeData ()->data ("svg");
+    QString type = event->mimeData ()->data ("item");
 
+    auto scene_pos = mapToScene(event->pos());
+    auto the_item = item::make_item (type, scene_pos);
 
-    auto mouse_pos = mapToScene(event->pos());
-    auto item = add_svg_to_scene(path, scene (), mouse_pos); assert (item);
-    auto new_center = item->mapRectToScene (item->boundingRect ()).center ();
+    if (the_item == nullptr)
+    {
+        return;
+    }
+    scene ()->addItem(the_item.get ());
 
-    auto diff = new_center - mouse_pos;
-    item->moveBy (- diff.x (), - diff.y ());
+    auto new_center = the_item->mapRectToScene (the_item->boundingRect ()).center ();
+
+    auto diff = new_center - scene_pos;
+    the_item->moveBy (- diff.x (), - diff.y ());
+
+    the_item.release();
 }
 
 void view::delete_selected()

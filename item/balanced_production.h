@@ -1,5 +1,4 @@
-﻿#ifndef SQUARE_TEXT_H
-#define SQUARE_TEXT_H
+﻿#pragma once
 #include <item/item.h>
 #include <QPainter>
 #include <QPointF>
@@ -22,4 +21,3 @@ protected:
 };
 }
 
-#endif // SQUARE_TEXT_H

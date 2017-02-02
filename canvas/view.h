@@ -49,7 +49,7 @@ protected:
     void wheelEvent (QWheelEvent* event) override;
 private:
     void select_all ();
-    void svg_drop_action (QDropEvent* event);
+    void item_drop_action (QDropEvent* event);
     void delete_selected ();
 
     template<typename CALLABLE>

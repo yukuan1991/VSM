@@ -1,9 +1,11 @@
 ﻿#include "drag_widget.h"
 #include <QMouseEvent>
 #include "utility/raii.hpp"
+#include "item/item.h"
 #include <QLabel>
 #include <QDrag>
 #include <QMimeData>
+#include "drawer/drag_pixmap.h"
 
 namespace drawer {
 
@@ -29,12 +31,13 @@ void drag_widget::mousePressEvent(QMouseEvent *event)
         return;
     }
 
-    if (label->objectName().isEmpty())
+    auto object_name = label->objectName();
+    if (object_name.isEmpty())
     {
         return;
     }
 
-    auto pm = label->pixmap();
+    auto pm = drawer::make_pixmap(object_name, item::item::width (), item::item::height ());
 
 
     QDrag drag (this);
@@ -43,9 +46,10 @@ void drag_widget::mousePressEvent(QMouseEvent *event)
         auto str = label->objectName().toStdString();
         data->setData ("item", QByteArray (str.data(), static_cast<int> (str.size())));
     }
+
     drag.setMimeData (data.release ());
-    drag.setPixmap (*pm);
-    drag.setHotSpot ({pm->width () / 2, pm->height () / 2});
+    drag.setPixmap (pm);
+    drag.setHotSpot ({pm.width () / 2, pm.height () / 2});
 
     drag.exec (Qt::CopyAction);
 }

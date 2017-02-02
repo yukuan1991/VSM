@@ -1,4 +1,11 @@
-#ifndef DRAG_PIXMAP_H
-#define DRAG_PIXMAP_H
+﻿#pragma once
+#include <QPixmap>
 
-#endif // DRAG_PIXMAP_H
+namespace drawer
+{
+
+QPixmap make_pixmap (const QString& name, qreal width, qreal height);
+
+
+}
+

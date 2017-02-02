@@ -1,5 +1,4 @@
-﻿#ifndef ITEM_MATERIAL_FLOW_H
-#define ITEM_MATERIAL_FLOW_H
+﻿#pragma once
 
 #include "item/item.h"
 
@@ -36,4 +35,3 @@ private:
 
 } // namespace item
 
-#endif // ITEM_MATERIAL_FLOW_H

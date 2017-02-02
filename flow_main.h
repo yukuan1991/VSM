@@ -1,5 +1,4 @@
-﻿#ifndef FLOW_MAIN_H
-#define FLOW_MAIN_H
+﻿#pragma once
 
 #include <QMainWindow>
 #include <QDockWidget>
@@ -62,8 +61,7 @@ private:
 private:
     Ui::flow_main *ui;
     std::unique_ptr<QDockWidget> drawer_ = std::make_unique<QDockWidget> (this);
-    std::unique_ptr<drawer::toolbox> drawer_content_ = drawer::toolbox::make(ENTITY_DIR,
-                                                                             MATERIAL_FLOW_DIR, this);
+    std::unique_ptr<drawer::toolbox> drawer_content_ = drawer::toolbox::make(this);
 
     std::unique_ptr<QDockWidget> attribute_ = std::make_unique<QDockWidget> (this);
     std::unique_ptr<remark_widget> attribute_content_ = std::make_unique<remark_widget> (this);
@@ -76,5 +74,3 @@ private:
     QToolBar *toolbar_edit = addToolBar(tr("编辑"));
 
 };
-
-#endif // FLOW_MAIN_H
