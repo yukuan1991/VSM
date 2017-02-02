@@ -1,5 +1,5 @@
-﻿#ifndef TRIANGLE_H
-#define TRIANGLE_H
+﻿#pragma once
+
 #include <memory>
 #include <item/item.h>
 #include <QPointF>
@@ -9,13 +9,13 @@
 namespace item {
 
 
-class triangle : public item
+class signal_board : public item
 {
 public:
-    static std::unique_ptr<triangle> make (QPointF pos,QColor color);
+    static std::unique_ptr<signal_board> make (QPointF pos, QColor color);
 
 protected:
-    triangle(item* parent= nullptr);
+    signal_board(item* parent= nullptr);
     void paint (QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = nullptr) override;
 private:
     QPointF
@@ -23,6 +23,5 @@ private:
     p2 {0.7 * item_width, 0.3125 * item_height},
     p3 {0.5 * item_width, 0.6875 * item_height};
 };
-}
 
-#endif // TRIANGLE_H
+} /// end of item

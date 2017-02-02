@@ -10,13 +10,13 @@
 namespace item {
 
 
-class circle : public item
+class fetch_material : public item
 {
 public:
-    static std::unique_ptr<circle> make(QPointF pos, QColor color = Qt::black);
+    static std::unique_ptr<fetch_material> make(QPointF pos, QColor color = Qt::black);
 
 protected:
-    explicit circle(item* parent=nullptr);
+    explicit fetch_material(item* parent=nullptr);
     void paint (QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = nullptr) override;
 private:
     int startAngle = 1 * item_width * 16;

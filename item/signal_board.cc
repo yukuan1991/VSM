@@ -1,23 +1,23 @@
 ﻿
-#include "triangle.h"
+#include "signal_board.h"
 #include <QPainter>
 #include <QDebug>
 #include <QStyle>
 #include <QStyleOptionGraphicsItem>
 
-namespace item {
+namespace item
+<%
 
 
-triangle::triangle(item *parent)
+signal_board::signal_board(item *parent)
     :item (parent)
 {
 
 }
 
-void triangle::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
+void signal_board::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
-    qDebug() << "wecome paint";
-     Q_UNUSED(widget);
+    Q_UNUSED(widget);
     auto the_pen = painter->pen ();
     the_pen.setColor(color ());
     painter->setPen(the_pen);
@@ -28,12 +28,12 @@ void triangle::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, 
 
 }
 
-std::unique_ptr<triangle> triangle::make(QPointF pos, QColor color)
+std::unique_ptr<signal_board> signal_board::make(QPointF pos, QColor color)
 {
-    std::unique_ptr <triangle> ret (new triangle);
+    std::unique_ptr <signal_board> ret (new signal_board);
     ret->setPos(pos);
     ret->set_color(std::move(color));
     return ret;
 
 }
-}
+%>

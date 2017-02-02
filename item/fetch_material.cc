@@ -1,4 +1,4 @@
-﻿#include "circle.h"
+﻿#include "fetch_material.h"
 #include <QPointF>
 #include <QColor>
 #include <QPainter>
@@ -9,23 +9,21 @@
 
 namespace item {
 
-
-std::unique_ptr<circle> circle::make(QPointF pos, QColor color)
+std::unique_ptr<fetch_material> fetch_material::make(QPointF pos, QColor color)
 {
-    std::unique_ptr<circle>ret(new circle);
+    std::unique_ptr<fetch_material>ret(new fetch_material);
     ret->setPos(pos);
     ret->set_color(std::move(color));
     return ret;
 }
 
-circle::circle(item *parent)
+fetch_material::fetch_material(item *parent)
     :item(parent)
 {
 
-
 }
 
-void circle::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
+void fetch_material::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
     auto the_pen = painter->pen();
     the_pen.setColor(color());
@@ -35,7 +33,7 @@ void circle::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QW
     //给定坐标
     painter->setBrush(Qt::white);
 
-    painter->drawArc(QRectF{10, 0, 80, 80}, 45 * 16, 270 * 16);
+    painter->drawArc(QRectF{0.1 * item_width, 0, 0.8 * item_width, item_height}, 45 * 16, 270 * 16);
     painter->setBrush(Qt::black);
     painter->drawPolygon({{p1,p2,p3}},Qt::WindingFill);
 

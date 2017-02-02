@@ -6,21 +6,21 @@
 namespace item {
 
 
-std::unique_ptr<rectangles>rectangles::make(QPointF pos, QColor color)
+std::unique_ptr<production_sequence>production_sequence::make(QPointF pos, QColor color)
 {
-    std::unique_ptr <rectangles> ret(new rectangles);
+    std::unique_ptr <production_sequence> ret(new production_sequence);
     ret->setPos(pos);
     ret->set_color(std::move(color));
     return ret;
 }
 
-rectangles::rectangles(item* parent)
+production_sequence::production_sequence(item* parent)
     :item(parent)
 {
 
 }
 
-void rectangles::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
+void production_sequence::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
     qDebug() << "wecome paint";
      Q_UNUSED(widget);

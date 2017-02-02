@@ -1,4 +1,4 @@
-﻿#include "buffer.h"
+﻿#include "cache_or_safe_storage.h"
 #include <memory.h>
 #include <QPainter>
 #include <QStyleOptionGraphicsItem>
@@ -6,22 +6,22 @@ namespace item {
 
 
 
-std::unique_ptr<buffer> buffer::make(QPointF pos, QColor color)
+std::unique_ptr<cache_or_safe_storage> cache_or_safe_storage::make(QPointF pos, QColor color)
 {
-    std::unique_ptr <buffer> ret (new buffer);
+    std::unique_ptr <cache_or_safe_storage> ret (new cache_or_safe_storage);
     ret->setPos(pos);
     ret->set_color(std::move(color));
     return ret;
 
 }
 
-buffer::buffer(item* parent)
+cache_or_safe_storage::cache_or_safe_storage(item* parent)
     :item(parent)
 {
 
 }
 
-void buffer::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
+void cache_or_safe_storage::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
     auto the_pen = painter->pen();
     the_pen.setColor(color());
