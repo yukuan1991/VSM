@@ -5,6 +5,7 @@
 #include <QDebug>
 #include <QFontMetricsF>
 #include <algorithm>
+#include <QLineF>
 
 
 namespace drawer
@@ -296,6 +297,47 @@ static void fetch_material_maker (QPainter* painter, qreal width, qreal height)
 static void fifo_maker (QPainter* painter, qreal width, qreal height)
 {
 
+    auto the_pen = painter->pen();
+    the_pen.setColor(Qt::black);
+    the_pen.setWidthF(width * 0.02);
+    painter->setPen(the_pen);
+
+    const QLineF
+            top_line (0.05 * width, height / 3, 0.95 * width, height / 3),
+            bottom_line (0.05 * width, height / 3 * 2, 0.95 * width, height / 3 * 2);
+
+    /// Set Bold
+    auto font = painter->font();
+    font.setBold(true);
+    painter->setFont(font);
+
+    /// Mesure font size
+    QFontMetricsF metrics (painter->font());
+    auto font_width = metrics.width("FIFO");
+    auto font_height = metrics.height();
+    auto mid_point = QPointF (width / 2, height / 2);
+
+    auto text_rect = QRectF (mid_point - QPointF {font_width / 2, font_height / 2},
+                             QSizeF {font_width, font_height});
+
+    painter->drawLine(top_line);
+    painter->drawLine(bottom_line);
+    painter->drawLine(QPointF (0.05 * width, height / 2),
+                      QPointF (text_rect.left() - 0.05 * width, height / 2));
+
+    painter->drawText(text_rect, "FIFO", Qt::AlignHCenter | Qt::AlignVCenter);
+    painter->drawLine(QPointF (text_rect.right() + 0.05 * width, height / 2),
+                      QPointF (0.9 * width, height / 2));
+
+    QPointF top_tip (0.9 * width, height / 2 + height * 2 / 80);
+    QPointF bottom_tip (0.9 * width, height / 2 - height * 2 / 80);
+    QPointF mid_tip (0.95 * width, height / 2);
+
+    the_pen.setWidthF(0.01 * width);
+    painter->setPen(the_pen);
+
+    painter->setBrush(Qt::black);
+    painter->drawPolygon({{top_tip, bottom_tip, mid_tip}}, Qt::WindingFill);
 }
 
 %>
