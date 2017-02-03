@@ -26,6 +26,7 @@ protected:
     static std::unique_ptr<drag_widget> init_material_flow ();
     QStringList get_file_names (const QDir& dir);
 private:
+    void on_button_pressed ();
 };
 
 %>

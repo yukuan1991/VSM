@@ -34,7 +34,7 @@ static void balanced_production_maker (QPainter* painter, qreal width, qreal hei
 static void adjustment_on_scene_maker (QPainter* painter, qreal width, qreal height);
 static void improvement_maker (QPainter* painter, qreal width, qreal height);
 static void cache_or_safe_storage_maker (QPainter* painter, qreal width, qreal height);
-static void operator_maker (QPainter* painter, qreal width, qreal height);
+static void operating_personnel (QPainter* painter, qreal width, qreal height);
 
 QPixmap make_pixmap(const QString &name, qreal width, qreal height)
 {
@@ -62,7 +62,7 @@ QPixmap make_pixmap(const QString &name, qreal width, qreal height)
         //{"改善", improvement_maker},
         {"取料", fetch_material_maker},
         {"缓冲或安全库存", cache_or_safe_storage_maker},
-        {"操作员", operator_maker}
+        {"操作员", operating_personnel}
     };
 
     QPainter painter (&pm);
@@ -264,7 +264,7 @@ static void cache_or_safe_storage_maker (QPainter* painter, qreal width, qreal h
     painter->drawLine(p7,p8);
 }
 
-static void operator_maker (QPainter* painter, qreal width, qreal height)
+static void operating_personnel (QPainter* painter, qreal width, qreal height)
 {
     auto the_pen = painter->pen();
     the_pen.setColor(Qt::black);
