@@ -18,6 +18,7 @@ public:
     static constexpr qreal height () { return item_height; }
     const QString& name () { return name_; }
     void set_name (QString s) { name_ = ::move (s);  emit name_changed (name_); }
+    const QString& type () { return type_; }
     const QColor& color () { return color_; }
     void set_color (QColor c) { color_ = ::move (c); emit color_changed (c); }
     virtual bool set_data (const nlohmann::json& data)  { Q_UNUSED (data); return true; }
@@ -32,6 +33,7 @@ protected:
 protected:
     constexpr static qreal item_width = 100;
     constexpr static qreal item_height = 0.8 * item_width;
+    QString type_;
 private:
     QString name_;
     QColor color_ = Qt::black;
