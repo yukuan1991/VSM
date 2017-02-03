@@ -47,9 +47,10 @@ QPixmap make_pixmap(const QString &name, qreal width, qreal height)
         {"看板站", board_station_maker},
         {"生产工序", production_sequence_maker},
         {"成品发送至顾客", finished_product_to_customer_maker},
+        {"数据箱", data_box_maker},
         //{"其他公司", other_company_maker},
         //{"数据箱", data_box_maker},
-        //{"库存", storage_maker},
+        {"库存", storage_maker},
         //{"卡车运输", truck_transport_maker},
         //{"库存超市", storage_super_market_maker},
         //{"信息", information_maker},
@@ -129,12 +130,38 @@ static void other_company_maker (QPainter* painter, qreal width, qreal height)
 
 static void data_box_maker (QPainter* painter, qreal width, qreal height)
 {
+    auto the_pen = painter->pen ();
+    the_pen.setColor(Qt::black);
+    the_pen.setWidthF(2.0);
+    painter->setPen(the_pen);
 
+    painter->drawLine(QPointF {1,1}, {99,1});
+    painter->drawLine (QPointF {1,20}, {99, 20});
+    painter->drawLine (QPointF {1,40}, {99, 40});
+    painter->drawLine (QPointF {1, 59}, {99, 59});
+    painter->drawLine (QPointF {1, 79}, {99, 79});
+    painter->drawLine (QPointF {1,1}, {1,79});
+    painter->drawLine (QPointF {99,1}, {99, 79});
 }
 
 static void storage_maker (QPainter* painter, qreal width, qreal height)
 {
+    auto the_pen = painter->pen ();
+    the_pen.setColor(Qt::black);
+    the_pen.setWidthF(2.0);
+    painter->setPen(the_pen);
 
+    painter->drawLine (QPointF {49, 1}, {99, 79});
+    painter->drawLine (QPointF {1, 79}, {99, 79});
+    painter->drawLine (QPointF {1,79}, {49, 1});
+    QFont font;
+    font.setPointSize(20);
+    QFontMetricsF metrics (font);
+    auto text_height = metrics.height();
+    auto text_width = metrics.width("I");
+    QRectF text_rect {49-text_width/2,40,text_width,text_height};
+    painter->setFont(font);
+    painter->drawText(text_rect, "I", Qt::AlignVCenter | Qt::AlignCenter);
 }
 
 static void truck_transport_maker (QPainter* painter, qreal width, qreal height)
