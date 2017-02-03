@@ -49,7 +49,7 @@ QPixmap make_pixmap(const QString &name, qreal width, qreal height)
         {"成品发送至顾客", finished_product_to_customer_maker},
         {"数据箱", data_box_maker},
         //{"其他公司", other_company_maker},
-        //{"数据箱", data_box_maker},
+        {"数据箱", data_box_maker},
         {"库存", storage_maker},
         {"卡车运输", truck_transport_maker},
         {"库存超市", storage_super_market_maker},
@@ -62,7 +62,7 @@ QPixmap make_pixmap(const QString &name, qreal width, qreal height)
         {"看板以批量方式传达", board_arrival_maker},
         {"均衡生产", balanced_production_maker},
         //{"现场调度", adjustment_on_scene_maker},
-        //{"改善", improvement_maker},
+        {"改善", improvement_maker},
         {"取料", fetch_material_maker},
         {"缓冲或安全库存", cache_or_safe_storage_maker},
         {"操作员", operating_personnel}
@@ -329,6 +329,35 @@ static void adjustment_on_scene_maker (QPainter* painter, qreal width, qreal hei
 
 static void improvement_maker (QPainter* painter, qreal width, qreal height)
 {
+    auto the_pen = painter->pen ();
+    the_pen.setColor(Qt::red);
+    the_pen.setWidthF(0.02 * width);
+    painter->setPen(the_pen);
+
+    painter->drawLine(QPointF {1,8}, {33,23});
+    painter->drawLine (QPointF {33, 23}, {38, 10});
+    painter->drawLine (QPointF {38,10}, {49, 21});
+    painter->drawLine (QPointF {49, 21}, {65, 1});
+    painter->drawLine (QPointF {65, 1}, {64, 19});
+    painter->drawLine (QPointF {64, 19}, {82, 17});
+    painter->drawLine (QPointF {82, 17}, {76, 26});
+    painter->drawLine (QPointF {76, 26}, {93, 30});
+    painter->drawLine (QPointF {93, 30}, {80, 37});
+    painter->drawLine (QPointF {80, 37}, {97, 48});
+    painter->drawLine (QPointF {97, 48}, {77, 47});
+    painter->drawLine (QPointF {77, 47}, {80, 62});
+    painter->drawLine (QPointF {80, 62}, {64, 53});
+    painter->drawLine (QPointF {64, 53}, {59, 68});
+    painter->drawLine (QPointF {59, 68}, {48, 55});
+    painter->drawLine (QPointF {48, 55}, {39, 74});
+    painter->drawLine (QPointF {39, 74}, {35, 57});
+    painter->drawLine (QPointF {35, 57}, {22, 62});
+    painter->drawLine (QPointF {22, 62}, {25, 51});
+    painter->drawLine (QPointF {25, 51}, {1, 52});
+    painter->drawLine (QPointF {1, 52}, {17, 42});
+    painter->drawLine (QPointF {17, 42}, {1, 31});
+    painter->drawLine (QPointF {1, 31}, {20, 27});
+    painter->drawLine (QPointF {20, 27}, {1, 8});
 
 }
 
