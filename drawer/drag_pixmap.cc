@@ -44,7 +44,7 @@ QPixmap make_pixmap(const QString &name, qreal width, qreal height)
     static std::map<QString, pixmap_maker> item_map
     {
         {"看板站", board_station_maker},
-        //{"生产工序", production_sequence_maker},
+        {"生产工序", production_sequence_maker},
         //{"其他公司", other_company_maker},
         //{"数据箱", data_box_maker},
         //{"库存", storage_maker},
@@ -108,7 +108,16 @@ void board_station_maker (QPainter* painter, qreal width, qreal height)
 
 static void production_sequence_maker (QPainter* painter, qreal width, qreal height)
 {
+    auto the_pen = painter->pen ();
+    the_pen.setColor (Qt::black);
+    the_pen.setWidthF(2.0);
+    painter->setPen(the_pen);
 
+    painter->drawLine (QPointF {1,1}, {99,1});
+    painter->drawLine (QPointF {1,28}, {99, 28});
+    painter->drawLine (QPointF {1,79}, {99, 79});
+    painter->drawLine (QPointF {1,1}, {1,79});
+    painter->drawLine (QPointF {99, 1}, {99, 79});
 }
 
 static void other_company_maker (QPainter* painter, qreal width, qreal height)

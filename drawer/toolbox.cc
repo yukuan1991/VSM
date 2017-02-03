@@ -94,6 +94,7 @@ std::unique_ptr<drag_widget> toolbox::init_entity()
         info_label->setObjectName({});
         v_layout->addWidget (info_label);
     }
+
     v_layout->addItem (new QSpacerItem (0, 0, QSizePolicy::Minimum, QSizePolicy::Expanding));
 
     return ret;
@@ -127,8 +128,6 @@ std::unique_ptr<drag_widget> toolbox::init_material_flow()
 
     auto button_push = std::make_unique<QPushButton> (drawer::make_pixmap("推动", 100, 80), "", ret.get ());
     button_push->setIconSize({100, 80});
-    //button_push->setMaximumSize({100, 80});
-    //button_push->setMinimumSize({100, 80});
     v_layout->addWidget(button_push.release());
 
     auto info_label = std::make_unique<QLabel> ("推动", ret.get ());
