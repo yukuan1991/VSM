@@ -9,7 +9,6 @@
 ///均衡生产
 namespace item {
 
-
 class balanced_production : public item
 {
 
