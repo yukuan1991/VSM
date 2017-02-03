@@ -1,4 +1,4 @@
-﻿#include "rectangles.h"
+﻿#include "production_sequence.h"
 #include <QDebug>
 #include <QPainter>
 #include <QColor>

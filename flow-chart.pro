@@ -41,7 +41,6 @@ SOURCES += \
     item/improve.cc \
     item/reclaimer.cc \
     item/information.cc \
-    item/rectangles.cc \
     item/square.cc \
     item/supermarket_rectangles.cc \
     item/three_rectangles.cc \
@@ -59,7 +58,8 @@ SOURCES += \
     item/sequence_pull_ball.cc \
     item/balanced_production.cc \
     item/operating_personnel.cc \
-    item/board_arrival.cc
+    item/board_arrival.cc \
+    item/production_sequence.cc
 
 HEADERS += \
     flow_app.h \
@@ -78,7 +78,6 @@ HEADERS += \
     item/improve.h \
     item/reclaimer.h \
     item/information.h \
-    item/rectangles.h \
     item/square.h \
     item/supermarket_rectangles.h \
     item/three_rectangles.h \
@@ -96,7 +95,8 @@ HEADERS += \
     item/sequence_pull_ball.h \
     item/balanced_production.h \
     item/operating_personnel.h \
-    item/board_arrival.h
+    item/board_arrival.h \
+    item/production_sequence.h
 
 FORMS += \
     flow_main.ui \
