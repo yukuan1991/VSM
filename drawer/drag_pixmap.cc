@@ -34,8 +34,8 @@ static void balanced_production_maker (QPainter* painter, qreal width, qreal hei
 static void adjustment_on_scene_maker (QPainter* painter, qreal width, qreal height);
 static void improvement_maker (QPainter* painter, qreal width, qreal height);
 static void cache_or_safe_storage_maker (QPainter* painter, qreal width, qreal height);
-static void operator_maker (QPainter* painter, qreal width, qreal height);
-static void goods_sent_to_customer_maker (QPainter* painter, qreal width, qreal height);
+static void finished_product_to_customer_maker (QPainter* painter, qreal width, qreal height);
+static void operating_personnel (QPainter* painter, qreal width, qreal height);
 
 QPixmap make_pixmap(const QString &name, qreal width, qreal height)
 {
@@ -46,7 +46,7 @@ QPixmap make_pixmap(const QString &name, qreal width, qreal height)
     {
         {"看板站", board_station_maker},
         {"生产工序", production_sequence_maker},
-        {"成品发送至顾客", goods_sent_to_customer_maker},
+        {"成品发送至顾客", finished_product_to_customer_maker},
         //{"其他公司", other_company_maker},
         //{"数据箱", data_box_maker},
         //{"库存", storage_maker},
@@ -64,7 +64,7 @@ QPixmap make_pixmap(const QString &name, qreal width, qreal height)
         //{"改善", improvement_maker},
         {"取料", fetch_material_maker},
         {"缓冲或安全库存", cache_or_safe_storage_maker},
-        {"操作员", operator_maker}
+        {"操作员", operating_personnel}
     };
 
     QPainter painter (&pm);
@@ -275,7 +275,7 @@ static void cache_or_safe_storage_maker (QPainter* painter, qreal width, qreal h
     painter->drawLine(p7,p8);
 }
 
-static void operator_maker (QPainter* painter, qreal width, qreal height)
+static void operating_personnel (QPainter* painter, qreal width, qreal height)
 {
     auto the_pen = painter->pen();
     the_pen.setColor(Qt::black);
@@ -353,9 +353,20 @@ static void fifo_maker (QPainter* painter, qreal width, qreal height)
 }
 
 
-static void goods_sent_to_customer_maker (QPainter* painter, qreal width, qreal height)
+static void finished_product_to_customer_maker (QPainter* painter, qreal width, qreal height)
 {
+    auto the_pen = painter->pen ();
+    the_pen.setColor(Qt::black);
+    the_pen.setWidthF(2.0);
+    painter->setPen(the_pen);
 
+    painter->drawLine (QPointF {1,20}, {79, 20});
+    painter->drawLine (QPointF {79, 20}, {79,1});
+    painter->drawLine (QPointF {79,1}, {99,38});
+    painter->drawLine (QPointF {99,38}, {79,77});
+    painter->drawLine (QPointF {79,77}, {79,56});
+    painter->drawLine (QPointF {79, 56}, {1,56});
+    painter->drawLine (QPointF {1,56}, {1,20});
 }
 
 %>

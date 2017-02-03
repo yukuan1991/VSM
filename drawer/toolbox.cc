@@ -9,6 +9,7 @@
 #include "drawer/drag_widget.h"
 #include "drawer/drag_pixmap.h"
 #include <QPushButton>
+#include <QDebug>
 
 namespace drawer
 <%
@@ -128,6 +129,8 @@ std::unique_ptr<drag_widget> toolbox::init_material_flow()
 
     auto button_push = std::make_unique<QPushButton> (drawer::make_pixmap("推动", 100, 80), "", ret.get ());
     button_push->setIconSize({100, 80});
+    button_push->setCheckable(true);
+    //connect(button_push.get(), &QPushButton::clicked, [this] (auto){ this->on_button_pressed (); });
     v_layout->addWidget(button_push.release());
 
     auto info_label = std::make_unique<QLabel> ("推动", ret.get ());
@@ -150,6 +153,18 @@ QStringList toolbox::get_file_names(const QDir &dir)
         path_list.push_back (it.absoluteFilePath ());
     }
     return path_list;
+}
+
+void toolbox::on_button_pressed()
+{
+    auto button = dynamic_cast<QPushButton*> (sender());
+    if (button == nullptr)
+    {
+        return;
+    }
+
+    auto name = button->text();
+    qDebug () << name;
 }
 
 %>
