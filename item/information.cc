@@ -1,42 +1,38 @@
 ﻿#include "information.h"
-#include <QDebug>
-#include <QPainter>
-#include <QColor>
 #include <QStyleOptionGraphicsItem>
+#include <QWidget>
+#include <QPainter>
+#include <QPainterPath>
+#include <QDebug>
+///长方形
 namespace item {
 
 
 std::unique_ptr<information> information::make(QPointF pos, QColor color)
 {
-    std::unique_ptr <information> ret (new information);
+    std::unique_ptr<information>ret(new information);
     ret->setPos(pos);
-    ret->set_color(std::move(color));
+    ret->set_color( std::move (color));
     return ret;
-}
-
-information::information(item* parent)
-    :item(parent)
-{
 
 }
 
 void information::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
-
     qDebug() << "wecome paint";
      Q_UNUSED(widget);
     auto the_pen = painter->pen ();
-    the_pen.setColor(color());
-    the_pen.setStyle(Qt::DashLine);
-    the_pen.setBrush(Qt::black);
+    the_pen.setColor(color ());
     painter->setPen(the_pen);
-    painter->drawLine(p1,p2);
-    painter->drawLine(p1,p3);
-
-    the_pen.setStyle(Qt::SolidLine);
-    painter->drawLine(p4,p5);
-    painter->drawLine(p5,p6);
-    painter->drawLine(p6,p4);
-    item::paint(painter, option, widget);
-   }
+    painter->drawRect(((item_width-information_length)/2),((item_height-information_heigth)/2),information_length,information_heigth);//这里面给一个长和宽
+   item::paint(painter, option, widget);
 }
+
+information::information(item *parent)
+    :item(parent)
+ {
+ }
+
+}
+
+

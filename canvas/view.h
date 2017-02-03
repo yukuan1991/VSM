@@ -30,12 +30,14 @@ public:
     explicit view(QWidget* parent = nullptr);
     explicit view(QGraphicsScene* scene, QWidget* parent = nullptr);
     void init ();
+
+    /// 如果比例小于1则用1
     void scale_object (double factor);
+
     void set_arrow_state (QString state) { arrow_state_ = ::move (state); }
 
 protected:
     void keyPressEvent (QKeyEvent* event) override;
-    void mouseDoubleClickEvent(QMouseEvent *event) override;
 
     void mousePressEvent (QMouseEvent* event) override;
     void mouseMoveEvent (QMouseEvent* event) override;
@@ -47,8 +49,7 @@ protected:
     void wheelEvent (QWheelEvent* event) override;
 private:
     void select_all ();
-    void rotate_selected ();
-    void svg_drop_action (QDropEvent* event);
+    void item_drop_action (QDropEvent* event);
     void delete_selected ();
 
     template<typename CALLABLE>

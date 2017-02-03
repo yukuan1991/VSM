@@ -17,9 +17,6 @@ scene::~scene()
 
 }
 
-
-
-
 void scene::on_selection_changed()
 {
     auto selected = selectedItems ();

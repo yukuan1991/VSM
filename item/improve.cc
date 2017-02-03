@@ -1,4 +1,4 @@
-﻿#include "improve.h"
+﻿#include "improvement.h"
 #include <QPointF>
 #include <QColor>
 #include <QPainter>
@@ -10,22 +10,22 @@
 namespace item {
 
 
-std::unique_ptr<improve> improve::make(QPointF pos, QColor color)
+std::unique_ptr<improvement> improvement::make(QPointF pos, QColor color)
 {
-    std::unique_ptr<improve>ret(new improve);
+    std::unique_ptr<improvement>ret(new improvement);
     ret->setPos(pos);
     ret->set_color(std::move(color));
     return ret;
 }
 
-improve::improve(item *parent)
+improvement::improvement(item *parent)
     :item(parent)
 {
 
 
 }
 
-void improve::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
+void improvement::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
     auto the_pen = painter->pen();
     the_pen.setColor(color());

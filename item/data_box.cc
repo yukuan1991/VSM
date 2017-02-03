@@ -1,0 +1,37 @@
+﻿#include "data_box.h"
+#include <QPainter>
+#include <QColor>
+#include <QStyleOptionGraphicsItem>
+#include <QDebug>
+
+namespace item {
+
+
+data_box::data_box(item* parent)
+    :item (parent)
+{
+
+}
+
+void data_box::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
+{
+    qDebug() << "wecome paint";
+     Q_UNUSED(widget);
+    auto the_pen = painter->pen ();
+    the_pen.setColor(color ());
+    painter->setPen(the_pen);
+    painter->drawPolygon({{p1, p2, p4, p3}},Qt::WindingFill);
+    painter->drawLine(p5,p6);
+    painter->drawLine(p7,p8);
+    painter->drawLine(p9,p10);
+   item::paint(painter, option, widget);
+}
+
+std::unique_ptr<data_box> data_box::make(QPointF pos, QColor color)
+{
+    std::unique_ptr<data_box> ret(new data_box);
+    ret->setPos(pos);
+    ret->set_color(std::move(color));
+    return ret;
+ }
+}

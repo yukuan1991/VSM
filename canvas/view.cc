@@ -16,6 +16,8 @@
 #include <assert.h>
 #include <QGLWidget>
 #include "item/traditional_info_flow.h"
+#include "item/electric_info_flow.h"
+#include "item/maker.hpp"
 
 
 
@@ -72,12 +74,6 @@ void view::keyPressEvent(QKeyEvent *event)
         event->accept ();
     }
 
-    if (event->modifiers () & Qt::CTRL and event->key () == Qt::Key_R)
-    {
-        rotate_selected ();
-        event->accept ();
-    }
-
     if (event->key () == Qt::Key_Delete)
     {
         delete_selected ();
@@ -85,24 +81,15 @@ void view::keyPressEvent(QKeyEvent *event)
     }
 }
 
-void view::mouseDoubleClickEvent(QMouseEvent *event)
-{
-    SCOPE_EXIT { QGraphicsView::mouseDoubleClickEvent (event); };
-
-    auto item = itemAt (event->pos ());
-    if (item == nullptr)
-    {
-        return;
-    }
-
-    hold_position (item, [] (auto&& item) { item->resetMatrix (); });
-}
-
 void view::mousePressEvent(QMouseEvent *event)
 {
     if (arrow_state_.isEmpty())
     {
         QGraphicsView::mousePressEvent(event);
+    }
+    else if (arrow_state_ == "看板用信息流")
+    {
+        ///
     }
     else
     {
@@ -116,17 +103,17 @@ void view::mouseMoveEvent(QMouseEvent *event)
     if (tmp_arrow_)
     {
         auto end_ptr = mapToScene(event->pos ());
-        tmp_arrow_.emplace (item::traditional_info_flow::make(last_pressed_, end_ptr));
+
+        if (arrow_state_ == "传统信息流")
+            tmp_arrow_.emplace (item::traditional_info_flow::make(last_pressed_, end_ptr));
+        else if (arrow_state_ == "电子信息流")
+            tmp_arrow_.emplace (item::electric_info_flow::make(last_pressed_, end_ptr));
 
         if (tmp_arrow_.value() != nullptr)
-        {
             scene()->addItem(tmp_arrow_->get());
-        }
     }
     else
-    {
         QGraphicsView::mouseMoveEvent(event);
-    }
 }
 
 
@@ -145,7 +132,7 @@ void view::mouseReleaseEvent(QMouseEvent *event)
 
 void view::dragEnterEvent(QDragEnterEvent *event)
 {
-    if (event->mimeData ()->hasFormat ("svg") and event->source () != this)
+    if (event->mimeData ()->hasFormat ("item") and event->source () != this)
     {
         event->accept ();
     }
@@ -157,8 +144,9 @@ void view::dragEnterEvent(QDragEnterEvent *event)
 
 void view::dragMoveEvent(QDragMoveEvent *event)
 {
-    if (event->mimeData ()->hasFormat ("svg") and event->source () != this)
+    if (event->mimeData ()->hasFormat ("item") and event->source () != this)
     {
+        //qDebug () << event->mimeData()->data("item").toStdString().data();
         event->accept ();
     }
     else
@@ -169,9 +157,9 @@ void view::dragMoveEvent(QDragMoveEvent *event)
 
 void view::dropEvent(QDropEvent *event)
 {
-    if (event->mimeData ()->hasFormat ("svg") and event->source () != this)
+    if (event->mimeData ()->hasFormat ("item") and event->source () != this)
     {
-        svg_drop_action (event);
+        item_drop_action (event);
         event->accept ();
     }
     else
@@ -189,15 +177,6 @@ void view::select_all()
     }
 }
 
-void view::rotate_selected()
-{
-    auto selected = scene ()->selectedItems ();
-    for (auto & item : selected)
-    {
-        hold_position (item, [] (auto&& item) { item->setMatrix (item->matrix ().rotate (rotate_arg)); });
-    }
-}
-
 void view::scale_object(double factor)
 {
     auto set_scale = [factor, this] (auto&& obj)
@@ -206,6 +185,11 @@ void view::scale_object(double factor)
 
         auto scale_factor = m.m11 ();
         scale_factor *= factor;
+
+        if (scale_factor < 1)
+        {
+            scale_factor = 1;
+        }
 
         auto m_after = QMatrix ();
         m_after.scale (scale_factor, scale_factor);
@@ -217,21 +201,28 @@ void view::scale_object(double factor)
         }
     };
 
-    //auto selected = scene ()->selectedItems ();
     set_scale (this);
 }
 
-void view::svg_drop_action(QDropEvent *event)
+void view::item_drop_action(QDropEvent *event)
 {
-    QString path = event->mimeData ()->data ("svg");
+    QString type = event->mimeData ()->data ("item");
 
+    auto scene_pos = mapToScene(event->pos());
+    auto the_item = item::make_item (type, scene_pos);
 
-    auto mouse_pos = mapToScene(event->pos());
-    auto item = add_svg_to_scene(path, scene (), mouse_pos); assert (item);
-    auto new_center = item->mapRectToScene (item->boundingRect ()).center ();
+    if (the_item == nullptr)
+    {
+        return;
+    }
+    scene ()->addItem(the_item.get ());
 
-    auto diff = new_center - mouse_pos;
-    item->moveBy (- diff.x (), - diff.y ());
+    auto new_center = the_item->mapRectToScene (the_item->boundingRect ()).center ();
+
+    auto diff = new_center - scene_pos;
+    the_item->moveBy (- diff.x (), - diff.y ());
+
+    the_item.release();
 }
 
 void view::delete_selected()

@@ -38,25 +38,28 @@ SOURCES += \
     canvas/scene.cc \
     canvas/view.cc \
     item/item.cc \
-    item/circle.cc \
     item/improve.cc \
-    item/reclaimer.cc \
-    item/board.cc \
-    item/convey.cc \
-    item/information.cc \
-    item/rectangles.cc \
-    item/round.cc \
-    item/square.cc \
-    item/square_text.cc \
-    item/supermarket_rectangles.cc \
-    item/three_rectangles.cc \
-    item/triangle.cc \
-    item/dispatch.cc \
-    item/buffer.cc \
-    item/communicate.cc \
-    item/polygon.cc \
     item/material_flow.cc \
-    item/traditional_info_flow.cc
+    item/traditional_info_flow.cc \
+    item/electric_info_flow.cc \
+    drawer/drag_widget.cc \
+    item/board_station.cc \
+    drawer/drag_pixmap.cc \
+    item/cache_or_safe_storage.cc \
+    item/fetch_material.cc \
+    item/signal_board.cc \
+    item/sequence_pull_ball.cc \
+    item/balanced_production.cc \
+    item/operating_personnel.cc \
+    item/board_arrival.cc \
+    item/production_sequence.cc \
+    item/adjustment_on_scene.cc \
+    item/production_watcher_board.cc \
+    item/material_fetch_watch_board.cc \
+    item/storage_super_market.cc \
+    item/board_information_flow.cc \
+    item/information.cc \
+    item/data_box.cc
 
 HEADERS += \
     flow_app.h \
@@ -72,25 +75,28 @@ HEADERS += \
     canvas/view.h \
     item/item.h \
     item/maker.hpp \
-    item/circle.h \
-    item/improve.h \
-    item/reclaimer.h \
-    item/board.h \
-    item/convey.h \
-    item/information.h \
-    item/rectangles.h \
-    item/round.h \
-    item/square.h \
-    item/square_text.h \
-    item/supermarket_rectangles.h \
-    item/three_rectangles.h \
-    item/triangle.h \
-    item/dispatch.h \
-    item/buffer.h \
-    item/communicate.h \
-    item/polygon.h \
     item/material_flow.h \
-    item/traditional_info_flow.h
+    item/traditional_info_flow.h \
+    item/electric_info_flow.h \
+    drawer/drag_widget.h \
+    item/board_station.h \
+    drawer/drag_pixmap.h \
+    item/cache_or_safe_storage.h \
+    item/fetch_material.h \
+    item/signal_board.h \
+    item/sequence_pull_ball.h \
+    item/balanced_production.h \
+    item/operating_personnel.h \
+    item/board_arrival.h \
+    item/production_sequence.h \
+    item/adjustment_on_scene.h \
+    item/improvement.h \
+    item/production_watcher_board.h \
+    item/material_fetch_watch_board.h \
+    item/storage_super_market.h \
+    item/board_information_flow.h \
+    item/information.h \
+    item/data_box.h
 
 FORMS += \
     flow_main.ui \

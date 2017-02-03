@@ -6,6 +6,8 @@
 #include "qt-tools/common.hpp"
 #include "qt-tools/screen_saver.h"
 #include "drawer/toolbox.h"
+#include <QGLWidget>
+
 APP_REGISTER (flow_app)
 
 using namespace std;
@@ -19,6 +21,7 @@ flow_app::flow_app(int argc, char **argv)
         go  [this] { update_check (); };
     }
 }
+<<<<<<< HEAD
 
 
 #include <QGraphicsView>
@@ -72,6 +75,45 @@ bool flow_app::run()
 //    }
 //    return exec();
     return true;
+=======
+#include "item/adjustment_on_scene.h"
+#include "item/improvement.h"
+#include "item/board_information_flow.h"
+#include "item/production_watcher_board.h"
+#include "item/material_fetch_watch_board.h"
+#include "item/storage_super_market.h"
+#include "item/information.h"
+#include "item/data_box.h"
+
+bool flow_app::run()
+{
+//    main_ = std::make_unique<flow_main> ();
+//    main_->set_drawer ();
+//    main_->show ();
+    QGraphicsScene scene (0, 0, 800, 600);
+    QGraphicsView view;
+    view.setScene(&scene);
+    QMatrix matrix;
+    matrix.scale (2,2);
+    view.setMatrix (matrix);
+    view.setDragMode (decltype (view) :: RubberBandDrag);
+    view.setRubberBandSelectionMode (Qt::IntersectsItemShape);
+    view.setViewport(new QGLWidget(QGLFormat(QGL::SampleBuffers)));
+    view.show();
+    qDebug() << "main";
+
+    auto p_item = item::data_box::make({150, 150}, Qt::black);
+
+    if (p_item != nullptr)
+
+    {
+        qDebug() << "main if";
+
+        scene.addItem(p_item.release());
+    }
+    return exec();
+    return false;
+>>>>>>> xixi
 }
 
 void flow_app::exec_update(std::vector<std::pair<string, string>> file_info)
