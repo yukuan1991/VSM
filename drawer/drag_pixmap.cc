@@ -51,11 +51,11 @@ QPixmap make_pixmap(const QString &name, qreal width, qreal height)
         //{"其他公司", other_company_maker},
         //{"数据箱", data_box_maker},
         {"库存", storage_maker},
-        //{"卡车运输", truck_transport_maker},
-        //{"库存超市", storage_super_market_maker},
-        //{"信息", information_maker},
-        //{"生产看板", production_watcher_board_maker},
-        //{"取料看板", material_fetch_watch_board_maker},
+        {"卡车运输", truck_transport_maker},
+        {"库存超市", storage_super_market_maker},
+        {"信息", information_maker},
+        {"生产看板", production_watcher_board_maker},
+        {"取料看板", material_fetch_watch_board_maker},
         {"信号看板", signal_board_maker},
         {"先进先出", fifo_maker},
         {"顺序拉动球", sequence_pull_ball_maker},
@@ -166,33 +166,84 @@ static void storage_maker (QPainter* painter, qreal width, qreal height)
 
 static void truck_transport_maker (QPainter* painter, qreal width, qreal height)
 {
+    auto the_pen = painter->pen();
+    the_pen.setColor(Qt::black);
+    the_pen.setWidthF(2.0);
+    painter->setPen(the_pen);
 
+    painter->drawLine (QPointF {1,1}, {69, 1});
+    painter->drawLine (QPointF {1,55}, {1,1});
+    painter->drawLine (QPointF {69, 1}, {69, 55});
+    painter->drawLine (QPointF {1,55}, {69, 55});
+    painter->drawLine (QPointF {69, 25},{99, 25});
+    painter->drawLine (QPointF {99, 25}, {99,55});
+    painter->drawLine (QPointF {99, 55}, {69, 55});
+    painter->setBrush(Qt::black);
+    painter->drawEllipse (QPointF {17, 65}, 12, 12);
+    painter->drawEllipse (QPointF {72, 65}, 12, 12);
 }
 
 static void storage_super_market_maker (QPainter* painter, qreal width, qreal height)
 {
+    auto the_pen = painter->pen ();
+    the_pen.setColor(Qt::black);
+    the_pen.setWidthF(2.0);
+    painter->setPen(the_pen);
 
+    painter->drawLine (QPointF {1,1}, {99, 1});
+    painter->drawLine (QPointF {1,27}, {99, 27});
+    painter->drawLine (QPointF {99, 1}, {99, 79});
+    painter->drawLine (QPointF {1,53}, {99, 53});
+    painter->drawLine (QPointF {1, 79}, {99, 79});
 }
 
 static void information_maker (QPainter* painter, qreal width, qreal height)
 {
-
+    auto the_pen = painter->pen ();
+    the_pen.setWidthF(2.0);
+    the_pen.setColor(Qt::black);
+    painter->setPen(the_pen);
+    painter->drawLine(QPointF {1,1}, {99, 1});
+    painter->drawLine (QPointF {99,1}, {99,79});
+    painter->drawLine (QPointF {99, 79}, {1, 79});
+    painter->drawLine (QPointF {1,79}, {1,1});
 }
 
 static void production_watcher_board_maker (QPainter* painter, qreal width, qreal height)
 {
-
+    auto the_pen = painter->pen ();
+    the_pen.setWidthF(2.0);
+    the_pen.setColor(Qt::black);
+    painter->setPen(the_pen);
+    painter->drawLine (QPointF {1,1}, {85, 1});
+    painter->drawLine (QPointF {85, 1}, {99, 16});
+    painter->drawLine (QPointF {99, 16}, {99, 79});
+    painter->drawLine (QPointF {99, 79}, {1, 79});
+    painter->drawLine (QPointF {1, 79}, {1,1});
 }
 
 static void material_fetch_watch_board_maker (QPainter* painter, qreal width, qreal height)
 {
-
+    auto the_pen = painter->pen ();
+    the_pen.setWidthF(2.0);
+    the_pen.setColor(Qt::black);
+    painter->setPen(the_pen);
+    painter->drawLine (QPointF {1, 39}, {25, 1});
+    painter->drawLine (QPointF {1,1}, {85,1});
+    painter->drawLine (QPointF {85, 1}, {99, 16});
+    painter->drawLine (QPointF {1,1}, {1,79});
+    painter->drawLine (QPointF {1,79}, {99,79});
+    painter->drawLine (QPointF {99, 79}, {99, 16});
+    painter->drawLine (QPointF {1, 79}, {50, 1});
+    painter->drawLine (QPointF {25, 79}, {74, 1});
+    painter->drawLine (QPointF {50, 79}, {(99+85)/2, (16+1)/2});
+    painter->drawLine (QPointF {74, 79}, {99, 39});
 }
 
 static void signal_board_maker (QPainter* painter, qreal width, qreal height)
 {
     QPointF
-    p1 {0.05 * width, height / 80},
+            p1 {0.05 * width, height / 80},
     p2 {0.95 * width, height / 80},
     p3 {0.5 * width, 79 * height / 80};
 
