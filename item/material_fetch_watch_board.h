@@ -1,18 +1,18 @@
 ﻿#pragma once
 
-#include "item/reclaimer.h"
+#include "item/material_fetch_watch_board.h"
 #include "item/item.h"
 #include <memory>
 ///取料看板
 namespace item {
 
 
-class reclaimer : public item
+class material_fetch_watch_board : public item
 {
 public:
-    static std::unique_ptr <reclaimer> make(QPointF pos, QColor = Qt::black);
+    static std::unique_ptr <material_fetch_watch_board> make(QPointF pos, QColor = Qt::black);
 protected:
-     explicit  reclaimer(item* parent=nullptr);
+     explicit  material_fetch_watch_board(item* parent=nullptr);
      void paint (QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = nullptr) override;
 private:
      QPointF //shape1_, shape2_, shape3_, shape4_, shape5_;

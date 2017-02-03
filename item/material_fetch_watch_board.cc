@@ -1,4 +1,4 @@
-﻿#include "reclaimer.h"
+﻿#include "material_fetch_watch_board.h"
 #include <QPointF>
 #include <QColor>
 #include <QPainter>
@@ -10,22 +10,22 @@
 namespace item {
 
 
-std::unique_ptr<reclaimer> reclaimer::make(QPointF pos, QColor color)
+std::unique_ptr<material_fetch_watch_board> material_fetch_watch_board::make(QPointF pos, QColor color)
 {
-    std::unique_ptr<reclaimer>ret(new reclaimer);
+    std::unique_ptr<material_fetch_watch_board>ret(new material_fetch_watch_board);
     ret->setPos(pos);
     ret->set_color(std::move(color));
     return ret;
 }
 
-reclaimer::reclaimer(item *parent)
+material_fetch_watch_board::material_fetch_watch_board(item *parent)
     :item(parent)
 {
 
 
 }
 
-void reclaimer::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
+void material_fetch_watch_board::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
     auto the_pen = painter->pen();
     the_pen.setColor(color());

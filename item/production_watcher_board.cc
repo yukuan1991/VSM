@@ -1,4 +1,4 @@
-﻿#include "polygon.h"
+﻿#include "production_watcher_board.h"
 #include <QPainter>
 #include <QLineF>
 #include <QStyleOptionGraphicsItem>
@@ -6,21 +6,21 @@
 namespace item {
 
 
-polygon::polygon(item *parent)
+production_watcher_board::production_watcher_board(item *parent)
     :item(parent)
 {
 
 }
-std::unique_ptr<polygon> polygon::make(QPointF pos, QColor color)
+std::unique_ptr<production_watcher_board> production_watcher_board::make(QPointF pos, QColor color)
 {
     qDebug() << "make";
-    std::unique_ptr<polygon> ret(new polygon);
+    std::unique_ptr<production_watcher_board> ret(new production_watcher_board);
     ret->setPos(pos);
     ret->set_color(std::move(color));
     return ret;
 }
 
-void polygon::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
+void production_watcher_board::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
     auto the_pen = painter->pen();
     the_pen.setColor(color());

@@ -4,13 +4,13 @@
 ///现场调度
 namespace item {
 
-class dispatch : public item
+class adjustment_on_scene : public item
 {
 public:
-    static std::unique_ptr<dispatch> make(QPointF pos, QColor = Qt::black);
+    static std::unique_ptr<adjustment_on_scene> make(QPointF pos, QColor = Qt::black);
 protected:
     void paint (QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = nullptr) override;
-    dispatch(item* parent = nullptr);
+    adjustment_on_scene(item* parent = nullptr);
 private:
     QPointF
     p1 {0.4 * item_width, 0.75 * item_height},

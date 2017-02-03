@@ -6,13 +6,13 @@
 namespace item {
 
 
-class polygon : public item
+class production_watcher_board : public item
 {
 public:
-    static std::unique_ptr<polygon>make(QPointF pos, QColor color = Qt::black);
+    static std::unique_ptr<production_watcher_board>make(QPointF pos, QColor color = Qt::black);
 
 protected:
-    explicit polygon(item* parent = nullptr);
+    explicit production_watcher_board(item* parent = nullptr);
     void paint (QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = nullptr) override;
 private:
     QPointF

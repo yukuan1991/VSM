@@ -1,4 +1,4 @@
-﻿#include "supermarket_rectangles.h"
+﻿#include "storage_super_market.h"
 #include <memory>
 #include <QDebug>
 #include <QColor>
@@ -7,21 +7,21 @@
 namespace item {
 
 
-std::unique_ptr<supermarket_rectangles> supermarket_rectangles::make(QPointF pos, QColor color)
+std::unique_ptr<storage_super_market> storage_super_market::make(QPointF pos, QColor color)
 {
-    std::unique_ptr <supermarket_rectangles> ret(new supermarket_rectangles);
+    std::unique_ptr <storage_super_market> ret(new storage_super_market);
     ret->setPos(pos);
     ret->set_color(std::move(color));
     return ret;
 }
 
-supermarket_rectangles::supermarket_rectangles(item* parent)
+storage_super_market::storage_super_market(item* parent)
     :item(parent)
 {
 
 }
 
-void supermarket_rectangles::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
+void storage_super_market::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
      Q_UNUSED(widget);
     auto the_pen = painter->pen ();

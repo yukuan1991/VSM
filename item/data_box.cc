@@ -1,4 +1,4 @@
-﻿#include "three_rectangles.h"
+﻿#include "data_box.h"
 #include <QPainter>
 #include <QColor>
 #include <QStyleOptionGraphicsItem>
@@ -7,13 +7,13 @@
 namespace item {
 
 
-three_rectangles::three_rectangles(item* parent)
+data_box::data_box(item* parent)
     :item (parent)
 {
 
 }
 
-void three_rectangles::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
+void data_box::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
     qDebug() << "wecome paint";
      Q_UNUSED(widget);
@@ -27,9 +27,9 @@ void three_rectangles::paint(QPainter *painter, const QStyleOptionGraphicsItem *
    item::paint(painter, option, widget);
 }
 
-std::unique_ptr<three_rectangles> three_rectangles::make(QPointF pos, QColor color)
+std::unique_ptr<data_box> data_box::make(QPointF pos, QColor color)
 {
-    std::unique_ptr<three_rectangles> ret(new three_rectangles);
+    std::unique_ptr<data_box> ret(new data_box);
     ret->setPos(pos);
     ret->set_color(std::move(color));
     return ret;

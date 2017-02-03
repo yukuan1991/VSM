@@ -1,28 +1,26 @@
-﻿#ifndef VS_ITEM_INFORMATION_H
-#define VS_ITEM_INFORMATION_H
-#include <item/item.h>
+﻿#ifndef information_H
+#define information_H
+#include <QPainter>
+#include <QColor>
 #include <memory>
-///看板用流信息
+#include <item/item.h>
+#include <QPainterPath>
+///信息
 namespace item {
 
 
 class information : public item
 {
 public:
-    static std::unique_ptr <information> make (QPointF pos, QColor color = Qt::black);
-
+    static std::unique_ptr<information> make (QPointF pos, QColor color = Qt::black);
 protected:
-    information(item* parent = nullptr);
-     void paint (QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = nullptr) override;
+    void paint (QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = nullptr) override;
+    explicit information(item* parent = nullptr);
+
 private:
-     QPointF
-     p1 {0.3 * item_width, 0.25 * item_height},
-     p2 {0.7 * item_width, 0.25 * item_height},
-     p3 {0.3 * item_width, 0.625 * item_height},
-     p4 {0.25 * item_width, 0.625 * item_height},
-     p5 {0.35 * item_width, 0.625 * item_height},
-     p6 {0.3 * item_width, 0.6875 * item_height};
-  };
+    constexpr static qreal information_length=0.8 * item_width;
+    constexpr static qreal information_heigth= 0.5 * information_length;
+   };
 }
 
-#endif // VS_ITEM_INFORMATION_H
+#endif // information_H

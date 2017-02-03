@@ -7,13 +7,13 @@
 namespace item {
 
 
-class supermarket_rectangles : public item
+class storage_super_market : public item
 {
 public:
-   static std::unique_ptr<supermarket_rectangles> make(QPointF pos,QColor color);
+   static std::unique_ptr<storage_super_market> make(QPointF pos,QColor color);
 
 protected:
-    supermarket_rectangles(item* parent = nullptr);
+    storage_super_market(item* parent = nullptr);
      void paint (QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = nullptr) override;
 private:
      QPointF

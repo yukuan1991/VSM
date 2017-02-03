@@ -1,5 +1,5 @@
-﻿#ifndef three_rectangles_H
-#define three_rectangles_H
+﻿#ifndef data_box_H
+#define data_box_H
 #include <item/item.h>
 #include <memory>
 
@@ -7,12 +7,12 @@
 namespace item {
 
 
-class three_rectangles : public item
+class data_box : public item
 {
 public:
-    static std::unique_ptr<three_rectangles> make(QPointF pos,QColor color);
+    static std::unique_ptr<data_box> make(QPointF pos,QColor color);
 protected:
-    three_rectangles(item* parent = nullptr);
+    data_box(item* parent = nullptr);
     void paint (QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = nullptr) override;
 private:
     QPointF
@@ -30,4 +30,4 @@ private:
 
   };
 }
-#endif // three_rectangles_H
+#endif // data_box_H

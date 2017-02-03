@@ -1,20 +1,20 @@
-﻿#include "dispatch.h"
+﻿#include "adjustment_on_scene.h"
 #include <memory.h>
 #include <QPainter>
 #include <QStyleOptionGraphicsItem>
 namespace item {
 
 
-std::unique_ptr<dispatch> dispatch::make(QPointF pos, QColor color)
+std::unique_ptr<adjustment_on_scene> adjustment_on_scene::make(QPointF pos, QColor color)
 {
-    std::unique_ptr <dispatch> ret (new dispatch);
+    std::unique_ptr <adjustment_on_scene> ret (new adjustment_on_scene);
     ret->setPos(pos);
     ret->set_color(std::move(color));
     return ret;
 
 }
 
-void dispatch::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
+void adjustment_on_scene::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
     auto the_pen = painter->pen();
     the_pen.setColor(color());
@@ -32,7 +32,7 @@ void dispatch::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, 
 
 }
 
-dispatch::dispatch(item* parent)
+adjustment_on_scene::adjustment_on_scene(item* parent)
     :item(parent)
 {
 
