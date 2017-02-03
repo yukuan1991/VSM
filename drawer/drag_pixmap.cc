@@ -35,6 +35,7 @@ static void adjustment_on_scene_maker (QPainter* painter, qreal width, qreal hei
 static void improvement_maker (QPainter* painter, qreal width, qreal height);
 static void cache_or_safe_storage_maker (QPainter* painter, qreal width, qreal height);
 static void operator_maker (QPainter* painter, qreal width, qreal height);
+static void goods_sent_to_customer_maker (QPainter* painter, qreal width, qreal height);
 
 QPixmap make_pixmap(const QString &name, qreal width, qreal height)
 {
@@ -45,6 +46,7 @@ QPixmap make_pixmap(const QString &name, qreal width, qreal height)
     {
         {"看板站", board_station_maker},
         {"生产工序", production_sequence_maker},
+        {"成品发送至顾客", goods_sent_to_customer_maker},
         //{"其他公司", other_company_maker},
         //{"数据箱", data_box_maker},
         //{"库存", storage_maker},
@@ -348,6 +350,12 @@ static void fifo_maker (QPainter* painter, qreal width, qreal height)
 
     painter->setBrush(Qt::black);
     painter->drawPolygon({{top_tip, bottom_tip, mid_tip}}, Qt::WindingFill);
+}
+
+
+static void goods_sent_to_customer_maker (QPainter* painter, qreal width, qreal height)
+{
+
 }
 
 %>
