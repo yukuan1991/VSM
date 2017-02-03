@@ -21,61 +21,8 @@ flow_app::flow_app(int argc, char **argv)
         go  [this] { update_check (); };
     }
 }
-<<<<<<< HEAD
 
 
-#include <QGraphicsView>
-#include <QMatrix>
-#include <QGraphicsScene>
-#include <QGLWidget>
-#include <QMatrix>
-#include "item/board.h"
-#include "item/buffer.h"
-#include "item/circle.h"
-#include "item/communicate.h"
-#include "item/convey.h"
-#include "item/dispatch.h"
-#include "item/improve.h"
-#include "item/information.h"
-#include "item/material_flow.h"
-#include "item/polygon.h"
-#include "item/reclaimer.h"
-#include "item/rectangles.h"
-#include "item/round.h"
-#include "item/square.h"
-#include "item/square_text.h"
-#include "item/supermarket_rectangles.h"
-#include "item/three_rectangles.h"
-#include "item/triangle.h"
-bool flow_app::run()
-{
-    main_ = std::make_unique<flow_main> ();
-    main_->set_drawer ();
-    main_->show ();
-//    QGraphicsScene scene (0, 0, 800, 600);
-//    QGraphicsView view;
-//    view.setScene(&scene);
-//    QMatrix matrix;
-//    matrix.scale (2,2);
-//    view.setMatrix (matrix);
-//    view.setDragMode (decltype (view) :: RubberBandDrag);
-//    view.setRubberBandSelectionMode (Qt::IntersectsItemShape);
-//    view.setViewport(new QGLWidget(QGLFormat(QGL::SampleBuffers)));
-//    view.show();
-//    qDebug() << "main";
-
-//   auto p_item =item::dispatch::make({150,150}, Qt::black);
-
-//    if (p_item != nullptr)
-
-//    {
-//        qDebug() << "main if";
-
-//        scene.addItem(p_item.release());
-//    }
-//    return exec();
-    return true;
-=======
 #include "item/adjustment_on_scene.h"
 #include "item/improvement.h"
 #include "item/board_information_flow.h"
@@ -113,7 +60,6 @@ bool flow_app::run()
     }
     return exec();
     return false;
->>>>>>> xixi
 }
 
 void flow_app::exec_update(std::vector<std::pair<string, string>> file_info)
