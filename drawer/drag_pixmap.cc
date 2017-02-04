@@ -434,7 +434,9 @@ static void operating_personnel (QPainter* painter, qreal width, qreal height)
     painter->setPen(the_pen);
 
     painter->drawArc(QRectF{0.1 * width, height * 10 / 80, 0.8 * width, height * 60 / 80}, 180 * 16, 180 * 16);
-    painter->drawArc(QRectF{0.3 * width, height * 20 / 80, 0.4 * width, height * 40 / 80}, 0 * 16, 360 * 16);
+
+    painter->setBrush(Qt::white);
+    painter->drawEllipse (QRectF(0.3 * width, height * 20 / 80, 0.4 * width, height * 40 / 80));
 }
 
 static void fetch_material_maker (QPainter* painter, qreal width, qreal height)
@@ -506,20 +508,24 @@ static void fifo_maker (QPainter* painter, qreal width, qreal height)
 
 static void finished_product_to_customer_maker (QPainter* painter, qreal width, qreal height)
 {
-    auto the_pen = painter->pen ();
-    the_pen.setColor(Qt::black);
-    the_pen.setWidthF(width / 50);
-    painter->setPen(the_pen);
-
     auto x_scale = width / 100;
     auto y_scale = height / 80;
-    painter->drawLine (QPointF {x_scale * 1,y_scale * 20}, {x_scale * 79, y_scale * 20});
-    painter->drawLine (QPointF {x_scale * 79, y_scale * 20}, {x_scale * 79,y_scale * 1});
-    painter->drawLine (QPointF {x_scale * 79,y_scale * 1}, {x_scale * 99,y_scale * 38});
-    painter->drawLine (QPointF {x_scale * 99,y_scale * 38}, {x_scale * 79,y_scale * 77});
-    painter->drawLine (QPointF {x_scale * 79,y_scale * 77}, {x_scale * 79,y_scale * 56});
-    painter->drawLine (QPointF {x_scale * 79, y_scale * 56}, {x_scale * 1,y_scale * 56});
-    painter->drawLine (QPointF {x_scale * 1,y_scale * 56}, {x_scale * 1,y_scale * 20});
+
+    auto the_pen = painter->pen ();
+    the_pen.setColor(Qt::black);
+    the_pen.setWidthF(x_scale * 2);
+    painter->setPen(the_pen);
+
+    QPointF p1 (1 * x_scale, 32 * y_scale);
+    QPointF p2 (82 * x_scale, 32 * y_scale);
+    QPointF p3 (82 * x_scale, 24 * y_scale);
+    QPointF p4 (99 * x_scale, 40 * y_scale);
+    QPointF p5 (82 * x_scale, 56 * y_scale);
+    QPointF p6 (82 * x_scale, 48 * y_scale);
+    QPointF p7 (1 * x_scale, 48 * y_scale);
+
+    painter->setBrush(Qt::white);
+    painter->drawPolygon({{p1, p2, p3, p4, p5, p6, p7}} , Qt::WindingFill);
 }
 
 %>
