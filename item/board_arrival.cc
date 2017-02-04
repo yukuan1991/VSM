@@ -11,8 +11,6 @@ std::unique_ptr<board_arrival> board_arrival::make(QPointF pos, QColor color)
     ret->setPos(pos);
     ret->set_color(std::move(color));
     return ret;
-
-
 }
 
 board_arrival::board_arrival(item* parent)
