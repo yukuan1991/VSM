@@ -284,7 +284,6 @@ static void board_arrival_maker (QPainter* painter, qreal width, qreal height)
     painter->setBrush(Qt::white);
 
     painter->drawPolygon({polygon_shape}, Qt::WindingFill);
-    painter->drawLine (QPointF (0, 0), QPointF (100, 80));
 
     for (auto& it : polygon_shape)
     {
