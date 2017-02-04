@@ -11,6 +11,7 @@ std::unique_ptr<sequence_pull_ball> sequence_pull_ball::make(QPointF pos, QColor
     std::unique_ptr <sequence_pull_ball> ret(new sequence_pull_ball);
     ret->setPos(pos);
     ret->set_color(std::move(color));
+    ret->type_ = "顺序拉动球";
     return ret;
 }
 

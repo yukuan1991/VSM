@@ -1,4 +1,4 @@
-﻿#include "board_information_flow.h"
+﻿#include "board_info_flow.h"
 #include <QDebug>
 #include <QPainter>
 #include <QColor>
@@ -6,21 +6,22 @@
 namespace item {
 
 
-std::unique_ptr<board_information_flow> board_information_flow::make(QPointF pos, QColor color)
+std::unique_ptr<board_info_flow> board_info_flow::make(QPointF pos, QColor color)
 {
-    std::unique_ptr <board_information_flow> ret (new board_information_flow);
+    std::unique_ptr <board_info_flow> ret (new board_info_flow);
     ret->setPos(pos);
     ret->set_color(std::move(color));
+    ret->type_ = "看板用流信息";
     return ret;
 }
 
-board_information_flow::board_information_flow(item* parent)
+board_info_flow::board_info_flow(item* parent)
     :item(parent)
 {
 
 }
 
-void board_information_flow::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
+void board_info_flow::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
 
     qDebug() << "wecome paint";

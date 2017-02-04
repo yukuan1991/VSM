@@ -13,7 +13,7 @@ protected:
     adjustment_on_scene(item* parent = nullptr);
 private:
     QPointF
-    p1 {0.4 * item_width, 0.75 * item_height},
+    p1_ {0.4 * item_width, 0.75 * item_height},
     p2 {0.6 * item_width, 0.75 * item_height},
     p3 {0.8 * item_width, 0.300 * item_height},
     p4 {0.75 * item_width, 0.625 * item_height},

@@ -6,13 +6,13 @@
 namespace item {
 
 
-class board_information_flow : public item
+class board_info_flow : public item
 {
 public:
-    static std::unique_ptr <board_information_flow> make (QPointF pos, QColor color = Qt::black);
+    static std::unique_ptr <board_info_flow> make (QPointF pos, QColor color = Qt::black);
 
 protected:
-    board_information_flow(item* parent = nullptr);
+    board_info_flow(item* parent = nullptr);
      void paint (QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = nullptr) override;
 private:
      QPointF

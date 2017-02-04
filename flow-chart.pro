@@ -57,9 +57,9 @@ SOURCES += \
     item/production_watcher_board.cc \
     item/material_fetch_watch_board.cc \
     item/storage_super_market.cc \
-    item/board_information_flow.cc \
     item/information.cc \
-    item/data_box.cc
+    item/data_box.cc \
+    item/board_info_flow.cc
 
 HEADERS += \
     flow_app.h \
@@ -94,9 +94,9 @@ HEADERS += \
     item/production_watcher_board.h \
     item/material_fetch_watch_board.h \
     item/storage_super_market.h \
-    item/board_information_flow.h \
     item/information.h \
-    item/data_box.h
+    item/data_box.h \
+    item/board_info_flow.h
 
 FORMS += \
     flow_main.ui \

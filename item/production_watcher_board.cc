@@ -3,6 +3,7 @@
 #include <QLineF>
 #include <QStyleOptionGraphicsItem>
 #include <QDebug>
+///修改完成
 namespace item {
 
 
@@ -17,6 +18,7 @@ std::unique_ptr<production_watcher_board> production_watcher_board::make(QPointF
     std::unique_ptr<production_watcher_board> ret(new production_watcher_board);
     ret->setPos(pos);
     ret->set_color(std::move(color));
+    ret->type_ = "生产看板";
     return ret;
 }
 
@@ -24,11 +26,11 @@ void production_watcher_board::paint(QPainter *painter, const QStyleOptionGraphi
 {
     auto the_pen = painter->pen();
     the_pen.setColor(color());
+    the_pen.setWidthF(item_width * 0.02);
     painter->setPen(the_pen);
-    //给定坐标
     painter->setBrush(Qt::white);
-    painter->drawPolygon({{p1, p2, p3,p4,p5}}, Qt::WindingFill);
+    painter->drawPolygon({{p1_, p2_, p3_,p4_,p5_}}, Qt::WindingFill);
+
     item::paint(painter, option, widget);
  }
-
 }

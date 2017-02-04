@@ -15,6 +15,7 @@ std::unique_ptr<improvement> improvement::make(QPointF pos, QColor color)
     std::unique_ptr<improvement>ret(new improvement);
     ret->setPos(pos);
     ret->set_color(std::move(color));
+    ret->type_ = "改善";
     return ret;
 }
 

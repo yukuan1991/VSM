@@ -33,6 +33,7 @@ std::unique_ptr<signal_board> signal_board::make(QPointF pos, QColor color)
     std::unique_ptr <signal_board> ret (new signal_board);
     ret->setPos(pos);
     ret->set_color(std::move(color));
+    ret->type_ = "信号看板";
     return ret;
 
 }
