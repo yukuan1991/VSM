@@ -47,21 +47,22 @@ QPixmap make_pixmap(const QString &name, qreal width, qreal height)
         {"看板站", board_station_maker},
         {"生产工序", production_sequence_maker},
         {"成品发送至顾客", finished_product_to_customer_maker},
+        {"数据箱", data_box_maker},
         //{"其他公司", other_company_maker},
-        //{"数据箱", data_box_maker},
-        //{"库存", storage_maker},
-        //{"卡车运输", truck_transport_maker},
-        //{"库存超市", storage_super_market_maker},
-        //{"信息", information_maker},
-        //{"生产看板", production_watcher_board_maker},
-        //{"取料看板", material_fetch_watch_board_maker},
+        {"数据箱", data_box_maker},
+        {"库存", storage_maker},
+        {"卡车运输", truck_transport_maker},
+        {"库存超市", storage_super_market_maker},
+        {"信息", information_maker},
+        {"生产看板", production_watcher_board_maker},
+        {"取料看板", material_fetch_watch_board_maker},
         {"信号看板", signal_board_maker},
         {"先进先出", fifo_maker},
         {"顺序拉动球", sequence_pull_ball_maker},
         {"看板以批量方式传达", board_arrival_maker},
         {"均衡生产", balanced_production_maker},
         //{"现场调度", adjustment_on_scene_maker},
-        //{"改善", improvement_maker},
+        {"改善", improvement_maker},
         {"取料", fetch_material_maker},
         {"缓冲或安全库存", cache_or_safe_storage_maker},
         {"操作员", operating_personnel}
@@ -115,11 +116,13 @@ static void production_sequence_maker (QPainter* painter, qreal width, qreal hei
     the_pen.setWidthF(2.0);
     painter->setPen(the_pen);
 
-    painter->drawLine (QPointF {1,1}, {99,1});
-    painter->drawLine (QPointF {1,28}, {99, 28});
-    painter->drawLine (QPointF {1,79}, {99, 79});
-    painter->drawLine (QPointF {1,1}, {1,79});
-    painter->drawLine (QPointF {99, 1}, {99, 79});
+    auto x_scale = width / 100;
+    auto y_scale = height / 80;
+    painter->drawLine (QPointF {x_scale * 1, y_scale * 1}, {x_scale * 99, y_scale * 1});
+    painter->drawLine (QPointF {x_scale * 1, y_scale * 28}, {x_scale * 99, y_scale * 28});
+    painter->drawLine (QPointF {x_scale * 1, y_scale * 79}, {x_scale * 99, y_scale * 79});
+    painter->drawLine (QPointF {x_scale * 1, y_scale * 1}, {x_scale * 1, y_scale * 79});
+    painter->drawLine (QPointF {x_scale * 99, y_scale * 1}, {x_scale * 99, y_scale * 79});
 }
 
 static void other_company_maker (QPainter* painter, qreal width, qreal height)
@@ -129,49 +132,157 @@ static void other_company_maker (QPainter* painter, qreal width, qreal height)
 
 static void data_box_maker (QPainter* painter, qreal width, qreal height)
 {
+    auto the_pen = painter->pen ();
+    the_pen.setColor(Qt::black);
+    the_pen.setWidthF(2.0);
+    painter->setPen(the_pen);
 
+    auto x_scale = width / 100;
+    auto y_scale = height / 80;
+    painter->drawLine (QPointF {x_scale * 1,y_scale * 1}, {x_scale * 99,y_scale * 1});
+    painter->drawLine (QPointF {x_scale * 1,y_scale * 20}, {x_scale * 99, y_scale * 20});
+    painter->drawLine (QPointF {x_scale * 1,y_scale * 40}, {x_scale * 99, y_scale * 40});
+    painter->drawLine (QPointF {x_scale * 1, y_scale * 59}, {x_scale * 99, y_scale * 59});
+    painter->drawLine (QPointF {x_scale * 1, y_scale * 79}, {x_scale * 99, y_scale * 79});
+    painter->drawLine (QPointF {x_scale * 1,y_scale * 1}, {x_scale * 1,y_scale * 79});
+    painter->drawLine (QPointF {x_scale * 99,y_scale * 1}, {x_scale * 99, y_scale * 79});
 }
 
 static void storage_maker (QPainter* painter, qreal width, qreal height)
 {
+    auto the_pen = painter->pen ();
+    the_pen.setColor(Qt::black);
+    the_pen.setWidthF(2.0);
+    painter->setPen(the_pen);
 
+    auto x_scale = width / 100;
+    auto y_scale = height / 80;
+    painter->drawLine (QPointF {x_scale * 49, y_scale * 1}, {x_scale * 99, y_scale * 79});
+    painter->drawLine (QPointF {x_scale * 1, y_scale * 79}, {x_scale * 99, y_scale * 79});
+    painter->drawLine (QPointF {x_scale * 1,y_scale * 79}, {x_scale * 49, y_scale * 1});
+    QFont font;
+    font.setPointSize(20);
+    QFontMetricsF metrics (font);
+    auto text_height = metrics.height();
+    auto text_width = metrics.width("I");
+    QRectF text_rect {x_scale * 49-text_width/2,y_scale * 40,text_width,text_height};
+    painter->setFont(font);
+    painter->drawText(text_rect, "I", Qt::AlignVCenter | Qt::AlignCenter);
 }
 
 static void truck_transport_maker (QPainter* painter, qreal width, qreal height)
 {
+    auto the_pen = painter->pen();
+    the_pen.setColor(Qt::black);
+    the_pen.setWidthF(0.02 * width);
+    painter->setPen(the_pen);
 
+    auto x_scale = width / 100;
+    auto y_scale = height / 80;
+
+    painter->setBrush(Qt::white);
+
+    QVector<QPointF> polygon_shape
+    {
+        {x_scale * 1, y_scale * 1},
+        {x_scale * 69, y_scale * 1},
+        {x_scale * 69, y_scale * 55},
+        {x_scale * 1, y_scale * 55}
+    };
+    painter->drawPolygon({polygon_shape}, Qt::WindingFill);
+
+    polygon_shape.clear();
+    polygon_shape = {
+        {x_scale * 69, y_scale * 25},
+        {x_scale * 99, y_scale * 25},
+        {x_scale * 99, y_scale * 55},
+        {x_scale * 69, y_scale * 55}
+    };
+    painter->drawPolygon({polygon_shape}, Qt::WindingFill);
+
+    painter->setBrush(Qt::black);
+    painter->drawEllipse (QPointF {x_scale * 17, y_scale * 65}, x_scale * 12, x_scale * 12);
+    painter->drawEllipse (QPointF {x_scale * 72, y_scale * 65}, x_scale * 12, x_scale * 12);
 }
 
 static void storage_super_market_maker (QPainter* painter, qreal width, qreal height)
 {
+    auto the_pen = painter->pen ();
+    the_pen.setColor(Qt::black);
+    the_pen.setWidthF(0.02 * width);
+    painter->setPen(the_pen);
 
+    auto x_scale = width / 100;
+    auto y_scale = height / 80;
+    painter->drawLine (QPointF {x_scale * 29,y_scale * 1}, {x_scale * 71, y_scale * 1});
+    painter->drawLine (QPointF {x_scale * 29,y_scale * 27}, {x_scale * 71, y_scale * 27});
+    painter->drawLine (QPointF {x_scale * 29,y_scale * 53}, {x_scale * 71, y_scale * 53});
+    painter->drawLine (QPointF {x_scale * 29, y_scale * 79}, {x_scale * 71, y_scale * 79});
+    painter->drawLine (QPointF {x_scale * 71, y_scale * 1}, {x_scale * 71, y_scale * 79});
 }
 
 static void information_maker (QPainter* painter, qreal width, qreal height)
 {
+    auto the_pen = painter->pen ();
+    the_pen.setWidthF(0.02 * width);
+    the_pen.setColor(Qt::black);
+    painter->setPen(the_pen);
 
+    auto x_scale = width / 100;
+    auto y_scale = height / 80;
+    painter->drawLine(QPointF {x_scale * 1,y_scale * 1}, {x_scale * 99, y_scale * 1});
+    painter->drawLine (QPointF {x_scale * 99,y_scale * 1}, {x_scale * 99,y_scale * 79});
+    painter->drawLine (QPointF {x_scale * 99, y_scale * 79}, {x_scale * 1, y_scale * 79});
+    painter->drawLine (QPointF {x_scale * 1,y_scale * 79}, {x_scale * 1,y_scale * 1});
 }
 
 static void production_watcher_board_maker (QPainter* painter, qreal width, qreal height)
 {
+    auto the_pen = painter->pen ();
+    the_pen.setWidthF(0.02 * width);
+    the_pen.setColor(Qt::black);
+    painter->setPen(the_pen);
 
+    auto x_scale = width / 100;
+    auto y_scale = height / 80;
+    painter->drawLine (QPointF {x_scale * 1,y_scale * 1}, {x_scale * 85, y_scale * 1});
+    painter->drawLine (QPointF {x_scale * 85, y_scale * 1}, {x_scale * 99, y_scale * 16});
+    painter->drawLine (QPointF {x_scale * 99, y_scale * 16}, {x_scale * 99, y_scale * 79});
+    painter->drawLine (QPointF {x_scale * 99, y_scale * 79}, {x_scale * 1, y_scale * 79});
+    painter->drawLine (QPointF {x_scale * 1, y_scale * 79}, {x_scale * 1, y_scale * 1});
 }
 
 static void material_fetch_watch_board_maker (QPainter* painter, qreal width, qreal height)
 {
+    auto the_pen = painter->pen ();
+    the_pen.setWidthF(0.02 * width);
+    the_pen.setColor(Qt::black);
+    painter->setPen(the_pen);
 
+    auto x_scale = width / 100;
+    auto y_scale = height / 80;
+    painter->drawLine (QPointF {x_scale * 1, y_scale * 39}, {x_scale * 25, y_scale * 1});
+    painter->drawLine (QPointF {x_scale * 1,y_scale * 1}, {x_scale * 85,y_scale * 1});
+    painter->drawLine (QPointF {x_scale * 85, y_scale * 1}, {x_scale * 99, y_scale * 16});
+    painter->drawLine (QPointF {x_scale * 1,y_scale * 1}, {x_scale * 1,y_scale * 79});
+    painter->drawLine (QPointF {x_scale * 1,y_scale * 79}, {x_scale * 99,y_scale * 79});
+    painter->drawLine (QPointF {x_scale * 99, y_scale * 79}, {x_scale * 99, y_scale * 16});
+    painter->drawLine (QPointF {x_scale * 1, y_scale * 79}, {x_scale * 50, y_scale * 1});
+    painter->drawLine (QPointF {x_scale * 25, y_scale * 79}, {x_scale * 74, y_scale * 1});
+    painter->drawLine (QPointF {x_scale * 50, y_scale * 79}, {x_scale * (99+85)/2,y_scale * (16+1)/2});
+    painter->drawLine (QPointF {x_scale * 74, y_scale * 79}, {x_scale * 99, y_scale * 39});
 }
 
 static void signal_board_maker (QPainter* painter, qreal width, qreal height)
 {
     QPointF
-    p1 {0.05 * width, height / 80},
+            p1 {0.05 * width, height / 80},
     p2 {0.95 * width, height / 80},
     p3 {0.5 * width, 79 * height / 80};
 
     auto the_pen = painter->pen ();
     the_pen.setColor(Qt::black);
-    the_pen.setWidthF(2.0);
+    the_pen.setWidthF(0.02 * width);
     painter->setPen(the_pen);
 
     painter->setBrush(Qt::white);
@@ -182,7 +293,7 @@ static void sequence_pull_ball_maker (QPainter* painter, qreal width, qreal heig
 {
     auto the_pen = painter->pen ();
     the_pen.setColor(Qt::black);
-    the_pen.setWidthF(2.0);
+    the_pen.setWidthF(0.02 * width);
     painter->setPen(the_pen);
     painter->drawEllipse(QRectF {0.2 * width, height / 8, 0.6 * width, height / 8 * 6});
     painter->drawEllipse(QRectF {0.35 * width, height / 80 * 25.0, 30.0, 30.0});
@@ -206,7 +317,6 @@ static void board_arrival_maker (QPainter* painter, qreal width, qreal height)
     painter->setBrush(Qt::white);
 
     painter->drawPolygon({polygon_shape}, Qt::WindingFill);
-    painter->drawLine (QPointF (0, 0), QPointF (100, 80));
 
     for (auto& it : polygon_shape)
     {
@@ -251,22 +361,63 @@ static void adjustment_on_scene_maker (QPainter* painter, qreal width, qreal hei
 
 static void improvement_maker (QPainter* painter, qreal width, qreal height)
 {
+    auto the_pen = painter->pen ();
+    the_pen.setColor(Qt::red);
+    the_pen.setWidthF(0.02 * width);
+    painter->setPen(the_pen);
+    painter->setBrush(Qt::white);
+    auto x_scale = width / 100;
+    auto y_scale = height / 80;
 
+    QVector<QPointF> polygon_shape
+    {
+        {x_scale * 1,y_scale * 8},
+        {x_scale * 33,y_scale * 23},
+        {x_scale * 38, y_scale * 10},
+        {x_scale * 49, y_scale * 21},
+        {x_scale * 65, y_scale * 1},
+        {x_scale * 64, y_scale * 19},
+        {x_scale * 82, y_scale * 17},
+        {x_scale * 76, y_scale * 26},
+        {x_scale * 93, y_scale * 30},
+        {x_scale * 80, y_scale * 37},
+        {x_scale * 97, y_scale * 48},
+        {x_scale * 77, y_scale * 47},
+        {x_scale * 80, y_scale * 62},
+        {x_scale * 64, y_scale * 53},
+        {x_scale * 59, y_scale * 68},
+        {x_scale * 48, y_scale * 55},
+        {x_scale * 39, y_scale * 74},
+        {x_scale * 35, y_scale * 57},
+        {x_scale * 22, y_scale * 62},
+        {x_scale * 25, y_scale * 51},
+        {x_scale * 1, y_scale * 52},
+        {x_scale * 17, y_scale * 42},
+        {x_scale * 1, y_scale * 31},
+        {x_scale * 20, y_scale * 27},
+        {x_scale * 1, y_scale * 8}
+    };
+
+    painter->drawPolygon({polygon_shape}, Qt::WindingFill);
 }
 
 static void cache_or_safe_storage_maker (QPainter* painter, qreal width, qreal height)
 {
+    auto x_scale = width / 100;
+    auto y_scale = height / 80;
     QPointF
-    p1{0.35 * width ,0.125 * height},
-    p2{0.65 * width,0.125 * height},
-    p3{0.35 * width,0.875 * height},
-    p4{0.65 * width,0.875 * height},
-    p5{0.35 * width,0.375 * height},
-    p6{0.65 * width,0.375 * height},
-    p7{0.35 * width,0.625 * height},
-    p8{0.65 * width,0.625 * height};
+            p1 {x_scale * 39, y_scale * 1},
+    p2 {x_scale * 60, y_scale * 1},
+    p4 {x_scale * 60, y_scale * 79},
+    p3 {x_scale * 39, y_scale * 79},
+    p5 {x_scale * 39, y_scale * 27},
+    p6 {x_scale * 60, y_scale * 27},
+    p7 {x_scale * 39, y_scale * 53},
+    p8 {x_scale * 60, y_scale * 53};
+
     auto the_pen = painter->pen();
     the_pen.setColor(Qt::black);
+    the_pen.setWidthF(width/50);
     painter->setPen(the_pen);
     //给定坐标
     painter->setBrush(Qt::white);
@@ -283,7 +434,9 @@ static void operating_personnel (QPainter* painter, qreal width, qreal height)
     painter->setPen(the_pen);
 
     painter->drawArc(QRectF{0.1 * width, height * 10 / 80, 0.8 * width, height * 60 / 80}, 180 * 16, 180 * 16);
-    painter->drawArc(QRectF{0.3 * width, height * 20 / 80, 0.4 * width, height * 40 / 80}, 0 * 16, 360 * 16);
+
+    painter->setBrush(Qt::white);
+    painter->drawEllipse (QRectF(0.3 * width, height * 20 / 80, 0.4 * width, height * 40 / 80));
 }
 
 static void fetch_material_maker (QPainter* painter, qreal width, qreal height)
@@ -355,18 +508,24 @@ static void fifo_maker (QPainter* painter, qreal width, qreal height)
 
 static void finished_product_to_customer_maker (QPainter* painter, qreal width, qreal height)
 {
+    auto x_scale = width / 100;
+    auto y_scale = height / 80;
+
     auto the_pen = painter->pen ();
     the_pen.setColor(Qt::black);
-    the_pen.setWidthF(2.0);
+    the_pen.setWidthF(x_scale * 2);
     painter->setPen(the_pen);
 
-    painter->drawLine (QPointF {1,20}, {79, 20});
-    painter->drawLine (QPointF {79, 20}, {79,1});
-    painter->drawLine (QPointF {79,1}, {99,38});
-    painter->drawLine (QPointF {99,38}, {79,77});
-    painter->drawLine (QPointF {79,77}, {79,56});
-    painter->drawLine (QPointF {79, 56}, {1,56});
-    painter->drawLine (QPointF {1,56}, {1,20});
+    QPointF p1 (1 * x_scale, 32 * y_scale);
+    QPointF p2 (82 * x_scale, 32 * y_scale);
+    QPointF p3 (82 * x_scale, 24 * y_scale);
+    QPointF p4 (99 * x_scale, 40 * y_scale);
+    QPointF p5 (82 * x_scale, 56 * y_scale);
+    QPointF p6 (82 * x_scale, 48 * y_scale);
+    QPointF p7 (1 * x_scale, 48 * y_scale);
+
+    painter->setBrush(Qt::white);
+    painter->drawPolygon({{p1, p2, p3, p4, p5, p6, p7}} , Qt::WindingFill);
 }
 
 %>
