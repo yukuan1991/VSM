@@ -21,9 +21,11 @@ void signal_board::paint(QPainter *painter, const QStyleOptionGraphicsItem *opti
     auto the_pen = painter->pen ();
     the_pen.setColor(color ());
     painter->setPen(the_pen);
+
     painter->drawLine(p1,p2);
     painter->drawLine(p1,p3);
     painter->drawLine(p2,p3);
+
     item::paint(painter, option, widget);
 
 }
