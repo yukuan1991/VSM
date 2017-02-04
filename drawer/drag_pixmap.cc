@@ -214,11 +214,11 @@ static void storage_super_market_maker (QPainter* painter, qreal width, qreal he
 
     auto x_scale = width / 100;
     auto y_scale = height / 80;
-    painter->drawLine (QPointF {x_scale * 1,y_scale * 1}, {x_scale * 99, y_scale * 1});
-    painter->drawLine (QPointF {x_scale * 1,y_scale * 27}, {x_scale * 99, y_scale * 27});
-    painter->drawLine (QPointF {x_scale * 99, y_scale * 1}, {x_scale * 99, y_scale * 79});
-    painter->drawLine (QPointF {x_scale * 1,y_scale * 53}, {x_scale * 99, y_scale * 53});
-    painter->drawLine (QPointF {x_scale * 1, y_scale * 79}, {x_scale * 99, y_scale * 79});
+    painter->drawLine (QPointF {x_scale * 29,y_scale * 1}, {x_scale * 71, y_scale * 1});
+    painter->drawLine (QPointF {x_scale * 29,y_scale * 27}, {x_scale * 71, y_scale * 27});
+    painter->drawLine (QPointF {x_scale * 29,y_scale * 53}, {x_scale * 71, y_scale * 53});
+    painter->drawLine (QPointF {x_scale * 29, y_scale * 79}, {x_scale * 71, y_scale * 79});
+    painter->drawLine (QPointF {x_scale * 71, y_scale * 1}, {x_scale * 71, y_scale * 79});
 }
 
 static void information_maker (QPainter* painter, qreal width, qreal height)
@@ -404,17 +404,21 @@ static void improvement_maker (QPainter* painter, qreal width, qreal height)
 
 static void cache_or_safe_storage_maker (QPainter* painter, qreal width, qreal height)
 {
+    auto x_scale = width / 100;
+    auto y_scale = height / 80;
     QPointF
-            p1{0.35 * width ,0.125 * height},
-    p2{0.65 * width,0.125 * height},
-    p3{0.35 * width,0.875 * height},
-    p4{0.65 * width,0.875 * height},
-    p5{0.35 * width,0.375 * height},
-    p6{0.65 * width,0.375 * height},
-    p7{0.35 * width,0.625 * height},
-    p8{0.65 * width,0.625 * height};
+            p1 {x_scale * 39, y_scale * 1},
+    p2 {x_scale * 60, y_scale * 1},
+    p4 {x_scale * 60, y_scale * 79},
+    p3 {x_scale * 39, y_scale * 79},
+    p5 {x_scale * 39, y_scale * 27},
+    p6 {x_scale * 60, y_scale * 27},
+    p7 {x_scale * 39, y_scale * 53},
+    p8 {x_scale * 60, y_scale * 53};
+
     auto the_pen = painter->pen();
     the_pen.setColor(Qt::black);
+    the_pen.setWidthF(width/50);
     painter->setPen(the_pen);
     //给定坐标
     painter->setBrush(Qt::white);
