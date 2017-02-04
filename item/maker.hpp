@@ -5,6 +5,7 @@
 #include <QDebug>
 #include "item/board_station.h"
 #include "item/board_arrival.h"
+#include "item/operating_personnel.h"
 
 namespace item
 <%
@@ -30,9 +31,9 @@ inline std::unique_ptr<item> make_item (const QString& classname, QPointF pos)
     using item_maker = up_item (*) (QPointF);
 
 
-    std::map<QString, item_maker> type_map
+    static std::map<QString, item_maker> type_map
     {
-        {"看板以批量方式传达", [] (QPointF p)->up_item { return board_arrival::make (p, Qt::black); }}
+        {"看板以批量方式传达", [] (QPointF p)->up_item { return board_arrival::make (p, Qt::black); }},
         //{"生产工序", production_sequence_maker},
         //{"其他公司", other_company_maker},
         //{"数据箱", data_box_maker},
@@ -50,7 +51,7 @@ inline std::unique_ptr<item> make_item (const QString& classname, QPointF pos)
         //{"改善", improvement_maker},
         //{"取料", fetch_material_maker},
         //{"缓冲或安全库存", cache_or_safe_storage_maker},
-        //{"操作员", operator_maker}
+        {"操作员", [] (QPointF p)->up_item { return operating_personnel::make (p, Qt::black); }}
     };
 
     auto found = type_map.find(classname);
