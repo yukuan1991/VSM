@@ -12,7 +12,5 @@ protected:
     void paint (QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = nullptr) override;
     adjustment_on_scene(item* parent = nullptr);
 private:
-
-
 };
 }

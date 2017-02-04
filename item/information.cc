@@ -8,7 +8,6 @@
 /// 修改完成
 namespace item {
 
-
 std::unique_ptr<information> information::make(QPointF pos, QColor color)
 {
     std::unique_ptr<information>ret(new information);
@@ -28,7 +27,6 @@ void information::paint(QPainter *painter, const QStyleOptionGraphicsItem *optio
     p2_{0.99 * item_width, 0.0125 * item_height},
     p3_{ 0.01 * item_width, 0.9875 * item_height},
     p4_{ 0.99 * item_width, 0.9875 * item_height};
-
 
     auto the_pen = painter->pen ();
     the_pen.setColor(color ());

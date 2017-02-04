@@ -31,6 +31,11 @@ void fetch_material::paint(QPainter *painter, const QStyleOptionGraphicsItem *op
     the_pen.setWidthF(2.0);
     painter->setPen(the_pen);
 
+    QPointF
+    p1 {0.75 * item_width, 0.8125 * item_height},
+    p2 {0.82 * item_width, 0.9 * item_height},
+    p3 {0.87 * item_width,0.75 * item_height};
+
     //给定坐标
     painter->setBrush(Qt::white);
 

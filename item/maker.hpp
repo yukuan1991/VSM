@@ -61,10 +61,11 @@ inline std::unique_ptr<item> make_item (const QString& classname, QPointF pos)
         {"看板以批量方式传达",  [] (QPointF p)->up_item { return board_arrival::make(p, Qt::black); }},
         {"均衡生产",  [] (QPointF p)->up_item { return balanced_production::make(p, Qt::black); }},
         {"现场调度",  [] (QPointF p)->up_item { return adjustment_on_scene::make(p, Qt::black); }},
-        {"改善",  [] (QPointF p)->up_item { return improvement::make(p, Qt::black); }},
+        {"改善",  [] (QPointF p)->up_item { return improvement::make(p, Qt::red); }},
         //{"取料", fetch_material_maker},
         {"缓冲或安全库存",  [] (QPointF p)->up_item { return cache_or_safe_storage::make(p, Qt::black); }},
-        {"操作员", [] (QPointF p)->up_item { return operating_personnel::make (p, Qt::black); }}
+        {"操作员", [] (QPointF p)->up_item { return operating_personnel::make (p, Qt::black); }},
+        {"看板站", [] (QPointF p)->up_item { return board_station::make (p, Qt::black); }}
     };
 
     auto found = type_map.find(classname);

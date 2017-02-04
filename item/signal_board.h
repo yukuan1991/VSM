@@ -18,10 +18,7 @@ protected:
     signal_board(item* parent= nullptr);
     void paint (QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = nullptr) override;
 private:
-    QPointF
-    p1 {0.3 * item_width, 0.3125 * item_height},
-    p2 {0.7 * item_width, 0.3125 * item_height},
-    p3 {0.5 * item_width, 0.6875 * item_height};
+
 };
 
 } /// end of item

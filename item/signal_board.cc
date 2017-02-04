@@ -18,6 +18,12 @@ signal_board::signal_board(item *parent)
 void signal_board::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
     Q_UNUSED(widget);
+
+    QPointF
+    p1 {0.3 * item_width, 0.3125 * item_height},
+    p2 {0.7 * item_width, 0.3125 * item_height},
+    p3 {0.5 * item_width, 0.6875 * item_height};
+
     auto the_pen = painter->pen ();
     the_pen.setColor(color ());
     painter->setPen(the_pen);
