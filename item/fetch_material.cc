@@ -14,6 +14,7 @@ std::unique_ptr<fetch_material> fetch_material::make(QPointF pos, QColor color)
     std::unique_ptr<fetch_material>ret(new fetch_material);
     ret->setPos(pos);
     ret->set_color(std::move(color));
+    ret->type_ = "取料";
     return ret;
 }
 

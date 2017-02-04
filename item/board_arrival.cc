@@ -10,6 +10,7 @@ std::unique_ptr<board_arrival> board_arrival::make(QPointF pos, QColor color)
     std::unique_ptr <board_arrival> ret(new board_arrival);
     ret->setPos(pos);
     ret->set_color(std::move(color));
+    ret->type_ = "看板以批量方式传达";
     return ret;
 }
 

@@ -3,7 +3,7 @@
 #include <memory>
 
 namespace item {
-
+///顺序拉动球
 class sequence_pull_ball : public item
 {
 public:

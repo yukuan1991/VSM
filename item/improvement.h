@@ -10,13 +10,13 @@
 namespace item {
 
 
-class improve : public item
+class improvement : public item
 {
 public:
-    static std::unique_ptr<improve> make(QPointF pos, QColor color = Qt::black);
+    static std::unique_ptr<improvement> make(QPointF pos, QColor color = Qt::black);
 
 protected:
-    explicit improve(item* parent=nullptr);
+    explicit improvement(item* parent=nullptr);
     void paint (QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = nullptr) override;
 private:
     QPointF

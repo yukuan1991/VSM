@@ -16,14 +16,14 @@ protected:
     void paint (QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = nullptr) override;
 private:
     QPointF
-    p1{0.35 * item_width ,0.125 * item_height},
-    p2{0.65 * item_width,0.125 * item_height},
-    p3{0.35 * item_width,0.875 * item_height},
-    p4{0.65 * item_width,0.875 * item_height},
-    p5{0.35 * item_width,0.375 * item_height},
-    p6{0.65 * item_width,0.375 * item_height},
-    p7{0.35 * item_width,0.625 * item_height},
-    p8{0.65 * item_width,0.625 * item_height};
+    p1_{0.39 * item_width ,0.0125 * item_height},
+    p2_{0.60 * item_width,0.0125 * item_height},
+    p3_{0.39 * item_width,0.3375 * item_height},
+    p4_{0.60 * item_width,0.3375 * item_height},
+    p5_{0.39 * item_width,0.6625 * item_height},
+    p6_{0.60 * item_width,0.6625 * item_height},
+    p7_{0.39 * item_width,0.9875 * item_height},
+    p8_{0.6 * item_width,0.9875 * item_height};
 };
 }
 

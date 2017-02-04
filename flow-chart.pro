@@ -39,13 +39,6 @@ SOURCES += \
     canvas/view.cc \
     item/item.cc \
     item/improve.cc \
-    item/reclaimer.cc \
-    item/information.cc \
-    item/square.cc \
-    item/supermarket_rectangles.cc \
-    item/three_rectangles.cc \
-    item/dispatch.cc \
-    item/polygon.cc \
     item/material_flow.cc \
     item/traditional_info_flow.cc \
     item/electric_info_flow.cc \
@@ -59,7 +52,14 @@ SOURCES += \
     item/balanced_production.cc \
     item/operating_personnel.cc \
     item/board_arrival.cc \
-    item/production_sequence.cc
+    item/production_sequence.cc \
+    item/adjustment_on_scene.cc \
+    item/production_watcher_board.cc \
+    item/material_fetch_watch_board.cc \
+    item/storage_super_market.cc \
+    item/information.cc \
+    item/data_box.cc \
+    item/board_info_flow.cc
 
 HEADERS += \
     flow_app.h \
@@ -75,14 +75,6 @@ HEADERS += \
     canvas/view.h \
     item/item.h \
     item/maker.hpp \
-    item/improve.h \
-    item/reclaimer.h \
-    item/information.h \
-    item/square.h \
-    item/supermarket_rectangles.h \
-    item/three_rectangles.h \
-    item/dispatch.h \
-    item/polygon.h \
     item/material_flow.h \
     item/traditional_info_flow.h \
     item/electric_info_flow.h \
@@ -96,7 +88,15 @@ HEADERS += \
     item/balanced_production.h \
     item/operating_personnel.h \
     item/board_arrival.h \
-    item/production_sequence.h
+    item/production_sequence.h \
+    item/adjustment_on_scene.h \
+    item/improvement.h \
+    item/production_watcher_board.h \
+    item/material_fetch_watch_board.h \
+    item/storage_super_market.h \
+    item/information.h \
+    item/data_box.h \
+    item/board_info_flow.h
 
 FORMS += \
     flow_main.ui \

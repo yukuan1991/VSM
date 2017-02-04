@@ -11,6 +11,7 @@ std::unique_ptr<board_station> board_station::make(QPointF pos, QColor color)
     std::unique_ptr <board_station> ret(new board_station);
     ret->setPos(pos);
     ret->set_color(std::move(color));
+    ret->type_ = "看板站";
     return ret;
 }
 

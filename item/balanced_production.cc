@@ -8,6 +8,7 @@ std::unique_ptr<balanced_production> balanced_production::make(QPointF pos, QCol
     std::unique_ptr<balanced_production>ret(new balanced_production);
     ret->setPos(pos);
     ret->set_color( std::move (color));
+    ret->type_ = "均衡生产";
     return ret;
 }
 
