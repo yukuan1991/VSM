@@ -21,27 +21,27 @@ flow_app::flow_app(int argc, char **argv)
         go  [this] { update_check (); };
     }
 }
-<<<<<<< HEAD
+
 #include <QGraphicsScene>
 #include <QGraphicsView>
 #include <QMatrix>
 #include <QGLWidget>
 #include "item/material_flow.h"
-=======
+
 
 
 #include "item/adjustment_on_scene.h"
 #include "item/improvement.h"
-#include "item/board_information_flow.h"
+
 #include "item/production_watcher_board.h"
 #include "item/material_fetch_watch_board.h"
->>>>>>> 070a5f658ffa3f7c120eca91d487f56bcc1cf8df
 #include "item/storage_super_market.h"
 #include "item/cache_or_safe_storage.h"
 #include "item/material_fetch_watch_board.h"
 #include "item/production_sequence.h"
 #include "item/production_watcher_board.h"
 #include "item/data_box.h"
+#include "item/information.h"
 bool flow_app::run()
 {
 //    main_ = std::make_unique<flow_main> ();
@@ -59,7 +59,7 @@ bool flow_app::run()
     view.show();
     qDebug() << "main";
 
-    auto p_item = item::data_box::make({150, 150},Qt::black);
+    auto p_item = item::storage_super_market::make({150, 150},Qt::black);
 
     if (p_item != nullptr)
 
@@ -69,11 +69,7 @@ bool flow_app::run()
         scene.addItem(p_item.release());
     }
     return exec();
-<<<<<<< HEAD
-    return true;
-=======
     return false;
->>>>>>> 070a5f658ffa3f7c120eca91d487f56bcc1cf8df
 }
 
 void flow_app::exec_update(std::vector<std::pair<string, string>> file_info)

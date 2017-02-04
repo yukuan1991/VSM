@@ -25,12 +25,22 @@ cache_or_safe_storage::cache_or_safe_storage(item* parent)
 
 void cache_or_safe_storage::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
+    QPointF
+    p1_{0.39 * item_width ,0.0125 * item_height},
+    p2_{0.60 * item_width,0.0125 * item_height},
+    p3_{0.39 * item_width,0.3375 * item_height},
+    p4_{0.60 * item_width,0.3375 * item_height},
+    p5_{0.39 * item_width,0.6625 * item_height},
+    p6_{0.60 * item_width,0.6625 * item_height},
+    p7_{0.39 * item_width,0.9875 * item_height},
+    p8_{0.6 * item_width,0.9875 * item_height};
+
+
     auto the_pen = painter->pen();
     the_pen.setColor(color());
     the_pen.setWidthF(item_width * 0.02);
     painter->setPen(the_pen);
     painter->setBrush(Qt::blue);
-    //给定坐标
     painter->setBrush(Qt::white);
     painter->drawPolygon({{p1_,p2_,p8_,p7_}},Qt::WindingFill);
     painter->drawLine(p3_,p4_);

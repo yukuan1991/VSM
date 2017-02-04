@@ -18,8 +18,7 @@ protected:
     explicit information(item* parent = nullptr);
 
 private:
-    constexpr static qreal information_length=0.8 * item_width;
-    constexpr static qreal information_heigth= 0.5 * information_length;
+
    };
 }
 

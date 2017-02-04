@@ -27,6 +27,17 @@ void storage_super_market::paint(QPainter *painter, const QStyleOptionGraphicsIt
 {
     Q_UNUSED(widget);
 
+    QPointF
+    p1_ {0.29 * item_width, 0.0125 * item_height},//p1
+    p2_ {0.71 * item_width, 0.0125 * item_height},//p2
+    p3_ {0.29 * item_width, 0.3375 * item_height},//
+    p4_ {0.71 * item_width, 0.3375 * item_height},
+
+    p5_ {0.29 * item_width, 0.6625 * item_height},
+    p6_ {0.71 * item_width, 0.6625 * item_height},
+    p7_ {0.29 * item_width, 0.9875 * item_height},
+    p8_ {0.71 * item_width, 0.9875 * item_height};
+
     auto the_pen = painter->pen ();
     the_pen.setColor(color ());
     the_pen.setWidthF(item_width * 0.02);

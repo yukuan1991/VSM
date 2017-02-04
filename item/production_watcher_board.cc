@@ -24,6 +24,13 @@ std::unique_ptr<production_watcher_board> production_watcher_board::make(QPointF
 
 void production_watcher_board::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
+    QPointF
+    p1_ {0.01 * item_width, 0.0125 * item_height},
+    p2_ {0.85 * item_width, 0.0125 * item_height},
+    p3_ {0.99 * item_width, 0.2 * item_height},
+    p4_ {0.99 * item_width, 0.9875 * item_height},
+    p5_ {0.01 * item_width, 0.9875 * item_height};
+
     auto the_pen = painter->pen();
     the_pen.setColor(color());
     the_pen.setWidthF(item_width * 0.02);
