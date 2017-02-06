@@ -61,7 +61,8 @@ SOURCES += \
     item/board_info_flow.cc \
     item/improvement.cc \
     item/storage.cc \
-    item/truck_transport.cc
+    item/truck_transport.cc \
+    item/other_company.cc
 
 HEADERS += \
     flow_app.h \
@@ -100,7 +101,8 @@ HEADERS += \
     item/data_box.h \
     item/board_info_flow.h \
     item/storage.h \
-    item/truck_transport.h
+    item/truck_transport.h \
+    item/other_company.h
 
 FORMS += \
     flow_main.ui \
