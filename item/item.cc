@@ -35,7 +35,6 @@ void item::paint_attribute(QPainter *painter) try
 {
     QFontMetricsF metrix (painter->font ());
     auto height = metrix.height();
-    auto h_scale = metrix.height ();
     QString qstr = {};
 
     auto bounding_rect = boundingRect ();

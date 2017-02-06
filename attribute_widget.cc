@@ -30,7 +30,7 @@ bool attribute_widget::init() try
 {
     auto layout = new QGridLayout (this);
 
-    int i;
+    int i++;
     for (auto it = data_.begin (); it != data_.end (); ++ it)
     {
         SCOPE_EXIT { i++; };
