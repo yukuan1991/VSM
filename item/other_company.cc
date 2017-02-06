@@ -40,7 +40,7 @@ void other_company::paint(QPainter *painter, const QStyleOptionGraphicsItem *opt
     p8 {1 * x_scale,79 * y_scale};
     painter->drawPolygon({{p1,p2,p3,p4,p5,p6,p7,p8}},Qt::WindingFill);
 
-
+    item::paint(painter, option, widget);
 }
 
 }

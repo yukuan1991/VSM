@@ -54,6 +54,9 @@ void truck_transport::paint(QPainter *painter, const QStyleOptionGraphicsItem *o
     painter->drawEllipse (QPointF {x_scale * 17, y_scale * 65}, x_scale * 12, x_scale * 12);
     painter->drawEllipse (QPointF {x_scale * 72, y_scale * 65}, x_scale * 12, x_scale * 12);
 
+    item::paint(painter, option, widget);
+
+
 }
 
 
