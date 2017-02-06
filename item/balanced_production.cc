@@ -25,11 +25,6 @@ void balanced_production::paint(QPainter *painter, const QStyleOptionGraphicsIte
     auto the_pen = painter->pen ();
     the_pen.setColor(Qt::black);
     the_pen.setWidthF(0.02 * item_width);
-    //设置字体加粗
-    QFont font;
-    font.setPixelSize(16);
-    painter->setFont(font);
-
     painter->setPen(the_pen);
 
     QRectF rect (0.05 * item_width, 0.25 * item_height, 0.9 * item_width, 0.5 * item_height);
@@ -44,7 +39,6 @@ void balanced_production::paint(QPainter *painter, const QStyleOptionGraphicsIte
 
     painter->drawRect(rect);
     painter->drawText(text_rect,"O X O X", Qt::AlignVCenter | Qt::AlignCenter);
-
     item::paint(painter, option, widget);
 }
 }
