@@ -116,11 +116,18 @@ static void production_sequence_maker (QPainter* painter, qreal width, qreal hei
 
     auto x_scale = width / 100;
     auto y_scale = height / 80;
-    painter->drawLine (QPointF {x_scale * 1, y_scale * 1}, {x_scale * 99, y_scale * 1});
+
+    QVector<QPointF> polygon_shape
+    {
+        {x_scale * 1, y_scale * 1},
+        {x_scale * 99, y_scale * 1},
+        {x_scale * 99, y_scale * 79},
+        {x_scale * 1, y_scale * 79}
+    };
+    painter->setBrush(Qt::white);
+    painter->drawPolygon({polygon_shape}, Qt::WindingFill);
+
     painter->drawLine (QPointF {x_scale * 1, y_scale * 28}, {x_scale * 99, y_scale * 28});
-    painter->drawLine (QPointF {x_scale * 1, y_scale * 79}, {x_scale * 99, y_scale * 79});
-    painter->drawLine (QPointF {x_scale * 1, y_scale * 1}, {x_scale * 1, y_scale * 79});
-    painter->drawLine (QPointF {x_scale * 99, y_scale * 1}, {x_scale * 99, y_scale * 79});
 }
 
 static void other_company_maker (QPainter* painter, qreal width, qreal height)
@@ -154,13 +161,20 @@ static void data_box_maker (QPainter* painter, qreal width, qreal height)
 
     auto x_scale = width / 100;
     auto y_scale = height / 80;
-    painter->drawLine (QPointF {x_scale * 1,y_scale * 1}, {x_scale * 99,y_scale * 1});
-    painter->drawLine (QPointF {x_scale * 1,y_scale * 20}, {x_scale * 99, y_scale * 20});
-    painter->drawLine (QPointF {x_scale * 1,y_scale * 40}, {x_scale * 99, y_scale * 40});
+
+    QVector<QPointF> polygon_shape
+    {
+        {x_scale * 1, y_scale * 1},
+        {x_scale * 99,y_scale * 1},
+        {x_scale * 99, y_scale * 79},
+        {x_scale * 1, y_scale * 79}
+    };
+    painter->setBrush(Qt::white);
+    painter->drawPolygon({polygon_shape}, Qt::WindingFill);
+
+    painter->drawLine (QPointF {x_scale * 1, y_scale * 20}, {x_scale * 99, y_scale * 20});
+    painter->drawLine (QPointF {x_scale * 1, y_scale * 40}, {x_scale * 99, y_scale * 40});
     painter->drawLine (QPointF {x_scale * 1, y_scale * 59}, {x_scale * 99, y_scale * 59});
-    painter->drawLine (QPointF {x_scale * 1, y_scale * 79}, {x_scale * 99, y_scale * 79});
-    painter->drawLine (QPointF {x_scale * 1,y_scale * 1}, {x_scale * 1,y_scale * 79});
-    painter->drawLine (QPointF {x_scale * 99,y_scale * 1}, {x_scale * 99, y_scale * 79});
 }
 
 static void storage_maker (QPainter* painter, qreal width, qreal height)
@@ -172,11 +186,19 @@ static void storage_maker (QPainter* painter, qreal width, qreal height)
 
     auto x_scale = width / 100;
     auto y_scale = height / 80;
-    painter->drawLine (QPointF {x_scale * 49, y_scale * 1}, {x_scale * 99, y_scale * 79});
-    painter->drawLine (QPointF {x_scale * 1, y_scale * 79}, {x_scale * 99, y_scale * 79});
-    painter->drawLine (QPointF {x_scale * 1,y_scale * 79}, {x_scale * 49, y_scale * 1});
+
+    QVector<QPointF> polygon_shape
+    {
+        {x_scale * 49, y_scale * 1},
+        {x_scale * 99, y_scale * 79},
+        {x_scale * 1, y_scale * 79}
+    };
+    painter->setBrush(Qt::white);
+    painter->drawPolygon({polygon_shape}, Qt::WindingFill);
+
     QFont font;
-    font.setPointSize(20);
+    font.setPointSize(22);
+    font.setBold(true);
     QFontMetricsF metrics (font);
     auto text_height = metrics.height();
     auto text_width = metrics.width("I");
@@ -245,10 +267,15 @@ static void information_maker (QPainter* painter, qreal width, qreal height)
 
     auto x_scale = width / 100;
     auto y_scale = height / 80;
-    painter->drawLine(QPointF {x_scale * 1,y_scale * 1}, {x_scale * 99, y_scale * 1});
-    painter->drawLine (QPointF {x_scale * 99,y_scale * 1}, {x_scale * 99,y_scale * 79});
-    painter->drawLine (QPointF {x_scale * 99, y_scale * 79}, {x_scale * 1, y_scale * 79});
-    painter->drawLine (QPointF {x_scale * 1,y_scale * 79}, {x_scale * 1,y_scale * 1});
+    QVector<QPointF> polygon_shape
+    {
+        {x_scale * 1,y_scale * 1},
+        {x_scale * 99, y_scale * 1},
+        {x_scale * 99,y_scale * 79},
+        {x_scale * 1, y_scale * 79}
+    };
+    painter->setBrush (Qt::white);
+    painter->drawPolygon ({polygon_shape}, Qt::WindingFill);
 }
 
 static void production_watcher_board_maker (QPainter* painter, qreal width, qreal height)
@@ -260,11 +287,16 @@ static void production_watcher_board_maker (QPainter* painter, qreal width, qrea
 
     auto x_scale = width / 100;
     auto y_scale = height / 80;
-    painter->drawLine (QPointF {x_scale * 1,y_scale * 1}, {x_scale * 85, y_scale * 1});
-    painter->drawLine (QPointF {x_scale * 85, y_scale * 1}, {x_scale * 99, y_scale * 16});
-    painter->drawLine (QPointF {x_scale * 99, y_scale * 16}, {x_scale * 99, y_scale * 79});
-    painter->drawLine (QPointF {x_scale * 99, y_scale * 79}, {x_scale * 1, y_scale * 79});
-    painter->drawLine (QPointF {x_scale * 1, y_scale * 79}, {x_scale * 1, y_scale * 1});
+    QVector<QPointF> polygon_shape
+    {
+        {x_scale * 1,y_scale * 1},
+        {x_scale * 85, y_scale * 1},
+        {x_scale * 99, y_scale * 16},
+        {x_scale * 99, y_scale * 79},
+        {x_scale * 1, y_scale * 79},
+    };
+    painter->setBrush (Qt::white);
+    painter->drawPolygon ({polygon_shape}, Qt::WindingFill);
 }
 
 static void material_fetch_watch_board_maker (QPainter* painter, qreal width, qreal height)
@@ -276,12 +308,18 @@ static void material_fetch_watch_board_maker (QPainter* painter, qreal width, qr
 
     auto x_scale = width / 100;
     auto y_scale = height / 80;
+
+    QVector<QPointF> polygon_shape
+    {
+        {x_scale * 1,y_scale * 1},
+        {x_scale * 85, y_scale * 1},
+        {x_scale * 99, y_scale * 16},
+        {x_scale * 99, y_scale * 79},
+        {x_scale * 1, y_scale * 79},
+    };
+    painter->setBrush (Qt::white);
+    painter->drawPolygon ({polygon_shape}, Qt::WindingFill);
     painter->drawLine (QPointF {x_scale * 1, y_scale * 39}, {x_scale * 25, y_scale * 1});
-    painter->drawLine (QPointF {x_scale * 1,y_scale * 1}, {x_scale * 85,y_scale * 1});
-    painter->drawLine (QPointF {x_scale * 85, y_scale * 1}, {x_scale * 99, y_scale * 16});
-    painter->drawLine (QPointF {x_scale * 1,y_scale * 1}, {x_scale * 1,y_scale * 79});
-    painter->drawLine (QPointF {x_scale * 1,y_scale * 79}, {x_scale * 99,y_scale * 79});
-    painter->drawLine (QPointF {x_scale * 99, y_scale * 79}, {x_scale * 99, y_scale * 16});
     painter->drawLine (QPointF {x_scale * 1, y_scale * 79}, {x_scale * 50, y_scale * 1});
     painter->drawLine (QPointF {x_scale * 25, y_scale * 79}, {x_scale * 74, y_scale * 1});
     painter->drawLine (QPointF {x_scale * 50, y_scale * 79}, {x_scale * (99+85)/2,y_scale * (16+1)/2});
@@ -310,6 +348,7 @@ static void sequence_pull_ball_maker (QPainter* painter, qreal width, qreal heig
     the_pen.setColor(Qt::black);
     the_pen.setWidthF(0.02 * width);
     painter->setPen(the_pen);
+    painter->setBrush(Qt::white);
     painter->drawEllipse(QRectF {0.2 * width, height / 8, 0.6 * width, height / 8 * 6});
     painter->drawEllipse(QRectF {0.35 * width, height / 80 * 25.0, 30.0, 30.0});
 }
@@ -356,16 +395,47 @@ static void balanced_production_maker (QPainter* painter, qreal width, qreal hei
     painter->setPen(the_pen);
 
     QRectF rect (0.05 * width, 0.25 * height, 0.9 * width, 0.5 * height);
+    QVector<QPointF> polygon_shape
+    {
+        {width * 0.05, height * 0.25},
+        {width * (0.05+0.9), height * 0.25},
+        {width * (0.05+0.9), height * (0.25 + 0.5)},\
+        {width * 0.05, height * (0.25 + 0.5)}
+    };
 
-
+<<<<<<< HEAD
     QFontMetricsF metrics (painter->font());
+=======
+    auto font = painter->font();
+    font.setBold(true);
+    font.setPointSize (12);
+    QFontMetricsF metrics (font);
+
+<<<<<<< HEAD
+=======
+    QFontMetricsF metrics (painter->font());
+>>>>>>> master
+>>>>>>> michelle
     auto w = metrics.width("O X O X");
     auto h = metrics.height();
 
     auto center = rect.center();
     auto text_rect = QRectF (center.x() - 0.5 * w, center.y() - 0.5 * h, w, h);
 
+<<<<<<< HEAD
+    painter->setBrush(Qt::white);
     painter->drawRect(rect);
+
+=======
+<<<<<<< HEAD
+    painter->setBrush(Qt::white);
+    painter->drawPolygon({polygon_shape}, Qt::WindingFill);
+
+    painter->setFont(font);
+=======
+    painter->drawRect(rect);
+>>>>>>> master
+>>>>>>> michelle
     painter->drawText(text_rect,"O X O X", Qt::AlignVCenter | Qt::AlignCenter);
 }
 

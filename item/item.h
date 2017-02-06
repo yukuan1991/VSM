@@ -21,6 +21,7 @@ public:
     const QString& type () { return type_; }
     const QColor& color () { return color_; }
     void set_color (QColor c) { color_ = ::move (c); emit color_changed (c); }
+    void set_data (const nlohmann::json& data)  { item_info_ = data; }
 
     QRectF boundingRect () const override;
 protected:
@@ -36,6 +37,7 @@ protected:
 private:
     QString name_;
     QColor color_ = Qt::black;
+    nlohmann::json item_info_;
 signals:
     void name_changed (const QString&);
     void color_changed (const QColor&);
