@@ -18,14 +18,14 @@ std::unique_ptr<adjustment_on_scene> adjustment_on_scene::make(QPointF pos, QCol
 void adjustment_on_scene::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
     QPointF
-    p1 {42 , 60},
-    p2 {60, 60},
-    p3 {22, 54},
-    p4 {30, 20},
-    p5 {33, 28},
-    p6 {78, 53},
-    p7 {82, 20},
-    p8 {85, 28};
+    p1 {0.42 * item_width , 0.75 * item_height},
+    p2 {0.6 * item_width, 0.75 * item_height},
+    p3 {0.22 * item_width, 0.675 * item_height},
+    p4 {0.3 * item_width, 0.25 * item_height},
+    p5 {0.33 * item_width, 0.35 * item_height},
+    p6 {0.78 * item_width, 0.6625 * item_height},
+    p7 {0.82 * item_width, 0.25 * item_height},
+    p8 {0.85 * item_width, 0.35 * item_height};
     auto the_pen = painter->pen();
     the_pen.setColor(color());
     the_pen.setWidthF(item_width * 0.02);
