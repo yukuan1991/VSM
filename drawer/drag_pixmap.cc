@@ -434,6 +434,7 @@ static void adjustment_on_scene_maker (QPainter* painter, qreal width, qreal hei
     painter->setBrush(Qt::white);
     painter->drawEllipse(QRectF (20, 50, 22, 22));
     painter->drawEllipse(QRectF (60,50, 22, 22));
+
     painter->drawLine(p1,p2);
     painter->drawLine(p3,p4);
     painter->drawLine(p4,p5);
@@ -544,7 +545,6 @@ static void fetch_material_maker (QPainter* painter, qreal width, qreal height)
 
 static void fifo_maker (QPainter* painter, qreal width, qreal height)
 {
-
     auto the_pen = painter->pen();
     the_pen.setColor(Qt::black);
     the_pen.setWidthF(width * 0.02);
