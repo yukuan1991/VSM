@@ -13,7 +13,6 @@ namespace drawer
 using namespace std;
 using pixmap_maker = void (*)  (QPainter*, qreal, qreal);
 
-
 static void board_station_maker (QPainter* painter, qreal width, qreal height);
 static void fifo_maker (QPainter* painter, qreal width, qreal height);
 static void fetch_material_maker (QPainter* painter, qreal width, qreal height);
@@ -48,7 +47,7 @@ QPixmap make_pixmap(const QString &name, qreal width, qreal height)
         {"生产工序", production_sequence_maker},
         {"成品发送至顾客", finished_product_to_customer_maker},
         {"数据箱", data_box_maker},
-        //{"其他公司", other_company_maker},
+        {"其他公司", other_company_maker},
         {"数据箱", data_box_maker},
         {"库存", storage_maker},
         {"卡车运输", truck_transport_maker},
@@ -61,7 +60,7 @@ QPixmap make_pixmap(const QString &name, qreal width, qreal height)
         {"顺序拉动球", sequence_pull_ball_maker},
         {"看板以批量方式传达", board_arrival_maker},
         {"均衡生产", balanced_production_maker},
-        //{"现场调度", adjustment_on_scene_maker},
+        {"现场调度", adjustment_on_scene_maker},
         {"改善", improvement_maker},
         {"取料", fetch_material_maker},
         {"缓冲或安全库存", cache_or_safe_storage_maker},
@@ -126,7 +125,24 @@ static void production_sequence_maker (QPainter* painter, qreal width, qreal hei
 
 static void other_company_maker (QPainter* painter, qreal width, qreal height)
 {
+    auto the_pen = painter->pen ();
+    the_pen.setColor(Qt::black);
+    the_pen.setWidthF(2.0);
+    painter->setPen(the_pen);
+    painter->setBrush(Qt::white);
 
+    auto x_scale = width / 100;
+    auto y_scale = height / 80;
+    const QPointF
+    p1 {1 * x_scale, 30 * y_scale},
+    p2 {33 * x_scale,1 * y_scale},
+    p3 {33 * x_scale,26 * y_scale},
+    p4 {66 * x_scale,1 * y_scale},
+    p5 {66 * x_scale,26 * y_scale},
+    p6 {99 * x_scale,4 * y_scale},
+    p7 {99 * x_scale,79 * y_scale},
+    p8 {1 * x_scale,79 * y_scale};
+    painter->drawPolygon({{p1,p2,p3,p4,p5,p6,p7,p8}},Qt::WindingFill);
 }
 
 static void data_box_maker (QPainter* painter, qreal width, qreal height)
@@ -355,6 +371,28 @@ static void balanced_production_maker (QPainter* painter, qreal width, qreal hei
 
 static void adjustment_on_scene_maker (QPainter* painter, qreal width, qreal height)
 {
+    QPointF
+    p1 {42 , 60},
+    p2 {60, 60},
+    p3 {22, 54},
+    p4 {30, 20},
+    p5 {33, 28},
+    p6 {78, 53},
+    p7 {82, 20},
+    p8 {85, 28};
+    auto the_pen = painter->pen();
+    the_pen.setColor(Qt::black);
+    the_pen.setWidthF(width * 0.02);
+    painter->setPen(the_pen);
+    //给定坐标
+    painter->setBrush(Qt::white);
+    painter->drawEllipse(QRectF (20, 50, 22, 22));///(x,y,width,heigth),不知道x,y到底是哪点的坐标
+    painter->drawEllipse(QRectF (60,50, 22, 22));
+    painter->drawLine(p1,p2);
+    painter->drawLine(p3,p4);
+    painter->drawLine(p4,p5);
+    painter->drawLine(p6,p7);
+    painter->drawLine(p7,p8);
 
 }
 
