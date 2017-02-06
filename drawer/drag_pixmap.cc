@@ -416,7 +416,6 @@ static void adjustment_on_scene_maker (QPainter* painter, qreal width, qreal hei
     auto x_scale = width / 100;
     auto y_scale = height / 80;
     QPointF
-<<<<<<< HEAD
     p1 {42 * x_scale, 60 * y_scale},
     p2 {60 * x_scale, 60 * y_scale},
     p3 {22 * x_scale, 54 * y_scale},
@@ -425,24 +424,14 @@ static void adjustment_on_scene_maker (QPainter* painter, qreal width, qreal hei
     p6 {78 * x_scale, 53 * y_scale},
     p7 {82 * x_scale, 20 * y_scale},
     p8 {85 * x_scale, 28 * y_scale};
-=======
-    p1 {42 , 60},
-    p2 {60, 60},
-    p3 {22, 54},
-    p4 {30, 20},
-    p5 {33, 28},
-    p6 {78, 53},
-    p7 {82, 20},
-    p8 {85, 28};
 
->>>>>>> a7c6e54ebcd07b25d045b61c3706074fbf6afc6d
     auto the_pen = painter->pen();
     the_pen.setColor(Qt::black);
     the_pen.setWidthF(width * 0.02);
     painter->setPen(the_pen);
-    //给定坐标
+
     painter->setBrush(Qt::white);
-    painter->drawEllipse(QRectF (20, 50, 22, 22));///(x,y,width,heigth),
+    painter->drawEllipse(QRectF (20, 50, 22, 22));
     painter->drawEllipse(QRectF (60,50, 22, 22));
     painter->drawLine(p1,p2);
     painter->drawLine(p3,p4);
@@ -512,7 +501,7 @@ static void cache_or_safe_storage_maker (QPainter* painter, qreal width, qreal h
     the_pen.setColor(Qt::black);
     the_pen.setWidthF(width/50);
     painter->setPen(the_pen);
-    //给定坐标
+
     painter->setBrush(Qt::white);
     painter->drawPolygon({{p1,p2,p4,p3}},Qt::WindingFill);
     painter->drawLine(p5,p6);
@@ -544,7 +533,7 @@ static void fetch_material_maker (QPainter* painter, qreal width, qreal height)
     the_pen.setWidthF(width / 50);
     painter->setPen(the_pen);
 
-    //给定坐标
+
     painter->setBrush(Qt::white);
 
     painter->drawArc(QRectF{0.125 * width, height * 2.5 / 80, 0.75 * width, height * 75 / 80}, 45 * 16, 270 * 16);
