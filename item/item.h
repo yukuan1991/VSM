@@ -14,8 +14,8 @@ class item : public QObject, public QGraphicsItem
     Q_OBJECT
     Q_INTERFACES(QGraphicsItem)
 public:
-    static constexpr qreal width () { return item_width; }
-    static constexpr qreal height () { return item_height; }
+    qreal width () { return item_width; }
+    qreal height () { return item_height; }
     const QString& name () { return name_; }
     void set_name (QString s) { name_ = ::move (s);  emit name_changed (name_); }
     const QString& type () { return type_; }
@@ -30,8 +30,8 @@ protected:
     /// overrides
     void paint (QPainter * painter, const QStyleOptionGraphicsItem* option, QWidget* widget) override;
 protected:
-    constexpr static qreal item_width = 100;
-    constexpr static qreal item_height = 0.8 * item_width;
+    qreal item_width = 100;
+    qreal item_height = 0.8 * item_width;
     QString type_;
 private:
     QString name_;

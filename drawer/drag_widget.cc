@@ -37,7 +37,7 @@ void drag_widget::mousePressEvent(QMouseEvent *event)
         return;
     }
 
-    auto pm = drawer::make_pixmap(object_name, item::item::width (), item::item::height ());
+    auto pm = drawer::make_pixmap(object_name, 100, 80);
 
 
     QDrag drag (this);
