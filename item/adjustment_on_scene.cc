@@ -28,6 +28,7 @@ void adjustment_on_scene::paint(QPainter *painter, const QStyleOptionGraphicsIte
     p8 {85, 28};
     auto the_pen = painter->pen();
     the_pen.setColor(color());
+    the_pen.setWidthF(item_width * 0.02);
     painter->setPen(the_pen);
     //给定坐标
     painter->setBrush(Qt::white);
