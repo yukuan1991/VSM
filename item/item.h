@@ -5,9 +5,14 @@
 #include <QGraphicsItem>
 #include "utility/raii.hpp"
 #include "json.hpp"
+#include <experimental/string_view>
+#include <experimental/optional>
 
 namespace item
 <%
+using std::experimental::string_view;
+using std::experimental::optional;
+using std::experimental::nullopt;
 
 class item : public QObject, public QGraphicsItem
 {
@@ -22,6 +27,8 @@ public:
     const QColor& color () { return color_; }
     void set_color (QColor c) { color_ = ::move (c); emit color_changed (c); }
     void set_data (const nlohmann::json& data)  { item_info_ = data; }
+    void set_attribute (string_view key, std::string value);
+    optional<std::string> attribute (string_view key);
 
     QRectF boundingRect () const override;
 protected:
