@@ -21,7 +21,6 @@ public:
     const QString& type () { return type_; }
     const QColor& color () { return color_; }
     void set_color (QColor c) { color_ = ::move (c); emit color_changed (c); }
-    virtual bool set_data (const nlohmann::json& data)  { Q_UNUSED (data); return true; }
 
     QRectF boundingRect () const override;
 protected:

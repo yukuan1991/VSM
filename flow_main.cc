@@ -27,12 +27,6 @@ flow_main::flow_main(QWidget *parent) :
 
 void flow_main::set_attribute_window()
 {
-    attribute_content_->setMaximumWidth (120);
-    attribute_content_->setMinimumWidth (120);
-
-    attribute_->setMaximumWidth (120);
-    attribute_->setMinimumWidth (120);
-
     attribute_->setWidget (attribute_content_.get());
 
     attribute_->setAllowedAreas (Qt::RightDockWidgetArea);

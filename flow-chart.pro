@@ -59,7 +59,8 @@ SOURCES += \
     item/balanced_production.cc \
     item/operating_personnel.cc \
     item/board_arrival.cc \
-    item/production_sequence.cc
+    item/production_sequence.cc \
+    attribute_widget.cc
 
 HEADERS += \
     flow_app.h \
@@ -96,7 +97,8 @@ HEADERS += \
     item/balanced_production.h \
     item/operating_personnel.h \
     item/board_arrival.h \
-    item/production_sequence.h
+    item/production_sequence.h \
+    attribute_widget.h
 
 FORMS += \
     flow_main.ui \

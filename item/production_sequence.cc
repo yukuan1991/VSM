@@ -23,12 +23,12 @@ production_sequence::production_sequence(item* parent)
 void production_sequence::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
     qDebug() << "wecome paint";
-     Q_UNUSED(widget);
+    Q_UNUSED(widget);
     auto the_pen = painter->pen ();
     the_pen.setColor(color ());
     painter->setPen(the_pen);
     painter->drawPolygon({{p1, p2, p4, p3}},Qt::WindingFill);
     painter->drawLine(p5,p6);
-   item::paint(painter, option, widget);
-  }
+    item::paint(painter, option, widget);
+}
 }

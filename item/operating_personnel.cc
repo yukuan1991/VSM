@@ -31,6 +31,7 @@ void operating_personnel::paint(QPainter *painter, const QStyleOptionGraphicsIte
     painter->drawArc(QRectF{0.1 * item_width, item_height * 10 / 80, 0.8 * item_width, item_height * 60 / 80}, 180 * 16, 180 * 16);
     painter->setBrush(Qt::white);
     painter->drawEllipse (QRectF(0.3 * item_width, item_height * 20 / 80, 0.4 * item_width, item_height * 40 / 80));
+
     item::paint(painter, option, widget);
 }
 }
