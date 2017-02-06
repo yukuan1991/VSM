@@ -1,24 +1,26 @@
 ﻿#pragma once
 
 #include <memory>
-#include <item/item.h>
 #include <QPointF>
 #include <QColor>
+#include <QRectF>
+#include "item/item.h"
+///改善
 
-///信号看板
 namespace item {
 
 
-class signal_board : public item
+class improvement : public item
 {
 public:
-    static std::unique_ptr<signal_board> make (QPointF pos, QColor color);
+    static std::unique_ptr<improvement> make(QPointF pos, QColor color = Qt::black);
 
 protected:
-    signal_board(item* parent= nullptr);
+    explicit improvement(item* parent=nullptr);
     void paint (QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = nullptr) override;
 private:
 
+
 };
 
-} /// end of item
+}

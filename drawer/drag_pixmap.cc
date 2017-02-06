@@ -101,7 +101,6 @@ void board_station_maker (QPainter* painter, qreal width, qreal height)
     painter->setPen(the_pen);
 
     ///给定坐标
-
     painter->drawLine(p1,p3);
     painter->drawLine(p3,p5);
     painter->drawLine(p5,p2);
@@ -393,15 +392,24 @@ static void balanced_production_maker (QPainter* painter, qreal width, qreal hei
     font.setPointSize (12);
     QFontMetricsF metrics (font);
 
+<<<<<<< HEAD
+=======
+    QFontMetricsF metrics (painter->font());
+>>>>>>> master
     auto w = metrics.width("O X O X");
     auto h = metrics.height();
+
     auto center = rect.center();
     auto text_rect = QRectF (center.x() - 0.5 * w, center.y() - 0.5 * h, w, h);
 
+<<<<<<< HEAD
     painter->setBrush(Qt::white);
     painter->drawPolygon({polygon_shape}, Qt::WindingFill);
 
     painter->setFont(font);
+=======
+    painter->drawRect(rect);
+>>>>>>> master
     painter->drawText(text_rect,"O X O X", Qt::AlignVCenter | Qt::AlignCenter);
 }
 

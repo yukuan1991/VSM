@@ -9,6 +9,10 @@ namespace item
 item::item(QObject *parent) : QObject(parent)
 {
     setFlags (ItemIsSelectable | ItemIsMovable);
+    set_data({
+                 {{"卡车运输", "注明运输频率"}},
+                 {{"yyyyyyyyyyyyyyyyyyyyyy", "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"}}
+             });
 }
 
 void item::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
@@ -19,6 +23,24 @@ void item::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWid
         set_dash(painter);
         painter->drawRect (boundingRect ());
     }
+
+    QFontMetricsF metrix (painter->font ());
+    auto h_scale = metrix.height ();
+    qreal width = 0;
+    qreal height = 0;
+    QString qstr = {};
+
+    for (auto& iter : item_info_)
+    {
+        std::string key = iter.begin().key();
+        std::string content = iter.begin().value();
+        qstr += (key + " : " + content + "\n").data ();
+        height += h_scale;
+    }
+    qstr.chop (1);
+    auto rect = boundingRect ();
+    QRectF text_rect (rect.left (), rect.bottom (), width, height);
+    painter->drawText(text_rect, qstr, Qt::AlignCenter | Qt::AlignVCenter);
 }
 
 QRectF item::boundingRect() const

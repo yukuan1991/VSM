@@ -15,15 +15,7 @@ protected:
     cache_or_safe_storage(item* parent = nullptr);
     void paint (QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = nullptr) override;
 private:
-    QPointF
-    p1{0.35 * item_width ,0.125 * item_height},
-    p2{0.65 * item_width,0.125 * item_height},
-    p3{0.35 * item_width,0.875 * item_height},
-    p4{0.65 * item_width,0.875 * item_height},
-    p5{0.35 * item_width,0.375 * item_height},
-    p6{0.65 * item_width,0.375 * item_height},
-    p7{0.35 * item_width,0.625 * item_height},
-    p8{0.65 * item_width,0.625 * item_height};
+
 };
 }
 

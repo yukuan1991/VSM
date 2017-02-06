@@ -6,6 +6,20 @@
 #include "item/board_station.h"
 #include "item/board_arrival.h"
 #include "item/operating_personnel.h"
+#include "item/production_sequence.h"
+#include "item/data_box.h"
+#include "item/storage_super_market.h"
+#include "item/information.h"
+#include "item/production_watcher_board.h"
+#include "item/material_fetch_watch_board.h"
+#include "item/signal_board.h"
+#include "item/sequence_pull_ball.h"
+#include "item/balanced_production.h"
+#include "item/board_arrival.h"
+#include "item/adjustment_on_scene.h"
+#include "item/improvement.h"
+#include "item/cache_or_safe_storage.h"
+#include "item/fetch_material.h"
 
 namespace item
 <%
@@ -34,24 +48,25 @@ inline std::unique_ptr<item> make_item (const QString& classname, QPointF pos)
     static std::map<QString, item_maker> type_map
     {
         {"看板以批量方式传达", [] (QPointF p)->up_item { return board_arrival::make (p, Qt::black); }},
-        //{"生产工序", production_sequence_maker},
+         {"生产工序", [] (QPointF p)->up_item { return production_sequence::make(p, Qt::black); }},
         //{"其他公司", other_company_maker},
-        //{"数据箱", data_box_maker},
+        {"数据箱", [] (QPointF p)->up_item { return data_box::make(p, Qt::black); }},
         //{"库存", storage_maker},
         //{"卡车运输", truck_transport_maker},
-        //{"库存超市", storage_super_market_maker},
-        //{"信息", information_maker},
-        //{"生产看板", production_watcher_board_maker},
-        //{"取料看板", material_fetch_watch_board_maker},
-        //{"信号看板", signal_board_maker},
-        //{"顺序拉动球", sequence_pull_ball_maker},
-        //{"看板以批量方式传达", board_arrival_maker},
-        //{"均衡生产", balanced_production_maker},
-        //{"现场调度", adjustment_on_scene_maker},
-        //{"改善", improvement_maker},
-        //{"取料", fetch_material_maker},
-        //{"缓冲或安全库存", cache_or_safe_storage_maker},
-        {"操作员", [] (QPointF p)->up_item { return operating_personnel::make (p, Qt::black); }}
+        {"库存超市", [] (QPointF p)->up_item { return storage_super_market::make(p, Qt::black); }},
+        {"信息", [] (QPointF p)->up_item { return information::make(p, Qt::black); }},
+        {"生产看板",  [] (QPointF p)->up_item { return production_watcher_board::make(p, Qt::black); }},
+        {"取料看板",  [] (QPointF p)->up_item { return material_fetch_watch_board::make(p, Qt::black); }},
+        {"信号看板",  [] (QPointF p)->up_item { return signal_board::make(p, Qt::black); }},
+        {"顺序拉动球",  [] (QPointF p)->up_item { return sequence_pull_ball::make(p, Qt::black); }},
+        {"看板以批量方式传达",  [] (QPointF p)->up_item { return board_arrival::make(p, Qt::black); }},
+        {"均衡生产",  [] (QPointF p)->up_item { return balanced_production::make(p, Qt::black); }},
+        {"现场调度",  [] (QPointF p)->up_item { return adjustment_on_scene::make(p, Qt::black); }},
+        {"改善",  [] (QPointF p)->up_item { return improvement::make(p, Qt::red); }},
+        {"取料",  [] (QPointF p)->up_item { return fetch_material::make(p, Qt::black); }},
+        {"缓冲或安全库存",  [] (QPointF p)->up_item { return cache_or_safe_storage::make(p, Qt::black); }},
+        {"操作员", [] (QPointF p)->up_item { return operating_personnel::make (p, Qt::black); }},
+        {"看板站", [] (QPointF p)->up_item { return board_station::make (p, Qt::black); }}
     };
 
     auto found = type_map.find(classname);
