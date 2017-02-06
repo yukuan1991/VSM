@@ -198,7 +198,7 @@ void view::scale_object(double factor)
         if (reinterpret_cast<void*> (obj) == reinterpret_cast<void*> (this))
         {
             emit scale_changed (scale_factor);
-        }
+            }
     };
 
     set_scale (this);

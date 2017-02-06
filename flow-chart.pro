@@ -38,7 +38,6 @@ SOURCES += \
     canvas/scene.cc \
     canvas/view.cc \
     item/item.cc \
-    item/improve.cc \
     item/material_flow.cc \
     item/traditional_info_flow.cc \
     item/electric_info_flow.cc \
@@ -59,7 +58,8 @@ SOURCES += \
     item/storage_super_market.cc \
     item/information.cc \
     item/data_box.cc \
-    item/board_info_flow.cc
+    item/board_info_flow.cc \
+    item/improvement.cc
 
 HEADERS += \
     flow_app.h \

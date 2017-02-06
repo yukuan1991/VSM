@@ -19,6 +19,7 @@
 #include "item/adjustment_on_scene.h"
 #include "item/improvement.h"
 #include "item/cache_or_safe_storage.h"
+#include "item/fetch_material.h"
 
 namespace item
 <%
@@ -62,7 +63,7 @@ inline std::unique_ptr<item> make_item (const QString& classname, QPointF pos)
         {"均衡生产",  [] (QPointF p)->up_item { return balanced_production::make(p, Qt::black); }},
         {"现场调度",  [] (QPointF p)->up_item { return adjustment_on_scene::make(p, Qt::black); }},
         {"改善",  [] (QPointF p)->up_item { return improvement::make(p, Qt::red); }},
-        //{"取料", fetch_material_maker},
+        {"取料",  [] (QPointF p)->up_item { return fetch_material::make(p, Qt::black); }},
         {"缓冲或安全库存",  [] (QPointF p)->up_item { return cache_or_safe_storage::make(p, Qt::black); }},
         {"操作员", [] (QPointF p)->up_item { return operating_personnel::make (p, Qt::black); }},
         {"看板站", [] (QPointF p)->up_item { return board_station::make (p, Qt::black); }}

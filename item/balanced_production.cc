@@ -1,5 +1,5 @@
 ﻿#include "balanced_production.h"
-
+///修改好了
 namespace item {
 
 
@@ -22,22 +22,45 @@ void balanced_production::paint(QPainter *painter, const QStyleOptionGraphicsIte
 {
     Q_UNUSED(widget);
 
+//    auto the_pen = painter->pen ();
+//    the_pen.setColor(Qt::black);
+//    the_pen.setWidthF(0.02 * item_width);
+//    painter->setPen(the_pen);
+
+//    QRectF rect (0.1 * item_width, 0.125 * item_height, 0.99 * item_width, 0.75 * item_height);
+
+//    //设置字体加粗
+//    QFont font;
+//    font.setBold(true);
+//    font.setPixelSize(12);
+//    painter->setFont(font);
+
+//    painter->drawRect(rect);
+//    painter->drawText(rect,"O X O X", Qt::AlignVCenter | Qt::AlignCenter);
+
     auto the_pen = painter->pen ();
     the_pen.setColor(Qt::black);
     the_pen.setWidthF(0.02 * item_width);
+    //设置字体加粗
+    QFont font;
+   // font.setBold(true);
+    font.setPixelSize(16);
+    painter->setFont(font);
+
     painter->setPen(the_pen);
 
     QRectF rect (0.05 * item_width, 0.25 * item_height, 0.9 * item_width, 0.5 * item_height);
 
-    QFontMetricsF metrics (painter->font());
 
-    auto font_width = metrics.width("OXOX");
-    auto font_height = metrics.height();
+    QFontMetricsF metrics (painter->font());
+    auto w = metrics.width("O X O X");
+    auto h = metrics.height();
+
     auto center = rect.center();
-    auto text_rect = QRectF (center.x() - 0.5 * font_width, center.y() - 0.5 * font_height, font_width, font_height);
+    auto text_rect = QRectF (center.x() - 0.5 * w, center.y() - 0.5 * h, w, h);
 
     painter->drawRect(rect);
-    painter->drawText(text_rect,"OXOX", Qt::AlignVCenter | Qt::AlignCenter);
+    painter->drawText(text_rect,"O X O X", Qt::AlignVCenter | Qt::AlignCenter);
 
     item::paint(painter, option, widget);
 }
