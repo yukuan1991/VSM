@@ -1,42 +1,48 @@
 ﻿#include "information.h"
-#include <QDebug>
-#include <QPainter>
-#include <QColor>
 #include <QStyleOptionGraphicsItem>
+#include <QWidget>
+#include <QPainter>
+#include <QPainterPath>
+#include <QDebug>
+///长方形
+/// 修改完成
 namespace item {
-
 
 std::unique_ptr<information> information::make(QPointF pos, QColor color)
 {
-    std::unique_ptr <information> ret (new information);
+    std::unique_ptr<information>ret(new information);
     ret->setPos(pos);
-    ret->set_color(std::move(color));
+    ret->set_color( std::move (color));
+    ret->type_ = "信息";
     return ret;
-}
-
-information::information(item* parent)
-    :item(parent)
-{
 
 }
 
 void information::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
+    Q_UNUSED(widget);
 
-    qDebug() << "wecome paint";
-     Q_UNUSED(widget);
+    QPointF
+    p1{0.01 * item_width, 0.0125 * item_height },
+    p2{0.99 * item_width, 0.0125 * item_height},
+    p3{ 0.01 * item_width, 0.9875 * item_height},
+    p4{ 0.99 * item_width, 0.9875 * item_height};
+
     auto the_pen = painter->pen ();
-    the_pen.setColor(color());
-    the_pen.setStyle(Qt::DashLine);
-    the_pen.setBrush(Qt::black);
+    the_pen.setColor(color ());
+    the_pen.setWidthF(item_width * 0.02);
     painter->setPen(the_pen);
-    painter->drawLine(p1,p2);
-    painter->drawLine(p1,p3);
+    painter->setBrush(Qt::white);
+    painter->drawPolygon({{p1,p2,p4,p3}},Qt::WindingFill);
 
-    the_pen.setStyle(Qt::SolidLine);
-    painter->drawLine(p4,p5);
-    painter->drawLine(p5,p6);
-    painter->drawLine(p6,p4);
     item::paint(painter, option, widget);
-   }
 }
+
+information::information(item *parent)
+    :item(parent)
+ {
+ }
+
+}
+
+

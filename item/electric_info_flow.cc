@@ -14,7 +14,7 @@ std::unique_ptr<electric_info_flow> electric_info_flow::make(QPointF p1, QPointF
     {
         return nullptr;
     }
-
+    ret->type_ = "电子信息流";
     return ret;
 }
 
