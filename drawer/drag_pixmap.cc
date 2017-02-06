@@ -13,7 +13,6 @@ namespace drawer
 using namespace std;
 using pixmap_maker = void (*)  (QPainter*, qreal, qreal);
 
-
 static void board_station_maker (QPainter* painter, qreal width, qreal height);
 static void fifo_maker (QPainter* painter, qreal width, qreal height);
 static void fetch_material_maker (QPainter* painter, qreal width, qreal height);
@@ -48,7 +47,7 @@ QPixmap make_pixmap(const QString &name, qreal width, qreal height)
         {"生产工序", production_sequence_maker},
         {"成品发送至顾客", finished_product_to_customer_maker},
         {"数据箱", data_box_maker},
-        //{"其他公司", other_company_maker},
+        {"其他公司", other_company_maker},
         {"数据箱", data_box_maker},
         {"库存", storage_maker},
         {"卡车运输", truck_transport_maker},
@@ -126,7 +125,24 @@ static void production_sequence_maker (QPainter* painter, qreal width, qreal hei
 
 static void other_company_maker (QPainter* painter, qreal width, qreal height)
 {
+    auto the_pen = painter->pen ();
+    the_pen.setColor(Qt::black);
+    the_pen.setWidthF(2.0);
+    painter->setPen(the_pen);
+    painter->setBrush(Qt::white);
 
+    auto x_scale = width / 100;
+    auto y_scale = height / 80;
+    const QPointF
+    p1 {1 * x_scale, 30 * y_scale},
+    p2 {33 * x_scale,1 * y_scale},
+    p3 {33 * x_scale,26 * y_scale},
+    p4 {66 * x_scale,1 * y_scale},
+    p5 {66 * x_scale,26 * y_scale},
+    p6 {99 * x_scale,4 * y_scale},
+    p7 {99 * x_scale,79 * y_scale},
+    p8 {1 * x_scale,79 * y_scale};
+    painter->drawPolygon({{p1,p2,p3,p4,p5,p6,p7,p8}},Qt::WindingFill);
 }
 
 static void data_box_maker (QPainter* painter, qreal width, qreal height)
