@@ -2,7 +2,7 @@
 
 #include "item/item.h"
 #include <memory>
-
+///电子信息流
 namespace item {
 
 class electric_info_flow : public item::item

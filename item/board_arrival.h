@@ -14,15 +14,7 @@ public:
 protected:
     board_arrival(item* parent = nullptr);
      void paint (QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = nullptr) override;
-private:
-    const QVector<QPointF> polygon_shape_
-    {
-        {0.3 * item_width, 0.3 * item_height},
-        {0.6375 * item_width, 0.3 * item_height},
-        {0.7 * item_width, 0.3625 * item_height},
-        {0.7 * item_width, 0.675 * item_height},
-        {0.3 * item_width, 0.675 * item_height}
-    };
+
 };
 }
 

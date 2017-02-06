@@ -6,6 +6,7 @@
 #include "qt-tools/common.hpp"
 #include "qt-tools/screen_saver.h"
 #include "drawer/toolbox.h"
+#include <QGLWidget>
 
 APP_REGISTER (flow_app)
 
