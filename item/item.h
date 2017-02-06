@@ -30,6 +30,7 @@ protected:
 
     /// overrides
     void paint (QPainter * painter, const QStyleOptionGraphicsItem* option, QWidget* widget) override;
+    void paint_attribute (QPainter* painter);
 protected:
     qreal item_width = 100;
     qreal item_height = 0.8 * item_width;
