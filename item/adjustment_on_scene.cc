@@ -32,8 +32,8 @@ void adjustment_on_scene::paint(QPainter *painter, const QStyleOptionGraphicsIte
     painter->setPen(the_pen);
     //给定坐标
     painter->setBrush(Qt::white);
-    painter->drawEllipse(QRectF (20, 50, 22, 22));///(x,y,width,heigth),不知道x,y到底是哪点的坐标
-    painter->drawEllipse(QRectF (60,50, 22, 22));
+    painter->drawEllipse(QRectF (0.2 * item_width, 0.625 * item_height, 0.22 * item_width, 0.275 * item_height));
+    painter->drawEllipse(QRectF (0.6 * item_width,0.625 * item_height, 0.22 * item_width, 0.275 * item_height));
     painter->drawLine(p1,p2);
     painter->drawLine(p3,p4);
     painter->drawLine(p4,p5);
