@@ -202,7 +202,7 @@ static void storage_maker (QPainter* painter, qreal width, qreal height)
     QFontMetricsF metrics (font);
     auto text_height = metrics.height();
     auto text_width = metrics.width("I");
-    QRectF text_rect {x_scale * 49-text_width/2,y_scale * 40,text_width,text_height};
+    QRectF text_rect {x_scale * 49 - text_width/2,y_scale * 40, text_width,text_height};
     painter->setFont(font);
     painter->drawText(text_rect, "I", Qt::AlignVCenter | Qt::AlignCenter);
 }
@@ -251,6 +251,7 @@ static void storage_super_market_maker (QPainter* painter, qreal width, qreal he
 
     auto x_scale = width / 100;
     auto y_scale = height / 80;
+
     painter->drawLine (QPointF {x_scale * 29,y_scale * 1}, {x_scale * 71, y_scale * 1});
     painter->drawLine (QPointF {x_scale * 29,y_scale * 27}, {x_scale * 71, y_scale * 27});
     painter->drawLine (QPointF {x_scale * 29,y_scale * 53}, {x_scale * 71, y_scale * 53});
@@ -421,6 +422,7 @@ static void adjustment_on_scene_maker (QPainter* painter, qreal width, qreal hei
     p6 {78, 53},
     p7 {82, 20},
     p8 {85, 28};
+
     auto the_pen = painter->pen();
     the_pen.setColor(Qt::black);
     the_pen.setWidthF(width * 0.02);
