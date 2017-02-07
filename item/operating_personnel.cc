@@ -19,6 +19,7 @@ std::unique_ptr<operating_personnel> operating_personnel::make(QPointF pos, QCol
 operating_personnel::operating_personnel(item* parent)
     :item (parent)
 {
+    set_attribute("操作员数量");
 
 }
 

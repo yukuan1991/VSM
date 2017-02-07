@@ -18,7 +18,9 @@ std::unique_ptr<storage> storage::make(QPointF pos, QColor color)
 storage::storage(item* parent)
     :item(parent)
 {
-
+    set_attribute("库存数量");
+    set_attribute("库存天数");
+    set_attribute("材料名");
 }
 
 void storage::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
