@@ -10,11 +10,14 @@ namespace item {
 production_watcher_board::production_watcher_board(item *parent)
     :item(parent)
 {
+    set_attribute("产品种类");
+    set_attribute("生产数量");
+    set_attribute("需求地点");
+    set_attribute("供货时间");
 
 }
 std::unique_ptr<production_watcher_board> production_watcher_board::make(QPointF pos, QColor color)
 {
-    qDebug() << "make";
     std::unique_ptr<production_watcher_board> ret(new production_watcher_board);
     ret->setPos(pos);
     ret->set_color(std::move(color));

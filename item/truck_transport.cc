@@ -17,6 +17,7 @@ std::unique_ptr<truck_transport> truck_transport::make(QPointF pos, QColor color
 truck_transport::truck_transport(item * parent)
     :item(parent)
 {
+    set_attribute("运输频率");
 
 }
 

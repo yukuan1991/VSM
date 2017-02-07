@@ -7,6 +7,9 @@ namespace item {
 adjustment_on_scene::adjustment_on_scene(item* parent)
     :item(parent)
 {
+      set_attribute ("库存量");
+      set_attribute ("原生产计划");
+      set_attribute ("更改后生产计划");
 
 }
 
