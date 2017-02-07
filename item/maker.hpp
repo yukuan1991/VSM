@@ -23,6 +23,9 @@
 #include "item/storage.h"
 #include "item/truck_transport.h"
 #include "item/other_company.h"
+#include "item/material_flow.h"
+#include "item/electric_info_flow.h"
+#include "traditional_info_flow.h"
 
 
 namespace item
@@ -70,7 +73,6 @@ inline std::unique_ptr<item> make_item (const QString& classname, QPointF pos)
         {"取料",  [] (QPointF p)->up_item { return fetch_material::make(p, Qt::black); }},
         {"缓冲或安全库存",  [] (QPointF p)->up_item { return cache_or_safe_storage::make(p, Qt::black); }},
         {"操作员", [] (QPointF p)->up_item { return operating_personnel::make (p, Qt::black); }},
-       // {"现场调度", [] (QPointF p)->up_item { return adjustment_on_scene::make (p, Qt::black); }},
         {"看板站", [] (QPointF p)->up_item { return board_station::make (p, Qt::black); }}
     };
 
@@ -87,13 +89,17 @@ inline std::unique_ptr<item> make_arrow (const QString& name, QPointF start, QPo
 {
     if (name == "传统信息流")
     {
-
+        return traditional_info_flow::make(start, end, Qt::blue);
     }
     else if (name == "电子信息流")
     {
-
+        return electric_info_flow::make(start, end, Qt::blue);
     }
     else if (name == "物流")
+    {
+        return material_flow::make(start, end, Qt::black);
+    }
+    else if (name == "先进先出")
     {
 
     }

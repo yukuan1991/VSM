@@ -28,7 +28,7 @@ public:
     ~scene () override;
 protected:
 private:
-    void on_selection_changed ();
+    void adjust_z_value ();
 
 private:
 };
