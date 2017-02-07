@@ -28,6 +28,14 @@ flow_main::flow_main(QWidget *parent) :
 void flow_main::set_attribute_window()
 {
     attribute_->setWidget (attribute_content_.get());
+    connect(attribute_content_.get (), &attribute_widget::commit, [this]
+    {
+        auto changes = attribute_content_->apply();
+        for (auto & it : changes)
+        {
+            qDebug () << it.first.data() << " " << it.second.data();
+        }
+    });
 
     attribute_->setAllowedAreas (Qt::RightDockWidgetArea);
     addDockWidget (Qt::RightDockWidgetArea, attribute_.get ());
@@ -35,7 +43,7 @@ void flow_main::set_attribute_window()
 
 void flow_main::update_remark()
 {
-    auto remark = attribute_content_->remark();
+    //auto remark = attribute_content_->remark();
     auto canvas = active_canvas_body();
 
     if (canvas == nullptr)
@@ -43,7 +51,7 @@ void flow_main::update_remark()
         return;
     }
 
-    canvas->set_remark(remark);
+    //canvas->set_remark(remark);
 }
 
 void flow_main::on_drawer_status(const QString &status)
@@ -217,7 +225,7 @@ void flow_main::init_conn()
     connect(ui->action_file_save_as, &QAction::triggered, this, &flow_main::file_save_as);
     connect (ui->action_zoom_in, &QAction::triggered, this, &flow_main::zoom_in_active);
     connect (ui->action_zoom_out, &QAction::triggered, this, &flow_main::zoom_out_active);
-    connect(attribute_content_.get (), &remark_widget::text_changed, this, &flow_main::update_remark);
+    //connect(attribute_content_.get (), &remark_widget::text_changed, this, &flow_main::update_remark);
 }
 
 void flow_main::zoom_in_active()
@@ -241,7 +249,7 @@ void flow_main::set_attribute()
     }
 
     auto remark = active_canvas->remark();
-    attribute_content_->set_remark(remark);
+    //attribute_content_->set_remark(remark);
 }
 
 void flow_main::on_drawer_visibility_changed()

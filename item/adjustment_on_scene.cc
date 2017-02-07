@@ -4,6 +4,11 @@
 #include <QStyleOptionGraphicsItem>
 namespace item {
 
+adjustment_on_scene::adjustment_on_scene(item* parent)
+    :item(parent)
+{
+
+}
 
 std::unique_ptr<adjustment_on_scene> adjustment_on_scene::make(QPointF pos, QColor color)
 {
@@ -43,9 +48,4 @@ void adjustment_on_scene::paint(QPainter *painter, const QStyleOptionGraphicsIte
 
 }
 
-adjustment_on_scene::adjustment_on_scene(item* parent)
-    :item(parent)
-{
-
-}
 }

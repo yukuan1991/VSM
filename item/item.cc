@@ -12,11 +12,10 @@ using namespace std;
 item::item(QObject *parent) : QObject(parent)
 {
     setFlags (ItemIsSelectable | ItemIsMovable);
-    set_data({{{"测试属性1", " 测试属性1的值"}},
-              {{"测试属性2", "测试属性2的值"}},
-              {{"测试属性3", "测试属性3的值"}},
-              {{"测试属性4", ""}}
-             });
+
+    set_attribute ("测试属性1", "测试属性1的值");
+    set_attribute ("测试属性2");
+    set_attribute ("测试属性3", "测试属性3的值");
 }
 
 void item::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
@@ -52,6 +51,7 @@ void item::paint_attribute(QPainter *painter) try
 
         std::string key = it.begin ().key();
         std::string value = it.begin ().value();
+
         if (value.empty())
         {
             continue;
@@ -118,7 +118,7 @@ optional<std::string> item::attribute(string_view key) try
 
     return nullopt;
 }
-catch (std::exception const & e)
+catch (std::exception const &)
 {
     return nullopt;
 }

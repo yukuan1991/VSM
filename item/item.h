@@ -26,8 +26,8 @@ public:
     const QString& type () { return type_; }
     const QColor& color () { return color_; }
     void set_color (QColor c) { color_ = ::move (c); emit color_changed (c); }
-    void set_data (const nlohmann::json& data)  { item_info_ = data; }
-    void set_attribute (string_view key, std::string value);
+    void set_attribute (string_view key, std::string value = {});
+    const nlohmann::json& data () { return item_info_; }
     optional<std::string> attribute (string_view key);
 
     QRectF boundingRect () const override;
