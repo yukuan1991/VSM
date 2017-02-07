@@ -4,7 +4,7 @@
 #include <QWidget>
 #include <memory>
 #include "json.hpp"
-
+///属性类
 class attribute_widget final : public QWidget
 {
     Q_OBJECT
