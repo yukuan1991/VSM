@@ -391,25 +391,16 @@ static void balanced_production_maker (QPainter* painter, qreal width, qreal hei
     font.setBold(true);
     font.setPointSize (12);
     QFontMetricsF metrics (font);
-
-<<<<<<< HEAD
-=======
-    QFontMetricsF metrics (painter->font());
->>>>>>> master
     auto w = metrics.width("O X O X");
     auto h = metrics.height();
 
     auto center = rect.center();
     auto text_rect = QRectF (center.x() - 0.5 * w, center.y() - 0.5 * h, w, h);
 
-<<<<<<< HEAD
     painter->setBrush(Qt::white);
     painter->drawPolygon({polygon_shape}, Qt::WindingFill);
 
     painter->setFont(font);
-=======
-    painter->drawRect(rect);
->>>>>>> master
     painter->drawText(text_rect,"O X O X", Qt::AlignVCenter | Qt::AlignCenter);
 }
 
