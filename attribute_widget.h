@@ -6,7 +6,7 @@
 #include <utility>
 #include <vector>
 #include "json.hpp"
-
+///属性类
 class attribute_widget final : public QWidget
 {
     Q_OBJECT
