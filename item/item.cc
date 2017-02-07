@@ -3,18 +3,19 @@
 #include <QPainter>
 #include <QPen>
 #include <QDebug>
+#include <algorithm>
 
 namespace item
 <%
+using namespace std;
 
 item::item(QObject *parent) : QObject(parent)
 {
     setFlags (ItemIsSelectable | ItemIsMovable);
-    set_data({{{"测试属性1", " 测试属性1的值"}},
-              {{"测试属性2", "测试属性2的值"}},
-              {{"测试属性3", "测试属性3的值"}},
-              {{"测试属性4", ""}}
-             });
+
+    set_attribute ("测试属性1", "测试属性1的值");
+    set_attribute ("测试属性2");
+    set_attribute ("测试属性3", "测试属性3的值");
 }
 
 void item::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
@@ -43,12 +44,19 @@ void item::paint_attribute(QPainter *painter) try
     int i = 0;
     for (auto& it : item_info_)
     {
+        if (!it.is_object() or it.empty())
+        {
+            continue;
+        }
+
         std::string key = it.begin ().key();
         std::string value = it.begin ().value();
+
         if (value.empty())
         {
             continue;
         }
+
         QString paint_str = (key + " : " + value).data();
         auto width = metrix.width(paint_str);
 
@@ -60,6 +68,59 @@ void item::paint_attribute(QPainter *painter) try
 catch (const std::exception& e)
 {
     qDebug () << e.what ();
+}
+
+void item::set_attribute(string_view key, std::string value)
+{
+    for (auto & it : item_info_)
+    {
+        if (!it.is_object() or it.empty())
+        {
+            continue;
+        }
+
+        std::string current_key = it.begin().key();
+        if (key == current_key)
+        {
+            auto target = *(it.begin());
+            target = value;
+            return;
+        }
+    }
+
+    item_info_.push_back({{key.to_string (), value}});
+}
+
+optional<std::string> item::attribute(string_view key) try
+{
+    auto it = find_if (item_info_.begin (), item_info_.end (), [&] (auto&& it)
+    {
+        if (!it.is_object () or it.empty ())
+        {
+            return false;
+        }
+
+        std::string current_key = it.begin ().key ();
+        if (current_key == key)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    });
+
+    if (it != item_info_.end ())
+    {
+        return it->begin().value();
+    }
+
+    return nullopt;
+}
+catch (std::exception const &)
+{
+    return nullopt;
 }
 
 QRectF item::boundingRect() const

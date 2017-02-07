@@ -23,6 +23,7 @@ storage::storage(item* parent)
 
 void storage::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
+    Q_UNUSED (widget);
     auto the_pen = painter->pen ();
     the_pen.setColor(Qt::black);
     the_pen.setWidthF(2.0);

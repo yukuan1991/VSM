@@ -3,19 +3,27 @@
 
 #include <QWidget>
 #include <memory>
+#include <utility>
+#include <vector>
 #include "json.hpp"
 ///属性类
 class attribute_widget final : public QWidget
 {
     Q_OBJECT
+signals:
+    void commit ();
 public:
-    std::unique_ptr<attribute_widget> make (nlohmann::json data, QWidget* parent = nullptr);
+    using attributes = std::map<std::string, std::string>;
+    static std::unique_ptr<attribute_widget> make (nlohmann::json data, QWidget* parent = nullptr);
     ~attribute_widget () override;
+    const attributes& apply () const { return changed_values_; }
 private:
-    explicit attribute_widget(QWidget *parent = 0);
+    explicit attribute_widget(nlohmann::json data, QWidget *parent = 0);
     bool init ();
+
 private:
-    nlohmann::json data_;
+    const nlohmann::json data_;
+    attributes changed_values_;
 };
 
 #endif // ATTRIBUTE_WIDGET_H
