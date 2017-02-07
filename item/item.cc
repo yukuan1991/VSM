@@ -12,10 +12,6 @@ using namespace std;
 item::item(QObject *parent) : QObject(parent)
 {
     setFlags (ItemIsSelectable | ItemIsMovable);
-
-    set_attribute ("测试属性1", "测试属性1的值");
-    set_attribute ("测试属性2");
-    set_attribute ("测试属性3", "测试属性3的值");
 }
 
 void item::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
