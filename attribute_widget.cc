@@ -34,7 +34,6 @@ bool attribute_widget::init() try
     auto layout = new QGridLayout (this);
 
     int i = 0;
-    qDebug () << data_.dump(4).data();
     for (auto & it : data_)
     {
         std::string key = it.begin().key();
@@ -54,6 +53,7 @@ bool attribute_widget::init() try
 
     auto button_commit = std::make_unique<QPushButton> ("提交", this);
     connect (button_commit.get (), &QPushButton::clicked, this, &attribute_widget::commit);
+
     layout->addWidget(button_commit.release(), i, 1);
     i ++;
     layout->addItem (new QSpacerItem (0, 0, QSizePolicy::Minimum, QSizePolicy::Expanding), i, 1);
