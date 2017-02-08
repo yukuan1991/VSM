@@ -3,13 +3,15 @@
 #include <QPainter>
 #include <QStyleOptionGraphicsItem>
 namespace item {
-
+///修改成了1/16
 adjustment_on_scene::adjustment_on_scene(item* parent)
     :item(parent)
 {
       set_attribute ("库存量");
       set_attribute ("原生产计划");
       set_attribute ("更改后生产计划");
+      item_width_ = item_width_ * ( 1 / width_heigth_small_);
+      item_height_ = item_height_ * ( 1 / width_heigth_small_);
 
 }
 
@@ -36,7 +38,7 @@ void adjustment_on_scene::paint(QPainter *painter, const QStyleOptionGraphicsIte
     p8 {0.85 * item_width_, 0.35 * item_height_};
     auto the_pen = painter->pen();
     the_pen.setColor(color());
-    the_pen.setWidthF(item_width_ * 0.02);
+    the_pen.setWidthF(std::max(item_width_ * 0.02,2.0));
     painter->setPen(the_pen);
     //给定坐标
     painter->setBrush(Qt::white);
