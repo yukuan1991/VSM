@@ -7,6 +7,7 @@
 #include <QRectF>
 ///取料看板
   ///修改完成
+  /// item_width 修改成了1/4
 namespace item {
 
 

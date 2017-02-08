@@ -4,6 +4,7 @@
 #include <QStyleOptionGraphicsItem>
 #include <QPainterPath>
 ///修改好
+/// 修改成1/4
 namespace item {
 
 
@@ -19,6 +20,8 @@ std::unique_ptr<sequence_pull_ball> sequence_pull_ball::make(QPointF pos, QColor
 sequence_pull_ball::sequence_pull_ball(item* parent)
     :item(parent)
 {
+    item_width_ /= width_heigth_small_;
+    item_height_ /= width_heigth_small_;
 
 }
 

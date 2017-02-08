@@ -526,9 +526,9 @@ static void operating_personnel (QPainter* painter, qreal width, qreal height)
 static void fetch_material_maker (QPainter* painter, qreal width, qreal height)
 {
     QPointF
-    p1 {0.75 * width, 0.8125 * height},
+    p1 {0.75 * width, 0.76 * height},
     p2 {0.82 * width, 0.9 * height},
-    p3 {0.87 * width,0.75 * height};
+    p3 {0.86 * width,0.65 * height};
 
     auto the_pen = painter->pen();
     the_pen.setColor(Qt::black);

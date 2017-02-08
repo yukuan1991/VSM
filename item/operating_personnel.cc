@@ -4,6 +4,7 @@
 #include <QColor>
 #include <QStyleOptionGraphicsItem>
 ///修改好
+/// 修改好1/4
 namespace item
 {
 
@@ -20,6 +21,8 @@ operating_personnel::operating_personnel(item* parent)
     :item (parent)
 {
     set_attribute("操作员数量");
+    item_width_ /= width_heigth_small_;
+    item_height_ /= width_heigth_small_;
 
 }
 

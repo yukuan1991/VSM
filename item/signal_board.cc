@@ -4,7 +4,7 @@
 #include <QDebug>
 #include <QStyle>
 #include <QStyleOptionGraphicsItem>
-///修改成了1/16
+///修改成了1/4
 namespace item
 <%
 
