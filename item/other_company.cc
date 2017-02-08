@@ -17,7 +17,7 @@ std::unique_ptr<other_company> other_company::make(QPointF pos, QColor color)
 other_company::other_company(item * parent)
     :item(parent)
 {
-    set_attribute("需求量");
+    set_attribute("需求量", "100");
     set_attribute("包装方式");
     set_attribute("工作班数");
 }
@@ -30,8 +30,8 @@ void other_company::paint(QPainter *painter, const QStyleOptionGraphicsItem *opt
     painter->setPen(the_pen);
     painter->setBrush(Qt::white);
 
-    auto x_scale = item_width / 100;
-    auto y_scale =item_height / 80;
+    auto x_scale = item_width_ / 100;
+    auto y_scale =item_height_ / 80;
     const QPointF
     p1 {1 * x_scale, 30 * y_scale},
     p2 {33 * x_scale,1 * y_scale},

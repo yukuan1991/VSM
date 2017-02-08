@@ -28,12 +28,12 @@ void operating_personnel::paint(QPainter *painter, const QStyleOptionGraphicsIte
     Q_UNUSED (widget);
     auto the_pen = painter->pen();
     the_pen.setColor(Qt::black);
-    the_pen.setWidthF(0.02 * item_width);
+    the_pen.setWidthF(0.02 * item_width_);
     painter->setPen(the_pen);
 
-    painter->drawArc(QRectF{0.1 * item_width, item_height * 10 / 80, 0.8 * item_width, item_height * 60 / 80}, 180 * 16, 180 * 16);
+    painter->drawArc(QRectF{0.1 * item_width_, item_height_ * 10 / 80, 0.8 * item_width_, item_height_ * 60 / 80}, 180 * 16, 180 * 16);
     painter->setBrush(Qt::white);
-    painter->drawEllipse (QRectF(0.3 * item_width, item_height * 20 / 80, 0.4 * item_width, item_height * 40 / 80));
+    painter->drawEllipse (QRectF(0.3 * item_width_, item_height_ * 20 / 80, 0.4 * item_width_, item_height_ * 40 / 80));
 
     item::paint(painter, option, widget);
 }

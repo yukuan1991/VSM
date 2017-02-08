@@ -23,14 +23,14 @@ void information::paint(QPainter *painter, const QStyleOptionGraphicsItem *optio
     Q_UNUSED(widget);
 
     QPointF
-    p1{0.01 * item_width, 0.0125 * item_height },
-    p2{0.99 * item_width, 0.0125 * item_height},
-    p3{ 0.01 * item_width, 0.9875 * item_height},
-    p4{ 0.99 * item_width, 0.9875 * item_height};
+    p1{0.01 * item_width_, 0.0125 * item_height_ },
+    p2{0.99 * item_width_, 0.0125 * item_height_},
+    p3{ 0.01 * item_width_, 0.9875 * item_height_},
+    p4{ 0.99 * item_width_, 0.9875 * item_height_};
 
     auto the_pen = painter->pen ();
     the_pen.setColor(color ());
-    the_pen.setWidthF(item_width * 0.02);
+    the_pen.setWidthF(item_width_ * 0.02);
     painter->setPen(the_pen);
     painter->setBrush(Qt::white);
     painter->drawPolygon({{p1,p2,p4,p3}},Qt::WindingFill);

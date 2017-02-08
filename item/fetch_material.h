@@ -19,12 +19,12 @@ protected:
     explicit fetch_material(item* parent=nullptr);
     void paint (QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = nullptr) override;
 private:
-    int startAngle = 1 * item_width * 16;
-    int spanAngle = 1.7 * item_width * 16;
-    qreal x = 0.2 * item_width;///20
-    qreal y = 0.25 * item_height; ///20
-    qreal width = 0.8 * item_width;
-    qreal heigth = 0.75 * item_height;
+    int startAngle = 1 * item_width_ * 16;
+    int spanAngle = 1.7 * item_width_ * 16;
+    qreal x = 0.2 * item_width_;///20
+    qreal y = 0.25 * item_height_; ///20
+    qreal width = 0.8 * item_width_;
+    qreal heigth = 0.75 * item_height_;
 
 
 
