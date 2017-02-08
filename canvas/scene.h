@@ -25,12 +25,17 @@ public:
     scene(ARGS&& ... args) : QGraphicsScene (std::forward<ARGS> (args)...) { init (); }
     void init ();
     bool load (const nlohmann::json & data);
+    const nlohmann::json selected_item_attribute ();
     ~scene () override;
+
+signals:
+    void selection_changed (bool);
 protected:
 private:
     void on_selection_changed ();
 
 private:
+    item::item* selected_item_ = nullptr;
 };
 
 %>

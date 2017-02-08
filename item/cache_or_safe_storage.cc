@@ -20,6 +20,10 @@ std::unique_ptr<cache_or_safe_storage> cache_or_safe_storage::make(QPointF pos, 
 cache_or_safe_storage::cache_or_safe_storage(item* parent)
     :item(parent)
 {
+    set_attribute ("产品名称");
+    set_attribute ("库存数量");
+    set_attribute ("库存周期");
+
 
 }
 

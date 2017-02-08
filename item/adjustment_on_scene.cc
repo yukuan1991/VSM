@@ -4,6 +4,14 @@
 #include <QStyleOptionGraphicsItem>
 namespace item {
 
+adjustment_on_scene::adjustment_on_scene(item* parent)
+    :item(parent)
+{
+      set_attribute ("库存量");
+      set_attribute ("原生产计划");
+      set_attribute ("更改后生产计划");
+
+}
 
 std::unique_ptr<adjustment_on_scene> adjustment_on_scene::make(QPointF pos, QColor color)
 {
@@ -18,22 +26,22 @@ std::unique_ptr<adjustment_on_scene> adjustment_on_scene::make(QPointF pos, QCol
 void adjustment_on_scene::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
     QPointF
-    p1 {42 , 60},
-    p2 {60, 60},
-    p3 {22, 54},
-    p4 {30, 20},
-    p5 {33, 28},
-    p6 {78, 53},
-    p7 {82, 20},
-    p8 {85, 28};
+    p1 {0.42 * item_width , 0.75 * item_height},
+    p2 {0.6 * item_width, 0.75 * item_height},
+    p3 {0.22 * item_width, 0.675 * item_height},
+    p4 {0.3 * item_width, 0.25 * item_height},
+    p5 {0.33 * item_width, 0.35 * item_height},
+    p6 {0.78 * item_width, 0.6625 * item_height},
+    p7 {0.82 * item_width, 0.25 * item_height},
+    p8 {0.85 * item_width, 0.35 * item_height};
     auto the_pen = painter->pen();
     the_pen.setColor(color());
     the_pen.setWidthF(item_width * 0.02);
     painter->setPen(the_pen);
     //给定坐标
     painter->setBrush(Qt::white);
-    painter->drawEllipse(QRectF (20, 50, 22, 22));///(x,y,width,heigth),不知道x,y到底是哪点的坐标
-    painter->drawEllipse(QRectF (60,50, 22, 22));
+    painter->drawEllipse(QRectF (0.2 * item_width, 0.625 * item_height, 0.22 * item_width, 0.275 * item_height));
+    painter->drawEllipse(QRectF (0.6 * item_width,0.625 * item_height, 0.22 * item_width, 0.275 * item_height));
     painter->drawLine(p1,p2);
     painter->drawLine(p3,p4);
     painter->drawLine(p4,p5);
@@ -43,9 +51,4 @@ void adjustment_on_scene::paint(QPainter *painter, const QStyleOptionGraphicsIte
 
 }
 
-adjustment_on_scene::adjustment_on_scene(item* parent)
-    :item(parent)
-{
-
-}
 }

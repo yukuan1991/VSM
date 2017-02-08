@@ -21,10 +21,10 @@ protected:
 private:
     int startAngle = 1 * item_width * 16;
     int spanAngle = 1.7 * item_width * 16;
-    constexpr static qreal x = 0.2 * item_width;///20
-    constexpr static qreal y = 0.25 * item_height; ///20
-    constexpr static qreal width = 0.8 * item_width;
-    constexpr static qreal heigth = 0.75 * item_height;
+    qreal x = 0.2 * item_width;///20
+    qreal y = 0.25 * item_height; ///20
+    qreal width = 0.8 * item_width;
+    qreal heigth = 0.75 * item_height;
 
 
 

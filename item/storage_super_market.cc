@@ -20,7 +20,8 @@ std::unique_ptr<storage_super_market> storage_super_market::make(QPointF pos, QC
 storage_super_market::storage_super_market(item* parent)
     :item(parent)
 {
-
+    set_attribute("产品名");
+    set_attribute("数量");
 }
 
 void storage_super_market::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)

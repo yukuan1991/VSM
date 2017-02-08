@@ -38,7 +38,7 @@
       </font>
      </property>
      <property name="text">
-      <string>备注</string>
+      <string>属性</string>
      </property>
     </widget>
    </item>
