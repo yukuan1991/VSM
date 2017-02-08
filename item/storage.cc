@@ -2,6 +2,7 @@
 #include "QPainter"
 #include "QStyleOptionGraphicsItem"
 #include "QWidget"
+///修改成了item_width * 1/2
 namespace item {
 
 
@@ -21,8 +22,8 @@ storage::storage(item* parent)
     set_attribute("库存数量");
     set_attribute("库存天数");
     set_attribute("材料名");
-    item_width_ /= width_heigth_small_;
-    item_height_ /= width_heigth_small_;
+    item_width_ /= small_object_ratio;
+    item_height_ /= small_object_ratio;
 }
 
 void storage::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
@@ -30,7 +31,7 @@ void storage::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, Q
     Q_UNUSED (widget);
     auto the_pen = painter->pen ();
     the_pen.setColor(Qt::black);
-    the_pen.setWidthF(2.0);
+    the_pen.setWidthF(std::max(item_width_ * 0.02, 2.0));
     painter->setPen(the_pen);
 
     auto x_scale = item_width_ / 100;

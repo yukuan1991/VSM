@@ -4,6 +4,7 @@
 #include <QColor>
 #include <QStyleOptionGraphicsItem>
 ///修改好
+/// 修改好1/4
 namespace item
 {
 
@@ -20,6 +21,8 @@ operating_personnel::operating_personnel(item* parent)
     :item (parent)
 {
     set_attribute("操作员数量");
+    item_width_ /= small_object_ratio;
+    item_height_ /= small_object_ratio;
 
 }
 
@@ -28,7 +31,7 @@ void operating_personnel::paint(QPainter *painter, const QStyleOptionGraphicsIte
     Q_UNUSED (widget);
     auto the_pen = painter->pen();
     the_pen.setColor(Qt::black);
-    the_pen.setWidthF(0.02 * item_width_);
+    the_pen.setWidthF(std::max(0.02 * item_width_,2.0));
     painter->setPen(the_pen);
 
     painter->drawArc(QRectF{0.1 * item_width_, item_height_ * 10 / 80, 0.8 * item_width_, item_height_ * 60 / 80}, 180 * 16, 180 * 16);

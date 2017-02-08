@@ -7,6 +7,7 @@
 #include <QRectF>
 ///取料看板
   ///修改完成
+  /// item_width 修改成了1/4
 namespace item {
 
 
@@ -25,6 +26,8 @@ material_fetch_watch_board::material_fetch_watch_board(item *parent)
     set_attribute("产品种类");
     set_attribute("产品数量");
     set_attribute("取货地点");
+    item_width_ /= small_object_ratio;
+    item_height_ /= small_object_ratio;
 }
 
 void material_fetch_watch_board::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
@@ -49,7 +52,7 @@ void material_fetch_watch_board::paint(QPainter *painter, const QStyleOptionGrap
 
     auto the_pen = painter->pen();
     the_pen.setColor(color());
-    the_pen.setWidthF(item_width_ * 0.02);
+    the_pen.setWidthF(std::max(item_width_ * 0.02, 2.0));
     painter->setPen(the_pen);
 
     painter->setBrush(Qt::white);
