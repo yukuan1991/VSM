@@ -21,6 +21,8 @@ storage::storage(item* parent)
     set_attribute("库存数量");
     set_attribute("库存天数");
     set_attribute("材料名");
+    item_width_ /= width_heigth_small_;
+    item_height_ /= width_heigth_small_;
 }
 
 void storage::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
@@ -31,18 +33,20 @@ void storage::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, Q
     the_pen.setWidthF(2.0);
     painter->setPen(the_pen);
 
-    auto x_scale = item_width / 100;
-    auto y_scale = item_height / 80;
+    auto x_scale = item_width_ / 100;
+    auto y_scale = item_height_ / 80;
     painter->drawLine (QPointF {x_scale * 49, y_scale * 1}, {x_scale * 99, y_scale * 79});
     painter->drawLine (QPointF {x_scale * 1, y_scale * 79}, {x_scale * 99, y_scale * 79});
     painter->drawLine (QPointF {x_scale * 1,y_scale * 79}, {x_scale * 49, y_scale * 1});
     QFont font;
-    font.setPointSize(20);
+    font.setPointSizeF (item_width_ / 5);
     QFontMetricsF metrics (font);
     auto text_height = metrics.height();
     auto text_width = metrics.width("I");
     QRectF text_rect {x_scale * 49-text_width/2,y_scale * 40,text_width,text_height};
     painter->setFont(font);
     painter->drawText(text_rect, "I", Qt::AlignVCenter | Qt::AlignCenter);
+
+    item::paint (painter, option, widget);
 }
 }

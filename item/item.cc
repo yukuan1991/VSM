@@ -131,7 +131,7 @@ catch (std::exception const &)
 
 QRectF item::boundingRect() const
 {
-    return {0, 0, item_width, item_height};
+    return {0, 0, item_width_, item_height_};
 }
 
 void item::set_dash(QPainter *painter)

@@ -65,8 +65,13 @@ private:
     std::unique_ptr<drawer::toolbox> drawer_content_ = drawer::toolbox::make(this);
 
     std::unique_ptr<QDockWidget> attribute_ = std::make_unique<QDockWidget> (this);
+<<<<<<< HEAD
     std::unique_ptr<attribute_widget> attribute_content_; //=
        //     attribute_widget::make(nlohmann::json {{{"123", "456"}}, {{"abc", "def"}}}, this);
+=======
+    std::unique_ptr<attribute_widget> attribute_content_ =
+            attribute_widget::make({{{"字段1", "值1"}}, {{"字段2", "值2"}}, {{"字段3", "值3"}}}, this);
+>>>>>>> 9b78c93dc9dc375f194c7e840c594a2d66f9d81c
 
     QMdiArea *mdi_area_ = new QMdiArea (this);//是一个多文档显示窗口
     int sequence_number_ = 1;

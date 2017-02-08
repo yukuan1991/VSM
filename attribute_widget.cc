@@ -24,7 +24,7 @@ attribute_widget::~attribute_widget()
 
 attribute_widget::attribute_widget(nlohmann::json data, QWidget *parent) :
     QWidget(parent),
-    data_ (::move (data))
+    data_ (::move (data))///给成员初 xx        x   x  始化
 {
 
 }

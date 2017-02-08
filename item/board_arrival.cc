@@ -25,16 +25,16 @@ void board_arrival::paint(QPainter *painter, const QStyleOptionGraphicsItem *opt
 {
     std::array<QPointF, 5> polygon_shape
     {
-        QPointF{0.3 * item_width, 0.3 * item_height},
-        QPointF{0.6375 * item_width, 0.3 * item_height},
-        QPointF{0.7 * item_width, 0.3625 * item_height},
-        QPointF{0.7 * item_width, 0.675 * item_height},
-        QPointF{0.3 * item_width, 0.675 * item_height}
+        QPointF{0.3 * item_width_, 0.3 * item_height_},
+        QPointF{0.6375 * item_width_, 0.3 * item_height_},
+        QPointF{0.7 * item_width_, 0.3625 * item_height_},
+        QPointF{0.7 * item_width_, 0.675 * item_height_},
+        QPointF{0.3 * item_width_, 0.675 * item_height_}
     };
 
     auto the_pen = painter->pen();
     the_pen.setColor(Qt::black);
-    the_pen.setWidthF(item_width / 50);
+    the_pen.setWidthF(item_width_ / 50);
     painter->setPen(the_pen);
     painter->setBrush(Qt::white);
 
@@ -42,13 +42,13 @@ void board_arrival::paint(QPainter *painter, const QStyleOptionGraphicsItem *opt
 
     for (auto&& it : polygon_shape)
     {
-        it += QPointF (-0.1 * item_width, 0.1 * item_height);
+        it += QPointF (-0.1 * item_width_, 0.1 * item_height_);
     }
     painter->drawPolygon(polygon_shape.data(), polygon_shape.size(), Qt::WindingFill);
 
     for (auto&& it : polygon_shape)
     {
-        it += QPointF (-0.1 * item_width, 0.1 * item_height);
+        it += QPointF (-0.1 * item_width_, 0.1 * item_height_);
     }
     painter->drawPolygon(polygon_shape.data(), polygon_shape.size(), Qt::WindingFill);
 

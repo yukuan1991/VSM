@@ -32,14 +32,14 @@ void fetch_material::paint(QPainter *painter, const QStyleOptionGraphicsItem *op
     painter->setPen(the_pen);
 
     QPointF
-    p1 {0.75 * item_width, 0.8125 * item_height},
-    p2 {0.82 * item_width, 0.9 * item_height},
-    p3 {0.87 * item_width,0.75 * item_height};
+    p1 {0.75 * item_width_, 0.8125 * item_height_},
+    p2 {0.82 * item_width_, 0.9 * item_height_},
+    p3 {0.87 * item_width_,0.75 * item_height_};
 
     //给定坐标
     painter->setBrush(Qt::white);
 
-    painter->drawArc(QRectF{0.1 * item_width, 0, 0.8 * item_width, item_height}, 45 * 16, 270 * 16);
+    painter->drawArc(QRectF{0.1 * item_width_, 0, 0.8 * item_width_, item_height_}, 45 * 16, 270 * 16);
     painter->setBrush(Qt::black);
     painter->drawPolygon({{p1,p2,p3}},Qt::WindingFill);
 

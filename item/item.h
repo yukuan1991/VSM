@@ -28,8 +28,8 @@ signals:
     void name_changed (const QString&);
     void color_changed (const QColor&);
 public:
-    qreal width () { return item_width; }
-    qreal height () { return item_height; }
+    qreal width () { return item_width_; }
+    qreal height () { return item_height_; }
     const QString& name () { return name_; }
     void set_name (QString s) { name_ = ::move (s);  emit name_changed (name_); }
     const QString& type () { return type_; }
@@ -51,9 +51,10 @@ protected:
     void paint (QPainter * painter, const QStyleOptionGraphicsItem* option, QWidget* widget) override;
     void paint_attribute (QPainter* painter);
 protected:
-    qreal item_width = 100;
-    qreal item_height = 0.8 * item_width;
+    qreal item_width_ = 100;
+    qreal item_height_ = 0.8 * item_width_;
     QString type_;
+    const qreal width_heigth_small_ = 2;
 private:
     QString name_;
     QColor color_ = Qt::black;
