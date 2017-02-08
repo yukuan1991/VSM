@@ -21,8 +21,8 @@ std::unique_ptr<fetch_material> fetch_material::make(QPointF pos, QColor color)
 fetch_material::fetch_material(item *parent)
     :item(parent)
 {
-    item_width_ /= width_heigth_small_;
-    item_height_ /= width_heigth_small_;
+    item_width_ /= small_object_ratio;
+    item_height_ /= small_object_ratio;
 }
 
 void fetch_material::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
