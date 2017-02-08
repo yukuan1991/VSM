@@ -31,10 +31,6 @@ void flow_main::set_attribute_window()
     connect(attribute_content_.get (), &attribute_widget::commit, [this]
     {
         auto changes = attribute_content_->apply();
-        for (auto & it : changes)
-        {
-            qDebug () << it.first.data() << " " << it.second.data();
-        }
     });
 
     attribute_->setAllowedAreas (Qt::RightDockWidgetArea);
@@ -43,15 +39,12 @@ void flow_main::set_attribute_window()
 
 void flow_main::update_remark()
 {
-    //auto remark = attribute_content_->remark();
     auto canvas = active_canvas_body();
 
     if (canvas == nullptr)
     {
         return;
     }
-
-    //canvas->set_remark(remark);
 }
 
 void flow_main::on_drawer_status(const QString &status)
@@ -242,7 +235,6 @@ void flow_main::zoom_out_active()
 
 void flow_main::set_attribute(bool ok)
 {
-    attribute_content_.release();
     if (!ok)
     {
         attribute_->setWidget (nullptr);
@@ -263,7 +255,6 @@ void flow_main::set_attribute(bool ok)
         attribute_->setWidget (nullptr);
         return;
     }
-    qDebug () << "after size judge";
     attribute_content_  = attribute_widget::make (::move (attribute), this);
     set_attribute_window ();
 

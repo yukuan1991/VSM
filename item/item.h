@@ -44,7 +44,7 @@ public:
 protected:
     explicit item(QObject *parent = 0);
     static void set_dash (QPainter* painter);
-    void set_z_value (qreal value) { z_value_ = value; }
+    void set_z_value (qreal value) { z_value_ = value; setZValue(value); }
     qreal z_value () { return z_value_; }
 
     /// overrides

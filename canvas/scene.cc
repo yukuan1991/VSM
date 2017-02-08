@@ -56,19 +56,22 @@ scene::~scene()
 
 void scene::adjust_z_value()
 {
-    auto selected = selectedItems ();
     auto children = items ();
 
 
     for (auto & it : children)
     {
-        if (std::find (selected.begin (), selected.end (), it) != selected.end ())
+        auto the_item = dynamic_cast<item::item*>(it);
+        if (the_item != nullptr)
         {
-            it->setZValue (1);
-        }
-        else
-        {
-            it->setZValue (0);
+            if (the_item->isSelected())
+            {
+                the_item->apply_z_value(item::selected_item::yes);
+            }
+            else
+            {
+                the_item->apply_z_value(item::selected_item::no);
+            }
         }
     }
 }
