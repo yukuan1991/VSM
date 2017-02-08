@@ -17,12 +17,11 @@ flow_main::flow_main(QWidget *parent) :
 {
     ui->setupUi(this);
     create_toolbar();
-     //更新活动窗口
+    //更新活动窗口
     connect (mdi_area_, &QMdiArea::subWindowActivated, this, &flow_main::set_tool_action);
     set_tool_action();
     set_mdi_area ();
     init_conn ();
-    set_attribute_window ();
 }
 
 void flow_main::set_attribute_window()
@@ -30,10 +29,12 @@ void flow_main::set_attribute_window()
     attribute_->setWidget (attribute_content_.get());
     connect(attribute_content_.get (), &attribute_widget::commit, [this]
     {
+        auto active_canvas = this->active_canvas_body();
         auto changes = attribute_content_->apply();
         for (auto & it : changes)
         {
-            qDebug () << it.first.data() << " " << it.second.data();
+            qDebug () << it.first.data () << " " << it.second.data ();
+            active_canvas->set_item_attribute (it.first, it.second);
         }
     });
 
@@ -248,7 +249,6 @@ void flow_main::set_attribute(bool ok)
         attribute_->setWidget (nullptr);
         return;
     }
-    qDebug () << "flow_main::set_attribute";
     auto active_canvas = active_canvas_body();
     if (active_canvas == nullptr)
     {
@@ -257,17 +257,13 @@ void flow_main::set_attribute(bool ok)
 
     auto remark = active_canvas->remark();
     auto attribute = active_canvas->selected_item_data();
-    qDebug () << attribute.dump(4).data ();
     if (attribute.size()==0)
     {
         attribute_->setWidget (nullptr);
         return;
     }
-    qDebug () << "after size judge";
     attribute_content_  = attribute_widget::make (::move (attribute), this);
     set_attribute_window ();
-
-    //attribute_content_->set_remark(remark);
 }
 
 void flow_main::on_drawer_visibility_changed()

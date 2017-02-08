@@ -12,8 +12,6 @@ using namespace std;
 item::item(QObject *parent) : QObject(parent)
 {
     setFlags (ItemIsSelectable | ItemIsMovable);
-    //set_attribute("123", "456");
-    //set_attribute("aaa", "bbb");
 }
 
 void item::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
