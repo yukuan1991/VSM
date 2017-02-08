@@ -22,7 +22,7 @@ protected:
     QRectF boundingRect () const override;
     QPainterPath shape () const override;
 private:
-    QPointF p1_, p2_;
+    QPointF start_, end_;
     QPointF mid_p1_, mid_p2_, body_end_, neck1_, neck2_;
 
     constexpr static qreal width = 10;

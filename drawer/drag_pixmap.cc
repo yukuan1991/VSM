@@ -576,7 +576,7 @@ static void fifo_maker (QPainter* painter, qreal width, qreal height)
     painter->drawLine(QPointF (0.05 * width, height / 2),
                       QPointF (text_rect.left() - 0.05 * width, height / 2));
 
-    painter->drawText(text_rect, "FIFO", Qt::AlignHCenter | Qt::AlignVCenter);
+    painter->drawText(text_rect, "FIFO");
     painter->drawLine(QPointF (text_rect.right() + 0.05 * width, height / 2),
                       QPointF (0.9 * width, height / 2));
 

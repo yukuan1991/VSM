@@ -22,7 +22,7 @@ protected:
     QRectF boundingRect () const override;
     QPainterPath shape () const override;
 private:
-    QPointF p1_, p2_;
+    QPointF start_, end_;
     QPointF body_end_, neck1_, neck2_;
     QPointF outer_p1_, outer_p2_, outer_neck1_, outer_tip_, outer_neck2_, outer_p4_, outer_p3_;
     constexpr static qreal tip_width = 3;

@@ -56,7 +56,7 @@ void fifo::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWid
     painter->drawLine(QPointF (0.05 * item_width, item_height / 2),
                       QPointF (text_rect.left() - 0.05 * item_width, item_height / 2));
 
-    painter->drawText(text_rect, "FIFO", Qt::AlignHCenter | Qt::AlignVCenter);
+
     painter->drawLine(QPointF (text_rect.right() + 0.05 * item_width, item_height / 2),
                       QPointF (0.9 * item_width, item_height / 2));
 

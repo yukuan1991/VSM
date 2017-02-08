@@ -25,35 +25,38 @@ traditional_info_flow::~traditional_info_flow()
 
 traditional_info_flow::traditional_info_flow(QPointF p1, QPointF p2, item *parent, QColor color)
     :item (parent)
-    , p1_ (p1)
-    , p2_ (p2)
 {
+    auto mid = (p1 + p2) / 2;
+    setPos(mid);
+    start_ = p1 - mid;
+    end_ = p2 - mid;
+
     set_color(::move (color));
 }
 
 bool traditional_info_flow::init()
 {
-    auto arrow_length = distance (p1_, p2_);
+    auto arrow_length = distance (start_, end_);
     if (arrow_length < tip_length)
     {
         return false;
     }
 
     auto body_length = arrow_length - tip_length;
-    body_end_ = QLineF {p1_, p2_}.pointAt(body_length / arrow_length);
-    auto vertical_line = QLineF (body_end_, p1_).normalVector();
+    body_end_ = QLineF {start_, end_}.pointAt(body_length / arrow_length);
+    auto vertical_line = QLineF (body_end_, start_).normalVector();
 
     neck1_ = vertical_line.pointAt(tip_width / vertical_line.length());
     neck2_ = vertical_line.pointAt(- tip_width / vertical_line.length());
 
-    auto top_angle = QLineF (p1_, body_end_).angle() + 90;
+    auto top_angle = QLineF (start_, body_end_).angle() + 90;
 
     auto x_diff = -qCos (qDegreesToRadians (top_angle)) * bound_width;
     auto y_diff = qSin (qDegreesToRadians (top_angle)) * bound_width;
 
-    outer_p1_ = {p1_.x() + x_diff, p1_.y() + y_diff};
+    outer_p1_ = {start_.x() + x_diff, start_.y() + y_diff};
     outer_p2_ = {body_end_.x() + x_diff, body_end_.y() + y_diff};
-    outer_p3_ = {p1_.x() - x_diff, p1_.y() - y_diff};
+    outer_p3_ = {start_.x() - x_diff, start_.y() - y_diff};
     outer_p4_ = {body_end_.x() - x_diff, body_end_.y() - y_diff};
 
 
@@ -68,10 +71,10 @@ void traditional_info_flow::paint(QPainter *painter, const QStyleOptionGraphicsI
     pen.setWidthF(2.0);
     painter->setPen(pen);
 
-    painter->drawLine(p1_, body_end_);
+    painter->drawLine(start_, body_end_);
     painter->setBrush(color ());
     pen.setWidthF(1);
-    painter->drawPolygon({{neck1_, neck2_, p2_}}, Qt::WindingFill);
+    painter->drawPolygon({{neck1_, neck2_, end_}}, Qt::WindingFill);
     if (option->state bitand QStyle::State_Selected)
     {
         set_dash(painter);
@@ -82,7 +85,7 @@ void traditional_info_flow::paint(QPainter *painter, const QStyleOptionGraphicsI
 
 QRectF traditional_info_flow::boundingRect() const
 {
-    return QPolygonF {{p1_, neck1_, p2_, neck2_}}.boundingRect();
+    return QPolygonF {{start_, neck1_, end_, neck2_}}.boundingRect();
 }
 
 QPainterPath traditional_info_flow::shape() const

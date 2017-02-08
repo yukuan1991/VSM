@@ -32,7 +32,7 @@ signals:
     void selection_changed (bool);
 protected:
 private:
-    void on_selection_changed ();
+    void adjust_z_value ();
 
 private:
     item::item* selected_item_ = nullptr;

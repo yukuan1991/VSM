@@ -9,7 +9,7 @@ namespace canvas
 
 void scene::init()
 {
-    connect (this, &scene::selectionChanged, [this] { on_selection_changed (); });
+    connect (this, &scene::selectionChanged, [this] { adjust_z_value (); });
     setSceneRect ({0, 0, 500, 500});
 }
 
@@ -30,7 +30,7 @@ scene::~scene()
 
 }
 
-void scene::on_selection_changed()
+void scene::adjust_z_value()
 {
     auto selected = selectedItems ();
     auto children = items ();
