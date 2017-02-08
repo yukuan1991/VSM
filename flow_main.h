@@ -6,7 +6,6 @@
 #include <QMdiArea>
 #include <QToolBar>
 #include "canvas/body.h"
-#include "remark_widget.h"
 #include "utility/interface.hpp"
 #include "drawer/toolbox.h"
 #include "attribute_widget.h"

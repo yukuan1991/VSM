@@ -94,7 +94,12 @@ inline std::unique_ptr<item> make_arrow (const QString& name, QPointF start, QPo
     }
     else if (name == "成品发送至顾客")
     {
-        return product_to_customer::make(start, end, Qt::black);
+        auto ret = product_to_customer::make(start, end, Qt::black);
+        if (! ret)
+        {
+            qDebug () << "product_to_customer is nullptr";
+        }
+        return ret;
     }
     qDebug () << __PRETTY_FUNCTION__ << " kengdie le ";
 

@@ -3,6 +3,7 @@
 #include <QPainter>
 #include <QPen>
 #include <QDebug>
+#include <boost/algorithm/string.hpp>
 #include <algorithm>
 
 namespace item
@@ -47,6 +48,7 @@ void item::paint_attribute(QPainter *painter) try
 
         std::string key = it.begin ().key();
         std::string value = it.begin ().value();
+        boost::trim (value);
 
         if (value.empty())
         {

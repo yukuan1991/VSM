@@ -30,7 +30,7 @@ std::unique_ptr<toolbox> toolbox::make(QWidget* parent)
 
 QString toolbox::status()
 {
-    return {};
+    return status_;
 }
 
 toolbox::~toolbox()
@@ -50,11 +50,15 @@ bool toolbox::init ()
     connect(entity.get(), &drag_widget::button_triggered, this, &toolbox::status_changed);
     addItem(entity.release(), "实体");
 
-    auto material_flow = init_material_flow();
+    auto material_flow = init_material_flow ();
     connect(material_flow.get(), &drag_widget::button_triggered, this, &toolbox::status_changed);
     addItem(material_flow.release(), "物流");
 
-    //connect (info_flow_.get (), &info_flow::status_changed, [this] (auto&&s) { this->status_changed (s); });
+    auto info_flow = init_info_flow ();
+    connect(info_flow.get(), &drag_widget::button_triggered, this, &toolbox::status_changed);
+    addItem(info_flow.release(), "信息流");
+
+    connect (this, &toolbox::status_changed, [this] (const QString& s){ status_ = s; });
 
     return true;
 }
@@ -90,48 +94,11 @@ std::unique_ptr<drag_widget> toolbox::init_entity()
 std::unique_ptr<drag_widget> toolbox::init_material_flow()
 {
     return drag_widget::make({"取料"}, {"先进先出", "成品发送至顾客"});
-    //auto ret = std::make_unique<drag_widget> ();
-    //const QString items []
-    //{
-    //    "取料"
-    //};
+}
 
-    //auto v_layout = new QVBoxLayout(ret.get());
-    //for (auto & it : items)
-    //{
-    //    auto map = drawer::make_pixmap (it, 100, 80);
-
-    //    auto pic_label = std::make_unique<QLabel> (ret.get ());
-    //    pic_label->setObjectName(it);
-    //    pic_label->setPixmap(map.scaled(100, 80));
-    //    v_layout->addWidget (pic_label.release ());
-
-    //    auto info_label = std::make_unique<QLabel> (it, ret.get ());
-    //    info_label->setObjectName({});
-    //    info_label->setAlignment(Qt::AlignHCenter);
-    //    v_layout->addWidget (info_label.release());
-    //}
-
-    //const QString buttons []
-    //{
-    //    "先进先出",
-    //    "成品发送至顾客"
-    //};
-    //for (auto & it : buttons)
-    //{
-    //    auto button = std::make_unique<QPushButton> (drawer::make_pixmap(it, 100, 80), "", ret.get ());
-    //    button->setIconSize({100, 80});
-    //    button->setCheckable(true);
-    //    v_layout->addWidget(button.release());
-
-    //    auto info_label = std::make_unique<QLabel> (it, ret.get ());
-    //    info_label->setObjectName(it);
-    //    info_label->setAlignment(Qt::AlignHCenter);
-    //    v_layout->addWidget (info_label.release());
-    //}
-
-    //v_layout->addItem (new QSpacerItem (0, 0, QSizePolicy::Minimum, QSizePolicy::Expanding));
-    return nullptr;
+std::unique_ptr<drag_widget> toolbox::init_info_flow()
+{
+    return drag_widget::make({}, {"传统信息流", "电子信息流", "看板用信息流"});
 }
 
 QStringList toolbox::get_file_names(const QDir &dir)
@@ -156,7 +123,6 @@ void toolbox::on_button_pressed()
     }
 
     auto name = button->text();
-    qDebug () << name;
 }
 
 %>

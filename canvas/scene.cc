@@ -3,6 +3,7 @@
 #include "utility/raii.hpp"
 #include <QGraphicsSceneMouseEvent>
 #include <QDebug>
+#include <QPainter>
 
 namespace canvas
 <%
@@ -12,7 +13,7 @@ void scene::init()
     connect (this, &scene::selectionChanged, [this] { adjust_z_value (); });
     connect (this, &scene::selectionChanged, [this] { report_selection (); });
 
-    setSceneRect ({0, 0, 500, 500});
+    setSceneRect ({0, 0, 1920, 1080});
 }
 
 const nlohmann::json scene::selected_item_attribute()
@@ -53,6 +54,7 @@ scene::~scene()
 {
 
 }
+
 
 void scene::adjust_z_value()
 {
