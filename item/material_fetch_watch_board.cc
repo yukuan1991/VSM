@@ -26,7 +26,9 @@ material_fetch_watch_board::material_fetch_watch_board(item *parent)
     set_attribute("产品种类");
     set_attribute("产品数量");
     set_attribute("取货地点");
+
     set_z_value(23);
+
     item_width_ /= small_object_ratio;
     item_height_ /= small_object_ratio;
 }

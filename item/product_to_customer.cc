@@ -22,6 +22,7 @@ product_to_customer::~product_to_customer()
 product_to_customer::product_to_customer(QPointF p1, QPointF p2, item *parent, QColor color)
 {
 
+    set_z_value(7);
 }
 
 bool product_to_customer::init()

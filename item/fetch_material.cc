@@ -23,6 +23,8 @@ fetch_material::fetch_material(item *parent)
 {
     item_width_ /= small_object_ratio;
     item_height_ /= small_object_ratio;
+
+    set_z_value(19);
 }
 
 void fetch_material::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)

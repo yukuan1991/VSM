@@ -24,6 +24,7 @@ fifo::fifo(item *parent)
     :item (parent)
 {
     set_attribute("最大批量");
+
     set_z_value(18);
 
 }

@@ -28,6 +28,8 @@ production_sequence::production_sequence(item* parent)
      set_attribute("包装数量");
      set_attribute("工作时间");
      set_attribute("不良品");
+
+     set_z_value(2);
 }
 
 void production_sequence::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)

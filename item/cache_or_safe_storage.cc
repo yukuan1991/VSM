@@ -24,6 +24,7 @@ cache_or_safe_storage::cache_or_safe_storage(item* parent)
     set_attribute ("库存数量");
     set_attribute ("库存周期");
 
+    set_z_value(14);
 
 }
 

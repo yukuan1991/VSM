@@ -18,7 +18,9 @@ board_arrival::board_arrival(item* parent)
     :item(parent)
 {
     set_attribute ("生产批量");
+
     set_z_value(25);
+
     item_width_ /= small_object_ratio;
     item_height_ /= small_object_ratio;
 

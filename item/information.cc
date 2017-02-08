@@ -42,6 +42,8 @@ information::information(item *parent)
     :item(parent)
  {
     set_attribute("信息名称");
+
+    set_z_value(9);
  }
 
 }

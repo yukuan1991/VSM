@@ -31,6 +31,8 @@ traditional_info_flow::traditional_info_flow(QPointF p1, QPointF p2, item *paren
     start_ = p1 - mid;
     end_ = p2 - mid;
 
+    set_z_value(8);
+
     set_color(::move (color));
 }
 

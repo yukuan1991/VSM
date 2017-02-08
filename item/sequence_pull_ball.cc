@@ -23,6 +23,7 @@ sequence_pull_ball::sequence_pull_ball(item* parent)
     item_width_ /= small_object_ratio;
     item_height_ /= small_object_ratio;
 
+    set_z_value(13);
 }
 
 void sequence_pull_ball::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)

@@ -21,6 +21,9 @@ operating_personnel::operating_personnel(item* parent)
     :item (parent)
 {
     set_attribute("操作员数量");
+
+    set_z_value(5);
+
     item_width_ /= small_object_ratio;
     item_height_ /= small_object_ratio;
 
