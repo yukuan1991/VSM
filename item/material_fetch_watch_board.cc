@@ -25,6 +25,8 @@ material_fetch_watch_board::material_fetch_watch_board(item *parent)
     set_attribute("产品种类");
     set_attribute("产品数量");
     set_attribute("取货地点");
+    item_width_ /= width_heigth_small_;
+    item_height_ /=width_heigth_small_;
 }
 
 void material_fetch_watch_board::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
@@ -49,7 +51,7 @@ void material_fetch_watch_board::paint(QPainter *painter, const QStyleOptionGrap
 
     auto the_pen = painter->pen();
     the_pen.setColor(color());
-    the_pen.setWidthF(item_width_ * 0.02);
+    the_pen.setWidthF(std::max(item_width_ * 0.02, 2.0));
     painter->setPen(the_pen);
 
     painter->setBrush(Qt::white);

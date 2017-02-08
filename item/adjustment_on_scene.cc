@@ -3,7 +3,7 @@
 #include <QPainter>
 #include <QStyleOptionGraphicsItem>
 namespace item {
-///修改成了1/16
+///修改成了1/4
 adjustment_on_scene::adjustment_on_scene(item* parent)
     :item(parent)
 {

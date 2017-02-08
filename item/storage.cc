@@ -2,6 +2,7 @@
 #include "QPainter"
 #include "QStyleOptionGraphicsItem"
 #include "QWidget"
+///修改成了item_width * 1/2
 namespace item {
 
 

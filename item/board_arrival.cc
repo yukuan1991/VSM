@@ -4,7 +4,7 @@
 #include <QStyleOptionGraphicsItem>
 namespace item {
 
-
+///修改成item_width * 1/4
 std::unique_ptr<board_arrival> board_arrival::make(QPointF pos, QColor color)
 {
     std::unique_ptr <board_arrival> ret(new board_arrival);
@@ -18,6 +18,8 @@ board_arrival::board_arrival(item* parent)
     :item(parent)
 {
     set_attribute ("生产批量");
+    item_width_ /= width_heigth_small_;
+    item_height_ /=width_heigth_small_;
 
 }
 
@@ -34,7 +36,7 @@ void board_arrival::paint(QPainter *painter, const QStyleOptionGraphicsItem *opt
 
     auto the_pen = painter->pen();
     the_pen.setColor(Qt::black);
-    the_pen.setWidthF(item_width_ / 50);
+    the_pen.setWidthF(std::max(item_width_ * 0.02, 2.0));
     painter->setPen(the_pen);
     painter->setBrush(Qt::white);
 
