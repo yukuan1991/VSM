@@ -22,6 +22,7 @@ flow_main::flow_main(QWidget *parent) :
     set_tool_action();
     set_mdi_area ();
     init_conn ();
+    set_attribute ();
 }
 
 void flow_main::set_attribute_window()
@@ -37,8 +38,6 @@ void flow_main::set_attribute_window()
         }
     });
 
-    attribute_->setAllowedAreas (Qt::RightDockWidgetArea);
-    addDockWidget (Qt::RightDockWidgetArea, attribute_.get ());
 }
 
 void flow_main::update_remark()
@@ -68,6 +67,14 @@ void flow_main::set_drawer()
 
     drawer_->setAllowedAreas (Qt::LeftDockWidgetArea);
     addDockWidget (Qt::LeftDockWidgetArea, drawer_.get ());
+}
+
+void flow_main::set_attribute()
+{
+    attribute_->setMaximumWidth(250);
+    attribute_->setMinimumWidth(250);
+    attribute_->setAllowedAreas (Qt::RightDockWidgetArea);
+    addDockWidget (Qt::RightDockWidgetArea, attribute_.get ());
 }
 
 flow_main::~flow_main()
@@ -196,7 +203,7 @@ not_null<canvas::body*> flow_main::create_canvas_body()
     canvas->setWindowState(Qt::WindowMaximized);
     mdi_area_->addSubWindow(canvas.release ());
 
-    connect(raw_canvas, &canvas::body::selection_changed, this, &flow_main::set_attribute);
+    connect(raw_canvas, &canvas::body::selection_changed, this, &flow_main::notify_attribute);
     connect (drawer_content_.get(), &drawer::toolbox::status_changed,
              raw_canvas, &canvas::body::set_arrow_state);
     raw_canvas->set_arrow_state(drawer_content_->status ());
@@ -235,12 +242,11 @@ void flow_main::zoom_out_active()
     active_canvas->scale_object(1 / 1.1);
 }
 
-void flow_main::set_attribute(bool ok)
+void flow_main::notify_attribute(bool ok)
 {
-    attribute_content_ = nullptr;
+    attribute_->setWidget (nullptr);
     if (!ok)
     {
-        attribute_->setWidget (nullptr);
         return;
     }
     auto active_canvas = active_canvas_body();
@@ -249,14 +255,14 @@ void flow_main::set_attribute(bool ok)
         return;
     }
 
-    auto remark = active_canvas->remark();
     auto attribute = active_canvas->selected_item_data();
-    if (attribute.size()==0)
+    if (attribute.size() == 0)
     {
-        attribute_->setWidget (nullptr);
         return;
     }
+
     attribute_content_  = attribute_widget::make (::move (attribute), this);
+
     set_attribute_window ();
 }
 

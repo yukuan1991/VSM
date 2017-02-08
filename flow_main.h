@@ -21,6 +21,7 @@ class flow_main : public QMainWindow
 public:
     explicit flow_main(QWidget *parent = nullptr);
     void set_drawer ();
+    void set_attribute ();
     ~flow_main();
 
 
@@ -35,7 +36,7 @@ private:
     void zoom_in_active ();
     void zoom_out_active ();
 
-    void set_attribute (bool ok);
+    void notify_attribute (bool ok);
 
 private:
     void on_drawer_visibility_changed ();
