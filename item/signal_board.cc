@@ -13,7 +13,8 @@ signal_board::signal_board(item *parent)
     :item (parent)
 {
     set_attribute("生产批量");
-
+    item_width_ /= 4;
+    item_height_ /= 4;
 }
 
 void signal_board::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
@@ -21,13 +22,13 @@ void signal_board::paint(QPainter *painter, const QStyleOptionGraphicsItem *opti
     Q_UNUSED(widget);
 
     QPointF
-    p1 {0.05 * item_width, item_height / 80},
-    p2 {0.95 * item_width, item_height / 80},
-    p3 {0.5 * item_width, 79 * item_height / 80};
+    p1 {0.05 * item_width_, item_height_ / 80},
+    p2 {0.95 * item_width_, item_height_ / 80},
+    p3 {0.5 * item_width_, 79 * item_height_ / 80};
 
     auto the_pen = painter->pen ();
     the_pen.setColor(Qt::black);
-    the_pen.setWidthF(0.02 * item_width);
+    the_pen.setWidthF (std::max (item_width_ * 0.02, 2.0));
     painter->setPen(the_pen);
 
     painter->setBrush(Qt::white);

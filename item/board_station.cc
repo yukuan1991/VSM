@@ -18,18 +18,18 @@ std::unique_ptr<board_station> board_station::make(QPointF pos, QColor color)
 void board_station::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
 
-    const QPointF p1 {0.2 * item_width, 0.125 * item_height},
-    p2 {0.8 * item_width, 0.125 * item_height},
-    p3 {0.25 * item_width, 0.5 * item_height},
-    p4 {0.5 * item_width, 0.5 * item_height},
-    p5 {0.75 * item_width, 0.5 * item_height},
-    p6 {0.25 *item_width, 0.875 * item_height},
-    p7 {0.5 * item_width, 0.875 * item_height},
-    p8 {0.75 * item_width, 0.875 * item_height};
+    const QPointF p1 {0.2 * item_width_, 0.125 * item_height_},
+    p2 {0.8 * item_width_, 0.125 * item_height_},
+    p3 {0.25 * item_width_, 0.5 * item_height_},
+    p4 {0.5 * item_width_, 0.5 * item_height_},
+    p5 {0.75 * item_width_, 0.5 * item_height_},
+    p6 {0.25 *item_width_, 0.875 * item_height_},
+    p7 {0.5 * item_width_, 0.875 * item_height_},
+    p8 {0.75 * item_width_, 0.875 * item_height_};
 
     auto the_pen = painter->pen();
     the_pen.setColor(Qt::black);
-    the_pen.setWidthF(item_width / 50);
+    the_pen.setWidthF(item_width_ / 50);
     painter->setPen(the_pen);
 
     ///给定坐标

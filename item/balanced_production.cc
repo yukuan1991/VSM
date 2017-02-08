@@ -26,10 +26,10 @@ void balanced_production::paint(QPainter *painter, const QStyleOptionGraphicsIte
 
     auto the_pen = painter->pen ();
     the_pen.setColor(Qt::black);
-    the_pen.setWidthF(0.02 * item_width);
+    the_pen.setWidthF(0.02 * item_width_);
     painter->setPen(the_pen);
 
-    QRectF rect (0.05 * item_width, 0.25 * item_height, 0.9 * item_width, 0.5 * item_height);
+    QRectF rect (0.05 * item_width_, 0.25 * item_height_, 0.9 * item_width_, 0.5 * item_height_);
 
 
     QFontMetricsF metrics (painter->font());

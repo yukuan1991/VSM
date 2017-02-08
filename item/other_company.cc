@@ -30,8 +30,8 @@ void other_company::paint(QPainter *painter, const QStyleOptionGraphicsItem *opt
     painter->setPen(the_pen);
     painter->setBrush(Qt::white);
 
-    auto x_scale = item_width / 100;
-    auto y_scale =item_height / 80;
+    auto x_scale = item_width_ / 100;
+    auto y_scale =item_height_ / 80;
     const QPointF
     p1 {1 * x_scale, 30 * y_scale},
     p2 {33 * x_scale,1 * y_scale},

@@ -31,8 +31,8 @@ void storage::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, Q
     the_pen.setWidthF(2.0);
     painter->setPen(the_pen);
 
-    auto x_scale = item_width / 100;
-    auto y_scale = item_height / 80;
+    auto x_scale = item_width_ / 100;
+    auto y_scale = item_height_ / 80;
     painter->drawLine (QPointF {x_scale * 49, y_scale * 1}, {x_scale * 99, y_scale * 79});
     painter->drawLine (QPointF {x_scale * 1, y_scale * 79}, {x_scale * 99, y_scale * 79});
     painter->drawLine (QPointF {x_scale * 1,y_scale * 79}, {x_scale * 49, y_scale * 1});
