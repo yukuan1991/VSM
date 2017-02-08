@@ -62,7 +62,6 @@ void flow_main::on_drawer_status(const QString &status)
 
 void flow_main::set_drawer()
 {
-
     drawer_->setMaximumWidth (150);
     drawer_->setMinimumWidth (150);
     drawer_content_->setMaximumWidth (140);
@@ -243,7 +242,7 @@ void flow_main::zoom_out_active()
 
 void flow_main::set_attribute(bool ok)
 {
-    attribute_content_.release();
+    attribute_content_ = nullptr;
     if (!ok)
     {
         attribute_->setWidget (nullptr);
