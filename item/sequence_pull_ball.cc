@@ -31,7 +31,7 @@ void sequence_pull_ball::paint(QPainter *painter, const QStyleOptionGraphicsItem
 
     auto the_pen = painter->pen ();
     the_pen.setColor(color ());
-    the_pen.setWidth(item_width_ * 0.02);
+    the_pen.setWidth(std::max(item_width_ * 0.02, 2.0));
     painter->setPen(the_pen);
     painter->drawEllipse(QRectF {0.2 * item_width_, item_height_ / 8, 0.6 * item_width_, 60 * item_height_ / 80});
     painter->drawEllipse(QRectF {0.35 * item_width_, 25.0 *item_height_ / 80, 30.0, 30.0});

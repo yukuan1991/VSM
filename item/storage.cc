@@ -31,7 +31,7 @@ void storage::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, Q
     Q_UNUSED (widget);
     auto the_pen = painter->pen ();
     the_pen.setColor(Qt::black);
-    the_pen.setWidthF(2.0);
+    the_pen.setWidthF(std::max(item_width_ * 0.02, 2.0));
     painter->setPen(the_pen);
 
     auto x_scale = item_width_ / 100;
