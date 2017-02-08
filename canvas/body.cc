@@ -134,6 +134,11 @@ const nlohmann::json body::selected_item_data()
     return scene_.selected_item_attribute ();
 }
 
+void body::set_item_attribute(string_view key, std::__cxx11::string value)
+{
+    scene_.set_item_attribute (key, value);
+}
+
 void body::window_modified()
 {
     setWindowModified(true);
@@ -142,7 +147,7 @@ void body::window_modified()
 
 void body::init_conn()
 {
-    connect(&scene_, &scene::selection_changed, [this] (bool ok){ emit selection_changed (ok); });
+    connect (&scene_, &scene::selection_changed, this, &body::selection_changed);
 }
 
 %>

@@ -10,19 +10,43 @@ namespace canvas
 void scene::init()
 {
     connect (this, &scene::selectionChanged, [this] { adjust_z_value (); });
+    connect (this, &scene::selectionChanged, [this] { report_selection (); });
+
     setSceneRect ({0, 0, 500, 500});
 }
 
 const nlohmann::json scene::selected_item_attribute()
 {
-    if (selected_item_)
-    {
-        return selected_item_->data();
-    }
-    else
+    auto selected = selectedItems();
+    if (selected.size() != 1)
     {
         return {};
     }
+
+    auto item_selected = dynamic_cast<item::item*> (selected [0]);
+
+    if (item_selected == nullptr)
+    {
+        return {};
+    }
+
+    return item_selected->data();
+}
+
+void scene::set_item_attribute(string_view key, std::__cxx11::string value)
+{
+    auto selected = selectedItems();
+    if (selected.size () != 1)
+    {
+        return;
+    }
+    auto item_selected = dynamic_cast<item::item*> (selected [0]);
+    if (item_selected == nullptr)
+    {
+        return;
+    }
+    item_selected->set_attribute (key, value);
+    item_selected->update ();
 }
 
 scene::~scene()
@@ -35,16 +59,6 @@ void scene::adjust_z_value()
     auto selected = selectedItems ();
     auto children = items ();
 
-    if (selected.size () == 1)
-    {
-        emit selection_changed(true);
-        selected_item_ = dynamic_cast<item::item*> (selected [0]); assert (selected_item_);
-    }
-    else
-    {
-        emit selection_changed(false);
-        selected_item_ = nullptr;
-    }
 
     for (auto & it : children)
     {
@@ -56,6 +70,18 @@ void scene::adjust_z_value()
         {
             it->setZValue (0);
         }
+    }
+}
+
+void scene::report_selection()
+{
+    if (selectedItems ().size () == 1)
+    {
+        emit selection_changed(true);
+    }
+    else
+    {
+        emit selection_changed(false);
     }
 }
 
