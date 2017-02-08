@@ -128,6 +128,11 @@ QString body::remark()
     return remark;
 }
 
+const nlohmann::json body::selected_item_data()
+{
+    return scene_.selected_item_attribute ();
+}
+
 void body::window_modified()
 {
     setWindowModified(true);
@@ -136,7 +141,7 @@ void body::window_modified()
 
 void body::init_conn()
 {
-    connect(&scene_, &scene::selectionChanged, [this] { emit selection_changed (); });
+    connect(&scene_, &scene::selection_changed, [this] (bool ok){ emit selection_changed (ok); });
 }
 
 %>

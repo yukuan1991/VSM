@@ -240,8 +240,15 @@ void flow_main::zoom_out_active()
     active_canvas->scale_object(1 / 1.1);
 }
 
-void flow_main::set_attribute()
+void flow_main::set_attribute(bool ok)
 {
+    attribute_content_.release();
+    if (!ok)
+    {
+        attribute_->setWidget (nullptr);
+        return;
+    }
+    qDebug () << "flow_main::set_attribute";
     auto active_canvas = active_canvas_body();
     if (active_canvas == nullptr)
     {
@@ -249,6 +256,17 @@ void flow_main::set_attribute()
     }
 
     auto remark = active_canvas->remark();
+    auto attribute = active_canvas->selected_item_data();
+    qDebug () << attribute.dump(4).data ();
+    if (attribute.size()==0)
+    {
+        attribute_->setWidget (nullptr);
+        return;
+    }
+    qDebug () << "after size judge";
+    attribute_content_  = attribute_widget::make (::move (attribute), this);
+    set_attribute_window ();
+
     //attribute_content_->set_remark(remark);
 }
 
