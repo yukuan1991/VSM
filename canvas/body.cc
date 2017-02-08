@@ -3,7 +3,6 @@
 #include "utility/raii.hpp"
 #include "defs.hpp"
 #include <QDir>
-#include "flow_utility.h"
 
 namespace canvas
 <%
@@ -29,36 +28,7 @@ std::string body::dump()
 
 bool body::load(const std::string &data) try
 {
-    this->scene()->clear();
-
-    SCOPE_FAIL { scene ()->clear(); };
-
-    auto json_data = nlohmann::json::parse(data);
-    double scale_factor = json_data ["view-scale"];
-
-    QMatrix matrix;
-    matrix.scale(scale_factor, scale_factor);
-
-    setMatrix(matrix);
-
-    for (auto & it : json_data ["items"])
-    {
-        std::string type = it ["type"];
-        double x = it ["pos"]["x"];
-        double y = it ["pos"]["y"];
-        auto path = get_path_from_name(type.data());
-        auto item = add_svg_to_scene (path, scene (), QPointF (x, y));
-
-        double z_value = it ["z-value"];
-        item->setZValue(z_value);
-
-        double scale = it ["scale"];
-        item->setMatrix(QMatrix ().scale(scale, scale));
-
-        std::string remark = it ["remark"];
-        item->setData(remark_role, remark.data());
-    }
-
+    Q_UNUSED (data);
     return true;
 }
 catch (const std::exception& e)

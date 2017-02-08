@@ -29,12 +29,15 @@ void sequence_pull_ball::paint(QPainter *painter, const QStyleOptionGraphicsItem
 {
     Q_UNUSED(widget);
 
+    auto x_scale = item_width_ * 0.01;
+    auto y_scale = item_height_ / 80;
+
     auto the_pen = painter->pen ();
     the_pen.setColor(color ());
-    the_pen.setWidth(std::max(item_width_ * 0.02, 2.0));
+    the_pen.setWidthF (std::max (x_scale * 2.0, 2.0));
     painter->setPen(the_pen);
-    painter->drawEllipse(QRectF {0.2 * item_width_, item_height_ / 8, 0.6 * item_width_, 60 * item_height_ / 80});
-    painter->drawEllipse(QRectF {0.35 * item_width_, 25.0 *item_height_ / 80, 30.0, 30.0});
+    painter->drawEllipse(QRectF {20 * x_scale, 10 * y_scale, 60 * x_scale, 60 * y_scale});
+    painter->drawEllipse(QRectF {35 * x_scale, 25 * y_scale, 30 * x_scale, 30 * y_scale});
 
     item::paint(painter, option, widget);
 }

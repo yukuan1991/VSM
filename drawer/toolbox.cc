@@ -46,9 +46,13 @@ toolbox::toolbox(QWidget *parent, Qt::WindowFlags f)
 
 bool toolbox::init ()
 {
-    addItem(init_entity().release(), "实体");
-    //addItem(info_flow_.get(), "信息流");
-    addItem(init_material_flow().release(), "物流");
+    auto entity = init_entity();
+    connect(entity.get(), &drag_widget::button_triggered, this, &toolbox::status_changed);
+    addItem(entity.release(), "实体");
+
+    auto material_flow = init_material_flow();
+    connect(material_flow.get(), &drag_widget::button_triggered, this, &toolbox::status_changed);
+    addItem(material_flow.release(), "物流");
 
     //connect (info_flow_.get (), &info_flow::status_changed, [this] (auto&&s) { this->status_changed (s); });
 

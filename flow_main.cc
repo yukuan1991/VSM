@@ -37,7 +37,10 @@ void flow_main::set_attribute_window()
             active_canvas->set_item_attribute (it.first, it.second);
         }
     });
-
+    if (attribute_->isHidden())
+    {
+        attribute_->show();
+    }
 }
 
 void flow_main::update_remark()

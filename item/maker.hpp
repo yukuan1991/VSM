@@ -25,6 +25,7 @@
 #include "item/other_company.h"
 #include "item/material_flow.h"
 #include "item/electric_info_flow.h"
+#include "item/product_to_customer.h"
 #include "traditional_info_flow.h"
 
 
@@ -33,18 +34,6 @@ namespace item
 
 using constructor = std::unique_ptr<item> (*) (item* parent);
 
-inline QHash<QByteArray, constructor>& constructors ()
-{
-    static QHash<QByteArray, constructor> instance;
-    return instance;
-}
-
-
-template<typename T>
-void regester_class (QByteArray classname)
-{
-    constructors().insert(::move (classname), [] (item* parent){return std::make_unique<T> (new T (parent)); });
-}
 
 inline std::unique_ptr<item> make_item (const QString& classname, QPointF pos)
 {
@@ -55,7 +44,7 @@ inline std::unique_ptr<item> make_item (const QString& classname, QPointF pos)
     static std::map<QString, item_maker> type_map
     {
         {"看板以批量方式传达", [] (QPointF p)->up_item { return board_arrival::make (p, Qt::black); }},
-         {"生产工序", [] (QPointF p)->up_item { return production_sequence::make(p, Qt::black); }},
+        {"生产工序", [] (QPointF p)->up_item { return production_sequence::make(p, Qt::black); }},
         { "其他公司",[] (QPointF p)->up_item { return other_company::make(p, Qt::black); }},
         {"数据箱", [] (QPointF p)->up_item { return data_box::make(p, Qt::black); }},
         {"库存", [] (QPointF p)->up_item { return storage::make(p, Qt::black); }},
@@ -103,6 +92,11 @@ inline std::unique_ptr<item> make_arrow (const QString& name, QPointF start, QPo
     {
 
     }
+    else if (name == "成品发送至顾客")
+    {
+        return product_to_customer::make(start, end, Qt::black);
+    }
+    qDebug () << __PRETTY_FUNCTION__ << " kengdie le ";
 
     return nullptr;
 }

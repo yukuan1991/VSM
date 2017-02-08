@@ -4,6 +4,8 @@ namespace item {
 
 std::unique_ptr<product_to_customer> product_to_customer::make(QPointF p1, QPointF p2, QColor color, item *parent)
 {
+    return nullptr;
+
     auto ret = unique_ptr<product_to_customer> (new product_to_customer (p1, p2, parent, ::move (color)));
     if (!ret->init())
     {
