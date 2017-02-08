@@ -10,8 +10,8 @@ adjustment_on_scene::adjustment_on_scene(item* parent)
       set_attribute ("库存量");
       set_attribute ("原生产计划");
       set_attribute ("更改后生产计划");
-      item_width_ = item_width_ * ( 1 / width_heigth_small_);
-      item_height_ = item_height_ * ( 1 / width_heigth_small_);
+      item_width_ = item_width_ * ( 1 / small_object_ratio);
+      item_height_ = item_height_ * ( 1 / small_object_ratio);
 
 }
 
