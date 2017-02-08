@@ -12,8 +12,6 @@ using namespace std;
 item::item(QObject *parent) : QObject(parent)
 {
     setFlags (ItemIsSelectable | ItemIsMovable);
-    //set_attribute("123", "456");
-    //set_attribute("aaa", "bbb");
 }
 
 void item::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
@@ -70,7 +68,6 @@ catch (const std::exception& e)
 
 void item::set_attribute(string_view key, std::string value)
 {
-    qDebug () << __func__ << " key: " << key.data () << " value: " << value.data ();
     for (auto & it : item_info_)
     {
         if (!it.is_object() or it.empty())
@@ -94,7 +91,11 @@ void item::apply_z_value(selected_item yes_or_no)
 {
     if (yes_or_no == selected_item::yes)
     {
-
+        setZValue (z_value_ + 0.5);
+    }
+    else
+    {
+        setZValue(z_value_);
     }
 }
 

@@ -31,6 +31,7 @@ material_flow::material_flow(QPointF p1, QPointF p2, QColor color, item *parent)
     setPos(mid_pos);
     start_ = p1 - mid_pos;
     end_ = p2 - mid_pos;
+    set_color (::move (color));
 }
 
 bool material_flow::init()
