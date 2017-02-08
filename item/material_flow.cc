@@ -7,11 +7,11 @@
 namespace item {
 
 
-std::unique_ptr<material_flow> material_flow::make(QPointF p1, QPointF p2, QColor color, item *parent)
+std::unique_ptr<material_flow> material_flow::make(QPointF start, QPointF end, QColor color, item *parent)
 {
-    std::unique_ptr<material_flow> ret (new material_flow (p1, p2, parent));
+    std::unique_ptr<material_flow> ret (new material_flow (start, end, ::move (color), parent));
 
-    if (!ret->init(p1, p2, ::move (color)))
+    if (!ret->init())
     {
         return nullptr;
     }
@@ -24,24 +24,25 @@ material_flow::~material_flow()
 
 }
 
-material_flow::material_flow(QPointF p1, QPointF p2, item *parent)
-    :item (parent),
-      p1_ (p1),
-      p2_ (p2)
+material_flow::material_flow(QPointF p1, QPointF p2, QColor color, item *parent)
+    :item (parent)
 {
-
+    auto mid_pos = (p1 + p2) / 2;
+    setPos(mid_pos);
+    start_ = p1 - mid_pos;
+    end_ = p2 - mid_pos;
 }
 
-bool material_flow::init(QPointF p1, QPointF p2, QColor c)
+bool material_flow::init()
 {
     constexpr auto min_distance = head_ratio * width;
+    auto p1 = start_, p2 = end_;
 
     if (distance(p1, p2) <= min_distance)
     {
         return false;
     }
 
-    set_color(std::move (c));
     arrow_tip_ = p2;
 
     QLineF line (p1, p2);

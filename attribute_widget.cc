@@ -34,7 +34,6 @@ bool attribute_widget::init() try
     auto layout = new QGridLayout (this);
 
     int i = 0;
-    qDebug () << data_.dump(4).data();
     for (auto & it : data_)
     {
         std::string key = it.begin().key();

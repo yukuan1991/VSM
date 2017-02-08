@@ -87,6 +87,14 @@ void item::set_attribute(string_view key, std::string value)
     item_info_.push_back({{key.to_string (), value}});
 }
 
+void item::apply_z_value(selected_item yes_or_no)
+{
+    if (yes_or_no == selected_item::yes)
+    {
+
+    }
+}
+
 optional<std::string> item::attribute(string_view key) try
 {
     auto it = find_if (item_info_.begin (), item_info_.end (), [&] (auto&& it)

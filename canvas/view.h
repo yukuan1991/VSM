@@ -3,14 +3,13 @@
 #include <QGraphicsView>
 #include <QGraphicsItem>
 #include <experimental/optional>
-#include <memory>
-#include "item/material_flow.h"
-
+#include "utility/memory.hpp"
+#include "utility/raii.hpp"
 
 
 namespace item
 {
-class material_flow;
+class item;
 }
 
 namespace canvas
@@ -24,9 +23,6 @@ class view : public QGraphicsView
 signals:
     void scale_changed (double);
 public:
-    constexpr static auto path_role = Qt::UserRole + 100;
-    constexpr static auto remark_role = Qt::UserRole + 101;
-public:
     explicit view(QWidget* parent = nullptr);
     explicit view(QGraphicsScene* scene, QWidget* parent = nullptr);
     void init ();
@@ -35,6 +31,7 @@ public:
     void scale_object (double factor);
 
     void set_arrow_state (QString state) { arrow_state_ = ::move (state); }
+    ~view () override;
 
 protected:
     void keyPressEvent (QKeyEvent* event) override;
@@ -55,9 +52,7 @@ private:
     template<typename CALLABLE>
     static void hold_position (QGraphicsItem* item, CALLABLE&& c);
 private:
-    constexpr static double rotate_arg = 90;
-
-    optional<std::unique_ptr<item::item>> tmp_arrow_ = std::experimental::nullopt;
+    optional<unique_ptr<item::item>> tmp_arrow_;
     QString arrow_state_;
     QPointF last_pressed_;
 };
