@@ -37,12 +37,14 @@ void storage::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, Q
     painter->drawLine (QPointF {x_scale * 1, y_scale * 79}, {x_scale * 99, y_scale * 79});
     painter->drawLine (QPointF {x_scale * 1,y_scale * 79}, {x_scale * 49, y_scale * 1});
     QFont font;
-    font.setPointSize(20);
+    font.setPointSizeF (item_width_ / 5);
     QFontMetricsF metrics (font);
     auto text_height = metrics.height();
     auto text_width = metrics.width("I");
     QRectF text_rect {x_scale * 49-text_width/2,y_scale * 40,text_width,text_height};
     painter->setFont(font);
     painter->drawText(text_rect, "I", Qt::AlignVCenter | Qt::AlignCenter);
+
+    item::paint (painter, option, widget);
 }
 }
