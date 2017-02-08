@@ -15,8 +15,6 @@
 #include <QGraphicsSvgItem>
 #include <assert.h>
 #include <QGLWidget>
-#include "item/traditional_info_flow.h"
-#include "item/electric_info_flow.h"
 #include "item/maker.hpp"
 
 
@@ -26,12 +24,14 @@ namespace canvas
 
 view::view(QWidget *parent)
     :QGraphicsView (parent)
+    , tmp_arrow_ (nullopt)
 {
     init ();
 }
 
 view::view(QGraphicsScene *scene, QWidget *parent)
     :QGraphicsView (scene, parent)
+    ,tmp_arrow_ (nullopt)
 {
     init ();
 }
@@ -104,16 +104,16 @@ void view::mouseMoveEvent(QMouseEvent *event)
     {
         auto end_ptr = mapToScene(event->pos ());
 
-        if (arrow_state_ == "传统信息流")
-            tmp_arrow_.emplace (item::traditional_info_flow::make(last_pressed_, end_ptr));
-        else if (arrow_state_ == "电子信息流")
-            tmp_arrow_.emplace (item::electric_info_flow::make(last_pressed_, end_ptr));
+        tmp_arrow_ = item::make_arrow(arrow_state_, last_pressed_, end_ptr);
 
         if (tmp_arrow_.value() != nullptr)
+        {
             scene()->addItem(tmp_arrow_->get());
+            return;
+        }
     }
-    else
-        QGraphicsView::mouseMoveEvent(event);
+
+    QGraphicsView::mouseMoveEvent(event);
 }
 
 
@@ -146,7 +146,6 @@ void view::dragMoveEvent(QDragMoveEvent *event)
 {
     if (event->mimeData ()->hasFormat ("item") and event->source () != this)
     {
-        //qDebug () << event->mimeData()->data("item").toStdString().data();
         event->accept ();
     }
     else
@@ -202,6 +201,11 @@ void view::scale_object(double factor)
     };
 
     set_scale (this);
+}
+
+view::~view()
+{
+
 }
 
 void view::item_drop_action(QDropEvent *event)

@@ -11,7 +11,6 @@ namespace canvas
 body::body(QWidget *parent, QString svg_dir)
     :view (parent)
     ,svg_dir_ (::move (svg_dir))
-
 {
     setScene (&scene_);
     init_conn ();
@@ -25,29 +24,31 @@ void body::file_new_title()
 
 std::string body::dump()
 {
-    nlohmann::json data;
-    nlohmann::json items = nlohmann::json::array();
-    for (auto & it : this->items())
-    {
-        nlohmann::json item_data;
-        item_data ["scale"] = it->matrix().m11();
-        item_data ["pos"]["x"] = it->pos().x ();
-        item_data ["pos"]["y"] = it->pos().y ();
-        item_data ["z-value"] = it->zValue();
-        item_data ["type"] = it->data(path_role).toString ().toStdString ();
-        item_data ["remark"] = it->data(remark_role).toString().toStdString();
-        items.push_back(::move (item_data));
-    }
-    data ["items"] = ::move (items);
-    data ["view-scale"] = matrix().m11 ();
-    auto view_geo = viewport()->geometry();
-    auto visible_area = mapToScene (view_geo).boundingRect();
-    data ["area"]["x"] = visible_area.x();
-    data ["area"]["y"] = visible_area.y();
-    data ["area"]["w"] = visible_area.width();
-    data ["area"]["h"] = visible_area.height();
+    return {};
+    //nlohmann::json data;
+    //nlohmann::json items = nlohmann::json::array();
+    //for (auto & it : this->items())
+    //{
+    //    nlohmann::json item_data;
+    //    item_data ["scale"] = it->matrix().m11();
+    //    item_data ["pos"]["x"] = it->pos().x ();
+    //    item_data ["pos"]["y"] = it->pos().y ();
+    //    item_data ["z-value"] = it->zValue();
+    //    item_data ["type"] = it->data(path_role).toString ().toStdString ();
+    //    item_data ["remark"] = it->data(remark_role).toString().toStdString();
+    //    items.push_back(::move (item_data));
+    //    it->update();
+    //}
+    //data ["items"] = ::move (items);
+    //data ["view-scale"] = matrix().m11 ();
+    //auto view_geo = viewport()->geometry();
+    //auto visible_area = mapToScene (view_geo).boundingRect();
+    //data ["area"]["x"] = visible_area.x();
+    //data ["area"]["y"] = visible_area.y();
+    //data ["area"]["w"] = visible_area.width();
+    //data ["area"]["h"] = visible_area.height();
 
-    return data.dump(4);
+    //return data.dump(4);
 }
 
 bool body::load(const std::string &data) try

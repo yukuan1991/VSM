@@ -14,7 +14,6 @@ std::unique_ptr<electric_info_flow> electric_info_flow::make(QPointF p1, QPointF
     {
         return nullptr;
     }
-    ret->type_ = "电子信息流";
     return ret;
 }
 
@@ -25,28 +24,31 @@ electric_info_flow::~electric_info_flow()
 
 electric_info_flow::electric_info_flow(QPointF p1, QPointF p2, item *parent, QColor color)
     :item (parent)
-    ,p1_ (p1)
-    ,p2_ (p2)
 {
+    auto mid_pos = (p1 + p2) / 2;
+    setPos((p1 + p2) / 2);
+    start_ = p1 - mid_pos;
+    end_ = p2 - mid_pos;
     set_color(::move (color));
+    type_ = "电子信息流";
 }
 
 bool electric_info_flow::init()
 {
-    auto dist = distance(p1_, p2_);
+    auto dist = distance(start_, end_);
     if (dist < 3 * width)
     {
         return false;
     }
 
-    auto normal = QLineF (QLineF (p1_, p2_).pointAt(0.5), p2_).normalVector();
+    auto normal = QLineF (QLineF (start_, end_).pointAt(0.5), end_).normalVector();
     QPointF side_p1 = normal.pointAt(width / normal.length());
     QPointF side_p2 = normal.pointAt(-width / normal.length());
-    mid_p1_ = QLineF ((p1_ + p2_) / 2, p2_).translated(side_p1 - (p1_ + p2_) / 2).unitVector().pointAt(width);
-    mid_p2_ = QLineF ((p1_ + p2_) / 2, p1_).translated(side_p2 - (p1_ + p2_) / 2).unitVector().pointAt(width);
+    mid_p1_ = QLineF ((start_ + end_) / 2, end_).translated(side_p1 - (start_ + end_) / 2).unitVector().pointAt(width);
+    mid_p2_ = QLineF ((start_ + end_) / 2, start_).translated(side_p2 - (start_ + end_) / 2).unitVector().pointAt(width);
 
-    QLineF end_line (mid_p2_, p2_);
-    if (QLineF (mid_p2_, p2_).length() < tip_length)
+    QLineF end_line (mid_p2_, end_);
+    if (QLineF (mid_p2_, end_).length() < tip_length)
     {
         return false;
     }
@@ -66,13 +68,13 @@ void electric_info_flow::paint(QPainter *painter, const QStyleOptionGraphicsItem
     pen.setWidthF (2.0);
     painter->setPen(pen);
 
-    painter->drawLine(p1_, mid_p1_);
+    painter->drawLine(start_, mid_p1_);
 
     painter->drawLine(mid_p1_, mid_p2_);
     painter->drawLine(mid_p2_, body_end_);
 
     painter->setBrush(color ());
-    painter->drawPolygon({{neck1_, neck2_, p2_}}, Qt::WindingFill);
+    painter->drawPolygon({{neck1_, neck2_, end_}}, Qt::WindingFill);
 
     if (option->state bitand QStyle::State_Selected)
     {
@@ -82,7 +84,7 @@ void electric_info_flow::paint(QPainter *painter, const QStyleOptionGraphicsItem
 
 QRectF electric_info_flow::boundingRect() const
 {
-    return QPolygonF {{p1_, mid_p1_, p2_, mid_p2_}}.boundingRect();
+    return QPolygonF {{start_, mid_p1_, end_, mid_p2_}}.boundingRect();
 }
 
 QPainterPath electric_info_flow::shape() const
