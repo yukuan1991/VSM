@@ -15,8 +15,8 @@ production_watcher_board::production_watcher_board(item *parent)
     set_attribute("生产数量");
     set_attribute("需求地点");
     set_attribute("供货时间");
-    item_width_ /= width_heigth_small_;
-    item_height_ /= width_heigth_small_;
+    item_width_ /= small_object_ratio;
+    item_height_ /= small_object_ratio;
 
 }
 std::unique_ptr<production_watcher_board> production_watcher_board::make(QPointF pos, QColor color)
