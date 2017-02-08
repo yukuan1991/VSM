@@ -31,6 +31,8 @@ electric_info_flow::electric_info_flow(QPointF p1, QPointF p2, item *parent, QCo
     end_ = p2 - mid_pos;
     set_color(::move (color));
     type_ = "电子信息流";
+
+    set_z_value(6);
 }
 
 bool electric_info_flow::init()

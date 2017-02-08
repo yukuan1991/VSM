@@ -55,6 +55,8 @@ bool toolbox::init ()
     return true;
 }
 
+
+///实体
 std::unique_ptr<drag_widget> toolbox::init_entity()
 {
     const vector<QString> items
@@ -82,7 +84,7 @@ std::unique_ptr<drag_widget> toolbox::init_entity()
     return drag_widget::make(items);
 
 }
-
+///物料流
 std::unique_ptr<drag_widget> toolbox::init_material_flow()
 {
     return drag_widget::make({"取料"}, {"先进先出", "成品发送至顾客"});
