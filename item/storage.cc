@@ -22,8 +22,8 @@ storage::storage(item* parent)
     set_attribute("库存数量");
     set_attribute("库存天数");
     set_attribute("材料名");
-    item_width_ /= width_heigth_small_;
-    item_height_ /= width_heigth_small_;
+    item_width_ /= small_object_ratio;
+    item_height_ /= small_object_ratio;
 }
 
 void storage::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)

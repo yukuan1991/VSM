@@ -13,8 +13,8 @@ signal_board::signal_board(item *parent)
     :item (parent)
 {
     set_attribute("生产批量");
-    item_width_ = item_width_ * (1/width_heigth_small_);
-    item_height_ = item_height_ * ( 1/width_heigth_small_);
+    item_width_ = item_width_ * (1/small_object_ratio);
+    item_height_ = item_height_ * ( 1/small_object_ratio);
 }
 
 void signal_board::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)

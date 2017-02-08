@@ -22,8 +22,9 @@ public:
     QString remark ();
     QString attached_file () { return windowTitle (); }
     void set_attached_file (QString attached_file) { setWindowTitle(attached_file); }
+    const nlohmann::json selected_item_data ();
 signals:
-    void selection_changed ();
+    void selection_changed (bool);
 public slots:
     void window_modified();
 private:

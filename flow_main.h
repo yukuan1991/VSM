@@ -35,7 +35,7 @@ private:
     void zoom_in_active ();
     void zoom_out_active ();
 
-    void set_attribute ();
+    void set_attribute (bool ok);
 
 private:
     void on_drawer_visibility_changed ();
@@ -65,8 +65,7 @@ private:
     std::unique_ptr<drawer::toolbox> drawer_content_ = drawer::toolbox::make(this);
 
     std::unique_ptr<QDockWidget> attribute_ = std::make_unique<QDockWidget> (this);
-    std::unique_ptr<attribute_widget> attribute_content_ =
-            attribute_widget::make({{{"字段1", "值1"}}, {{"字段2", "值2"}}, {{"字段3", "值3"}}}, this);
+    std::unique_ptr<attribute_widget> attribute_content_;
 
     QMdiArea *mdi_area_ = new QMdiArea (this);//是一个多文档显示窗口
     int sequence_number_ = 1;

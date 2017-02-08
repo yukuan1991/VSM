@@ -397,7 +397,10 @@ static void balanced_production_maker (QPainter* painter, qreal width, qreal hei
 
     QRectF rect (0.05 * width, 0.25 * height, 0.9 * width, 0.5 * height);
 
-    QFontMetricsF metrics (painter->font());
+    auto font = painter->font();
+    font.setBold(true);
+    font.setPointSize (12);
+    QFontMetricsF metrics (font);
     auto w = metrics.width("O X O X");
     auto h = metrics.height();
 
@@ -407,7 +410,7 @@ static void balanced_production_maker (QPainter* painter, qreal width, qreal hei
     painter->setBrush(Qt::white);
     painter->drawRect(rect);
 
-    painter->drawRect(rect);
+    painter->setFont(font);
     painter->drawText(text_rect,"O X O X", Qt::AlignVCenter | Qt::AlignCenter);
 }
 
