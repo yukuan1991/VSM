@@ -4,7 +4,7 @@
 #include <QDebug>
 #include <QStyle>
 #include <QStyleOptionGraphicsItem>
-
+///修改成了1/16
 namespace item
 <%
 
@@ -13,8 +13,8 @@ signal_board::signal_board(item *parent)
     :item (parent)
 {
     set_attribute("生产批量");
-    item_width_ /= 4;
-    item_height_ /= 4;
+    item_width_ = item_width_ * (1/width_heigth_small_);
+    item_height_ = item_height_ * ( 1/width_heigth_small_);
 }
 
 void signal_board::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
