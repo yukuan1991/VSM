@@ -21,20 +21,21 @@ std::unique_ptr<fetch_material> fetch_material::make(QPointF pos, QColor color)
 fetch_material::fetch_material(item *parent)
     :item(parent)
 {
-
+    item_width_ /= width_heigth_small_;
+    item_height_ /= width_heigth_small_;
 }
 
 void fetch_material::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
     auto the_pen = painter->pen();
     the_pen.setColor(color());
-    the_pen.setWidthF(2.0);
+    the_pen.setWidthF(std::max(item_width_ * 0.02, 2.0));
     painter->setPen(the_pen);
 
     QPointF
-    p1 {0.75 * item_width_, 0.8125 * item_height_},
+    p1 {0.75 * item_width_, 0.76 * item_height_},
     p2 {0.82 * item_width_, 0.9 * item_height_},
-    p3 {0.87 * item_width_,0.75 * item_height_};
+    p3 {0.86 * item_width_,0.65 * item_height_};
 
     //给定坐标
     painter->setBrush(Qt::white);
