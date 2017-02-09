@@ -35,7 +35,9 @@ static void improvement_maker (QPainter* painter, qreal width, qreal height);
 static void cache_or_safe_storage_maker (QPainter* painter, qreal width, qreal height);
 static void finished_product_to_customer_maker (QPainter* painter, qreal width, qreal height);
 static void operating_personnel (QPainter* painter, qreal width, qreal height);
-static void tradition_info_flow_maker(QPainter* painter, qreal width, qreal heigth);
+static void tradition_info_flow_maker(QPainter* painter, qreal width, qreal height);
+static void electric_info_flow_maker(QPainter* painter,qreal width,qreal height);
+static void board_info_flow_maker(QPainter* painter, qreal width,qreal height);
 
 QPixmap make_pixmap(const QString &name, qreal width, qreal height)
 {
@@ -66,7 +68,9 @@ QPixmap make_pixmap(const QString &name, qreal width, qreal height)
         {"取料", fetch_material_maker},
         {"缓冲或安全库存", cache_or_safe_storage_maker},
         {"操作员", operating_personnel},
-        {"传统信息流", tradition_info_flow_maker}
+        {"传统信息流", tradition_info_flow_maker},
+        {"电子信息流", electric_info_flow_maker},
+        {"看板用信息流",board_info_flow_maker}
     };
 
     QPainter painter (&pm);
@@ -616,13 +620,15 @@ static void finished_product_to_customer_maker (QPainter* painter, qreal width, 
     painter->drawPolygon({{p1, p2, p3, p4, p5, p6, p7}} , Qt::WindingFill);
 }
 
-static void tradition_info_flow_maker(QPainter* painter, qreal width, qreal heigth)
+static void tradition_info_flow_maker(QPainter* painter, qreal width, qreal height)
 {
-    QPointF p1{90,41},
-    p2{19,41},
-    p3{19,38},
-    p4{19,44},
-    p5{13,41};
+    auto x_scale = width / 100;
+    auto y_scale = height / 80;
+    QPointF p1{90 * x_scale, 41 * y_scale},
+    p2{19 * x_scale ,41 * y_scale},
+    p3{19 * x_scale,38 * y_scale},
+    p4{19 * x_scale,44 * y_scale},
+    p5{13 * x_scale,41 * y_scale};
     auto the_pen = painter->pen();
     the_pen.setWidthF(2.0);
     the_pen.setColor(Qt::blue);
@@ -631,6 +637,50 @@ static void tradition_info_flow_maker(QPainter* painter, qreal width, qreal heig
     painter->setBrush(Qt::blue);
     painter->drawPolygon({{p3,p4,p5}},Qt::WindingFill);
 
+}
+static void electric_info_flow_maker(QPainter* painter,qreal width,qreal height)
+{
+    auto x_scale = width /100;
+    auto y_scale = height /80;
+
+    QPointF p1 {93 * x_scale, 24 * y_scale},
+    p2{53 * x_scale, 18 * y_scale},
+    p3{58 * x_scale, 26 * y_scale},
+    p4{16 * x_scale, 20 * y_scale},
+    p5{16 * x_scale, 17 * y_scale},
+    p6{15 * x_scale, 22 * y_scale},
+    p7 {1 * x_scale, 18 * y_scale};
+
+    auto the_pen = painter->pen();
+    the_pen.setWidthF(2.0);
+    the_pen.setColor(Qt::blue);
+    painter->setPen(the_pen);
+    painter->setBrush(Qt::blue);
+    painter->drawLine(p1,p2);
+    painter->drawLine(p2,p3);
+    painter->drawLine(p3,p4);
+    painter->drawPolygon({{p5,p6,p7}},Qt::WindingFill);
+
+}
+static void board_info_flow_maker(QPainter* painter, qreal width,qreal height)
+{
+    auto x_scale = width / 100;
+    auto y_scale = height / 80;
+    QPointF p1{91 * x_scale, 18 * y_scale},
+    p2{15 * x_scale, 18 * y_scale},
+    p3{15 * x_scale, 59 * y_scale},
+    p4{12 * x_scale, 59 * y_scale},
+    p5{18 * x_scale, 59 * y_scale},
+    p6{15 * x_scale, 65* y_scale};
+    auto the_pen = painter->pen();
+    the_pen.setColor(Qt::black);
+    the_pen.setWidthF(2.0);
+    painter->setBrush(Qt::black);
+    painter->drawPolygon({{p4,p5,p6}},Qt::WindingFill);
+    the_pen.setStyle(Qt::DashLine);
+    painter->setPen(the_pen);
+    painter->drawLine(p1,p2);
+    painter->drawLine(p2,p3);
 }
 
 %>
