@@ -21,12 +21,17 @@ flow_app::flow_app(int argc, char **argv)
         go  [this] { update_check (); };
     }
 }
-
+#include "item/traditional_info_flow.h"
+#include <QGraphicsScene>
+#include <QMatrix>
+#include <QGLWidget>
+#include "item/board_info_flow.h"
 bool flow_app::run()
 {
     main_ = std::make_unique<flow_main> ();
     main_->set_drawer ();
     main_->show ();
+
     return true;
 }
 

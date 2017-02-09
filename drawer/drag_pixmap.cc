@@ -35,6 +35,7 @@ static void improvement_maker (QPainter* painter, qreal width, qreal height);
 static void cache_or_safe_storage_maker (QPainter* painter, qreal width, qreal height);
 static void finished_product_to_customer_maker (QPainter* painter, qreal width, qreal height);
 static void operating_personnel (QPainter* painter, qreal width, qreal height);
+static void tradition_info_flow_maker(QPainter* painter, qreal width, qreal heigth);
 
 QPixmap make_pixmap(const QString &name, qreal width, qreal height)
 {
@@ -64,7 +65,8 @@ QPixmap make_pixmap(const QString &name, qreal width, qreal height)
         {"改善", improvement_maker},
         {"取料", fetch_material_maker},
         {"缓冲或安全库存", cache_or_safe_storage_maker},
-        {"操作员", operating_personnel}
+        {"操作员", operating_personnel},
+        {"传统信息流", tradition_info_flow_maker}
     };
 
     QPainter painter (&pm);
@@ -612,6 +614,23 @@ static void finished_product_to_customer_maker (QPainter* painter, qreal width, 
 
     painter->setBrush(Qt::white);
     painter->drawPolygon({{p1, p2, p3, p4, p5, p6, p7}} , Qt::WindingFill);
+}
+
+static void tradition_info_flow_maker(QPainter* painter, qreal width, qreal heigth)
+{
+    QPointF p1{90,41},
+    p2{19,41},
+    p3{19,38},
+    p4{19,44},
+    p5{13,41};
+    auto the_pen = painter->pen();
+    the_pen.setWidthF(2.0);
+    the_pen.setColor(Qt::blue);
+    painter->setPen(the_pen);
+    painter->drawLine(p1,p2);
+    painter->setBrush(Qt::blue);
+    painter->drawPolygon({{p3,p4,p5}},Qt::WindingFill);
+
 }
 
 %>
