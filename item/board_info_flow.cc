@@ -56,6 +56,11 @@ void board_info_flow::paint(QPainter *painter, const QStyleOptionGraphicsItem *o
     QPen pen;
     pen.setWidthF(2.0);
     pen.setColor (color ());
+
+    if (option->state bitand QStyle::State_Selected)
+    {
+        pen.setColor(Qt::red);
+    }
     pen.setStyle(Qt::DashLine);
     painter->setPen(pen);
 
