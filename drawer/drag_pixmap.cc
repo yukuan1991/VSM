@@ -71,9 +71,10 @@ QPixmap make_pixmap(const QString &name, qreal width, qreal height)
         {"操作员", operating_personnel},
         {"传统信息流", tradition_info_flow_maker},
         {"电子信息流", electric_info_flow_maker},
-        {"看板用信息流",board_info_flow_maker},
-        {"推动式的物料流动",material_flow_maker},
+        {"看板用信息流", board_info_flow_maker},
+        {"物流", material_flow_maker}
     };
+
 
 
     QPainter painter (&pm);
@@ -687,9 +688,10 @@ static void board_info_flow_maker(QPainter* painter, qreal width,qreal height)
 }
 static void material_flow_maker(QPainter* painter,qreal width, qreal height)
 {
-    qDebug() <<"echo1";
+    qDebug() << "qdebug";
     auto x_scale = width / 100;
     auto y_scale = height / 80;
+
     QPointF p1{34 * x_scale, 51 * y_scale },
     p2{34 * x_scale, 61 * y_scale},
     p3{ 41 * x_scale, 61 * y_scale},
@@ -737,7 +739,6 @@ static void material_flow_maker(QPainter* painter,qreal width, qreal height)
 
     painter->setBrush(Qt::black);
     painter->drawPolygon({{p11,p12,p13,p14}},Qt::WindingFill);
-
 
 }
 
