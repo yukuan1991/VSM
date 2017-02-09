@@ -93,7 +93,7 @@ std::unique_ptr<drag_widget> toolbox::init_entity()
 
 std::unique_ptr<drag_widget> toolbox::init_material_flow()
 {
-    return drag_widget::make({"取料"}, {"先进先出", "成品发送至顾客"});
+    return drag_widget::make({"取料"}, {"物流", "先进先出", "成品发送至顾客"});
 }
 
 std::unique_ptr<drag_widget> toolbox::init_info_flow()
