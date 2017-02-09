@@ -14,7 +14,8 @@ signal_board::signal_board(item *parent)
 {
     set_attribute("生产批量");
 
-    set_z_value(24);
+    set_z_value(315);
+
     item_width_ = item_width_ * (1/small_object_ratio);
     item_height_ = item_height_ * ( 1/small_object_ratio);
 }

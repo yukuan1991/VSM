@@ -38,6 +38,7 @@ static void operating_personnel (QPainter* painter, qreal width, qreal height);
 static void tradition_info_flow_maker(QPainter* painter, qreal width, qreal height);
 static void electric_info_flow_maker(QPainter* painter,qreal width,qreal height);
 static void board_info_flow_maker(QPainter* painter, qreal width,qreal height);
+static void material_flow_maker(QPainter* painter,qreal width, qreal height);
 
 QPixmap make_pixmap(const QString &name, qreal width, qreal height)
 {
@@ -70,8 +71,10 @@ QPixmap make_pixmap(const QString &name, qreal width, qreal height)
         {"操作员", operating_personnel},
         {"传统信息流", tradition_info_flow_maker},
         {"电子信息流", electric_info_flow_maker},
-        {"看板用信息流",board_info_flow_maker}
+        {"看板用信息流",board_info_flow_maker},
+        {"推动式的物料流动",material_flow_maker},
     };
+
 
     QPainter painter (&pm);
 
@@ -681,6 +684,61 @@ static void board_info_flow_maker(QPainter* painter, qreal width,qreal height)
     painter->setPen(the_pen);
     painter->drawLine(p1,p2);
     painter->drawLine(p2,p3);
+}
+static void material_flow_maker(QPainter* painter,qreal width, qreal height)
+{
+    qDebug() <<"echo1";
+    auto x_scale = width / 100;
+    auto y_scale = height / 80;
+    QPointF p1{34 * x_scale, 51 * y_scale },
+    p2{34 * x_scale, 61 * y_scale},
+    p3{ 41 * x_scale, 61 * y_scale},
+    p4{41 * x_scale, 51 * y_scale},
+
+    p5{49 * x_scale,51 * y_scale},
+    p6{49 * x_scale, 61 * y_scale},
+
+    p7{56 * x_scale,51 * y_scale},
+    p8{56* x_scale,61 * y_scale},
+
+    p9{65 * x_scale,51 * y_scale},
+    p10 {65 * x_scale,61 * y_scale},
+
+    p11{73 * x_scale, 51 * y_scale},
+    p12{73 * x_scale, 61* y_scale},
+
+    p13{81 * x_scale,51 * y_scale},
+    p14{81 * x_scale,61 * y_scale},
+
+    p15{81 * x_scale,  46 * y_scale},
+    p16{81 * x_scale, 66 * y_scale},
+    p17{91 * x_scale, 56 * y_scale};
+
+    auto the_pen = painter->pen();
+    the_pen.setColor(Qt::black);
+    the_pen.setWidthF(2.0);
+    painter->setPen(the_pen);
+
+    painter->setBrush(Qt::white);
+    painter->drawPolygon({{p1,p2,p3,p4}},Qt::WindingFill);
+
+    painter->setBrush(Qt::black);
+    painter->drawPolygon({{p2,p3,p5,p6}},Qt::WindingFill);
+
+    painter->setBrush(Qt::white);
+    painter->drawPolygon({{p5,p6,p7,p8}},Qt::WindingFill);
+
+    painter->setBrush(Qt::black);
+    painter->drawPolygon({{p7,p8,p9,p10}});
+
+    painter->setBrush(Qt::white);
+    painter->drawPolygon({{p9,p10,p11,p12}},Qt::WindingFill);
+    painter->drawPolygon({{p15,p16,p17}},Qt::WindingFill);
+
+    painter->setBrush(Qt::black);
+    painter->drawPolygon({{p11,p12,p13,p14}},Qt::WindingFill);
+
+
 }
 
 %>

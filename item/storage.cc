@@ -23,7 +23,7 @@ storage::storage(item* parent)
     set_attribute("库存天数");
     set_attribute("材料名");
 
-    set_z_value(20);
+    set_z_value(304);
 
     item_width_ /= small_object_ratio;
     item_height_ /= small_object_ratio;

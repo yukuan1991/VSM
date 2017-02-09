@@ -18,7 +18,7 @@ std::unique_ptr<board_info_flow> board_info_flow::make(QPointF pos, QColor color
 board_info_flow::board_info_flow(item* parent)
     :item(parent)
 {
-    set_z_value(11);
+    set_z_value(103);
 
 }
 

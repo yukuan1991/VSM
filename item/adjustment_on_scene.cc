@@ -13,7 +13,7 @@ adjustment_on_scene::adjustment_on_scene(item* parent)
       item_width_ = item_width_ * ( 1 / small_object_ratio);
       item_height_ = item_height_ * ( 1 / small_object_ratio);
 
-      set_z_value(15);
+      set_z_value(307);
 
 }
 

@@ -25,7 +25,7 @@ improvement::improvement(item *parent)
     set_attribute("存在问题");
     set_attribute("改善方向");
 
-    set_z_value(26);
+    set_z_value(401);
 }
 
 void improvement::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)

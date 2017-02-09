@@ -23,7 +23,7 @@ storage_super_market::storage_super_market(item* parent)
     set_attribute("产品名");
     set_attribute("数量");
 
-    set_z_value(16);
+    set_z_value(306);
 }
 
 void storage_super_market::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
