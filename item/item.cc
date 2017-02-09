@@ -3,6 +3,7 @@
 #include <QPainter>
 #include <QPen>
 #include <QDebug>
+#include <boost/algorithm/string.hpp>
 #include <algorithm>
 
 namespace item
@@ -12,8 +13,6 @@ using namespace std;
 item::item(QObject *parent) : QObject(parent)
 {
     setFlags (ItemIsSelectable | ItemIsMovable);
-    set_attribute("123", "456");
-    set_attribute("aaa", "bbb");
 }
 
 void item::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
@@ -49,6 +48,7 @@ void item::paint_attribute(QPainter *painter) try
 
         std::string key = it.begin ().key();
         std::string value = it.begin ().value();
+        boost::trim (value);
 
         if (value.empty())
         {
@@ -80,7 +80,7 @@ void item::set_attribute(string_view key, std::string value)
         std::string current_key = it.begin().key();
         if (key == current_key)
         {
-            auto target = *(it.begin());
+            auto& target = *(it.begin());
             target = value;
             return;
         }
@@ -93,7 +93,11 @@ void item::apply_z_value(selected_item yes_or_no)
 {
     if (yes_or_no == selected_item::yes)
     {
-
+        setZValue (z_value_ + 0.5);
+    }
+    else
+    {
+        setZValue(z_value_);
     }
 }
 

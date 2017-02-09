@@ -28,9 +28,7 @@ DEFINES += EXEC_FILE=\\\"$$TARGET\\\"
 
 SOURCES += \
     flow_app.cc \
-    flow_utility.cc \
     flow_main.cc \
-    remark_widget.cc \
     drawer/list.cc \
     drawer/toolbox.cc \
     drawer/info_flow.cc \
@@ -71,8 +69,6 @@ HEADERS += \
     flow_app.h \
     defs.hpp \
     flow_main.h \
-    flow_utility.h \
-    remark_widget.h \
     drawer/list.h \
     drawer/toolbox.h \
     drawer/info_flow.h \

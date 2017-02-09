@@ -17,12 +17,12 @@ flow_main::flow_main(QWidget *parent) :
 {
     ui->setupUi(this);
     create_toolbar();
-     //更新活动窗口
+    //更新活动窗口
     connect (mdi_area_, &QMdiArea::subWindowActivated, this, &flow_main::set_tool_action);
     set_tool_action();
     set_mdi_area ();
     init_conn ();
-    set_attribute_window ();
+    set_attribute ();
 }
 
 void flow_main::set_attribute_window()
@@ -30,28 +30,27 @@ void flow_main::set_attribute_window()
     attribute_->setWidget (attribute_content_.get());
     connect(attribute_content_.get (), &attribute_widget::commit, [this]
     {
+        auto active_canvas = this->active_canvas_body();
         auto changes = attribute_content_->apply();
         for (auto & it : changes)
         {
-            qDebug () << it.first.data() << " " << it.second.data();
+            active_canvas->set_item_attribute (it.first, it.second);
         }
     });
-
-    attribute_->setAllowedAreas (Qt::RightDockWidgetArea);
-    addDockWidget (Qt::RightDockWidgetArea, attribute_.get ());
+    if (attribute_->isHidden())
+    {
+        attribute_->show();
+    }
 }
 
 void flow_main::update_remark()
 {
-    //auto remark = attribute_content_->remark();
     auto canvas = active_canvas_body();
 
     if (canvas == nullptr)
     {
         return;
     }
-
-    //canvas->set_remark(remark);
 }
 
 void flow_main::on_drawer_status(const QString &status)
@@ -61,7 +60,6 @@ void flow_main::on_drawer_status(const QString &status)
 
 void flow_main::set_drawer()
 {
-
     drawer_->setMaximumWidth (150);
     drawer_->setMinimumWidth (150);
     drawer_content_->setMaximumWidth (140);
@@ -72,6 +70,14 @@ void flow_main::set_drawer()
 
     drawer_->setAllowedAreas (Qt::LeftDockWidgetArea);
     addDockWidget (Qt::LeftDockWidgetArea, drawer_.get ());
+}
+
+void flow_main::set_attribute()
+{
+    attribute_->setMaximumWidth(250);
+    attribute_->setMinimumWidth(250);
+    attribute_->setAllowedAreas (Qt::RightDockWidgetArea);
+    addDockWidget (Qt::RightDockWidgetArea, attribute_.get ());
 }
 
 flow_main::~flow_main()
@@ -200,7 +206,7 @@ not_null<canvas::body*> flow_main::create_canvas_body()
     canvas->setWindowState(Qt::WindowMaximized);
     mdi_area_->addSubWindow(canvas.release ());
 
-    connect(raw_canvas, &canvas::body::selection_changed, this, &flow_main::set_attribute);
+    connect(raw_canvas, &canvas::body::selection_changed, this, &flow_main::notify_attribute);
     connect (drawer_content_.get(), &drawer::toolbox::status_changed,
              raw_canvas, &canvas::body::set_arrow_state);
     raw_canvas->set_arrow_state(drawer_content_->status ());
@@ -225,7 +231,6 @@ void flow_main::init_conn()
     connect(ui->action_file_save_as, &QAction::triggered, this, &flow_main::file_save_as);
     connect (ui->action_zoom_in, &QAction::triggered, this, &flow_main::zoom_in_active);
     connect (ui->action_zoom_out, &QAction::triggered, this, &flow_main::zoom_out_active);
-    //connect(attribute_content_.get (), &remark_widget::text_changed, this, &flow_main::update_remark);
 }
 
 void flow_main::zoom_in_active()
@@ -240,34 +245,28 @@ void flow_main::zoom_out_active()
     active_canvas->scale_object(1 / 1.1);
 }
 
-void flow_main::set_attribute(bool ok)
+void flow_main::notify_attribute(bool ok)
 {
-    attribute_content_.release();
+    attribute_->setWidget (nullptr);
     if (!ok)
     {
-        attribute_->setWidget (nullptr);
         return;
     }
-    qDebug () << "flow_main::set_attribute";
     auto active_canvas = active_canvas_body();
     if (active_canvas == nullptr)
     {
         return;
     }
 
-    auto remark = active_canvas->remark();
     auto attribute = active_canvas->selected_item_data();
-    qDebug () << attribute.dump(4).data ();
-    if (attribute.size()==0)
+    if (attribute.size() == 0)
     {
-        attribute_->setWidget (nullptr);
         return;
     }
-    qDebug () << "after size judge";
-    attribute_content_  = attribute_widget::make (::move (attribute), this);
-    set_attribute_window ();
 
-    //attribute_content_->set_remark(remark);
+    attribute_content_  = attribute_widget::make (::move (attribute), this);
+
+    set_attribute_window ();
 }
 
 void flow_main::on_drawer_visibility_changed()

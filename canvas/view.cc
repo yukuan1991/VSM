@@ -10,7 +10,6 @@
 #include <QDragMoveEvent>
 #include <QDropEvent>
 #include <QMimeData>
-#include "flow_utility.h"
 #include "defs.hpp"
 #include <QGraphicsSvgItem>
 #include <assert.h>

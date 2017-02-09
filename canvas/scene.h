@@ -6,6 +6,7 @@
 #include <experimental/optional>
 #include <memory>
 #include "item/material_flow.h"
+#include <experimental/string_view>
 
 namespace item
 {
@@ -16,6 +17,7 @@ namespace canvas
 <%
 
 using std::experimental::nullopt;
+using std::experimental::string_view;
 
 class scene : public QGraphicsScene
 {
@@ -26,6 +28,7 @@ public:
     void init ();
     bool load (const nlohmann::json & data);
     const nlohmann::json selected_item_attribute ();
+    void set_item_attribute (string_view key, std::string value = {});
     ~scene () override;
 
 signals:
@@ -33,6 +36,7 @@ signals:
 protected:
 private:
     void adjust_z_value ();
+    void report_selection ();
 
 private:
     item::item* selected_item_ = nullptr;

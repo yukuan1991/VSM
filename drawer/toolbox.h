@@ -24,9 +24,12 @@ protected:
     bool init ();
     static std::unique_ptr<drag_widget> init_entity ();
     static std::unique_ptr<drag_widget> init_material_flow ();
+    static std::unique_ptr<drag_widget> init_info_flow ();
     QStringList get_file_names (const QDir& dir);
 private:
     void on_button_pressed ();
+private:
+    QString status_;
 };
 
 %>

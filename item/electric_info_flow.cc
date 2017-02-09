@@ -68,6 +68,7 @@ void electric_info_flow::paint(QPainter *painter, const QStyleOptionGraphicsItem
     Q_UNUSED (widget);
     QPen pen;
     pen.setWidthF (2.0);
+    pen.setColor (color ());
     painter->setPen(pen);
 
     painter->drawLine(start_, mid_p1_);

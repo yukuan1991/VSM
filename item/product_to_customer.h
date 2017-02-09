@@ -25,11 +25,13 @@ protected:
     QPainterPath shape () const override;
 private:
     QPointF start_, end_;
-    QPointF body_end_, neck1_, neck2_;
+    QPointF body_p1_, body_p2_, body_p3_, body_p4_, neck1_, neck2_, arrow_tip_;
     QPointF outer_p1_, outer_p2_, outer_neck1_, outer_tip_, outer_neck2_, outer_p4_, outer_p3_;
-    constexpr static qreal tip_width = 3;
-    constexpr static qreal tip_length = 10;
-    constexpr static qreal bound_width = 5;
+
+    constexpr static qreal width = 5;
+    constexpr static qreal fill_distance = 8;
+    constexpr static qreal head_ratio = 5;
+    constexpr static qreal outer_gap = 4;
 };
 
 } // namespace item

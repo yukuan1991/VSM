@@ -24,6 +24,7 @@ drag_widget::drag_widget(std::vector<QString> labels, std::vector<QString> butto
 
 void drag_widget::on_button_pressed()
 {
+    qDebug () << "button pressed";
     auto button = dynamic_cast<QPushButton*>(sender ());
     if (button == nullptr)
     {
@@ -92,7 +93,6 @@ bool drag_widget::init()
         v_layout->addWidget (pic_label);
 
         auto info_label = new QLabel (it, this);
-        info_label->setObjectName({});
         v_layout->addWidget (info_label);
     }
 
@@ -100,6 +100,7 @@ bool drag_widget::init()
     for (auto & it : button_names_)
     {
         auto button = new QPushButton (drawer::make_pixmap(it, 100, 80), "", this);
+        button->setObjectName(it);
         button->setIconSize({100, 80});
         button->setCheckable(true);
         button->setChecked(false);
@@ -109,7 +110,6 @@ bool drag_widget::init()
         buttons_.emplace_back (button);
 
         auto info_label = std::make_unique<QLabel> (it, this);
-        info_label->setObjectName(it);
         info_label->setAlignment(Qt::AlignHCenter);
         v_layout->addWidget (info_label.release());
     }
