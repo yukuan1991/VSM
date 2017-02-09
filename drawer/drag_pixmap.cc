@@ -725,7 +725,7 @@ static void material_flow_maker(QPainter* painter,qreal width, qreal height)
     painter->drawPolygon({{p1,p2,p3,p4}},Qt::WindingFill);
 
     painter->setBrush(Qt::black);
-    painter->drawPolygon({{p2,p3,p5,p6}},Qt::WindingFill);
+    painter->drawPolygon({{p3,p4,p5,p6}},Qt::WindingFill);
 
     painter->setBrush(Qt::white);
     painter->drawPolygon({{p5,p6,p7,p8}},Qt::WindingFill);
@@ -737,8 +737,19 @@ static void material_flow_maker(QPainter* painter,qreal width, qreal height)
     painter->drawPolygon({{p9,p10,p11,p12}},Qt::WindingFill);
     painter->drawPolygon({{p15,p16,p17}},Qt::WindingFill);
 
+    painter->setBrush(Qt::white);
+    painter->drawPolygon({{p5,p6,p8,p7}},Qt::WindingFill);
+
     painter->setBrush(Qt::black);
-    painter->drawPolygon({{p11,p12,p13,p14}},Qt::WindingFill);
+    painter->drawPolygon({{p7,p8,p10,p9}});
+
+    painter->setBrush(Qt::white);
+    painter->drawPolygon({{p9,p10,p12,p11}},Qt::WindingFill);
+    painter->drawPolygon({{p15,p16,p17}},Qt::WindingFill);
+
+    painter->setBrush(Qt::black);
+    painter->drawPolygon({{p11,p12,p14,p13}},Qt::WindingFill);
+
 
 }
 

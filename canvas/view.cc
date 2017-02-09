@@ -15,6 +15,9 @@
 #include <assert.h>
 #include <QGLWidget>
 #include "item/maker.hpp"
+#include "qt-tools/graphics.hpp"
+#include "item/board_info_flow.h"
+#include <QMenu>
 
 
 
@@ -40,6 +43,7 @@ void view::init()
     setDragMode (RubberBandDrag);
     setRubberBandSelectionMode (Qt::IntersectsItemShape);
     setViewport(new QGLWidget(QGLFormat(QGL::SampleBuffers)));
+    connect (this, &view::set_arrow_state, this, &view::on_state_changed);
 }
 
 void view::wheelEvent(QWheelEvent *event)
@@ -88,7 +92,7 @@ void view::mousePressEvent(QMouseEvent *event)
     }
     else if (arrow_state_ == "看板用信息流")
     {
-        ///
+        board_info_press_event(event);
     }
     else
     {
@@ -108,11 +112,17 @@ void view::mouseMoveEvent(QMouseEvent *event)
         if (tmp_arrow_.value() != nullptr)
         {
             scene()->addItem(tmp_arrow_->get());
-            return;
         }
     }
+    else if (arrow_state_ == "看板用信息流")
+    {
+        board_info_move_event(event);
+    }
+    else
+    {
+        QGraphicsView::mouseMoveEvent(event);
+    }
 
-    QGraphicsView::mouseMoveEvent(event);
 }
 
 
@@ -123,10 +133,67 @@ void view::mouseReleaseEvent(QMouseEvent *event)
         tmp_arrow_.value().release();
         tmp_arrow_ = nullopt;
     }
+    else if (arrow_state_ == "看板用信息流")
+    {
+        board_info_release_event(event);
+    }
     else
     {
         QGraphicsView::mouseReleaseEvent(event);
     }
+}
+
+void view::board_info_press_event(QMouseEvent *event)
+{
+    auto scene_pos = mapToScene(event->pos());
+
+    if (event->button() == Qt::LeftButton)
+    {
+        if (board_tmp_item_.empty())
+        {
+            board_tmp_item_.emplace_back (make_line (scene_pos, scene_pos));
+            scene ()->addItem (board_tmp_item_.back ().get ());
+            return;
+        }
+
+        auto& last_item = board_tmp_item_.back ();
+        auto last_ptr = last_item->line ().p1 ();
+        if (distance (scene_pos, last_ptr) < 10)
+        {
+            return;
+        }
+
+        last_item->setLine({last_ptr, scene_pos});
+        board_tmp_item_.emplace_back (make_line (scene_pos, scene_pos));
+        scene ()->addItem (board_tmp_item_.back ().get ());
+    }
+    else if (event->button() == Qt::RightButton)
+    {
+        if (board_tmp_item_.empty())
+        {
+            return;
+        }
+
+        finish_board_info (::move (board_tmp_item_));
+    }
+}
+
+
+void view::board_info_move_event(QMouseEvent *event)
+{
+    if (board_tmp_item_.empty())
+    {
+        return;
+    }
+
+    auto& last_item = board_tmp_item_.back();
+    auto p1 = last_item->line().p1();
+    last_item->setLine({p1, mapToScene (event->pos())});
+}
+
+void view::board_info_release_event(QMouseEvent *event)
+{
+
 }
 
 void view::dragEnterEvent(QDragEnterEvent *event)
@@ -196,10 +263,25 @@ void view::scale_object(double factor)
         if (reinterpret_cast<void*> (obj) == reinterpret_cast<void*> (this))
         {
             emit scale_changed (scale_factor);
-            }
+        }
     };
 
     set_scale (this);
+}
+
+void view::on_state_changed(const QString &state)
+{
+    board_tmp_item_.clear();
+
+    SCOPE_EXIT { arrow_state_ = state; };
+    if (state == "看板用信息流")
+    {
+        setMouseTracking(true);
+    }
+    else
+    {
+        setMouseTracking(false);
+    }
 }
 
 view::~view()
@@ -234,6 +316,24 @@ void view::delete_selected()
     {
         delete it;
     }
+}
+
+void view::finish_board_info(vector<unique_ptr<QGraphicsLineItem>> lines)
+{
+    QMenu menu (this);
+    menu.addAction ("确定");
+    menu.addAction ("取消");
+    scene ()->addItem (item::board_info_flow::make (::move (lines), Qt::black).release ());
+}
+
+unique_ptr<QGraphicsLineItem> view::make_line(QPointF p1, QPointF p2)
+{
+    auto ret = std::make_unique<QGraphicsLineItem> (QLineF (p1, p2));
+    QPen pen;
+    pen.setWidthF (2.0);
+    pen.setStyle (Qt::DashLine);
+    ret->setPen (pen);
+    return ret;
 }
 
 %>

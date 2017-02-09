@@ -1,7 +1,8 @@
 ﻿#ifndef VS_ITEM_INFORMATION_H
 #define VS_ITEM_INFORMATION_H
 #include <item/item.h>
-#include <memory>
+#include "utility/memory.hpp"
+#include "utility/containers.hpp"
 ///看板用流信息
 namespace item {
 
@@ -9,14 +10,19 @@ namespace item {
 class board_info_flow : public item
 {
 public:
-    static std::unique_ptr <board_info_flow> make (QPointF pos, QColor color = Qt::black);
+    static unique_ptr <board_info_flow> make (vector<unique_ptr<QGraphicsLineItem>> tmp_lines, QColor color,
+                                              item* parent = nullptr);
 
 protected:
     board_info_flow(item* parent = nullptr);
-     void paint (QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = nullptr) override;
+    bool init (vector<unique_ptr<QGraphicsLineItem>> tmp_lines);
+    void paint (QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = nullptr) override;
+    QRectF boundingRect () const override;
 private:
-
-  };
+    vector<QLineF> lines_;
+    static constexpr qreal tip_length = 10;
+    static constexpr qreal tip_width = 4;
+};
 }
 
 #endif // VS_ITEM_INFORMATION_H

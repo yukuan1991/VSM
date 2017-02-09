@@ -63,7 +63,6 @@ inline std::unique_ptr<item> make_item (const QString& classname, QPointF pos)
         {"缓冲或安全库存",  [] (QPointF p)->up_item { return cache_or_safe_storage::make(p, Qt::black); }},
         {"操作员", [] (QPointF p)->up_item { return operating_personnel::make (p, Qt::black); }},
         {"看板站", [] (QPointF p)->up_item { return board_station::make (p, Qt::black); }}
-
     };
 
     auto found = type_map.find(classname);

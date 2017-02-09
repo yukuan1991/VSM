@@ -70,6 +70,12 @@ void traditional_info_flow::paint(QPainter *painter, const QStyleOptionGraphicsI
     Q_UNUSED(widget);
     QPen pen;
     pen.setColor(color ());
+
+    if (option->state bitand QStyle::State_Selected)
+    {
+        pen.setColor(Qt::red);
+    }
+
     pen.setWidthF(2.0);
     painter->setPen(pen);
 
@@ -77,12 +83,6 @@ void traditional_info_flow::paint(QPainter *painter, const QStyleOptionGraphicsI
     painter->setBrush(color ());
     pen.setWidthF(1);
     painter->drawPolygon({{neck1_, neck2_, end_}}, Qt::WindingFill);
-    if (option->state bitand QStyle::State_Selected)
-    {
-        set_dash(painter);
-        painter->drawPath(shape ());
-    }
-
 }
 
 QRectF traditional_info_flow::boundingRect() const

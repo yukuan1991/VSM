@@ -24,7 +24,6 @@ drag_widget::drag_widget(std::vector<QString> labels, std::vector<QString> butto
 
 void drag_widget::on_button_pressed()
 {
-    qDebug () << "button pressed";
     auto button = dynamic_cast<QPushButton*>(sender ());
     if (button == nullptr)
     {
