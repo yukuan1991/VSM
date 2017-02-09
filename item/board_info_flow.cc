@@ -25,6 +25,8 @@ board_info_flow::board_info_flow(item* parent)
 
     set_z_value(103);
     set_z_value(11);
+
+
 }
 
 bool board_info_flow::init(vector<unique_ptr<QGraphicsLineItem> > tmp_lines)
@@ -33,13 +35,13 @@ bool board_info_flow::init(vector<unique_ptr<QGraphicsLineItem> > tmp_lines)
     {
         return false;
     }
+    set_z_value(103);
 
     auto begin_ptr = tmp_lines.front()->line().p1();
     setPos(begin_ptr);
     lines_.reserve(tmp_lines.size ());
     for (auto & it : tmp_lines)
     {
-        //lines_.emplace_back (it->line () - begin_ptr);
         lines_.emplace_back (it->line().p1() - begin_ptr, it->line().p2() - begin_ptr);
     }
 

@@ -193,7 +193,7 @@ void view::board_info_move_event(QMouseEvent *event)
 
 void view::board_info_release_event(QMouseEvent *event)
 {
-
+    Q_UNUSED (event);
 }
 
 void view::dragEnterEvent(QDragEnterEvent *event)
@@ -321,9 +321,14 @@ void view::delete_selected()
 void view::finish_board_info(vector<unique_ptr<QGraphicsLineItem>> lines)
 {
     QMenu menu (this);
-    menu.addAction ("确定");
+    auto confirm = menu.addAction ("确定");
     menu.addAction ("取消");
-    scene ()->addItem (item::board_info_flow::make (::move (lines), Qt::black).release ());
+    connect (confirm, &QAction::triggered, [&]
+    {
+        scene ()->addItem (item::board_info_flow::make (::move (lines), Qt::black).release ());
+    });
+
+    menu.exec(QCursor::pos());
 }
 
 unique_ptr<QGraphicsLineItem> view::make_line(QPointF p1, QPointF p2)
