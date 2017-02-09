@@ -69,6 +69,12 @@ void electric_info_flow::paint(QPainter *painter, const QStyleOptionGraphicsItem
     QPen pen;
     pen.setWidthF (2.0);
     pen.setColor (color ());
+
+    if (option->state bitand QStyle::State_Selected)
+    {
+        pen.setColor(Qt::red);
+    }
+
     painter->setPen(pen);
 
     painter->drawLine(start_, mid_p1_);
@@ -78,11 +84,6 @@ void electric_info_flow::paint(QPainter *painter, const QStyleOptionGraphicsItem
 
     painter->setBrush(color ());
     painter->drawPolygon({{neck1_, neck2_, end_}}, Qt::WindingFill);
-
-    if (option->state bitand QStyle::State_Selected)
-    {
-        qDebug () << "selected" << dynamic_cast<QObject*> (this);
-    }
 }
 
 QRectF electric_info_flow::boundingRect() const
