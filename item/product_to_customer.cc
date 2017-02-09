@@ -15,7 +15,7 @@ std::unique_ptr<product_to_customer> product_to_customer::make(QPointF start, QP
     {
         return nullptr;
     }
-    ret->type_ = "传统信息流";
+    ret->type_ = "成品发送至顾客";
     return ret;
 
 }
@@ -34,7 +34,7 @@ product_to_customer::product_to_customer(QPointF start, QPointF end, item *paren
     end_ = end - mid_pos;
     set_color (::move (color));
 
-    set_z_value(7);
+    set_z_value(202);
 }
 
 bool product_to_customer::init()

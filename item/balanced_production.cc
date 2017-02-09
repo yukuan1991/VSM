@@ -18,7 +18,7 @@ balanced_production::balanced_production(item* parent)
     set_attribute ("生产品类");
     set_attribute ("生产数量");
 
-    set_z_value(12);
+    set_z_value(317);
 
 }
 

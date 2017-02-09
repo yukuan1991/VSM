@@ -16,7 +16,7 @@ production_watcher_board::production_watcher_board(item *parent)
     set_attribute("需求地点");
     set_attribute("供货时间");
 
-    set_z_value(22);
+    set_z_value(313);
 
     item_width_ /= small_object_ratio;
     item_height_ /= small_object_ratio;

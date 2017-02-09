@@ -19,7 +19,7 @@ truck_transport::truck_transport(item * parent)
 {
     set_attribute("运输频率");
 
-    set_z_value(10);
+    set_z_value(305);
 
 }
 

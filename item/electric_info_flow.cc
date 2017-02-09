@@ -32,7 +32,7 @@ electric_info_flow::electric_info_flow(QPointF p1, QPointF p2, item *parent, QCo
     set_color(::move (color));
     type_ = "电子信息流";
 
-    set_z_value(6);
+    set_z_value(102);
 }
 
 bool electric_info_flow::init()

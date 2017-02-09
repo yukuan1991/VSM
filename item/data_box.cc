@@ -11,7 +11,7 @@ namespace item {
 data_box::data_box(item* parent)
     :item (parent)
 {
-    set_z_value(4);
+    set_z_value(303);
 
 }
 

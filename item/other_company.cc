@@ -20,7 +20,7 @@ other_company::other_company(item * parent)
     set_attribute("需求量");
     set_attribute("包装方式");
     set_attribute("工作班数");
-    set_z_value(3);
+    set_z_value(302);
 }
 
 void other_company::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
