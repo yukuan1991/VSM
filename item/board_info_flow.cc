@@ -22,6 +22,7 @@ unique_ptr<board_info_flow> board_info_flow::make(vector<unique_ptr<QGraphicsLin
 board_info_flow::board_info_flow(item* parent)
     :item(parent)
 {
+    set_z_value(103);
 }
 
 bool board_info_flow::init(vector<unique_ptr<QGraphicsLineItem> > tmp_lines)
