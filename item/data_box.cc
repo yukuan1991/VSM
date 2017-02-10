@@ -3,6 +3,7 @@
 #include <QColor>
 #include <QStyleOptionGraphicsItem>
 #include <QDebug>
+#include <QInputDialog>
 ///数据箱
    ///修改完成
 namespace item {
@@ -40,8 +41,40 @@ void data_box::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, 
     painter->drawLine(p5_,p6_);
     painter->drawLine(p7_,p8_);
     painter->drawLine(p3_,p4_);
+    auto item_name = name();
+    if(item_name.empty())
+    {
+        return;
+    }
 
-   item::paint(painter, option, widget);
+    QFontMetricsF metrics (painter->font());
+    auto width = metrics.width(item_name.data());
+    auto height = metrics.height();
+    auto center_1 = QPointF (item_width_ / 2, (p1_.y() + p3_.y() ) / 2);
+    auto center_2 = QPointF (item_width_ / 2, (p5_.y() + p7_.y() ) / 2);
+    auto center_3 = QPointF (item_width_ / 2, (p3_.y() + p5_.y() ) / 2);
+    auto center_4 = QPointF (item_width_ / 2, (p7_.y() + p9_.y() ) / 2);
+
+    painter->drawText(QRectF (center_3 - QPointF (width / 2, height / 2), QSizeF (width, height)), item_name.data());
+    painter->drawText(QRectF (center_1 - QPointF (width / 2, height / 2), QSizeF (width, height)), item_name.data());
+    painter->drawText(QRectF (center_2 - QPointF (width / 2, height / 2), QSizeF (width, height)), item_name.data());
+    painter->drawText(QRectF (center_4 - QPointF (width / 2, height / 2), QSizeF (width, height)), item_name.data());
+
+
+
+    item::paint(painter, option, widget);
+}
+
+void data_box::mouseDoubleClickEvent(QGraphicsSceneMouseEvent *event)
+{
+    auto old_name = name ();
+    bool confirmed = false;
+    auto company_name = QInputDialog::getText(nullptr, "", "名称:",
+                                              QLineEdit::Normal, old_name.data(), &confirmed);
+    if (confirmed)
+    {
+        set_name (company_name.trimmed ().toStdString());
+    }
 }
 
 std::unique_ptr<data_box> data_box::make(QPointF pos, QColor color)
