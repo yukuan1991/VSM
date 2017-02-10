@@ -691,29 +691,29 @@ static void material_flow_maker(QPainter* painter,qreal width, qreal height)
     auto x_scale = width / 100;
     auto y_scale = height / 80;
 
-    QPointF p1{23 * x_scale, 40 * y_scale },
-    p2{23 * x_scale, 50 * y_scale},
-    p3{30 * x_scale, 50 * y_scale},
-    p4{30 * x_scale, 40 * y_scale},
+    QPointF p1{1 * x_scale, 35 * y_scale },
+    p2{1 * x_scale, 50 * y_scale},
+    p3{16 * x_scale, 50 * y_scale},
+    p4{16 * x_scale, 35 * y_scale},
 
-    p5{37 * x_scale,40 * y_scale},
-    p6{37 * x_scale, 50 * y_scale},
+    p5{30 * x_scale,35 * y_scale},
+    p6{30 * x_scale, 50 * y_scale},
 
-    p7{44 * x_scale,40 * y_scale},
-    p8{44 * x_scale,50 * y_scale},
+    p7{45 * x_scale,35 * y_scale},
+    p8{45 * x_scale,50 * y_scale},
 
-    p9{51 * x_scale,40 * y_scale},
-    p10{51 * x_scale,50 * y_scale},
+    p9{60 * x_scale,35 * y_scale},
+    p10{60 * x_scale,50 * y_scale},
 
-    p11{58 * x_scale, 40 * y_scale},
-    p12{58 * x_scale, 50* y_scale},
+    p11{74 * x_scale, 35 * y_scale},
+    p12{74 * x_scale, 50* y_scale},
 
-    p13{65 * x_scale,40 * y_scale},
-    p14{65 * x_scale,50 * y_scale},
+    p13{89 * x_scale,35 * y_scale},
+    p14{89 * x_scale,50 * y_scale},
 
-    p15{65 * x_scale,  35 * y_scale},
-    p16{65 * x_scale, 55* y_scale},
-    p17{75 * x_scale, 45 * y_scale};
+    p15{89 * x_scale,  27 * y_scale},
+    p16{89 * x_scale, 58 * y_scale},
+    p17{99 * x_scale, 42 * y_scale};
 
     auto the_pen = painter->pen();
     the_pen.setColor(Qt::black);

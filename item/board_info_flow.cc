@@ -22,11 +22,7 @@ unique_ptr<board_info_flow> board_info_flow::make(vector<unique_ptr<QGraphicsLin
 board_info_flow::board_info_flow(item* parent)
     :item(parent)
 {
-
     set_z_value(103);
-    set_z_value(11);
-
-
 }
 
 bool board_info_flow::init(vector<unique_ptr<QGraphicsLineItem> > tmp_lines)
@@ -35,7 +31,6 @@ bool board_info_flow::init(vector<unique_ptr<QGraphicsLineItem> > tmp_lines)
     {
         return false;
     }
-    set_z_value(103);
 
     auto begin_ptr = tmp_lines.front()->line().p1();
     setPos(begin_ptr);
@@ -61,6 +56,11 @@ void board_info_flow::paint(QPainter *painter, const QStyleOptionGraphicsItem *o
     QPen pen;
     pen.setWidthF(2.0);
     pen.setColor (color ());
+
+    if (option->state bitand QStyle::State_Selected)
+    {
+        pen.setColor(Qt::red);
+    }
     pen.setStyle(Qt::DashLine);
     painter->setPen(pen);
 
