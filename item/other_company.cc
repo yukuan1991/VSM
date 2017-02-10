@@ -1,6 +1,11 @@
 ﻿#include "other_company.h"
 #include "QStyleOptionGraphicsItem"
 #include "QPainter"
+#include <QGraphicsSceneMouseEvent>
+#include <QAction>
+#include <QMenu>
+#include <QInputDialog>
+
 namespace item {
 
 
@@ -11,7 +16,6 @@ std::unique_ptr<other_company> other_company::make(QPointF pos, QColor color)
     ret->set_color(std::move(color));
     ret->type_ = "其他公司";
     return ret;
-
 }
 
 other_company::other_company(item * parent)
@@ -25,6 +29,8 @@ other_company::other_company(item * parent)
 
 void other_company::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
+    SCOPE_EXIT { item::paint(painter, option, widget); };
+
     auto the_pen = painter->pen ();
     the_pen.setColor(Qt::black);
     the_pen.setWidthF(2.0);
@@ -34,7 +40,7 @@ void other_company::paint(QPainter *painter, const QStyleOptionGraphicsItem *opt
     auto x_scale = item_width_ / 100;
     auto y_scale =item_height_ / 80;
     const QPointF
-    p1 {1 * x_scale, 30 * y_scale},
+            p1 {1 * x_scale, 30 * y_scale},
     p2 {33 * x_scale,1 * y_scale},
     p3 {33 * x_scale,26 * y_scale},
     p4 {66 * x_scale,1 * y_scale},
@@ -44,7 +50,31 @@ void other_company::paint(QPainter *painter, const QStyleOptionGraphicsItem *opt
     p8 {1 * x_scale,79 * y_scale};
     painter->drawPolygon({{p1,p2,p3,p4,p5,p6,p7,p8}},Qt::WindingFill);
 
-    item::paint(painter, option, widget);
+    auto item_name = name ();
+    if (item_name.empty())
+    {
+        return;
+    }
+
+    QFontMetricsF metrics (painter->font());
+    auto width = metrics.width(item_name.data());
+    auto height = metrics.height();
+    auto center = QPointF (item_width_ / 2, (p1.y() + p8.y()) / 2);
+    painter->drawText(QRectF (center - QPointF (width / 2, height / 2), QSizeF (width, height)), item_name.data());
+}
+
+
+void other_company::mouseDoubleClickEvent(QGraphicsSceneMouseEvent *event)
+{
+    auto old_name = name ();
+    bool confirmed = false;
+    auto company_name = QInputDialog::getText(nullptr, "", "公司名称:",
+                                              QLineEdit::Normal, old_name.data(), &confirmed);
+    if (confirmed)
+    {
+        set_name (company_name.trimmed ().toStdString());
+    }
+
 }
 
 }

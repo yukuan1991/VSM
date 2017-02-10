@@ -12,6 +12,7 @@ public:
 protected:
     other_company(item* parent = nullptr);
     void paint (QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = nullptr) override;
+    void mouseDoubleClickEvent(QGraphicsSceneMouseEvent *event) override;
 };
 }
 #endif // OTHER_COMPANY_H

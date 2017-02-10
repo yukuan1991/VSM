@@ -27,7 +27,7 @@ public:
     scene(ARGS&& ... args) : QGraphicsScene (std::forward<ARGS> (args)...) { init (); }
     void init ();
     bool load (const nlohmann::json & data);
-    const nlohmann::json selected_item_attribute ();
+    nlohmann::json selected_item_attribute ();
     void set_item_attribute (string_view key, std::string value = {});
     ~scene () override;
 

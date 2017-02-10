@@ -39,7 +39,7 @@ void item::paint_attribute(QPainter *painter) try
     QPointF start_point (bounding_rect.left (), bounding_rect.bottom ());
 
     int i = 0;
-    for (auto& it : item_info_)
+    for (auto& it : item_info_ ["attribute"])
     {
         if (!it.is_object() or it.empty())
         {
@@ -68,9 +68,23 @@ catch (const std::exception& e)
     qDebug () << e.what ();
 }
 
+string item::name()
+{
+    auto iter = item_info_.find("name");
+    if (iter != item_info_.end () and iter->is_string ())
+    {
+        return *iter;
+    }
+    else
+    {
+        return {};
+    }
+}
+
 void item::set_attribute(string_view key, std::string value)
 {
-    for (auto & it : item_info_)
+    auto& attribute = item_info_ ["attribute"];
+    for (auto & it : attribute)
     {
         if (!it.is_object() or it.empty())
         {
@@ -86,7 +100,7 @@ void item::set_attribute(string_view key, std::string value)
         }
     }
 
-    item_info_.push_back({{key.to_string (), value}});
+    attribute.push_back({{key.to_string (), value}});
 }
 
 void item::apply_z_value(selected_item yes_or_no)
@@ -99,38 +113,6 @@ void item::apply_z_value(selected_item yes_or_no)
     {
         setZValue(z_value_);
     }
-}
-
-optional<std::string> item::attribute(string_view key) try
-{
-    auto it = find_if (item_info_.begin (), item_info_.end (), [&] (auto&& it)
-    {
-        if (!it.is_object () or it.empty ())
-        {
-            return false;
-        }
-
-        std::string current_key = it.begin ().key ();
-        if (current_key == key)
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
-    });
-
-    if (it != item_info_.end ())
-    {
-        return it->begin().value();
-    }
-
-    return nullopt;
-}
-catch (std::exception const &)
-{
-    return nullopt;
 }
 
 QRectF item::boundingRect() const

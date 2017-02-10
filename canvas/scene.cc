@@ -14,7 +14,7 @@ void scene::init()
     setSceneRect ({0, 0, 1920, 1080});
 }
 
-const nlohmann::json scene::selected_item_attribute()
+nlohmann::json scene::selected_item_attribute()
 {
     auto selected = selectedItems();
     if (selected.size() != 1)
@@ -29,7 +29,7 @@ const nlohmann::json scene::selected_item_attribute()
         return {};
     }
 
-    return item_selected->data();
+    return item_selected->attributes();
 }
 
 void scene::set_item_attribute(string_view key, std::__cxx11::string value)

@@ -7,6 +7,7 @@
 #include "json.hpp"
 #include <experimental/string_view>
 #include <experimental/optional>
+#include "utility/containers.hpp"
 
 namespace item
 <%
@@ -29,15 +30,14 @@ signals:
 public:
     qreal width () { return item_width_; }
     qreal height () { return item_height_; }
-    const QString& name () { return name_; }
-    void set_name (QString s) { name_ = ::move (s);  emit name_changed (name_); }
+    void set_name (string name) { item_info_ ["name"] = name; }
+    string name ();
     const QString& type () { return type_; }
     const QColor& color () { return color_; }
     void set_color (QColor c) { color_ = ::move (c); emit color_changed (c); }
     void set_attribute (string_view key, std::string value = {});
     void apply_z_value (selected_item yes_or_no);
-    const nlohmann::json& data () { return item_info_; }
-    optional<std::string> attribute (string_view key);
+    nlohmann::json attributes () { return item_info_ ["attribute"]; }
 
     QRectF boundingRect () const override;
 protected:
@@ -46,6 +46,7 @@ protected:
     void set_z_value (qreal value) { z_value_ = value; setZValue(value); }
     QVariant itemChange(GraphicsItemChange change, const QVariant &value) override;
     qreal z_value () { return z_value_; }
+
 
     /// overrides
     void paint (QPainter * painter, const QStyleOptionGraphicsItem* option, QWidget* widget) override;
@@ -57,7 +58,6 @@ protected:
     static constexpr qreal small_object_ratio = 2;
     static constexpr qreal small_object_height = 4;
 private:
-    QString name_;
     QColor color_ = Qt::black;
     nlohmann::json item_info_;
     qreal z_value_ = 0;
