@@ -1,5 +1,4 @@
 ﻿#include "drawer/toolbox.h"
-#include "drawer/list.h"
 #include <QDir>
 #include "drawer/info_flow.h"
 #include <QLabel>
