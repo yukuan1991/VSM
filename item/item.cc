@@ -149,15 +149,18 @@ void item::set_dash(QPainter *painter)
 
 QVariant item::itemChange(QGraphicsItem::GraphicsItemChange change, const QVariant &value)
 {
-    if (isSelected ())
+    if (change == QGraphicsItem::ItemSelectedChange)
     {
-        set_z_value (z_value_ + 0.5);
+        if (isSelected ())
+        {
+            set_z_value (z_value_ + 0.5);
+        }
+        else
+        {
+            set_z_value (z_value_);
+        }
     }
-    else
-    {
-        set_z_value (z_value_);
-    }
-    return QGraphicsObject::itemChange (change, value);
+    return QGraphicsItem::itemChange (change, value);
 }
 
 %> // namespace item

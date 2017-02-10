@@ -46,7 +46,6 @@ bool board_info_flow::init(vector<unique_ptr<QGraphicsLineItem> > tmp_lines)
 
 void board_info_flow::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
-    Q_UNUSED (option);
     Q_UNUSED (widget);
     auto lines = this->lines_;
     if (lines.empty())
@@ -58,14 +57,15 @@ void board_info_flow::paint(QPainter *painter, const QStyleOptionGraphicsItem *o
     pen.setWidthF(2.0);
     pen.setColor (color ());
 
+    painter->setBrush(color ());
     if (option->state bitand QStyle::State_Selected)
     {
         pen.setColor(Qt::red);
+        painter->setBrush (Qt::red);
     }
     pen.setStyle(Qt::DashLine);
     painter->setPen(pen);
 
-    painter->setBrush(color ());
 
     auto last_line = lines.back ();
     lines.pop_back ();
@@ -85,6 +85,8 @@ void board_info_flow::paint(QPainter *painter, const QStyleOptionGraphicsItem *o
 
     painter->drawLine(last_line.p1 (), body_end);
     pen.setWidthF(1);
+    pen.setStyle(Qt::SolidLine);
+    painter->setPen (pen);
     painter->drawPolygon({{neck1, neck2, last_line.p2 ()}}, Qt::WindingFill);
 }
 
