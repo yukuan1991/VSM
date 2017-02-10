@@ -20,10 +20,9 @@ enum class selected_item : bool
     no = false
 };
 
-class item : public QObject, public QGraphicsItem
+class item : public QGraphicsObject
 {
     Q_OBJECT
-    Q_INTERFACES(QGraphicsItem)
 signals:
     void name_changed (const QString&);
     void color_changed (const QColor&);
@@ -42,9 +41,10 @@ public:
 
     QRectF boundingRect () const override;
 protected:
-    explicit item(QObject *parent = 0);
+    explicit item(QGraphicsItem *parent = 0);
     static void set_dash (QPainter* painter);
     void set_z_value (qreal value) { z_value_ = value; setZValue(value); }
+    QVariant itemChange(GraphicsItemChange change, const QVariant &value) override;
     qreal z_value () { return z_value_; }
 
     /// overrides

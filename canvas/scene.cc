@@ -10,9 +10,7 @@ namespace canvas
 
 void scene::init()
 {
-    connect (this, &scene::selectionChanged, [this] { adjust_z_value (); });
     connect (this, &scene::selectionChanged, [this] { report_selection (); });
-
     setSceneRect ({0, 0, 1920, 1080});
 }
 
@@ -55,28 +53,6 @@ scene::~scene()
 
 }
 
-
-void scene::adjust_z_value()
-{
-    auto children = items ();
-
-
-    for (auto & it : children)
-    {
-        auto the_item = dynamic_cast<item::item*>(it);
-        if (the_item != nullptr)
-        {
-            if (the_item->isSelected())
-            {
-                the_item->apply_z_value(item::selected_item::yes);
-            }
-            else
-            {
-                the_item->apply_z_value(item::selected_item::no);
-            }
-        }
-    }
-}
 
 void scene::report_selection()
 {
