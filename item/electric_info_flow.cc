@@ -55,7 +55,7 @@ bool electric_info_flow::init()
         return false;
     }
 
-    body_end_ = end_line.pointAt( (end_line.length() - tip_length) / end_line.length());
+    body_end_ = end_line.pointAt((end_line.length() - tip_length) / end_line.length());
     neck1_ = QLineF (body_end_, mid_p2_).normalVector().unitVector().pointAt(tip_width);
     neck2_ = QLineF (body_end_, mid_p2_).normalVector().unitVector().pointAt(-tip_width);
 
@@ -93,7 +93,10 @@ QRectF electric_info_flow::boundingRect() const
 
 QPainterPath electric_info_flow::shape() const
 {
-    return item::shape();
+    QPainterPath path;
+    path.addPolygon({{start_, mid_p1_, end_, mid_p2_}});
+    path.lineTo(start_);
+    return path;
 }
 
 } // namespace item
