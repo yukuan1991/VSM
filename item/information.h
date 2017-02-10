@@ -18,6 +18,7 @@ protected:
     explicit information(item* parent = nullptr);
 
 private:
+    void mouseDoubleClickEvent(QGraphicsSceneMouseEvent *event);
 
    };
 }
