@@ -3,6 +3,7 @@
 #include <QPainter>
 #include <QColor>
 #include <QStyleOptionGraphicsItem>
+#include <QInputDialog>
 ///修改完成
 namespace item {
 
@@ -48,10 +49,33 @@ void production_sequence::paint(QPainter *painter, const QStyleOptionGraphicsIte
     the_pen.setWidthF(item_width_ * 0.02);
     painter->setPen(the_pen);
     painter->setBrush(Qt::white);
-    painter->drawRect(QRectF (p1_,
-                              QSizeF ((p6_ - p1_).x(), (p6_ - p1_).y())));
+    painter->drawRect(QRectF (p1_,QSizeF ((p6_ - p1_).x(), (p6_ - p1_).y())));
     painter->drawLine(p3_,p4_);
+    auto item_name = name();
+    if(item_name.empty())
+    {
+        return;
+    }
+
+    QFontMetricsF metrics (painter->font());
+    auto width = metrics.width(item_name.data());
+    auto height = metrics.height();
+    auto center = QPointF (item_width_ / 2, (p6_.y() + p4_.y()) / 2);
+    painter->drawText(QRectF (center - QPointF (width / 2, height / 2), QSizeF (width, height)), item_name.data());
 
     item::paint(painter, option, widget);
+}
+
+void production_sequence::mouseDoubleClickEvent(QGraphicsSceneMouseEvent *event)
+{
+    auto old_name = name ();
+    bool confirmed = false;
+    auto company_name = QInputDialog::getText(nullptr, "", "名称:",
+                                              QLineEdit::Normal, old_name.data(), &confirmed);
+    if (confirmed)
+    {
+        set_name (company_name.trimmed ().toStdString());
+    }
+
 }
 }
