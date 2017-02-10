@@ -647,13 +647,13 @@ static void electric_info_flow_maker(QPainter* painter,qreal width,qreal height)
     auto x_scale = width /100;
     auto y_scale = height /80;
 
-    QPointF p1 {93 * x_scale, 24 * y_scale},
-    p2{53 * x_scale, 18 * y_scale},
-    p3{58 * x_scale, 26 * y_scale},
-    p4{16 * x_scale, 20 * y_scale},
-    p5{16 * x_scale, 17 * y_scale},
-    p6{15 * x_scale, 22 * y_scale},
-    p7 {1 * x_scale, 18 * y_scale};
+    QPointF p1 {93 * x_scale, 41 * y_scale},
+    p2{53 * x_scale, 38 * y_scale},
+    p3{58 * x_scale, 46 * y_scale},
+    p4{16 * x_scale, 39 * y_scale},
+    p5{16 * x_scale, 35 * y_scale},
+    p6{16 * x_scale, 42 * y_scale},
+    p7{10 * x_scale, 38 * y_scale};
 
     auto the_pen = painter->pen();
     the_pen.setWidthF(2.0);
@@ -688,33 +688,32 @@ static void board_info_flow_maker(QPainter* painter, qreal width,qreal height)
 }
 static void material_flow_maker(QPainter* painter,qreal width, qreal height)
 {
-    qDebug() << "qdebug";
     auto x_scale = width / 100;
     auto y_scale = height / 80;
 
-    QPointF p1{34 * x_scale, 51 * y_scale },
-    p2{34 * x_scale, 61 * y_scale},
-    p3{ 41 * x_scale, 61 * y_scale},
-    p4{41 * x_scale, 51 * y_scale},
+    QPointF p1{23 * x_scale, 40 * y_scale },
+    p2{23 * x_scale, 50 * y_scale},
+    p3{30 * x_scale, 50 * y_scale},
+    p4{30 * x_scale, 40 * y_scale},
 
-    p5{49 * x_scale,51 * y_scale},
-    p6{49 * x_scale, 61 * y_scale},
+    p5{37 * x_scale,40 * y_scale},
+    p6{37 * x_scale, 50 * y_scale},
 
-    p7{56 * x_scale,51 * y_scale},
-    p8{56* x_scale,61 * y_scale},
+    p7{44 * x_scale,40 * y_scale},
+    p8{44 * x_scale,50 * y_scale},
 
-    p9{65 * x_scale,51 * y_scale},
-    p10 {65 * x_scale,61 * y_scale},
+    p9{51 * x_scale,40 * y_scale},
+    p10{51 * x_scale,50 * y_scale},
 
-    p11{73 * x_scale, 51 * y_scale},
-    p12{73 * x_scale, 61* y_scale},
+    p11{58 * x_scale, 40 * y_scale},
+    p12{58 * x_scale, 50* y_scale},
 
-    p13{81 * x_scale,51 * y_scale},
-    p14{81 * x_scale,61 * y_scale},
+    p13{65 * x_scale,40 * y_scale},
+    p14{65 * x_scale,50 * y_scale},
 
-    p15{81 * x_scale,  46 * y_scale},
-    p16{81 * x_scale, 66 * y_scale},
-    p17{91 * x_scale, 56 * y_scale};
+    p15{65 * x_scale,  35 * y_scale},
+    p16{65 * x_scale, 55* y_scale},
+    p17{75 * x_scale, 45 * y_scale};
 
     auto the_pen = painter->pen();
     the_pen.setColor(Qt::black);
