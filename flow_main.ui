@@ -47,9 +47,16 @@
     </property>
     <addaction name="action_drawer"/>
    </widget>
+   <widget class="QMenu" name="menu">
+    <property name="title">
+     <string>帮助</string>
+    </property>
+    <addaction name="action_guide"/>
+   </widget>
    <addaction name="menu_file"/>
    <addaction name="menu_edit"/>
    <addaction name="menu_window"/>
+   <addaction name="menu"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
   <action name="action_file_new">
@@ -176,6 +183,14 @@
    </property>
    <property name="statusTip">
     <string>全局缩小</string>
+   </property>
+  </action>
+  <action name="action_guide">
+   <property name="text">
+    <string>向导</string>
+   </property>
+   <property name="toolTip">
+    <string>向导</string>
    </property>
   </action>
  </widget>

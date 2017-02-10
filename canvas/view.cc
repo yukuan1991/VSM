@@ -99,6 +99,8 @@ void view::mousePressEvent(QMouseEvent *event)
         last_pressed_ = mapToScene(event->pos());
         tmp_arrow_.emplace (nullptr);
     }
+
+
 }
 
 void view::mouseMoveEvent(QMouseEvent *event)
@@ -320,14 +322,13 @@ void view::delete_selected()
 
 void view::finish_board_info(vector<unique_ptr<QGraphicsLineItem>> lines)
 {
-    QMenu menu (this);
+    QMenu menu;
     auto confirm = menu.addAction ("确定");
     menu.addAction ("取消");
     connect (confirm, &QAction::triggered, [&]
     {
         scene ()->addItem (item::board_info_flow::make (::move (lines), Qt::black).release ());
     });
-
     menu.exec(QCursor::pos());
 }
 

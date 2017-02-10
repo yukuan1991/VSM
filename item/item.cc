@@ -10,7 +10,7 @@ namespace item
 <%
 using namespace std;
 
-item::item(QObject *parent) : QObject(parent)
+item::item(QGraphicsItem *parent) : QGraphicsObject (parent)
 {
     setFlags (ItemIsSelectable | ItemIsMovable);
 }
@@ -138,12 +138,29 @@ QRectF item::boundingRect() const
     return {0, 0, item_width_, item_height_};
 }
 
+
 void item::set_dash(QPainter *painter)
 {
     painter->setBrush(Qt::transparent);
     QPen pen;
     pen.setStyle(Qt::DashLine);
     painter->setPen(pen);
+}
+
+QVariant item::itemChange(QGraphicsItem::GraphicsItemChange change, const QVariant &value)
+{
+    if (change == QGraphicsItem::ItemSelectedChange)
+    {
+        if (isSelected ())
+        {
+            set_z_value (z_value_ + 0.5);
+        }
+        else
+        {
+            set_z_value (z_value_);
+        }
+    }
+    return QGraphicsItem::itemChange (change, value);
 }
 
 %> // namespace item
