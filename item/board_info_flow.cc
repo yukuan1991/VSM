@@ -31,7 +31,6 @@ bool board_info_flow::init(vector<unique_ptr<QGraphicsLineItem> > tmp_lines)
     {
         return false;
     }
-    set_z_value(103);
 
     auto begin_ptr = tmp_lines.front()->line().p1();
     setPos(begin_ptr);

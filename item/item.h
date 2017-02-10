@@ -55,6 +55,7 @@ protected:
     qreal item_height_ = 0.8 * item_width_;
     QString type_;
     static constexpr qreal small_object_ratio = 2;
+    static constexpr qreal small_object_height = 4;
 private:
     QString name_;
     QColor color_ = Qt::black;

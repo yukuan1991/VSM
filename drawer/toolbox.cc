@@ -70,7 +70,7 @@ std::unique_ptr<drag_widget> toolbox::init_entity()
     const vector<QString> items
     {
         "生产工序",
-        "取料",
+//        "取料",
         "其他公司",
         "数据箱",
         "库存",
