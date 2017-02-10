@@ -11,7 +11,9 @@ namespace canvas
 void scene::init()
 {
     connect (this, &scene::selectionChanged, [this] { report_selection (); });
-    setSceneRect ({0, 0, 1920, 1080});
+    setSceneRect ({0, 0, 1500, 1500});
+    setBackgroundBrush(QColor (230, 230, 230));
+    connect (this, &scene::changed, this, &scene::on_scene_changed);
 }
 
 nlohmann::json scene::selected_item_attribute()
@@ -32,7 +34,7 @@ nlohmann::json scene::selected_item_attribute()
     return item_selected->attributes();
 }
 
-void scene::set_item_attribute(string_view key, std::__cxx11::string value)
+void scene::set_item_attribute(string_view key, string value)
 {
     auto selected = selectedItems();
     if (selected.size () != 1)
@@ -53,6 +55,18 @@ scene::~scene()
 
 }
 
+void scene::drawBackground(QPainter *painter, const QRectF &rect)
+{
+    QGraphicsScene::drawBackground(painter, rect);
+
+    painter->setBrush(Qt::white);
+    constexpr qreal width = 1000;
+    constexpr qreal height = 1000 * 1.4142135;
+    auto center_point = sceneRect ().center();
+
+    painter->drawRect(QRectF (center_point - QPointF (width / 2, height / 2), QSizeF (width, height)));
+}
+
 
 void scene::report_selection()
 {
@@ -64,6 +78,12 @@ void scene::report_selection()
     {
         emit selection_changed(false);
     }
+}
+
+void scene::on_scene_changed(const QList<QRectF> &areas)
+{
+    for (auto & it : areas)
+        qDebug () << it;
 }
 
 %>

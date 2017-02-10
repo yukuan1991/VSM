@@ -3,10 +3,9 @@
 #include <QGraphicsScene>
 #include <utility>
 #include "json.hpp"
-#include <experimental/optional>
 #include <memory>
 #include "item/material_flow.h"
-#include <experimental/string_view>
+#include "utility/containers.hpp"
 
 namespace item
 {
@@ -34,9 +33,11 @@ public:
 signals:
     void selection_changed (bool);
 protected:
+    void drawBackground (QPainter* painter, const QRectF& rect) override;
 private:
     void adjust_z_value ();
     void report_selection ();
+    void on_scene_changed (const QList<QRectF> & areas);
 
 private:
     item::item* selected_item_ = nullptr;
