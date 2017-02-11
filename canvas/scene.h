@@ -6,6 +6,8 @@
 #include <memory>
 #include "item/material_flow.h"
 #include "utility/containers.hpp"
+#include "item/production_sequence.h"
+
 
 namespace item
 {
@@ -14,9 +16,6 @@ class material_flow;
 
 namespace canvas
 <%
-
-using std::experimental::nullopt;
-using std::experimental::string_view;
 
 class scene : public QGraphicsScene
 {
@@ -37,10 +36,11 @@ protected:
 private:
     void adjust_z_value ();
     void report_selection ();
-    void on_scene_changed (const QList<QRectF> & areas);
-
+    void product_sequence_deletion ();
 private:
     item::item* selected_item_ = nullptr;
+    qreal width = 1000;
+    qreal height = 1000 * 1.4142135;
 };
 
 %>
