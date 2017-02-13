@@ -4,6 +4,9 @@
 #include <QStyleOptionGraphicsItem>
 #include <QDebug>
 #include <QInputDialog>
+#include <QVBoxLayout>
+#include <QLabel>
+#include <QLineEdit>
 ///数据箱
    ///修改完成
 namespace item {
@@ -81,7 +84,27 @@ void data_box::mouseDoubleClickEvent(QGraphicsSceneMouseEvent *event)
 //    list << "One: " << "Two: " << "Three: " << "Four: " ;
 //    dialog.SetLabelTexts(list);
 //    dialog.SetLabelsWidth(30);
-//    dialog.show();
+//    dialog.exec();
+    add_widget();
+
+
+
+
+}
+
+void data_box::add_widget()
+{
+
+    layout->addWidget(label_1);
+    layout->addWidget(label_2);
+    layout->addWidget(label_3);
+    layout->addWidget(label_4);
+    layout->addWidget(edit_1);
+    layout->addWidget(edit_2);
+    layout->addWidget(edit_3);
+    layout->addWidget(edit_4);
+    widget->setLayout(layout);
+    widget->show();
 
 
 }
