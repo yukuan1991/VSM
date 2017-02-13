@@ -1,5 +1,4 @@
 ﻿#include "drawer/toolbox.h"
-#include "drawer/list.h"
 #include <QDir>
 #include "drawer/info_flow.h"
 #include <QLabel>
@@ -48,14 +47,17 @@ bool toolbox::init ()
 {
     auto entity = init_entity();
     connect(entity.get(), &drag_widget::button_triggered, this, &toolbox::status_changed);
+    connect(this, &toolbox::reset_status, entity.get (), &drag_widget::reset_status);
     addItem(entity.release(), "实体");
 
     auto material_flow = init_material_flow ();
     connect(material_flow.get(), &drag_widget::button_triggered, this, &toolbox::status_changed);
+    connect(this, &toolbox::reset_status, material_flow.get (), &drag_widget::reset_status);
     addItem(material_flow.release(), "物流");
 
     auto info_flow = init_info_flow ();
     connect(info_flow.get(), &drag_widget::button_triggered, this, &toolbox::status_changed);
+    connect(this, &toolbox::reset_status, info_flow.get (), &drag_widget::reset_status);
     addItem(info_flow.release(), "信息流");
 
     connect (this, &toolbox::status_changed, [this] (const QString& s){ status_ = s; });

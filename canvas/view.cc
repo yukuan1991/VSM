@@ -17,6 +17,7 @@
 #include "item/maker.hpp"
 #include "qt-tools/graphics.hpp"
 #include "item/board_info_flow.h"
+#include <QPainter>
 #include <QMenu>
 
 
@@ -40,6 +41,7 @@ view::view(QGraphicsScene *scene, QWidget *parent)
 
 void view::init()
 {
+    setRenderHint (QPainter::Antialiasing, true);
     setDragMode (RubberBandDrag);
     setRubberBandSelectionMode (Qt::IntersectsItemShape);
     setViewport(new QGLWidget(QGLFormat(QGL::SampleBuffers)));
@@ -132,7 +134,11 @@ void view::mouseReleaseEvent(QMouseEvent *event)
 {
     if (tmp_arrow_)
     {
-        tmp_arrow_.value().release();
+        if (*tmp_arrow_)
+        {
+            emit arrow_finished ();
+            tmp_arrow_.value().release();
+        }
         tmp_arrow_ = nullopt;
     }
     else if (arrow_state_ == "看板用信息流")
@@ -328,6 +334,7 @@ void view::finish_board_info(vector<unique_ptr<QGraphicsLineItem>> lines)
     connect (confirm, &QAction::triggered, [&]
     {
         scene ()->addItem (item::board_info_flow::make (::move (lines), Qt::black).release ());
+        emit arrow_finished ();
     });
     menu.exec(QCursor::pos());
 }

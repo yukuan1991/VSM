@@ -23,6 +23,7 @@ std::unique_ptr<information> information::make(QPointF pos, QColor color)
 void information::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
     Q_UNUSED(widget);
+    SCOPE_EXIT {item::paint(painter, option, widget);};
     auto x_scale = (item_width_ / 100);
     auto y_scale = (item_height_ / 80 );
 
@@ -49,7 +50,7 @@ void information::paint(QPainter *painter, const QStyleOptionGraphicsItem *optio
     auto center = QPointF (item_width_ / 2, (p1.y() + p4.y()) / 2);
     painter->drawText(QRectF (center - QPointF (width / 2, height / 2), QSizeF (width, height)), item_name.data());
 
-    item::paint(painter, option, widget);
+
 }
 
 information::information(item *parent)

@@ -22,6 +22,7 @@ class view : public QGraphicsView
 signals:
     void scale_changed (double);
     void set_arrow_state (const QString&);
+    void arrow_finished ();
 public:
     explicit view(QWidget* parent = nullptr);
     explicit view(QGraphicsScene* scene, QWidget* parent = nullptr);

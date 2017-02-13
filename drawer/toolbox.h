@@ -15,6 +15,7 @@ class toolbox : public QToolBox
     Q_OBJECT
 signals:
     void status_changed (const QString&);
+    void reset_status ();
 public:
     static std::unique_ptr<toolbox> make (QWidget* parent);
     QString status ();

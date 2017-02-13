@@ -1,12 +1,14 @@
 ﻿#pragma once
 
 #include <QGraphicsScene>
+#include <QColor>
 #include <utility>
 #include "json.hpp"
-#include <experimental/optional>
 #include <memory>
 #include "item/material_flow.h"
-#include <experimental/string_view>
+#include "utility/containers.hpp"
+#include "item/production_sequence.h"
+
 
 namespace item
 {
@@ -15,9 +17,6 @@ class material_flow;
 
 namespace canvas
 <%
-
-using std::experimental::nullopt;
-using std::experimental::string_view;
 
 class scene : public QGraphicsScene
 {
@@ -34,12 +33,17 @@ public:
 signals:
     void selection_changed (bool);
 protected:
+    void drawBackground (QPainter* painter, const QRectF& rect) override;
 private:
     void adjust_z_value ();
     void report_selection ();
-
+    void product_sequence_deletion ();
 private:
     item::item* selected_item_ = nullptr;
+    qreal width = 1000;
+    qreal height = 1000 * 1.4142135;
+
+    const static QColor background_color;
 };
 
 %>

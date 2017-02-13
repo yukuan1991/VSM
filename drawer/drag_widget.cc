@@ -58,11 +58,17 @@ void drag_widget::hideEvent(QHideEvent *event)
 {
     SCOPE_EXIT { QWidget::hideEvent (event); };
 
+    reset_status ();
+}
+
+void drag_widget::reset_status()
+{
     for (auto it : buttons_)
     {
         it->setChecked(false);
     }
     emit button_triggered("");
+
 }
 
 unique_ptr<drag_widget> drag_widget::make(vector<QString> labels, vector<QString> buttons, QWidget *parent)

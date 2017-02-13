@@ -35,6 +35,7 @@ production_sequence::production_sequence(item* parent)
 
 void production_sequence::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
+    SCOPE_EXIT { item::paint(painter, option, widget); };
     Q_UNUSED(widget);
 
     QPointF
@@ -62,8 +63,6 @@ void production_sequence::paint(QPainter *painter, const QStyleOptionGraphicsIte
     auto height = metrics.height();
     auto center = QPointF (item_width_ / 2, (p6_.y() + p4_.y()) / 2);
     painter->drawText(QRectF (center - QPointF (width / 2, height / 2), QSizeF (width, height)), item_name.data());
-
-    item::paint(painter, option, widget);
 }
 
 void production_sequence::mouseDoubleClickEvent(QGraphicsSceneMouseEvent *event)

@@ -32,7 +32,7 @@ void other_company::paint(QPainter *painter, const QStyleOptionGraphicsItem *opt
     SCOPE_EXIT { item::paint(painter, option, widget); };
 
     auto the_pen = painter->pen ();
-    the_pen.setColor(Qt::black);
+    the_pen.setColor(color ());
     the_pen.setWidthF(2.0);
     painter->setPen(the_pen);
     painter->setBrush(Qt::white);
@@ -60,12 +60,14 @@ void other_company::paint(QPainter *painter, const QStyleOptionGraphicsItem *opt
     auto width = metrics.width(item_name.data());
     auto height = metrics.height();
     auto center = QPointF (item_width_ / 2, (p1.y() + p8.y()) / 2);
-    painter->drawText(QRectF (center - QPointF (width / 2, height / 2), QSizeF (width, height)), item_name.data());
+    painter->drawText(QRectF (center - QPointF (width / 2, height / 2),
+                              QSizeF (width, height)), item_name.data());
 }
 
 
 void other_company::mouseDoubleClickEvent(QGraphicsSceneMouseEvent *event)
 {
+    Q_UNUSED (event);
     auto old_name = name ();
     bool confirmed = false;
     auto company_name = QInputDialog::getText(nullptr, "", "公司名称:",
@@ -74,7 +76,6 @@ void other_company::mouseDoubleClickEvent(QGraphicsSceneMouseEvent *event)
     {
         set_name (company_name.trimmed ().toStdString());
     }
-
 }
 
 }

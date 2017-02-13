@@ -209,6 +209,9 @@ not_null<canvas::body*> flow_main::create_canvas_body()
     connect(raw_canvas, &canvas::body::selection_changed, this, &flow_main::notify_attribute);
     connect (drawer_content_.get(), &drawer::toolbox::status_changed,
              raw_canvas, &canvas::body::set_arrow_state);
+
+    connect (raw_canvas, &canvas::body::arrow_finished, drawer_content_.get(), &drawer::toolbox::reset_status);
+
     raw_canvas->set_arrow_state(drawer_content_->status ());
 
     return raw_canvas;

@@ -32,7 +32,7 @@ public:
     qreal height () { return item_height_; }
     void set_name (string name) { item_info_ ["name"] = name; }
     string name ();
-    const QString& type () { return type_; }
+    const QString& item_type () { return type_; }
     const QColor& color () { return color_; }
     void set_color (QColor c) { color_ = ::move (c); emit color_changed (c); }
     void set_attribute (string_view key, std::string value = {});
@@ -61,9 +61,6 @@ private:
     QColor color_ = Qt::black;
     nlohmann::json item_info_;
     qreal z_value_ = 0;
-
-
-public slots:
 };
 
 %>
