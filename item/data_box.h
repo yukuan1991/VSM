@@ -15,7 +15,7 @@ class data_box : public item
 {
 public:
     static std::unique_ptr<data_box> make(QPointF pos,QColor color);
-    ~data_box();
+//    ~data_box();
 protected:
     data_box(item* parent = nullptr);
     void paint (QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = nullptr) override;
@@ -26,8 +26,8 @@ private:
     void mouseDoubleClickEvent(QGraphicsSceneMouseEvent *event);
    // void add_widget();
 
-    std::tuple<std::string, std::string, std::string, std::string>
-    get_names (const std::tuple<std::string, std::string, std::string, std::string>& old_value);
+//    std::tuple<std::string, std::string, std::string, std::string>
+//    get_names (const std::tuple<std::string, std::string, std::string, std::string>& old_value);
 
 //    QWidget *widget = new QWidget;
 
