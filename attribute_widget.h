@@ -7,6 +7,7 @@
 #include <vector>
 #include "json.hpp"
 ///属性类
+class QPushButton;
 class attribute_widget final : public QWidget
 {
     Q_OBJECT
@@ -17,6 +18,7 @@ public:
     static std::unique_ptr<attribute_widget> make (nlohmann::json data, QWidget* parent = nullptr);
     ~attribute_widget () override;
     const attributes& apply () const { return changed_values_; }
+    void keyPressEvent (QKeyEvent* event) override;
 private:
     explicit attribute_widget(nlohmann::json data, QWidget *parent = 0);
     bool init ();
@@ -24,6 +26,7 @@ private:
 private:
     const nlohmann::json data_;
     attributes changed_values_;
+    QPushButton* button_commit_ = nullptr;
 };
 
 #endif // ATTRIBUTE_WIDGET_H

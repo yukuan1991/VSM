@@ -1,6 +1,7 @@
 ﻿#pragma once
 
 #include <QGraphicsScene>
+#include <QColor>
 #include <utility>
 #include "json.hpp"
 #include <memory>
@@ -41,6 +42,8 @@ private:
     item::item* selected_item_ = nullptr;
     qreal width = 1000;
     qreal height = 1000 * 1.4142135;
+
+    const static QColor background_color;
 };
 
 %>

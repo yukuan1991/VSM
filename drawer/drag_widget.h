@@ -20,6 +20,7 @@ public:
                                          vector<QString> buttons = {},
                                          QWidget* parent = nullptr);
     bool init ();
+    void reset_status ();
     ~drag_widget ();
 private:
     explicit drag_widget(vector<QString> labels = {},

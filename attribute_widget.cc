@@ -5,6 +5,7 @@
 #include <QDebug>
 #include <QPushButton>
 #include <QLineEdit>
+#include <QKeyEvent>
 
 std::unique_ptr<attribute_widget> attribute_widget::make(nlohmann::json data, QWidget *parent)
 {
@@ -22,9 +23,21 @@ attribute_widget::~attribute_widget()
 
 }
 
-attribute_widget::attribute_widget(nlohmann::json data, QWidget *parent) :
-    QWidget(parent),
-    data_ (::move (data))///给成员初 xx        x   x  始化
+void attribute_widget::keyPressEvent(QKeyEvent *event)
+{
+    if (event->key () == Qt::Key_Enter or event->key () == Qt::Key_Return)
+    {
+        button_commit_->click();
+    }
+    else
+    {
+        QWidget::keyPressEvent(event);
+    }
+}
+
+attribute_widget::attribute_widget(nlohmann::json data, QWidget *parent)
+    : QWidget(parent),
+    data_ (::move (data))
 {
 
 }
@@ -52,6 +65,7 @@ bool attribute_widget::init() try
     }
 
     auto button_commit = std::make_unique<QPushButton> ("提交", this);
+    button_commit_ = button_commit.get();
     connect (button_commit.get (), &QPushButton::clicked, this, &attribute_widget::commit);
     layout->addWidget(button_commit.release(), i, 1);
     i ++;

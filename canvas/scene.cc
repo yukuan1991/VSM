@@ -12,11 +12,14 @@
 namespace canvas
 <%
 
+const QColor scene::background_color (230, 230, 230);
+
+
 void scene::init()
 {
     connect (this, &scene::selectionChanged, [this] { report_selection (); });
     setSceneRect ({0, 0, 1500, 1500});
-    setBackgroundBrush(QColor (230, 230, 230));
+    setBackgroundBrush(background_color);
 }
 
 nlohmann::json scene::selected_item_attribute()
@@ -120,7 +123,7 @@ void scene::drawBackground(QPainter *painter, const QRectF &rect)
     }
 
     qreal last = effective_rect.left();
-    painter->setPen (Qt::red);
+    painter->setPen ({Qt::black, 2.0});
     for (auto & it : sequences)
     {
         QLineF flat_line (QPointF (last, 70), QPointF (it.first, 70));
