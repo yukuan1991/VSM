@@ -10,7 +10,7 @@ namespace item
 
 class board_station : public item
 {
-public:
+
 public:
     static std::unique_ptr <board_station> make(QPointF pos, QColor color = Qt::black);
 protected:

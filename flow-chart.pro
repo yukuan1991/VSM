@@ -62,8 +62,7 @@ SOURCES += \
     item/truck_transport.cc \
     item/other_company.cc \
     item/fifo.cc \
-    item/product_to_customer.cc \
-    item/MultiInputDialog.cc
+    item/product_to_customer.cc
 
 HEADERS += \
     flow_app.h \
@@ -103,8 +102,7 @@ HEADERS += \
     item/truck_transport.h \
     item/other_company.h \
     item/fifo.h \
-    item/product_to_customer.h \
-    item/MultiInputDialog.h
+    item/product_to_customer.h
 
 FORMS += \
     flow_main.ui \

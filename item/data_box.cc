@@ -7,6 +7,7 @@
 #include <QVBoxLayout>
 #include <QLabel>
 #include <QLineEdit>
+#include <QDebug>
 ///数据箱
    ///修改完成
 namespace item {
@@ -16,6 +17,7 @@ data_box::data_box(item* parent)
     :item (parent)
 {
     set_z_value(303);
+   // connect(button_ok, SIGNAL(clicked()), this, SLOT(get_edit_text()));
 
 }
 
@@ -68,6 +70,17 @@ void data_box::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, 
     item::paint(painter, option, widget);
 }
 
+//void data_box::get_edit_text()
+//{
+
+//    auto text_1 = label_1->text().toStdString();
+//    auto text_2 = label_2->text().toStdString();
+//    auto text_3 = label_3->text().toStdString();
+//    auto text_4 = label_4->text().toStdString();
+//    qDebug() << "text_";
+
+//}
+
 void data_box::mouseDoubleClickEvent(QGraphicsSceneMouseEvent *event)
 {
 //    auto old_name = name ();
@@ -79,35 +92,61 @@ void data_box::mouseDoubleClickEvent(QGraphicsSceneMouseEvent *event)
 //    {
 //        set_name (name_1.trimmed ().toStdString());
     //    }
-//    MultiInputDialog dialog(4);
-//    QStringList list;
-//    list << "One: " << "Two: " << "Three: " << "Four: " ;
-//    dialog.SetLabelTexts(list);
-//    dialog.SetLabelsWidth(30);
-//    dialog.exec();
-    add_widget();
 
-
+//    add_widget();
 
 
 }
+// data_box::~data_box()
+//{
+//     delete widget;
+//     qDebug () << "删除创建的对象";
 
-void data_box::add_widget()
-{
+//}
 
-    layout->addWidget(label_1);
-    layout->addWidget(label_2);
-    layout->addWidget(label_3);
-    layout->addWidget(label_4);
-    layout->addWidget(edit_1);
-    layout->addWidget(edit_2);
-    layout->addWidget(edit_3);
-    layout->addWidget(edit_4);
-    widget->setLayout(layout);
-    widget->show();
+//void data_box::add_widget()
+//{
+//     label_1->setFixedSize(30,20);
+//     label_2->setFixedSize(30,20);
+//     label_3->setFixedSize(30,20);
+//     label_4->setFixedSize(30,20);
+
+//    button_ok->setFixedSize(40,20);
+//    button_cancle->setFixedSize(40,20);
+//    button_ok->setText(tr("确定"));
+//    button_cancle->setText(tr("取消"));
+//    edit_1->setFixedSize(200,20);
+//    edit_2->setFixedSize(200,20);
+//    edit_3->setFixedSize(200,20);
+//    edit_4->setFixedSize(200,20);
+
+//    layout_->addWidget(label_1);
+//    layout_->addWidget(edit_1);
+//    layout_1->addWidget(label_2);
+//    layout_1->addWidget(edit_2);
+//    layout_2->addWidget(label_3);
+//    layout_2->addWidget(edit_3);
+//    layout_3->addWidget(label_4);
+//    layout_3->addWidget(edit_4);
+//    layout_4->addWidget(button_ok);
+//    layout_4->addWidget(button_cancle);
+//    vb_layout->addLayout(layout_);
+//    vb_layout->addLayout(layout_1);
+//    vb_layout->addLayout(layout_2);
+//    vb_layout->addLayout(layout_3);
+//    vb_layout->addLayout(layout_4);
+//    widget->setLayout(vb_layout);
+
+//    widget->setMaximumSize(400,400);
+//    widget->show();
 
 
-}
+//}
+
+//std::tuple<std::string, std::string, std::string, std::string> data_box::get_names(const std::tuple<std::string, std::string, std::string, std::string> &old_value)
+//{
+
+//}
 
 std::unique_ptr<data_box> data_box::make(QPointF pos, QColor color)
 {
