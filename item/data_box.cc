@@ -70,7 +70,7 @@ void data_box::mouseDoubleClickEvent(QGraphicsSceneMouseEvent *event)
     auto old_name = name ();
     bool confirmed = false;
     auto company_name = QInputDialog::getText(nullptr, "", "名称:",
-                                              QLineEdit::Normal, old_name.data(), &confirmed);
+                                            QLineEdit::Normal, old_name.data(), &confirmed);
     if (confirmed)
     {
         set_name (company_name.trimmed ().toStdString());
