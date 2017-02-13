@@ -118,7 +118,7 @@ void product_to_customer::paint(QPainter *painter, const QStyleOptionGraphicsIte
                          Qt::WindingFill);
 
 
-    if (option->state bitand QStyle::State_Selected)
+    if (/*option->state bitand QStyle::State_Selected*/false)
     {
         set_dash(painter);
 
@@ -133,7 +133,6 @@ void product_to_customer::paint(QPainter *painter, const QStyleOptionGraphicsIte
         path.lineTo(outer_p4_);
         painter->drawPath(path);
     }
-
 }
 
 QRectF product_to_customer::boundingRect() const

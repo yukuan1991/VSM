@@ -61,6 +61,7 @@ private:
     QColor color_ = Qt::black;
     nlohmann::json item_info_;
     qreal z_value_ = 0;
+    bool show_frame_ = false;
 };
 
 %>

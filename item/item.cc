@@ -19,7 +19,8 @@ void item::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWid
 {
     Q_UNUSED(widget);
     painter->setPen(Qt::black);
-    if (option->state bitand QStyle::State_Selected)
+
+    if ((option->state bitand QStyle::State_Selected) and show_frame_)
     {
         set_dash(painter);
         painter->drawRect (boundingRect ());

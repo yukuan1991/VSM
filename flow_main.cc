@@ -299,6 +299,7 @@ void flow_main::on_action_print_triggered()
         return;
     }
     QPrinter printer;
+    printer.setPageOrientation (QPageLayout::Orientation::Landscape);
     QPrintDialog dlg (&printer);
     if (QPrintDialog::Accepted == dlg.exec ())
     {
