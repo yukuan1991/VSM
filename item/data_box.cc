@@ -67,15 +67,23 @@ void data_box::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, 
 
 void data_box::mouseDoubleClickEvent(QGraphicsSceneMouseEvent *event)
 {
-    auto old_name = name ();
-    bool confirmed = false;
-    auto name_1 = QInputDialog::getText(nullptr, "", "名称:",
-                                              QLineEdit::Normal, old_name.data(), &confirmed);
+//    auto old_name = name ();
+//    bool confirmed = false;
+//    auto name_1 = QInputDialog::getText(nullptr, "", "名称:",
+//                                              QLineEdit::Normal, old_name.data(), &confirmed);
 
-    if (confirmed)
-    {
-        set_name (name_1.trimmed ().toStdString());
-    }
+//    if (confirmed)
+//    {
+//        set_name (name_1.trimmed ().toStdString());
+    //    }
+//    MultiInputDialog dialog(4);
+//    QStringList list;
+//    list << "One: " << "Two: " << "Three: " << "Four: " ;
+//    dialog.SetLabelTexts(list);
+//    dialog.SetLabelsWidth(30);
+//    dialog.show();
+
+
 }
 
 std::unique_ptr<data_box> data_box::make(QPointF pos, QColor color)

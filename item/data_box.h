@@ -2,6 +2,7 @@
 #define data_box_H
 #include <item/item.h>
 #include <memory>
+#include "MultiInputDialog.h"
 
 ///数据箱
 namespace item {
