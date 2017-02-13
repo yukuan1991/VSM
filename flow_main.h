@@ -9,6 +9,7 @@
 #include "utility/interface.hpp"
 #include "drawer/toolbox.h"
 #include "attribute_widget.h"
+#include <QWizardPage>
 
 namespace Ui {
 class flow_main;
@@ -58,6 +59,7 @@ private:
     void update_remark ();
 
     void on_drawer_status (const QString& status);
+    void get_page();
 
 private:
     Ui::flow_main *ui;
@@ -73,5 +75,9 @@ private:
 private:
     QToolBar *toolbar_file = addToolBar(tr("文件"));
     QToolBar *toolbar_edit = addToolBar(tr("编辑"));
+    QWizardPage* create_page1();
+    QWizardPage* create_page2();
+    QWizardPage* create_page3();
+    QWizardPage* create_page4();
 
 };

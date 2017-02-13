@@ -10,6 +10,7 @@
 #include "utility/file.hpp"
 #include <QDebug>
 #include <QMdiSubWindow>
+#include <QWizardPage>
 
 flow_main::flow_main(QWidget *parent) :
     QMainWindow(parent),
@@ -56,6 +57,56 @@ void flow_main::update_remark()
 void flow_main::on_drawer_status(const QString &status)
 {
     Q_UNUSED(status);
+}
+
+void flow_main::get_page()
+{
+    QWizard wizard(this);
+    wizard.setWindowTitle("wizard dialog");
+    wizard.setOption( QWizard::NoBackButtonOnStartPage );//设置第一页没有上一步的按钮
+    wizard.setWizardStyle( QWizard::ModernStyle );//设置上一步下一步等按钮的显示格式
+    wizard.addPage(create_page1());
+    wizard.addPage(create_page2());
+    wizard.addPage(create_page3());
+    wizard.exec();
+}
+
+QWizardPage *flow_main::create_page1()
+{
+    QWizardPage *page = new QWizardPage;
+    page->setTitle("introduce");
+    page->setTitle("select information");
+    page->setButtonText(QWizard::BackButton,"上一页");
+    page->setButtonText(QWizard::NextButton,"下一页");
+    page->setButtonText(QWizard::CancelButton,"取消");
+    page->setButtonText(QWizard::FinishButton,"完成");
+    return page;
+
+}
+
+QWizardPage *flow_main::create_page2()
+{
+    QWizardPage *page = new QWizardPage;
+    page->setTitle("select information");
+    page->setButtonText(QWizard::BackButton,"上一页");
+    page->setButtonText(QWizard::NextButton,"下一页");
+    page->setButtonText(QWizard::CancelButton,"取消");
+    page->setButtonText(QWizard::FinishButton,"完成");
+    return page;
+
+}
+
+QWizardPage *flow_main::create_page3()
+{
+    QWizardPage *page = new QWizardPage;
+    page->setTitle("Finish");
+    page->setButtonText(QWizard::BackButton,"上一页");
+    page->setButtonText(QWizard::NextButton,"下一页");
+    page->setButtonText(QWizard::CancelButton,"取消");
+    page->setButtonText(QWizard::FinishButton,"完成");
+    qDebug () <<"page3"<< page->nextId();
+    return page;
+
 }
 
 void flow_main::set_drawer()
@@ -234,6 +285,7 @@ void flow_main::init_conn()
     connect(ui->action_file_save_as, &QAction::triggered, this, &flow_main::file_save_as);
     connect (ui->action_zoom_in, &QAction::triggered, this, &flow_main::zoom_in_active);
     connect (ui->action_zoom_out, &QAction::triggered, this, &flow_main::zoom_out_active);
+    connect(ui->action_new_guide, &QAction::triggered, this, &flow_main::get_page);
 }
 
 void flow_main::zoom_in_active()
