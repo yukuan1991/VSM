@@ -65,11 +65,11 @@ void information::mouseDoubleClickEvent(QGraphicsSceneMouseEvent *event)
 
     auto old_name = name ();
     bool confirmed = false;
-    auto company_name = QInputDialog::getText(nullptr, "", "信息名称:",
+    auto name = QInputDialog::getText(nullptr, "", "信息名称:",
                                               QLineEdit::Normal, old_name.data(), &confirmed);
     if (confirmed)
     {
-        set_name (company_name.trimmed ().toStdString());
+        set_name (name.trimmed ().toStdString());
     }
 
 }
