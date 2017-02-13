@@ -27,7 +27,7 @@ public:
     void set_attached_file (QString attached_file) { setWindowTitle(attached_file); }
     const nlohmann::json selected_item_data ();
     void set_item_attribute (string_view key, std::string value = {});
-    unique_ptr<QPrinter> generate_printer ();
+    void print_render (QPrinter* printer);
     ~body ();
 signals:
     void selection_changed (bool);

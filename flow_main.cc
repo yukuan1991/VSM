@@ -298,7 +298,10 @@ void flow_main::on_action_print_triggered()
         QMessageBox::information (this, "打印", "没有选中的窗口");
         return;
     }
-
-    auto printer = body->generate_printer ();
-    QPrintDialog dlg (printer.get ());
+    QPrinter printer;
+    QPrintDialog dlg (&printer);
+    if (QPrintDialog::Accepted == dlg.exec ())
+    {
+        body->print_render (&printer);
+    }
 }
