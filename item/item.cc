@@ -36,7 +36,7 @@ void item::paint_attribute(QPainter *painter) try
     auto height = metrix.height();
     QString qstr = {};
 
-    auto bounding_rect = boundingRect ();
+    auto bounding_rect = shape_rect();
     QPointF start_point (bounding_rect.left (), bounding_rect.bottom ());
 
     int i = 0;

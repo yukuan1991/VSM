@@ -38,6 +38,7 @@ public:
     void set_attribute (string_view key, std::string value = {});
     void apply_z_value (selected_item yes_or_no);
     nlohmann::json attributes () { return item_info_ ["attribute"]; }
+    virtual QRectF shape_rect () const { return boundingRect(); }
 
     QRectF boundingRect () const override;
 protected:

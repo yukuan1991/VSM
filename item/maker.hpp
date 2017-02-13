@@ -27,6 +27,7 @@
 #include "item/electric_info_flow.h"
 #include "item/product_to_customer.h"
 #include "traditional_info_flow.h"
+#include "item/fifo.h"
 
 
 namespace item
@@ -90,7 +91,7 @@ inline std::unique_ptr<item> make_arrow (const QString& name, QPointF start, QPo
     }
     else if (name == "先进先出")
     {
-
+        return fifo::make (start, end, Qt::black);
     }
     else if (name == "成品发送至顾客")
     {
