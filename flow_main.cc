@@ -10,6 +10,7 @@
 #include "utility/file.hpp"
 #include <QDebug>
 #include <QMdiSubWindow>
+#include <QPrintDialog>
 
 flow_main::flow_main(QWidget *parent) :
     QMainWindow(parent),
@@ -287,4 +288,17 @@ void flow_main::on_action_drawer_triggered()
     {
         drawer_->hide ();
     }
+}
+
+void flow_main::on_action_print_triggered()
+{
+    auto body = active_canvas_body ();
+    if (body == nullptr)
+    {
+        QMessageBox::information (this, "打印", "没有选中的窗口");
+        return;
+    }
+
+    auto printer = body->generate_printer ();
+    QPrintDialog dlg (printer.get ());
 }

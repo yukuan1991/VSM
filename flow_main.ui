@@ -31,6 +31,7 @@
     <addaction name="action_file_open"/>
     <addaction name="action_file_save"/>
     <addaction name="action_file_save_as"/>
+    <addaction name="action_print"/>
    </widget>
    <widget class="QMenu" name="menu_edit">
     <property name="title">
@@ -191,6 +192,11 @@
    </property>
    <property name="toolTip">
     <string>向导</string>
+   </property>
+  </action>
+  <action name="action_print">
+   <property name="text">
+    <string>打印</string>
    </property>
   </action>
  </widget>

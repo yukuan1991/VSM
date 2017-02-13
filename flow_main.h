@@ -29,6 +29,8 @@ private slots:
     void set_tool_action();
 
     void on_action_drawer_triggered();
+    void on_action_print_triggered();
+
 private:
     void set_mdi_area ();
     void init_conn ();

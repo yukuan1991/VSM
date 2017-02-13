@@ -85,6 +85,22 @@ void body::set_item_attribute(string_view key, std::__cxx11::string value)
     scene_.set_item_attribute (key, value);
 }
 
+unique_ptr<QPrinter> body::generate_printer()
+{
+    auto printer = make_unique<QPrinter> (QPrinter::HighResolution);
+    //printer->setPaperSize(QPrinter::A4);
+
+    QPainter painter(printer.get ());
+    scene ()->render(&painter, QRectF (), scene_.effective_rect ());
+    return printer;
+}
+
+body::~body()
+{
+
+}
+
+
 void body::window_modified()
 {
     setWindowModified(true);

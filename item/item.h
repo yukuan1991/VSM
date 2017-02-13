@@ -43,8 +43,8 @@ public:
 protected:
     explicit item(QGraphicsItem *parent = 0);
     static void set_dash (QPainter* painter);
+    QVariant itemChange(QGraphicsItem::GraphicsItemChange change, const QVariant &value) override;
     void set_z_value (qreal value) { z_value_ = value; setZValue(value); }
-    QVariant itemChange(GraphicsItemChange change, const QVariant &value) override;
     qreal z_value () { return z_value_; }
 
 

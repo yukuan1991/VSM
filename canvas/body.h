@@ -4,6 +4,9 @@
 #include "canvas/view.h"
 #include "canvas/scene.h"
 #include "utility/raii.hpp"
+#include "utility/memory.hpp"
+#include <QPrinter>
+class QPrinter;
 
 namespace canvas
 <%
@@ -24,6 +27,8 @@ public:
     void set_attached_file (QString attached_file) { setWindowTitle(attached_file); }
     const nlohmann::json selected_item_data ();
     void set_item_attribute (string_view key, std::string value = {});
+    unique_ptr<QPrinter> generate_printer ();
+    ~body ();
 signals:
     void selection_changed (bool);
 public slots:

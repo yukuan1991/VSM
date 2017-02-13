@@ -18,7 +18,7 @@ const QColor scene::background_color (230, 230, 230);
 void scene::init()
 {
     connect (this, &scene::selectionChanged, [this] { report_selection (); });
-    setSceneRect ({0, 0, 1500, 1500});
+    setSceneRect ({0, 0, 1500, 1200});
     setBackgroundBrush(background_color);
 }
 
@@ -67,9 +67,10 @@ void scene::drawBackground(QPainter *painter, const QRectF &rect)
 
     painter->setBrush(Qt::white);
     auto center_point = sceneRect ().center();
-    QRectF effective_rect (center_point - QPointF (width / 2, height / 2), QSizeF (width, height));
+    effective_rect_ = QRectF (center_point - QPointF (width / 2, height / 2), QSizeF (width, height));
 
-    painter->drawRect(effective_rect);
+    painter->drawRect(effective_rect_);
+    qDebug () << effective_rect_.width () << " " << effective_rect_.height ();
 
     vector<pair<qreal, qreal>> sequences;
     for (auto it : items ())
@@ -86,12 +87,12 @@ void scene::drawBackground(QPainter *painter, const QRectF &rect)
 
         auto begin_x = it->mapToScene (it->boundingRect().topLeft()).x();
         auto end_x = it->mapToScene(it->boundingRect().topRight()).x();
-        if (effective_rect.left() > end_x or effective_rect.right () < begin_x)
+        if (effective_rect_.left() > end_x or effective_rect_.right () < begin_x)
         {
             continue;
         }
-        sequences.emplace_back (std::max (effective_rect.left(), begin_x),
-                                std::min (effective_rect.right (), end_x));
+        sequences.emplace_back (std::max (effective_rect_.left(), begin_x),
+                                std::min (effective_rect_.right (), end_x));
     }
     std::sort (begin (sequences), end (sequences));
 
@@ -122,19 +123,21 @@ void scene::drawBackground(QPainter *painter, const QRectF &rect)
         }
     }
 
-    qreal last = effective_rect.left();
+    qreal last = effective_rect_.left();
     painter->setPen ({Qt::black, 2.0});
+    auto low_ground = effective_rect_.bottom () - 20;
+    auto high_ground = low_ground - 30;
     for (auto & it : sequences)
     {
-        QLineF flat_line (QPointF (last, 70), QPointF (it.first, 70));
+        QLineF flat_line (QPointF (last, high_ground), QPointF (it.first, high_ground));
         painter->drawLine(flat_line);
-        QLineF vertical_line (QPointF (it.first, 70), QPointF (it.first, 100));
+        QLineF vertical_line (QPointF (it.first, high_ground), QPointF (it.first, low_ground));
         painter->drawLine(vertical_line);
-        painter->drawLine(QPointF (it.first, 100), QPointF (it.second, 100));
-        painter->drawLine(QPointF (it.second, 70), QPointF (it.second, 100));
+        painter->drawLine(QPointF (it.first, low_ground), QPointF (it.second, low_ground));
+        painter->drawLine(QPointF (it.second, high_ground), QPointF (it.second, low_ground));
         last = it.second;
     }
-    painter->drawLine(QPointF (last, 70), QPointF (effective_rect.right (), 70));
+    painter->drawLine(QPointF (last, high_ground), QPointF (effective_rect_.right (), high_ground));
 }
 
 
