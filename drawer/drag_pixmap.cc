@@ -41,6 +41,7 @@ static void board_info_flow_maker(QPainter* painter, qreal width,qreal height);
 static void material_flow_maker(QPainter* painter,qreal width, qreal height);
 static void production_control_depterment_maker(QPainter* painter,qreal width, qreal height);
 static void value_add_radio_maker(QPainter* painter,qreal width, qreal height);
+static void text_maker(QPainter* painter,qreal width, qreal height);
 QPixmap make_pixmap(const QString &name, qreal width, qreal height)
 {
     QPixmap pm (static_cast<int> (width), static_cast<int> (height));
@@ -75,7 +76,8 @@ QPixmap make_pixmap(const QString &name, qreal width, qreal height)
         {"看板用信息流", board_info_flow_maker},
         {"物流", material_flow_maker},
         {"生产控制部门",production_control_depterment_maker},
-        {"增值比",value_add_radio_maker}
+        {"增值比",value_add_radio_maker},
+        {"文字",text_maker}
     };
 
 
@@ -798,6 +800,22 @@ static void value_add_radio_maker(QPainter* painter,qreal width, qreal height)
     painter->drawPolygon({{p1,p2,p6,p5}},Qt::WindingFill);
     painter->drawLine(p3,p4);
 
+}
+
+static void text_maker(QPainter* painter,qreal width, qreal height)
+{
+    auto font = painter->font();
+    font.setPointSizeF(height);
+    font.setBold(true);
+    painter->setFont(font);
+
+    QFontMetricsF metrics (font);
+
+    auto w = metrics.width("A");
+    auto h = metrics.height();
+    QPointF center (width / 2, height / 2);
+
+    painter->drawText(QRectF (center - QPointF (w / 2, h / 2), QSizeF (w, h)), "A");
 }
 
 %>
