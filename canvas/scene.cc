@@ -12,6 +12,8 @@
 namespace canvas
 <%
 
+using namespace std;
+
 const QColor scene::background_color (230, 230, 230);
 
 

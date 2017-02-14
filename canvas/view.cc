@@ -27,14 +27,14 @@ namespace canvas
 
 view::view(QWidget *parent)
     :QGraphicsView (parent)
-    , tmp_arrow_ (nullopt)
+    , tmp_arrow_ (nullptr)
 {
     init ();
 }
 
 view::view(QGraphicsScene *scene, QWidget *parent)
     :QGraphicsView (scene, parent)
-    ,tmp_arrow_ (nullopt)
+    ,tmp_arrow_ (nullptr)
 {
     init ();
 }
@@ -137,7 +137,7 @@ void view::mouseReleaseEvent(QMouseEvent *event)
             emit arrow_finished ();
             tmp_arrow_.value().release();
         }
-        tmp_arrow_ = nullopt;
+        *tmp_arrow_ = nullptr;
     }
     else if (arrow_state_ == "看板用信息流")
     {
