@@ -190,6 +190,7 @@ QWizardPage *flow_main::future_create_page1()
     future_layout_1->addWidget(future_label_step_1);
     future_layout_1->addWidget(future_label_title_1);
     future_page_1->setLayout(future_layout_1);
+
     return future_page_1;
 
 }
@@ -205,6 +206,7 @@ QWizardPage *flow_main::future_create_page2()
     future_layout_2->addWidget(future_label_step_2);
     future_layout_2->addWidget(future_label_title_2);
     future_page_2->setLayout(future_layout_2);
+
     return future_page_2;
 
 }
@@ -245,7 +247,7 @@ QWizardPage *flow_main::improve_create_page1()
     improve_page_1->setButtonText(QWizard::CancelButton,"取消");
     improve_page_1->setButtonText(QWizard::FinishButton,"完成");
     improve_label_step_1->setText(tr("第一步"));
-    improve_label_title_1->setText(tr("定拍环"));
+    improve_label_title_1->setText(tr("优化定拍环"));
     improve_layout_1->addWidget(improve_label_step_1);
     improve_layout_1->addWidget(improve_label_title_1);
     improve_page_1->setLayout(improve_layout_1);
@@ -259,7 +261,7 @@ QWizardPage *flow_main::improve_create_page2()
     improve_page_2->setButtonText(QWizard::CancelButton,"取消");
     improve_page_2->setButtonText(QWizard::FinishButton,"完成");
     improve_label_step_2->setText(tr("第二步"));
-    improve_label_title_2->setText(tr("定拍环之前工序环"));
+    improve_label_title_2->setText(tr("优化定拍环之外其他环"));
     improve_layout_2->addWidget(improve_label_step_2);
     improve_layout_2->addWidget(improve_label_title_2);
     improve_page_2->setLayout(improve_layout_2);
@@ -274,7 +276,7 @@ QWizardPage *flow_main::improve_create_page3()
     improve_page_3->setButtonText(QWizard::CancelButton,"取消");
     improve_page_3->setButtonText(QWizard::FinishButton,"完成");
     improve_label_step_3->setText(tr("第三步"));
-    improve_label_title_3->setText(tr("供应商环"));
+    improve_label_title_3->setText(tr("优化供应商环"));
     improve_layout_3->addWidget(improve_label_step_3);
     improve_layout_3->addWidget(improve_label_title_3);
     improve_page_3->setLayout(improve_layout_3);
