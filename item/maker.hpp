@@ -69,7 +69,7 @@ inline std::unique_ptr<item> make_item (const QString& classname, QPointF pos)
         {"操作员", [] (QPointF p)->up_item { return operating_personnel::make (p, Qt::black); }},
         {"看板站", [] (QPointF p)->up_item { return board_station::make (p, Qt::black); }},
         {"生产控制部门", [] (QPointF p)->up_item { return production_control_department::make (p, Qt::black); }},
-        //{"增值比", [] (QPointF p)->up_item { return value_added_radtio::make(p,Qt::black);}},
+        {"增值比", [] (QPointF p)->up_item { return value_added_radtio::make(p,Qt::black);}},
     };
 
     auto found = type_map.find(classname);

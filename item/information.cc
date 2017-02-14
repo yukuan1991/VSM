@@ -72,7 +72,6 @@ void information::mouseDoubleClickEvent(QGraphicsSceneMouseEvent *event)
     {
         set_name (name.trimmed ().toStdString());
     }
-
 }
 }
 

@@ -1,5 +1,6 @@
 ﻿#include "value_added_radtio.h"
 #include <QPainter>
+#include <QDebug>
 namespace item {
 
 
@@ -26,7 +27,7 @@ void value_added_radtio::paint(QPainter *painter, const QStyleOptionGraphicsItem
     the_pen.setWidthF(std::max(item_width_ * 0.02,2.0));
     painter->setBrush(Qt::white);
     painter->setPen(the_pen);
-    painter->drawPolygon({{p1,p2,p5,p6}},Qt::WindingFill);
+    painter->drawPolygon({{p1,p2,p6,p5}},Qt::WindingFill);
     painter->drawLine(p3,p4);
 
     item::paint(painter,option,widget);
@@ -39,6 +40,7 @@ std::unique_ptr<value_added_radtio> value_added_radtio::make(QPointF pos, QColor
     ret->setPos(pos);
     ret->set_color(std::move(color));
     ret->type_ = "增值比";
+    qDebug() << "value_added_radtio";
     return ret;
 }
 }

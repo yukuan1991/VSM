@@ -8,7 +8,7 @@ namespace item {
 class value_added_radtio : public item
 {
 public:
-    std::unique_ptr<value_added_radtio> make (QPointF pos, QColor color = Qt::black);
+    static std::unique_ptr<value_added_radtio> make (QPointF pos, QColor color = Qt::black);
 protected:
     value_added_radtio(item* parent = nullptr);
     void paint (QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = nullptr) override;

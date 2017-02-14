@@ -91,6 +91,7 @@ std::unique_ptr<drag_widget> toolbox::init_entity()
         "操作员",
         "生产控制部门",
         "增值比"
+
     };
     return drag_widget::make(items);
 

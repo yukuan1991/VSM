@@ -63,16 +63,16 @@ void flow_main::on_drawer_status(const QString &status)
 
 void flow_main::get_page()
 {
-    QWizard wizard(this);
-    wizard.setWindowTitle("wizard dialog");
-    wizard.setOption( QWizard::NoBackButtonOnStartPage );//设置第一页没有上一步的按钮
-    wizard.setWizardStyle( QWizard::ModernStyle );//设置上一步下一步等按钮的显示格式
-    wizard.addPage(create_page1());
-    wizard.addPage(create_page2());
-    wizard.addPage(create_page3());
-    wizard.addPage(create_page4());
-    wizard.addPage(create_page5());
-    wizard.exec();
+    QWizard *wizard_ = new QWizard(this);
+    wizard_->setWindowTitle("wizardialog");
+    wizard_->setOption( QWizard::NoBackButtonOnStartPage );//设置第一页没有上一步的按钮
+    wizard_->setWizardStyle( QWizard::ModernStyle );//设置上一步下一步等按钮的显示格式
+    wizard_->addPage(create_page1());
+    wizard_->addPage(create_page2());
+    wizard_->addPage(create_page3());
+    wizard_->addPage(create_page4());
+    wizard_->addPage(create_page5());
+    wizard_->exec();
 }
 
 QWizardPage *flow_main::create_page1()
@@ -325,6 +325,7 @@ void flow_main::init_conn()
     connect(ui->action_file_save_as, &QAction::triggered, this, &flow_main::file_save_as);
     connect (ui->action_zoom_in, &QAction::triggered, this, &flow_main::zoom_in_active);
     connect (ui->action_zoom_out, &QAction::triggered, this, &flow_main::zoom_out_active);
+
     connect(ui->action_new_guide, &QAction::triggered, this, &flow_main::get_page);
 }
 

@@ -59,6 +59,10 @@
      <property name="title">
       <string>向导</string>
      </property>
+     <property name="icon">
+      <iconset>
+       <normaloff>image/help.png</normaloff>image/help.png</iconset>
+     </property>
      <addaction name="action_new_guide"/>
      <addaction name="action_future_guide"/>
      <addaction name="action_impore_guide"/>

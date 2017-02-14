@@ -86,28 +86,29 @@ private:
     QWizardPage* create_page4();
     QWizardPage* create_page5();
 
+
     QWizardPage *page_1 = new QWizardPage(this);
     QWizardPage *page_2 = new QWizardPage(this);
     QWizardPage *page_3 = new QWizardPage(this);
     QWizardPage *page_4 = new QWizardPage(this);
     QWizardPage *page_5 = new QWizardPage(this);
 
-    QVBoxLayout *layout_1 = new QVBoxLayout(page_1);
-    QVBoxLayout *layout_2 = new QVBoxLayout(page_2);
-    QVBoxLayout *layout_3 = new QVBoxLayout(page_3);
-    QVBoxLayout *layout_4 = new QVBoxLayout(page_4);
-    QVBoxLayout *layout_5 = new QVBoxLayout(page_5);
+    QVBoxLayout *layout_1 = new QVBoxLayout(this);
+    QVBoxLayout *layout_2 = new QVBoxLayout(this);
+    QVBoxLayout *layout_3 = new QVBoxLayout(this);
+    QVBoxLayout *layout_4 = new QVBoxLayout(this);
+    QVBoxLayout *layout_5 = new QVBoxLayout(this);
 
-    QLabel *label_step_1 = new QLabel(page_1);
-    QLabel *label_title_1 = new QLabel(page_1);
-    QLabel *label_step_2 = new QLabel(page_2);
-    QLabel *label_title_2= new QLabel(page_2);
-    QLabel *label_step_3 = new QLabel(page_3);
-    QLabel *label_title_3= new QLabel(page_3);
-    QLabel *label_step_4 = new QLabel(page_5);
-    QLabel *label_title_4= new QLabel(page_5);
-    QLabel *label_step_5 = new QLabel(page_5);
-    QLabel *label_title_5= new QLabel(page_5);
+    QLabel *label_step_1 = new QLabel(this);
+    QLabel *label_title_1 = new QLabel(this);
+    QLabel *label_step_2 = new QLabel(this);
+    QLabel *label_title_2= new QLabel(this);
+    QLabel *label_step_3 = new QLabel(this);
+    QLabel *label_title_3= new QLabel(this);
+    QLabel *label_step_4 = new QLabel(this);
+    QLabel *label_title_4= new QLabel(this);
+    QLabel *label_step_5 = new QLabel(this);
+    QLabel *label_title_5= new QLabel(this);
 
 
 

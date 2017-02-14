@@ -1,6 +1,7 @@
 ﻿#include "production_control_department.h"
 #include<memory>
 #include <QPainter>
+#include <QDebug>
 namespace item {
 
 std::unique_ptr<production_control_department> production_control_department::make(QPointF pos, QColor color)
@@ -10,6 +11,7 @@ std::unique_ptr<production_control_department> production_control_department::ma
     ret->setPos(pos);
     ret->set_color(std::move(color));
     ret->type_ = "生产控制部门";
+    qDebug() << "production_control_department";
     return ret;
 
 }
