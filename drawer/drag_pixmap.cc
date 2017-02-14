@@ -282,8 +282,8 @@ static void information_maker (QPainter* painter, qreal width, qreal height)
     {
         {x_scale * 1,y_scale * 1},
         {x_scale * 99, y_scale * 1},
-        {x_scale * 99,y_scale * 79},
-        {x_scale * 1, y_scale * 79}
+        {x_scale * 99,y_scale * 79 / 4},
+        {x_scale * 1, y_scale * 79 / 4}
     };
     painter->setBrush (Qt::white);
     painter->drawPolygon ({polygon_shape}, Qt::WindingFill);
