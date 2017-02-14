@@ -64,7 +64,9 @@ private:
 
     void on_drawer_status (const QString& status);
     //获取向导页面
-    void get_page();
+    void get_new_page();
+    void get_future_page();
+    void get_improve_page();
 
 private:
     Ui::flow_main *ui;
@@ -80,35 +82,77 @@ private:
 private:
     QToolBar *toolbar_file = addToolBar(tr("文件"));
     QToolBar *toolbar_edit = addToolBar(tr("编辑"));
-    QWizardPage* create_page1();
-    QWizardPage* create_page2();
-    QWizardPage* create_page3();
-    QWizardPage* create_page4();
-    QWizardPage* create_page5();
+    QWizardPage* new_create_page1();
+    QWizardPage* new_create_page2();
+    QWizardPage* new_create_page3();
+    QWizardPage* new_create_page4();
+    QWizardPage* new_create_page5();
 
+    QWizardPage* future_create_page1();
+    QWizardPage* future_create_page2();
+    QWizardPage* future_create_page3();
+    QWizardPage *future_create_page4();
 
-    QWizardPage *page_1 = new QWizardPage(this);
-    QWizardPage *page_2 = new QWizardPage(this);
-    QWizardPage *page_3 = new QWizardPage(this);
-    QWizardPage *page_4 = new QWizardPage(this);
-    QWizardPage *page_5 = new QWizardPage(this);
+    QWizardPage* improve_create_page1();
+    QWizardPage* improve_create_page2();
+    QWizardPage* improve_create_page3();
 
-    QVBoxLayout *layout_1 = new QVBoxLayout(this);
-    QVBoxLayout *layout_2 = new QVBoxLayout(this);
-    QVBoxLayout *layout_3 = new QVBoxLayout(this);
-    QVBoxLayout *layout_4 = new QVBoxLayout(this);
-    QVBoxLayout *layout_5 = new QVBoxLayout(this);
+    QWizardPage *new_page_1 = new QWizardPage(this);
+    QWizardPage *new_page_2 = new QWizardPage(this);
+    QWizardPage *new_page_3 = new QWizardPage(this);
+    QWizardPage *new_page_4 = new QWizardPage(this);
+    QWizardPage *new_page_5 = new QWizardPage(this);
 
-    QLabel *label_step_1 = new QLabel(this);
-    QLabel *label_title_1 = new QLabel(this);
-    QLabel *label_step_2 = new QLabel(this);
-    QLabel *label_title_2= new QLabel(this);
-    QLabel *label_step_3 = new QLabel(this);
-    QLabel *label_title_3= new QLabel(this);
-    QLabel *label_step_4 = new QLabel(this);
-    QLabel *label_title_4= new QLabel(this);
-    QLabel *label_step_5 = new QLabel(this);
-    QLabel *label_title_5= new QLabel(this);
+    QWizardPage *future_page_1 = new QWizardPage(this);
+    QWizardPage *future_page_2 = new QWizardPage(this);
+    QWizardPage *future_page_3 = new QWizardPage(this);
+    QWizardPage *future_page_4 = new QWizardPage(this);
+
+    QWizardPage *improve_page_1 = new QWizardPage(this);
+    QWizardPage *improve_page_2 = new QWizardPage(this);
+    QWizardPage *improve_page_3 = new QWizardPage(this);
+
+    QVBoxLayout *new_layout_1 = new QVBoxLayout(this);
+    QVBoxLayout *new_layout_2 = new QVBoxLayout(this);
+    QVBoxLayout *new_layout_3 = new QVBoxLayout(this);
+    QVBoxLayout *new_layout_4 = new QVBoxLayout(this);
+    QVBoxLayout *new_layout_5 = new QVBoxLayout(this);
+
+    QVBoxLayout *future_layout_1 = new QVBoxLayout(this);
+    QVBoxLayout *future_layout_2 = new QVBoxLayout(this);
+    QVBoxLayout *future_layout_3 = new QVBoxLayout(this);
+    QVBoxLayout *future_layout_4 = new QVBoxLayout(this);
+
+    QVBoxLayout *improve_layout_1 = new QVBoxLayout(this);
+    QVBoxLayout *improve_layout_2 = new QVBoxLayout(this);
+    QVBoxLayout *improve_layout_3 = new QVBoxLayout(this);
+
+    QLabel *new_label_step_1 = new QLabel(this);
+    QLabel *new_label_title_1 = new QLabel(this);
+    QLabel *new_label_step_2 = new QLabel(this);
+    QLabel *new_label_title_2= new QLabel(this);
+    QLabel *new_label_step_3 = new QLabel(this);
+    QLabel *new_label_title_3= new QLabel(this);
+    QLabel *new_label_step_4 = new QLabel(this);
+    QLabel *new_label_title_4= new QLabel(this);
+    QLabel *new_label_step_5 = new QLabel(this);
+    QLabel *new_label_title_5= new QLabel(this);
+
+    QLabel *future_label_step_1 = new QLabel(this);
+    QLabel *future_label_title_1 = new QLabel(this);
+    QLabel *future_label_step_2 = new QLabel(this);
+    QLabel *future_label_title_2= new QLabel(this);
+    QLabel *future_label_step_3 = new QLabel(this);
+    QLabel *future_label_title_3= new QLabel(this);
+    QLabel *future_label_step_4 = new QLabel(this);
+    QLabel *future_label_title_4= new QLabel(this);
+
+    QLabel *improve_label_step_1 = new QLabel(this);
+    QLabel *improve_label_title_1 = new QLabel(this);
+    QLabel *improve_label_step_2 = new QLabel(this);
+    QLabel *improve_label_title_2= new QLabel(this);
+    QLabel *improve_label_step_3 = new QLabel(this);
+    QLabel *improve_label_title_3= new QLabel(this);
 
 
 

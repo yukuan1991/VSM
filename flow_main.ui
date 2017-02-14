@@ -65,7 +65,7 @@
      </property>
      <addaction name="action_new_guide"/>
      <addaction name="action_future_guide"/>
-     <addaction name="action_impore_guide"/>
+     <addaction name="action_improve_guide"/>
     </widget>
     <addaction name="menu_guide"/>
    </widget>
@@ -211,7 +211,7 @@
     <string>未来图向导</string>
    </property>
   </action>
-  <action name="action_impore_guide">
+  <action name="action_improve_guide">
    <property name="text">
     <string>改善点实施</string>
    </property>
