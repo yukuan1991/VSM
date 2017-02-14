@@ -15,6 +15,7 @@ namespace item
 using std::experimental::string_view;
 using std::experimental::optional;
 using std::experimental::nullopt;
+using namespace std;
 
 enum class selected_item : bool
 {
