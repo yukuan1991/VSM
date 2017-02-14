@@ -25,14 +25,37 @@ flow_app::flow_app(int argc, char **argv)
 #include <QGraphicsScene>
 #include <QMatrix>
 #include <QGLWidget>
-#include "item/board_info_flow.h"
+#include "item/production_control_department.h"
+#include "item/value_added_radtio.h"
+
 bool flow_app::run()
 {
     main_ = std::make_unique<flow_main> ();
     main_->set_drawer ();
     main_->show ();
+//    QGraphicsScene scene (0, 0, 800, 600);
+//    QGraphicsView view;
+//    view.setScene(&scene);
+//    QMatrix matrix;
+//    matrix.scale (2,2);
+//    view.setMatrix (matrix);
+//    view.setDragMode (decltype (view) :: RubberBandDrag);
+//    view.setRubberBandSelectionMode (Qt::IntersectsItemShape);
+//    view.setViewport(new QGLWidget(QGLFormat(QGL::SampleBuffers)));
+//    view.show();
+//    qDebug() << "main";
 
-    return true;
+//    auto p_item = item::production_control_department::make({100, 100},Qt::black);
+
+//    if (p_item != nullptr)
+
+//    {
+//        qDebug() << "main if";
+
+//        scene.addItem(p_item.release());
+//    }
+//    return exec();
+   return true ;
 }
 
 void flow_app::exec_update(std::vector<std::pair<string, string>> file_info)

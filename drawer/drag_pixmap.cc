@@ -39,7 +39,8 @@ static void tradition_info_flow_maker(QPainter* painter, qreal width, qreal heig
 static void electric_info_flow_maker(QPainter* painter,qreal width,qreal height);
 static void board_info_flow_maker(QPainter* painter, qreal width,qreal height);
 static void material_flow_maker(QPainter* painter,qreal width, qreal height);
-
+static void production_control_depterment_maker(QPainter* painter,qreal width, qreal height);
+static void value_add_radio_maker(QPainter* painter,qreal width, qreal height);
 QPixmap make_pixmap(const QString &name, qreal width, qreal height)
 {
     QPixmap pm (static_cast<int> (width), static_cast<int> (height));
@@ -72,7 +73,9 @@ QPixmap make_pixmap(const QString &name, qreal width, qreal height)
         {"传统信息流", tradition_info_flow_maker},
         {"电子信息流", electric_info_flow_maker},
         {"看板用信息流", board_info_flow_maker},
-        {"物流", material_flow_maker}
+        {"物流", material_flow_maker},
+        {"生产控制部门",production_control_depterment_maker},
+        {"增值比",value_add_radio_maker}
     };
 
 
@@ -749,6 +752,51 @@ static void material_flow_maker(QPainter* painter,qreal width, qreal height)
     painter->setBrush(Qt::black);
     painter->drawPolygon({{p11,p12,p14,p13}},Qt::WindingFill);
 
+
+}
+static void production_control_depterment_maker(QPainter* painter,qreal width, qreal height)
+{
+    auto x_scale = width /100;
+    auto y_scale = height /80;
+    QPointF p1{2 * x_scale, 2 * y_scale},
+    p2{98 * x_scale, 2 * y_scale},
+    p3{98 * x_scale, 78 * y_scale},
+    p4{2 * x_scale, 78 * y_scale},
+    p5{2 * x_scale, 35 * y_scale},
+    p6{98 * x_scale,35 * y_scale},
+    p7{2 *x_scale, 55 * y_scale},
+    p8{50 * x_scale,55 * y_scale},
+    p9{50 * x_scale, 78 * y_scale};
+
+    auto the_pen = painter->pen();
+    the_pen.setColor(Qt::black);
+    the_pen.setWidthF(std::max(0.02 * width,2.0));
+    painter->setPen(the_pen);
+    painter->setBrush(Qt::white);
+    painter->drawPolygon({{p1,p2,p3,p4}},Qt::WindingFill);
+    painter->drawLine(p5,p6);
+    painter->drawLine(p7,p8);
+    painter->drawLine(p8,p9);
+}
+static void value_add_radio_maker(QPainter* painter,qreal width, qreal height)
+{
+    auto x_scale = width / 100;
+    auto y_scale = height/ 80;
+
+    QPointF p1{1 * x_scale, 1 * y_scale},
+    p2{124 * x_scale, 1 * y_scale},
+    p3{1 * x_scale, 40 * y_scale},
+    p4{124 * x_scale, 40 * y_scale},
+    p5{1 * x_scale, 79 * y_scale},
+    p6{124 * x_scale, 79 * y_scale};
+
+    auto the_pen = painter->pen();
+    the_pen.setColor(Qt::black);
+    the_pen.setWidthF(std::max(width * 0.02, 2.0));
+    painter->setBrush(Qt::white);
+    painter->setPen(the_pen);
+    painter->drawPolygon({{p1,p2,p6,p5}},Qt::WindingFill);
+    painter->drawLine(p3,p4);
 
 }
 

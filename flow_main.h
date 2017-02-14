@@ -79,5 +79,6 @@ private:
     QWizardPage* create_page2();
     QWizardPage* create_page3();
     QWizardPage* create_page4();
+    QWizardPage *page = new QWizardPage(this);
 
 };

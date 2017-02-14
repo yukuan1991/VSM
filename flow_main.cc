@@ -73,7 +73,7 @@ void flow_main::get_page()
 
 QWizardPage *flow_main::create_page1()
 {
-    QWizardPage *page = new QWizardPage;
+
     page->setTitle("introduce");
     page->setTitle("select information");
     page->setButtonText(QWizard::BackButton,"上一页");

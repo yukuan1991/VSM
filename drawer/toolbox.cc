@@ -72,7 +72,6 @@ std::unique_ptr<drag_widget> toolbox::init_entity()
     const vector<QString> items
     {
         "生产工序",
-//        "取料",
         "其他公司",
         "数据箱",
         "库存",
@@ -90,6 +89,8 @@ std::unique_ptr<drag_widget> toolbox::init_entity()
         "改善",
         "缓冲或安全库存",
         "操作员",
+        "生产控制部门",
+        "增值比"
     };
     return drag_widget::make(items);
 

@@ -62,7 +62,9 @@ SOURCES += \
     item/truck_transport.cc \
     item/other_company.cc \
     item/fifo.cc \
-    item/product_to_customer.cc
+    item/product_to_customer.cc \
+    item/production_control_department.cc \
+    item/value_added_radtio.cc
 
 HEADERS += \
     flow_app.h \
@@ -102,7 +104,9 @@ HEADERS += \
     item/truck_transport.h \
     item/other_company.h \
     item/fifo.h \
-    item/product_to_customer.h
+    item/product_to_customer.h \
+    item/production_control_department.h \
+    item/value_added_radtio.h
 
 FORMS += \
     flow_main.ui \
