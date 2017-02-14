@@ -7,6 +7,7 @@
 #include "json.hpp"
 #include <experimental/string_view>
 #include <experimental/optional>
+#include "utility/interface.hpp"
 #include "utility/containers.hpp"
 
 namespace item
@@ -28,6 +29,7 @@ signals:
     void name_changed (const QString&);
     void color_changed (const QColor&);
 public:
+    friend nlohmann::json dump_scene (not_null<QGraphicsScene*> scene);
     qreal width () { return item_width_; }
     qreal height () { return item_height_; }
     void set_name (string name) { item_info_ ["name"] = name; }
@@ -39,6 +41,7 @@ public:
     void apply_z_value (selected_item yes_or_no);
     nlohmann::json attributes () { return item_info_ ["attribute"]; }
     virtual QRectF shape_rect () const { return boundingRect(); }
+
 
     QRectF boundingRect () const override;
 protected:
@@ -62,6 +65,9 @@ protected:
     static constexpr qreal small_object_ratio = 2;
     static constexpr qreal small_object_height = 4;
     bool show_frame_ = false;
+private:
+    void load_item_info (nlohmann::json item_info) { item_info_ = ::move (item_info); }
+    nlohmann::json save_item_info () { return item_info_; }
 private:
     QColor color_ = Qt::black;
     qreal z_value_ = 0;

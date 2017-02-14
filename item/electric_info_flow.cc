@@ -59,6 +59,10 @@ bool electric_info_flow::init()
     neck1_ = QLineF (body_end_, mid_p2_).normalVector().unitVector().pointAt(tip_width);
     neck2_ = QLineF (body_end_, mid_p2_).normalVector().unitVector().pointAt(-tip_width);
 
+    item_info_["begin"]["x"] = start_.x();
+    item_info_["begin"]["y"] = start_.y();
+    item_info_["end"]["x"] = end_.x();
+    item_info_["end"]["y"] = end_.y();
 
     return true;
 }

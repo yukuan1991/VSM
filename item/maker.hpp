@@ -28,7 +28,9 @@
 #include "item/product_to_customer.h"
 #include "traditional_info_flow.h"
 #include "item/fifo.h"
-
+#include "json.hpp"
+#include "utility/interface.hpp"
+#include <QGraphicsScene>
 
 namespace item
 <%
@@ -107,5 +109,41 @@ inline std::unique_ptr<item> make_arrow (const QString& name, QPointF start, QPo
     return nullptr;
 }
 
+
+inline nlohmann::json dump_scene (not_null<QGraphicsScene*> scene)
+{
+    using nlohmann::json;
+    auto data = nlohmann::json ();
+    auto& item_data = data ["items"];
+    for (auto & raw_item : scene->items ())
+    {
+        auto casted_item = dynamic_cast<item*> (raw_item);
+        if (casted_item == nullptr)
+        {
+            continue;
+        }
+
+        json item_dump;
+        item_dump ["item_info"] = casted_item->save_item_info();
+        auto pos = casted_item->pos();
+        item_dump["x"] = pos.x();
+        item_dump["y"] = pos.y();
+        item_dump["type"] = casted_item->item_type().toStdString();
+
+        item_data.push_back(::move (item_dump));
+    }
+    return data;
+}
+
+inline bool load_scene (not_null<QGraphicsScene*> scene, const nlohmann::json& data) noexcept try
+{
+    SCOPE_FAIL { scene->clear(); };
+    scene->clear();
+}
+catch (std::exception const & e)
+{
+    Q_UNUSED(e);
+    return false;
+}
 
 %>

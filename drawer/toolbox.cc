@@ -59,6 +59,7 @@ bool toolbox::init ()
     connect(info_flow.get(), &drag_widget::button_triggered, this, &toolbox::status_changed);
     connect(this, &toolbox::reset_status, info_flow.get (), &drag_widget::reset_status);
     addItem(info_flow.release(), "信息流");
+    addItem (drag_widget::make({"改善"}).release (), {"改善"});
 
     connect (this, &toolbox::status_changed, [this] (const QString& s){ status_ = s; });
 
@@ -72,7 +73,6 @@ std::unique_ptr<drag_widget> toolbox::init_entity()
     const vector<QString> items
     {
         "生产工序",
-//        "取料",
         "其他公司",
         //"数据箱",
         "库存",
@@ -87,7 +87,6 @@ std::unique_ptr<drag_widget> toolbox::init_entity()
         "看板以批量方式传达",
         "均衡生产",
         "现场调度",
-        "改善",
         "缓冲或安全库存",
         "操作员",
     };

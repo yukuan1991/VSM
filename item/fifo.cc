@@ -48,6 +48,11 @@ bool fifo::init()
         return false;
     }
 
+    item_info_["begin"]["x"] = begin_.x();
+    item_info_["begin"]["y"] = begin_.y();
+    item_info_["end"]["x"] = end_.x();
+    item_info_["end"]["y"] = end_.y();
+
     return true;
 }
 

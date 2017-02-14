@@ -35,6 +35,10 @@ material_flow::material_flow(QPointF p1, QPointF p2, QColor color, item *parent)
     set_color(::move (color));
     set_z_value(201);
 
+    item_info_["begin"]["x"] = start_.x();
+    item_info_["begin"]["y"] = start_.y();
+    item_info_["end"]["x"] = end_.x();
+    item_info_["end"]["y"] = end_.y();
 }
 
 bool material_flow::init()
