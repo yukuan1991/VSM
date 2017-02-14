@@ -2,10 +2,15 @@
 #define data_box_H
 #include <item/item.h>
 #include <memory>
+#include <utility>
+#include "utility/containers.hpp"
 
 ///数据箱
 namespace item {
 
+using std::tuple;
+using std::make_tuple;
+using std::get;
 
 class data_box : public item
 {
@@ -16,6 +21,7 @@ protected:
     void paint (QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = nullptr) override;
 private:
     void mouseDoubleClickEvent(QGraphicsSceneMouseEvent *event);
+    optional<tuple<string, string, string, string>> set_box_data (string a, string b, string c, string d);
 
 
   };

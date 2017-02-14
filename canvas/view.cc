@@ -101,8 +101,6 @@ void view::mousePressEvent(QMouseEvent *event)
         last_pressed_ = mapToScene(event->pos());
         tmp_arrow_.emplace (nullptr);
     }
-
-
 }
 
 void view::mouseMoveEvent(QMouseEvent *event)

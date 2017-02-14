@@ -31,7 +31,6 @@ public:
     /// 如果比例小于1则用1
     void scale_object (double factor);
 
-    //void set_arrow_state (QString state) { arrow_state_ = ::move (state); }
     void on_state_changed (const QString& state);
     ~view () override;
 

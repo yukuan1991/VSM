@@ -91,6 +91,13 @@ void scene::drawBackground(QPainter *painter, const QRectF &rect)
         {
             continue;
         }
+        auto begin_y = it->mapToScene (it->boundingRect().topLeft ()).y();
+        auto end_y = it->mapToScene(it->boundingRect().bottomRight ()).y();
+        if (effective_rect_.top() > begin_y or effective_rect_.bottom() < end_y)
+        {
+            continue;
+        }
+
         sequences.emplace_back (std::max (effective_rect_.left(), begin_x),
                                 std::min (effective_rect_.right (), end_x));
     }

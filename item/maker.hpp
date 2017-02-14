@@ -47,7 +47,7 @@ inline std::unique_ptr<item> make_item (const QString& classname, QPointF pos)
         {"看板以批量方式传达", [] (QPointF p)->up_item { return board_arrival::make (p, Qt::black); }},
         {"生产工序", [] (QPointF p)->up_item { return production_sequence::make(p, Qt::black); }},
         { "其他公司",[] (QPointF p)->up_item { return other_company::make(p, Qt::black); }},
-        {"数据箱", [] (QPointF p)->up_item { return data_box::make(p, Qt::black); }},
+        //{"数据箱", [] (QPointF p)->up_item { return data_box::make(p, Qt::black); }},
         {"库存", [] (QPointF p)->up_item { return storage::make(p, Qt::black); }},
         {"卡车运输", [] (QPointF p)->up_item { return truck_transport::make(p, Qt::black); }},
         {"库存超市", [] (QPointF p)->up_item { return storage_super_market::make(p, Qt::black); }},
@@ -60,7 +60,7 @@ inline std::unique_ptr<item> make_item (const QString& classname, QPointF pos)
         {"均衡生产",  [] (QPointF p)->up_item { return balanced_production::make(p, Qt::black); }},
         {"现场调度",  [] (QPointF p)->up_item { return adjustment_on_scene::make(p, Qt::black); }},
         {"改善",  [] (QPointF p)->up_item { return improvement::make(p, Qt::red); }},
-//        {"取料",  [] (QPointF p)->up_item { return fetch_material::make(p, Qt::black); }},
+        {"取料",  [] (QPointF p)->up_item { return fetch_material::make(p, Qt::black); }},
         {"缓冲或安全库存",  [] (QPointF p)->up_item { return cache_or_safe_storage::make(p, Qt::black); }},
         {"操作员", [] (QPointF p)->up_item { return operating_personnel::make (p, Qt::black); }},
         {"看板站", [] (QPointF p)->up_item { return board_station::make (p, Qt::black); }}

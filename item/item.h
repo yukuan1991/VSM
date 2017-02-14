@@ -44,25 +44,27 @@ public:
 protected:
     explicit item(QGraphicsItem *parent = 0);
     static void set_dash (QPainter* painter);
-    QVariant itemChange(QGraphicsItem::GraphicsItemChange change, const QVariant &value) override;
     void set_z_value (qreal value) { z_value_ = value; setZValue(value); }
     qreal z_value () { return z_value_; }
 
+    string find_json_value (const string& key, const nlohmann::json& data);
+
 
     /// overrides
+    QVariant itemChange(QGraphicsItem::GraphicsItemChange change, const QVariant &value) override;
     void paint (QPainter * painter, const QStyleOptionGraphicsItem* option, QWidget* widget) override;
     void paint_attribute (QPainter* painter);
 protected:
     qreal item_width_ = 100;
     qreal item_height_ = 0.8 * item_width_;
     QString type_;
+    nlohmann::json item_info_;
     static constexpr qreal small_object_ratio = 2;
     static constexpr qreal small_object_height = 4;
+    bool show_frame_ = false;
 private:
     QColor color_ = Qt::black;
-    nlohmann::json item_info_;
     qreal z_value_ = 0;
-    bool show_frame_ = false;
 };
 
 %>
