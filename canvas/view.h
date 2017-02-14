@@ -45,6 +45,8 @@ protected:
     void board_info_move_event (QMouseEvent* event);
     void board_info_release_event (QMouseEvent* event);
 
+    void add_text (QMouseEvent* event);
+
     void dragEnterEvent(QDragEnterEvent *event) override;
     void dragMoveEvent(QDragMoveEvent *event) override;
     void dropEvent (QDropEvent* event) override;

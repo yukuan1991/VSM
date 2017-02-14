@@ -33,16 +33,19 @@ public:
     friend nlohmann::json dump_scene (not_null<QGraphicsScene*> scene);
     qreal width () { return item_width_; }
     qreal height () { return item_height_; }
+
     void set_name (string name) { item_info_ ["name"] = name; }
     string name ();
+
     const QString& item_type () { return type_; }
+
     const QColor& color () { return color_; }
     void set_color (QColor c) { color_ = ::move (c); emit color_changed (c); }
+
     void set_attribute (string_view key, std::string value = {});
     void apply_z_value (selected_item yes_or_no);
     nlohmann::json attributes () { return item_info_ ["attribute"]; }
     virtual QRectF shape_rect () const { return boundingRect(); }
-
 
     QRectF boundingRect () const override;
 protected:
@@ -52,7 +55,6 @@ protected:
     qreal z_value () { return z_value_; }
 
     string find_json_value (const string& key, const nlohmann::json& data);
-
 
     /// overrides
     QVariant itemChange(QGraphicsItem::GraphicsItemChange change, const QVariant &value) override;

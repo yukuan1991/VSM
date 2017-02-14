@@ -90,7 +90,7 @@ std::unique_ptr<drag_widget> toolbox::init_entity()
         "缓冲或安全库存",
         "操作员",
     };
-    return drag_widget::make(items);
+    return drag_widget::make(items, {"文字"});
 
 }
 ///物料流
