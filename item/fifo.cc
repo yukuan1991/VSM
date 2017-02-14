@@ -48,12 +48,19 @@ bool fifo::init()
         return false;
     }
 
+    item_info_["begin"]["x"] = begin_.x();
+    item_info_["begin"]["y"] = begin_.y();
+    item_info_["end"]["x"] = end_.x();
+    item_info_["end"]["y"] = end_.y();
+
     return true;
 }
 
 
 void fifo::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
+    Q_UNUSED (widget);
+    Q_UNUSED (option);
     auto the_pen = painter->pen();
     the_pen.setColor(Qt::black);
     the_pen.setWidthF(2.0);
@@ -61,6 +68,7 @@ void fifo::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWid
     auto font = painter->font ();
     painter->setFont (font_);
     auto x_scale = item_width_ / 100;
+    Q_UNUSED (x_scale);
     auto y_scale = item_height_ / 80;
 
     {
@@ -99,8 +107,6 @@ void fifo::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWid
             paint_attribute(painter);
         }
     }
-
-
 }
 
 fifo::fifo(QPointF begin, QPointF end, QColor color, item *parent)

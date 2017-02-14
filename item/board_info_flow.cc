@@ -40,6 +40,16 @@ bool board_info_flow::init(vector<unique_ptr<QGraphicsLineItem> > tmp_lines)
         lines_.emplace_back (it->line().p1() - begin_ptr, it->line().p2() - begin_ptr);
     }
 
+    for (auto  & it : lines_)
+    {
+        nlohmann::json line_data;
+        line_data ["x1"] = it.x1();
+        line_data ["x2"] = it.x2();
+        line_data ["y1"] = it.y1();
+        line_data ["y2"] = it.y2();
+        item_info_["lines"].push_back(::move (line_data));
+    }
+
     return true;
 }
 

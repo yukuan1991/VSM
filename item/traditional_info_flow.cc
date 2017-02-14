@@ -61,6 +61,10 @@ bool traditional_info_flow::init()
     outer_p3_ = {start_.x() - x_diff, start_.y() - y_diff};
     outer_p4_ = {body_end_.x() - x_diff, body_end_.y() - y_diff};
 
+    item_info_["begin"]["x"] = start_.x();
+    item_info_["begin"]["y"] = start_.y();
+    item_info_["end"]["x"] = end_.x();
+    item_info_["end"]["y"] = end_.y();
 
     return true;
 }

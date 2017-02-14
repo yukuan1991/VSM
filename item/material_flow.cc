@@ -35,6 +35,10 @@ material_flow::material_flow(QPointF p1, QPointF p2, QColor color, item *parent)
     set_color(::move (color));
     set_z_value(201);
 
+    item_info_["begin"]["x"] = start_.x();
+    item_info_["begin"]["y"] = start_.y();
+    item_info_["end"]["x"] = end_.x();
+    item_info_["end"]["y"] = end_.y();
 }
 
 bool material_flow::init()
@@ -145,7 +149,7 @@ void material_flow::paint(QPainter *painter, const QStyleOptionGraphicsItem *opt
 
     painter->restore();
     painter->drawPolygon({{neck1_, neck2_, arrow_tip_}}, Qt::WindingFill);
-    if (/*option->state bitand QStyle::State_Selected*/ false)
+    if ((option->state bitand QStyle::State_Selected) and show_frame_)
     {
         painter->setPen(Qt::DashLine);
         painter->setBrush(Qt::transparent);

@@ -18,6 +18,7 @@ item::item(QGraphicsItem *parent) : QGraphicsObject (parent)
 void item::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
     Q_UNUSED(widget);
+
     painter->setPen(Qt::black);
 
     if ((option->state bitand QStyle::State_Selected) and show_frame_)
@@ -27,7 +28,6 @@ void item::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWid
     }
 
     paint_attribute(painter);
-
 }
 
 void item::paint_attribute(QPainter *painter) try
@@ -144,6 +144,20 @@ QVariant item::itemChange(QGraphicsItem::GraphicsItemChange change, const QVaria
         }
     }
     return QGraphicsItem::itemChange (change, value);
+}
+
+string item::find_json_value(const string& key, const nlohmann::json& data)
+{
+    auto iter = data.find(key);
+    if (iter != data.end () and iter->is_string ())
+    {
+        return *iter;
+    }
+    else
+    {
+        return {};
+    }
+
 }
 
 %> // namespace item
