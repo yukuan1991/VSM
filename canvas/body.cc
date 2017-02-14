@@ -80,10 +80,23 @@ const nlohmann::json body::selected_item_data()
     return scene_.selected_item_attribute ();
 }
 
-void body::set_item_attribute(string_view key, std::__cxx11::string value)
+void body::set_item_attribute(string_view key, std::string value)
 {
     scene_.set_item_attribute (key, value);
 }
+
+
+void body::print_render(QPrinter *printer)
+{
+    QPainter painter(printer);
+    scene ()->render(&painter, QRectF (), scene_.effective_rect ());
+}
+
+body::~body()
+{
+
+}
+
 
 void body::window_modified()
 {

@@ -28,6 +28,7 @@ public:
     bool load (const nlohmann::json & data);
     nlohmann::json selected_item_attribute ();
     void set_item_attribute (string_view key, std::string value = {});
+    QRectF effective_rect () { return effective_rect_; }
     ~scene () override;
 
 signals:
@@ -40,10 +41,11 @@ private:
     void product_sequence_deletion ();
 private:
     item::item* selected_item_ = nullptr;
-    qreal width = 1000;
-    qreal height = 1000 * 1.4142135;
+    qreal height = 1000;
+    qreal width = 1000 * 1.4142135;
 
     const static QColor background_color;
+    QRectF effective_rect_;
 };
 
 %>

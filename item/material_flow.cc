@@ -145,7 +145,7 @@ void material_flow::paint(QPainter *painter, const QStyleOptionGraphicsItem *opt
 
     painter->restore();
     painter->drawPolygon({{neck1_, neck2_, arrow_tip_}}, Qt::WindingFill);
-    if (option->state bitand QStyle::State_Selected)
+    if (/*option->state bitand QStyle::State_Selected*/ false)
     {
         painter->setPen(Qt::DashLine);
         painter->setBrush(Qt::transparent);

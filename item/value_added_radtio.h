@@ -1,7 +1,6 @@
 ﻿#ifndef VALUE_ADDED_RADTIO_H
 #define VALUE_ADDED_RADTIO_H
 #include "item/item.h"
-#include <memory>
 
 ///价值增值比
 namespace item {

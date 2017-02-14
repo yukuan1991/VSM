@@ -784,11 +784,11 @@ static void value_add_radio_maker(QPainter* painter,qreal width, qreal height)
     auto y_scale = height/ 80;
 
     QPointF p1{1 * x_scale, 1 * y_scale},
-    p2{124 * x_scale, 1 * y_scale},
+    p2{99 * x_scale, 1 * y_scale},
     p3{1 * x_scale, 40 * y_scale},
-    p4{124 * x_scale, 40 * y_scale},
+    p4{99 * x_scale, 40 * y_scale},
     p5{1 * x_scale, 79 * y_scale},
-    p6{124 * x_scale, 79 * y_scale};
+    p6{99 * x_scale, 79 * y_scale};
 
     auto the_pen = painter->pen();
     the_pen.setColor(Qt::black);

@@ -38,13 +38,14 @@ public:
     void set_attribute (string_view key, std::string value = {});
     void apply_z_value (selected_item yes_or_no);
     nlohmann::json attributes () { return item_info_ ["attribute"]; }
+    virtual QRectF shape_rect () const { return boundingRect(); }
 
     QRectF boundingRect () const override;
 protected:
     explicit item(QGraphicsItem *parent = 0);
     static void set_dash (QPainter* painter);
+    QVariant itemChange(QGraphicsItem::GraphicsItemChange change, const QVariant &value) override;
     void set_z_value (qreal value) { z_value_ = value; setZValue(value); }
-    QVariant itemChange(GraphicsItemChange change, const QVariant &value) override;
     qreal z_value () { return z_value_; }
 
 
@@ -61,6 +62,7 @@ private:
     QColor color_ = Qt::black;
     nlohmann::json item_info_;
     qreal z_value_ = 0;
+    bool show_frame_ = false;
 };
 
 %>

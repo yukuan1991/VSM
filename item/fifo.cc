@@ -2,78 +2,138 @@
 #include <QLineF>
 #include <QPainter>
 #include <QFontMetricsF>
+#include <QDebug>
 
 namespace item {
 
-std::unique_ptr<fifo> fifo::make(QPointF pos, QColor color)
+std::unique_ptr<fifo> fifo::make(QPointF begin, QPointF end, QColor color, item *parent)
 {
-    auto ret = std::unique_ptr<fifo> (new fifo);
+    auto ret = std::unique_ptr<fifo> (new fifo (begin, end, color, parent));
 
-    if (ret == nullptr)
+    if (ret == nullptr or !ret->init ())
     {
         return nullptr;
     }
 
-    ret->setPos(pos);
-    ret->set_color(::move (color));
-
     return ret;
 }
 
-fifo::fifo(item *parent)
-    :item (parent)
+bool fifo::init()
 {
-    set_attribute("最大批量");
+    QLineF line (begin_, end_);
+    auto angle = line.angle();
+    auto length = line.length();
+    angle_ = angle;
+    length_ = length;
 
-    set_z_value(204);
+    font_.setPointSizeF (item_height_ / 16 * 2.5);
+    font_.setBold (true);
+    QFontMetrics metrics (font_);
+    font_width_ = metrics.width("FIFO");
+    font_height_ = metrics.height ();
 
+    shape_.moveTo (QPointF (- length_ / 2, - item_height_ / 8));
+    shape_.lineTo (QPointF (length_ / 2, - item_height_ / 8));
+    shape_.lineTo (QPointF (length_ / 2, item_height_ / 8));
+    shape_.lineTo (QPointF (- length_ / 2, item_height_ / 8));
+    shape_.lineTo(QPointF (- length_ / 2, - item_height_ / 8));
+
+    QMatrix matrix;
+    matrix.rotate (- angle_);
+    shape_ = matrix.map (shape_);
+    bounding_rect_ = shape_.boundingRect();
+
+    if (length_ < font_width_ + item_width_ * tip_length_ratio)
+    {
+        return false;
+    }
+
+    return true;
 }
+
 
 void fifo::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
     auto the_pen = painter->pen();
     the_pen.setColor(Qt::black);
-    the_pen.setWidthF(item_width_ * 0.02);
+    the_pen.setWidthF(2.0);
     painter->setPen(the_pen);
+    auto font = painter->font ();
+    painter->setFont (font_);
+    auto x_scale = item_width_ / 100;
+    auto y_scale = item_height_ / 80;
 
-    const QLineF
-            top_line (0.05 * item_width_, item_height_ / 3, 0.95 * item_width_, item_height_ / 3),
-            bottom_line (0.05 * item_width_, item_height_ / 3 * 2, 0.95 * item_width_, item_height_ / 3 * 2);
+    {
+        painter->save ();
+        SCOPE_EXIT { painter->restore (); };
+        painter->rotate (- angle_);
 
-    /// Set Bold
-    auto font = painter->font();
-    font.setBold(true);
-    painter->setFont(font);
+        painter->drawLine(QPointF (- length_ / 2, 10 * y_scale), QPointF (length_ / 2, 10 * y_scale));
+        painter->drawLine(QPointF (- length_ / 2, 0), QPointF (- font_width_ / 2, 0));
+        auto tip_start_x = length_ / 2 - (item_width_ * tip_length_ratio);
 
-    /// Mesure font size
-    QFontMetricsF metrics (painter->font());
-    auto font_width = metrics.width("FIFO");
-    auto font_height = metrics.height();
-    auto mid_point = QPointF (item_width_ / 2, item_height_ / 2);
+        painter->drawLine(QPointF (font_width_ / 2, 0), QPointF (tip_start_x, 0));
+        {
+            painter->save ();
+            SCOPE_EXIT { painter->restore (); };
 
-    auto text_rect = QRectF (mid_point - QPointF {font_width / 2, font_height / 2},
-                             QSizeF {font_width, font_height});
+            painter->setBrush(Qt::black);
+            the_pen.setWidthF(1.0);
+            painter->setPen (the_pen);
+            painter->drawPolygon({{QPointF (tip_start_x, 2 * y_scale),
+                                   QPointF (tip_start_x, - 2 * y_scale),
+                                   QPointF (length_ / 2, 0)}}, Qt::WindingFill);
+        }
 
-    painter->drawLine(top_line);
-    painter->drawLine(bottom_line);
-    painter->drawLine(QPointF (0.05 * item_width_, item_height_ / 2),
-                      QPointF (text_rect.left() - 0.05 * item_width_, item_height_ / 2));
+        painter->drawLine(QPointF (- length_ / 2, - item_height_ / 8), QPointF (length_ / 2, - item_height_ / 8));
+        {
+            painter->save ();
+            SCOPE_EXIT { painter->restore (); };
+            if (begin_.x() > end_.x ())
+            {
+                painter->rotate (180);
+            }
+            painter->drawText(QRectF (QPointF (- font_width_ / 2, - font_height_ / 2),
+                                      QSizeF (font_width_, font_height_)), "FIFO");
+            painter->setFont(font);
+            paint_attribute(painter);
+        }
+    }
 
-    painter->drawText(text_rect, "FIFO", Qt::AlignHCenter | Qt::AlignVCenter);
-    painter->drawLine(QPointF (text_rect.right() + 0.05 * item_width_, item_height_ / 2),
-                      QPointF (0.9 * item_width_, item_height_ / 2));
 
-    QPointF top_tip (0.9 * item_width_, item_height_ / 2 + item_height_ * 2 / 80);
-    QPointF bottom_tip (0.9 * item_width_, item_height_ / 2 - item_height_ * 2 / 80);
-    QPointF mid_tip (0.95 * item_width_, item_height_ / 2);
+}
 
-    the_pen.setWidthF(0.01 * item_width_);
-    painter->setPen(the_pen);
+fifo::fifo(QPointF begin, QPointF end, QColor color, item *parent)
+    :item (parent)
+    ,begin_ (::move (begin))
+    ,end_ (::move (end))
+{
+    auto mid_point = (begin_ + end_) / 2;
+    begin_ -= mid_point;
+    end_ -= mid_point;
+    setPos (mid_point);
+    set_attribute("最大批量");
 
-    painter->setBrush(Qt::black);
-    painter->drawPolygon({{top_tip, bottom_tip, mid_tip}}, Qt::WindingFill);
+    set_color(::move (color));
 
-    item::paint (painter, option, widget);
+    set_z_value(204);
+
+}
+
+QRectF fifo::shape_rect() const
+{
+    return QRectF (QPointF (- length_ / 2,  - item_height_ / 8),
+                   QSizeF (length_, item_height_ / 4));
+}
+
+QRectF fifo::boundingRect() const
+{
+    return bounding_rect_;
+}
+
+QPainterPath fifo::shape() const
+{
+    return shape_;
 }
 
 

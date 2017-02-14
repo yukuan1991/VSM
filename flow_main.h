@@ -10,6 +10,8 @@
 #include "drawer/toolbox.h"
 #include "attribute_widget.h"
 #include <QWizardPage>
+#include <QVBoxLayout>
+#include <QLabel>
 
 namespace Ui {
 class flow_main;
@@ -30,6 +32,8 @@ private slots:
     void set_tool_action();
 
     void on_action_drawer_triggered();
+    void on_action_print_triggered();
+
 private:
     void set_mdi_area ();
     void init_conn ();
@@ -59,6 +63,7 @@ private:
     void update_remark ();
 
     void on_drawer_status (const QString& status);
+    //获取向导页面
     void get_page();
 
 private:
@@ -80,5 +85,9 @@ private:
     QWizardPage* create_page3();
     QWizardPage* create_page4();
     QWizardPage *page = new QWizardPage(this);
+    QVBoxLayout *layout = new QVBoxLayout(page);
+    QLabel *label_step = new QLabel(page);
+    QLabel *label_title = new QLabel(page);
+
 
 };

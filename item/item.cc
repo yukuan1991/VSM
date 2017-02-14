@@ -19,7 +19,8 @@ void item::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWid
 {
     Q_UNUSED(widget);
     painter->setPen(Qt::black);
-    if (option->state bitand QStyle::State_Selected)
+
+    if ((option->state bitand QStyle::State_Selected) and show_frame_)
     {
         set_dash(painter);
         painter->drawRect (boundingRect ());
@@ -35,7 +36,7 @@ void item::paint_attribute(QPainter *painter) try
     auto height = metrix.height();
     QString qstr = {};
 
-    auto bounding_rect = boundingRect ();
+    auto bounding_rect = shape_rect();
     QPointF start_point (bounding_rect.left (), bounding_rect.bottom ());
 
     int i = 0;

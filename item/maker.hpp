@@ -29,6 +29,7 @@
 #include "traditional_info_flow.h"
 #include "production_control_department.h"
 #include "value_added_radtio.h"
+#include "item/fifo.h"
 
 
 namespace item
@@ -65,7 +66,7 @@ inline std::unique_ptr<item> make_item (const QString& classname, QPointF pos)
         {"操作员", [] (QPointF p)->up_item { return operating_personnel::make (p, Qt::black); }},
         {"看板站", [] (QPointF p)->up_item { return board_station::make (p, Qt::black); }},
         {"生产控制部门", [] (QPointF p)->up_item { return production_control_department::make (p, Qt::black); }},
-//        {"增值比", [] (QPointF p)->up_item { return value_added_radtio::make (p, Qt::black); }}
+        //{"增值比", [] (QPointF p)->up_item { return value_added_radtio::make(p,Qt::black);}},
     };
 
     auto found = type_map.find(classname);
@@ -93,7 +94,7 @@ inline std::unique_ptr<item> make_arrow (const QString& name, QPointF start, QPo
     }
     else if (name == "先进先出")
     {
-
+        return fifo::make (start, end, Qt::black);
     }
     else if (name == "成品发送至顾客")
     {

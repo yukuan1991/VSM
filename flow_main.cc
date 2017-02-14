@@ -11,6 +11,8 @@
 #include <QDebug>
 #include <QMdiSubWindow>
 #include <QWizardPage>
+#include <QPrintDialog>
+#include <QHBoxLayout>
 
 flow_main::flow_main(QWidget *parent) :
     QMainWindow(parent),
@@ -74,12 +76,17 @@ void flow_main::get_page()
 QWizardPage *flow_main::create_page1()
 {
 
-    page->setTitle("introduce");
-    page->setTitle("select information");
+//    page->setTitle("introduce");
+//    page->setTitle("select information");
     page->setButtonText(QWizard::BackButton,"上一页");
     page->setButtonText(QWizard::NextButton,"下一页");
     page->setButtonText(QWizard::CancelButton,"取消");
     page->setButtonText(QWizard::FinishButton,"完成");
+    label_step->setText(tr("第一步"));
+    label_title->setText(tr("绘制顾客栏及参数"));
+    layout->addWidget(label_step);
+    layout->addWidget(label_title);
+    page->setLayout(layout);
     return page;
 
 }
@@ -104,7 +111,6 @@ QWizardPage *flow_main::create_page3()
     page->setButtonText(QWizard::NextButton,"下一页");
     page->setButtonText(QWizard::CancelButton,"取消");
     page->setButtonText(QWizard::FinishButton,"完成");
-    qDebug () <<"page3"<< page->nextId();
     return page;
 
 }
@@ -338,5 +344,22 @@ void flow_main::on_action_drawer_triggered()
     else
     {
         drawer_->hide ();
+    }
+}
+
+void flow_main::on_action_print_triggered()
+{
+    auto body = active_canvas_body ();
+    if (body == nullptr)
+    {
+        QMessageBox::information (this, "打印", "没有选中的窗口");
+        return;
+    }
+    QPrinter printer;
+    printer.setPageOrientation (QPageLayout::Orientation::Landscape);
+    QPrintDialog dlg (&printer);
+    if (QPrintDialog::Accepted == dlg.exec ())
+    {
+        body->print_render (&printer);
     }
 }

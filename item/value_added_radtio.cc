@@ -11,7 +11,7 @@ value_added_radtio::value_added_radtio(item* parent)
 
 void value_added_radtio::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
-    auto x_scale = item_width_ / 100;
+    auto x_scale = (item_width_ / 100);
     auto y_scale = item_height_ / 80;
 
     QPointF p1{1 * x_scale, 1 * y_scale},
