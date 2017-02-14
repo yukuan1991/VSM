@@ -70,48 +70,82 @@ void flow_main::get_page()
     wizard.addPage(create_page1());
     wizard.addPage(create_page2());
     wizard.addPage(create_page3());
+    wizard.addPage(create_page4());
+    wizard.addPage(create_page5());
     wizard.exec();
 }
 
 QWizardPage *flow_main::create_page1()
 {
 
-//    page->setTitle("introduce");
-//    page->setTitle("select information");
-    page->setButtonText(QWizard::BackButton,"上一页");
-    page->setButtonText(QWizard::NextButton,"下一页");
-    page->setButtonText(QWizard::CancelButton,"取消");
-    page->setButtonText(QWizard::FinishButton,"完成");
-    label_step->setText(tr("第一步"));
-    label_title->setText(tr("绘制顾客栏及参数"));
-    layout->addWidget(label_step);
-    layout->addWidget(label_title);
-    page->setLayout(layout);
-    return page;
-
+        page_1->setButtonText(QWizard::BackButton,"上一页");
+        page_1->setButtonText(QWizard::NextButton,"下一页");
+        page_1->setButtonText(QWizard::CancelButton,"取消");
+        page_1->setButtonText(QWizard::FinishButton,"完成");
+        label_step_1->setText(tr("第一步"));
+        label_title_1->setText(tr("绘制顾客栏及参数"));
+        layout_1->addWidget(label_step_1);
+        layout_1->addWidget(label_title_1);
+        page_1->setLayout(layout_1);
+        return page_1;
 }
 
 QWizardPage *flow_main::create_page2()
 {
-    QWizardPage *page = new QWizardPage;
-    page->setTitle("select information");
-    page->setButtonText(QWizard::BackButton,"上一页");
-    page->setButtonText(QWizard::NextButton,"下一页");
-    page->setButtonText(QWizard::CancelButton,"取消");
-    page->setButtonText(QWizard::FinishButton,"完成");
-    return page;
+    page_2->setButtonText(QWizard::BackButton,"上一页");
+    page_2->setButtonText(QWizard::NextButton,"下一页");
+    page_2->setButtonText(QWizard::CancelButton,"取消");
+    page_2->setButtonText(QWizard::FinishButton,"完成");
+    label_step_2->setText(tr("第二步"));
+    label_title_2->setText(tr("绘制工作步骤及参数、库存三角"));
+    layout_2->addWidget(label_step_2);
+    layout_2->addWidget(label_title_2);
+    page_2->setLayout(layout_2);
+    return page_2;
 
 }
 
 QWizardPage *flow_main::create_page3()
 {
-    QWizardPage *page = new QWizardPage;
-    page->setTitle("Finish");
-    page->setButtonText(QWizard::BackButton,"上一页");
-    page->setButtonText(QWizard::NextButton,"下一页");
-    page->setButtonText(QWizard::CancelButton,"取消");
-    page->setButtonText(QWizard::FinishButton,"完成");
-    return page;
+    page_3->setButtonText(QWizard::BackButton,"上一页");
+    page_3->setButtonText(QWizard::NextButton,"下一页");
+    page_3->setButtonText(QWizard::CancelButton,"取消");
+    page_3->setButtonText(QWizard::FinishButton,"完成");
+    label_step_3->setText(tr("第三步"));
+    label_title_3->setText(tr("画出供应商、物料流"));
+    layout_3->addWidget(label_step_3);
+    layout_3->addWidget(label_title_3);
+    page_3->setLayout(layout_3);
+    return page_3;
+}
+
+QWizardPage *flow_main::create_page4()
+{
+    page_4->setButtonText(QWizard::BackButton,"上一页");
+    page_4->setButtonText(QWizard::NextButton,"下一页");
+    page_4->setButtonText(QWizard::CancelButton,"取消");
+    page_4->setButtonText(QWizard::FinishButton,"完成");
+    label_step_4->setText(tr("第四步"));
+    label_title_4->setText(tr("画出控制部门补充信息流"));
+    layout_4->addWidget(label_step_4);
+    layout_4->addWidget(label_title_4);
+    page_4->setLayout(layout_4);
+    return page_4;
+
+}
+
+QWizardPage *flow_main::create_page5()
+{
+    page_5->setButtonText(QWizard::BackButton,"上一页");
+    page_5->setButtonText(QWizard::NextButton,"下一页");
+    page_5->setButtonText(QWizard::CancelButton,"取消");
+    page_5->setButtonText(QWizard::FinishButton,"完成");
+    label_step_5->setText(tr("第五步"));
+    label_title_5->setText(tr("计算增值、非增值时间"));
+    layout_5->addWidget(label_step_5);
+    layout_5->addWidget(label_title_5);
+    page_5->setLayout(layout_5);
+    return page_5;
 
 }
 
