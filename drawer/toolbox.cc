@@ -89,6 +89,9 @@ std::unique_ptr<drag_widget> toolbox::init_entity()
         "现场调度",
         "缓冲或安全库存",
         "操作员",
+        "生产控制部门",
+        "增值比"
+
     };
     return drag_widget::make(items, {"文字"});
 

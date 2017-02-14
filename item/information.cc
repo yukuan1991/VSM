@@ -23,6 +23,7 @@ std::unique_ptr<information> information::make(QPointF pos, QColor color)
 void information::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
     Q_UNUSED(widget);
+    SCOPE_EXIT {item::paint(painter, option, widget);};
     auto x_scale = (item_width_ / 100);
     auto y_scale = (item_height_ / 80 );
 
@@ -49,7 +50,7 @@ void information::paint(QPainter *painter, const QStyleOptionGraphicsItem *optio
     auto center = QPointF (item_width_ / 2, (p1.y() + p4.y()) / 2);
     painter->drawText(QRectF (center - QPointF (width / 2, height / 2), QSizeF (width, height)), item_name.data());
 
-    item::paint(painter, option, widget);
+
 }
 
 information::information(item *parent)
@@ -67,13 +68,12 @@ void information::mouseDoubleClickEvent(QGraphicsSceneMouseEvent *event)
 
     auto old_name = name ();
     bool confirmed = false;
-    auto company_name = QInputDialog::getText(nullptr, "", "信息名称:",
+    auto name = QInputDialog::getText(nullptr, "", "信息名称:",
                                               QLineEdit::Normal, old_name.data(), &confirmed);
     if (confirmed)
     {
-        set_name (company_name.trimmed ().toStdString());
+        set_name (name.trimmed ().toStdString());
     }
-
 }
 }
 

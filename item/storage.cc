@@ -39,9 +39,16 @@ void storage::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, Q
 
     auto x_scale = item_width_ / 100;
     auto y_scale = item_height_ / 80;
-    painter->drawLine (QPointF {x_scale * 49, y_scale * 1}, {x_scale * 99, y_scale * 79});
-    painter->drawLine (QPointF {x_scale * 1, y_scale * 79}, {x_scale * 99, y_scale * 79});
-    painter->drawLine (QPointF {x_scale * 1,y_scale * 79}, {x_scale * 49, y_scale * 1});
+    QPointF p1{x_scale * 49, y_scale * 1},
+    p2{x_scale * 99, y_scale * 79},
+    p3{x_scale * 1, y_scale * 79};
+
+
+    painter->setBrush(Qt::white);
+    painter->drawPolygon({{p1,p2,p3}},Qt::WindingFill);
+//    painter->drawLine (QPointF {x_scale * 49, y_scale * 1}, {x_scale * 99, y_scale * 79});
+//    painter->drawLine (QPointF {x_scale * 1, y_scale * 79}, {x_scale * 99, y_scale * 79});
+//    painter->drawLine (QPointF {x_scale * 1,y_scale * 79}, {x_scale * 49, y_scale * 1});
     QFont font;
     font.setPointSizeF (item_width_ / 5);
     QFontMetricsF metrics (font);

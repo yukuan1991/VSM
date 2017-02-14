@@ -20,7 +20,7 @@
      <x>0</x>
      <y>0</y>
      <width>800</width>
-     <height>26</height>
+     <height>23</height>
     </rect>
    </property>
    <widget class="QMenu" name="menu_file">
@@ -52,7 +52,22 @@
     <property name="title">
      <string>帮助</string>
     </property>
-    <addaction name="action_guide"/>
+    <widget class="QMenu" name="menu_guide">
+     <property name="focusPolicy">
+      <enum>Qt::NoFocus</enum>
+     </property>
+     <property name="title">
+      <string>向导</string>
+     </property>
+     <property name="icon">
+      <iconset>
+       <normaloff>image/help.png</normaloff>image/help.png</iconset>
+     </property>
+     <addaction name="action_new_guide"/>
+     <addaction name="action_future_guide"/>
+     <addaction name="action_improve_guide"/>
+    </widget>
+    <addaction name="menu_guide"/>
    </widget>
    <addaction name="menu_file"/>
    <addaction name="menu_edit"/>
@@ -186,12 +201,19 @@
     <string>全局缩小</string>
    </property>
   </action>
-  <action name="action_guide">
+  <action name="action_new_guide">
    <property name="text">
-    <string>向导</string>
+    <string>现状图向导</string>
    </property>
-   <property name="toolTip">
-    <string>向导</string>
+  </action>
+  <action name="action_future_guide">
+   <property name="text">
+    <string>未来图向导</string>
+   </property>
+  </action>
+  <action name="action_improve_guide">
+   <property name="text">
+    <string>改善点实施</string>
    </property>
   </action>
   <action name="action_print">
