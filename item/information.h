@@ -20,7 +20,7 @@ protected:
 private:
     void mouseDoubleClickEvent(QGraphicsSceneMouseEvent *event);
 
-   };
+};
 }
 
 #endif // information_H

@@ -29,14 +29,14 @@ void information::paint(QPainter *painter, const QStyleOptionGraphicsItem *optio
     QPointF
     p1{1 * x_scale, 1 * y_scale},
     p2{99 * x_scale, 1 * y_scale},
-    p3{ 1 * x_scale, 79 * y_scale},
-    p4{ 99 * x_scale, 79 * y_scale};
+    p3{ 99 * x_scale, 79 * y_scale},
+    p4{ 1 * x_scale, 79 * y_scale};
     auto the_pen = painter->pen ();
     the_pen.setColor(color ());
-    the_pen.setWidthF(item_width_ * 0.02);
+    the_pen.setWidthF(std::max(item_width_ * 0.02, 2.0));
     painter->setPen(the_pen);
     painter->setBrush(Qt::white);
-    painter->drawPolygon({{p1,p2,p4,p3}},Qt::WindingFill);
+    painter->drawPolygon({{p1,p2,p3,p4}}, Qt::WindingFill);
     auto item_name = name();
     if(item_name.empty())
     {
@@ -56,8 +56,10 @@ information::information(item *parent)
     :item(parent)
  {
     set_attribute("信息名称");
-    set_z_value(312);
-    item_height_ /= small_object_height;
+    set_z_value(317);
+    //item_height_ /= small_object_height;
+    item_width_ /= small_object_ratio;
+    item_height_ /= small_object_ratio;
 }
 
 void information::mouseDoubleClickEvent(QGraphicsSceneMouseEvent *event)
