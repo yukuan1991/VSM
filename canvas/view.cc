@@ -14,12 +14,12 @@
 #include <QGraphicsSvgItem>
 #include <assert.h>
 #include <QGLWidget>
-#include "item/maker.hpp"
 #include "qt-tools/graphics.hpp"
 #include "item/board_info_flow.h"
 #include <QPainter>
 #include <QMenu>
-
+#include "item/maker.hpp"
+#include "item/text_item.h"
 
 
 namespace canvas
@@ -42,8 +42,8 @@ view::view(QGraphicsScene *scene, QWidget *parent)
 void view::init()
 {
     setRenderHint (QPainter::Antialiasing, true);
-    setDragMode (RubberBandDrag);
-    setRubberBandSelectionMode (Qt::IntersectsItemShape);
+    //setDragMode (RubberBandDrag);
+    //setRubberBandSelectionMode (Qt::IntersectsItemShape);
     setViewport(new QGLWidget(QGLFormat(QGL::SampleBuffers)));
     connect (this, &view::set_arrow_state, this, &view::on_state_changed);
 }
@@ -96,6 +96,10 @@ void view::mousePressEvent(QMouseEvent *event)
     {
         board_info_press_event(event);
     }
+    else if (arrow_state_ == "文字")
+    {
+        return;
+    }
     else
     {
         last_pressed_ = mapToScene(event->pos());
@@ -142,6 +146,10 @@ void view::mouseReleaseEvent(QMouseEvent *event)
     else if (arrow_state_ == "看板用信息流")
     {
         board_info_release_event(event);
+    }
+    else if (arrow_state_ == "文字")
+    {
+        add_text (event);
     }
     else
     {
@@ -200,6 +208,19 @@ void view::board_info_move_event(QMouseEvent *event)
 void view::board_info_release_event(QMouseEvent *event)
 {
     Q_UNUSED (event);
+}
+
+void view::add_text(QMouseEvent *event)
+{
+    auto scene_pos = mapToScene (event->pos ());
+    auto text = text_item::make (scene_pos);
+    auto center = text->mapToScene(text->boundingRect ().center ());
+    auto diff = center - scene_pos;
+    text->setPos(scene_pos - diff);
+    text->setTextInteractionFlags(Qt::TextEditorInteraction);
+    scene ()->addItem(text.release ());
+    emit arrow_finished ();
+
 }
 
 void view::dragEnterEvent(QDragEnterEvent *event)

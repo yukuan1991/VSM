@@ -45,7 +45,6 @@ inline std::unique_ptr<item> make_item (const QString& classname, QPointF pos)
     using up_item = std::unique_ptr<item>;
     using item_maker = up_item (*) (QPointF);
 
-
     static std::map<QString, item_maker> type_map
     {
         {"看板以批量方式传达", [] (QPointF p)->up_item { return board_arrival::make (p, Qt::black); }},
@@ -143,6 +142,7 @@ inline bool load_scene (not_null<QGraphicsScene*> scene, const nlohmann::json& d
 {
     SCOPE_FAIL { scene->clear(); };
     scene->clear();
+    return true;
 }
 catch (std::exception const & e)
 {

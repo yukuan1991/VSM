@@ -93,7 +93,7 @@ std::unique_ptr<drag_widget> toolbox::init_entity()
         "增值比"
 
     };
-    return drag_widget::make(items);
+    return drag_widget::make(items, {"文字"});
 
 }
 ///物料流
