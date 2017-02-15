@@ -65,7 +65,8 @@ SOURCES += \
     item/product_to_customer.cc \
     item/text_item.cc \
     item/production_control_department.cc \
-    item/value_added_radtio.cc
+    item/value_added_radtio.cc \
+    guide.cc
 
 HEADERS += \
     flow_app.h \
@@ -108,7 +109,8 @@ HEADERS += \
     item/product_to_customer.h \
     item/text_item.h \
     item/production_control_department.h \
-    item/value_added_radtio.h
+    item/value_added_radtio.h \
+    guide.h
 
 FORMS += \
     flow_main.ui \
