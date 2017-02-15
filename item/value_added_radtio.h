@@ -12,6 +12,7 @@ public:
 protected:
     value_added_radtio(item* parent = nullptr);
     void paint (QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = nullptr) override;
+
 };
 }
 #endif // VALUE_ADDED_RADTIO_H

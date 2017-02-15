@@ -7,6 +7,8 @@ namespace item {
 value_added_radtio::value_added_radtio(item* parent)
     :item(parent)
 {
+    set_attribute("生产交付周期");
+    set_attribute("增值时间");
 
 }
 
