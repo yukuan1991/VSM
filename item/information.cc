@@ -57,9 +57,7 @@ information::information(item *parent)
  {
     set_attribute("信息名称");
     set_z_value(317);
-    //item_height_ /= small_object_height;
-    item_width_ /= small_object_ratio;
-    item_height_ /= small_object_ratio;
+    item_height_ /= small_object_height;
 }
 
 void information::mouseDoubleClickEvent(QGraphicsSceneMouseEvent *event)
