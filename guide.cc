@@ -4,10 +4,12 @@
 
 static const map<QString, vector<pair<QString, QString>>> guide_map
 {
-    {"new", { {"123", "456"}, {"234", "567"} } },
-    {"improve", { {"123", "456"}, {"234", "567"} } },
-    {"future", { {"123", "456"}, {"234", "567"} } }
+    {"current", { {"第一步", "绘制顾客栏及参数"}, {"第二步", "绘制工作步骤及参数、库存三角"}, {"第三步", "画出供应商、物料流"},{"第四步","画出控制部门补充信息流"},{"第五步","计算增值、非增值时间"}} },
+    {"future", { {"第一步", "标出节拍时间（定拍单元）及之后工序和成品超市及发送到顾客过程（过程包括物流和看板信息流）"}, {"第二步", "添加定拍单元前所有工序和原材料超市（包括物料流与看板信息流）"},
+            {"第三步","画出控制部门并补充所有信息流"},{"第四步","计算增值、非增值时间"} } },
+    {"improve", { {"第一步", "优化定拍环"}, {"第二步", "优化定拍环之外其他环"}, {"第三步","优化供应商环"} }}
 };
+
 static void start_wizard(const vector<pair<QString, QString>>& steps);
 static unique_ptr<QWizardPage> create_page (const QString& step, const QString& title);
 
