@@ -104,6 +104,32 @@ void item::set_attribute(string_view key, std::string value)
     attribute.push_back({{key.to_string (), value}});
 }
 
+string item::attribute(const string &key) try
+{
+    auto& attribute = item_info_ ["attribute"];
+
+    for (auto & it : attribute)
+    {
+        if (!it.is_object() or it.empty())
+        {
+            continue;
+        }
+
+        std::string current_key = it.begin().key();
+        if (key == current_key)
+        {
+            string value = it.begin().value();
+            return value;
+        }
+    }
+
+    return {};
+}
+catch (std::exception const &)
+{
+    return {};
+}
+
 void item::apply_z_value(selected_item yes_or_no)
 {
     if (yes_or_no == selected_item::yes)

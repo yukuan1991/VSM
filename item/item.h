@@ -43,6 +43,7 @@ public:
     void set_color (QColor c) { color_ = ::move (c); emit color_changed (c); }
 
     void set_attribute (string_view key, std::string value = {});
+    std::string attribute (const string& key);
     void apply_z_value (selected_item yes_or_no);
     nlohmann::json attributes () { return item_info_ ["attribute"]; }
     virtual QRectF shape_rect () const { return boundingRect(); }
@@ -59,7 +60,7 @@ protected:
     /// overrides
     QVariant itemChange(QGraphicsItem::GraphicsItemChange change, const QVariant &value) override;
     void paint (QPainter * painter, const QStyleOptionGraphicsItem* option, QWidget* widget) override;
-    void paint_attribute (QPainter* painter);
+    virtual void paint_attribute (QPainter* painter);
 protected:
     qreal item_width_ = 100;
     qreal item_height_ = 0.8 * item_width_;

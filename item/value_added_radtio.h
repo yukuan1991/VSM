@@ -12,6 +12,8 @@ public:
 protected:
     value_added_radtio(item* parent = nullptr);
     void paint (QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = nullptr) override;
+    void paint_attribute (QPainter* painter) override;
+    QRectF boundingRect () const override;
 
 };
 }
