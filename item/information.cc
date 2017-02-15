@@ -65,7 +65,7 @@ information::information(item *parent)
 
 void information::mouseDoubleClickEvent(QGraphicsSceneMouseEvent *event)
 {
-
+    item::mouseDoubleClickEvent (event);
     auto old_name = name ();
     bool confirmed = false;
     auto name = QInputDialog::getText(nullptr, "", "信息名称:",

@@ -28,7 +28,7 @@ void invoke_guide(const QString &type)
 static void start_wizard(const vector<pair<QString, QString>>& steps)
 {
     QWizard wizard_new;
-    wizard_new.setWindowTitle("wizardialog");
+    wizard_new.setWindowTitle("向导");
     wizard_new.setOption( QWizard::NoBackButtonOnStartPage );//设置第一页没有上一步的按钮
     wizard_new.setWizardStyle( QWizard::ModernStyle );//设置上一步下一步等按钮的显示格式
 

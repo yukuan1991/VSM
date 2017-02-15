@@ -140,6 +140,7 @@ inline nlohmann::json dump_scene (not_null<QGraphicsScene*> scene)
 
 inline bool load_scene (not_null<QGraphicsScene*> scene, const nlohmann::json& data) noexcept try
 {
+    (void)data;
     SCOPE_FAIL { scene->clear(); };
     scene->clear();
     return true;

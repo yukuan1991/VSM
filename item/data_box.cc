@@ -179,6 +179,9 @@ optional<tuple<string, string, string, string>> data_box::set_box_data(string a,
 
     connect (button_confirm, &QPushButton::clicked, &dlg, &QDialog::accept);
 
+    auto pos = QCursor::pos();
+    pos -= QPoint (dlg.width() / 2, dlg.height() / 2);
+    dlg.move(pos);
     if (dlg.exec () == QDialog::Accepted)
     {
         return make_tuple (edit_a->text().toStdString(), edit_b->text().toStdString(),

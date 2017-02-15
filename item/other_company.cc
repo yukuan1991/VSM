@@ -70,12 +70,20 @@ void other_company::mouseDoubleClickEvent(QGraphicsSceneMouseEvent *event)
     Q_UNUSED (event);
     auto old_name = name ();
     bool confirmed = false;
-    auto company_name = QInputDialog::getText(nullptr, "", "公司名称:",
-                                              QLineEdit::Normal, old_name.data(), &confirmed);
-    if (confirmed)
+    QInputDialog dlg;
+    dlg.setInputMode (QInputDialog::TextInput);
+    dlg.setLabelText("公司名称");
+    dlg.move(QCursor::pos() - QPoint (dlg.width() / 2, dlg.height() / 2));
+    if (dlg.exec() == QInputDialog::Accepted)
     {
-        set_name (company_name.trimmed ().toStdString());
+        set_name(dlg.textValue().trimmed().toStdString());
     }
+    //auto company_name = QInputDialog::getText(nullptr, "", "公司名称:",
+    //                                          QLineEdit::Normal, old_name.data(), &confirmed);
+    //if (confirmed)
+    //{
+    //    set_name (company_name.trimmed ().toStdString());
+    //}
 }
 
 }
