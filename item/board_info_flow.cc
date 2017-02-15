@@ -37,7 +37,10 @@ bool board_info_flow::init(vector<unique_ptr<QGraphicsLineItem> > tmp_lines)
     lines_.reserve(tmp_lines.size ());
     for (auto & it : tmp_lines)
     {
-        lines_.emplace_back (it->line().p1() - begin_ptr, it->line().p2() - begin_ptr);
+        if (it->line().length() > 1)
+        {
+            lines_.emplace_back (it->line().p1() - begin_ptr, it->line().p2() - begin_ptr);
+        }
     }
 
     for (auto  & it : lines_)
@@ -91,6 +94,7 @@ void board_info_flow::paint(QPainter *painter, const QStyleOptionGraphicsItem *o
 
     auto neck1 = vertical_line.pointAt(tip_width / vertical_line.length());
     auto neck2 = vertical_line.pointAt(- tip_width / vertical_line.length());
+
 
     painter->drawLine(last_line.p1 (), body_end);
     pen.setWidthF(1);

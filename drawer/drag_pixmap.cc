@@ -285,10 +285,10 @@ static void information_maker (QPainter* painter, qreal width, qreal height)
     auto y_scale = height / 80;
     QVector<QPointF> polygon_shape
     {
-        {x_scale * 1,y_scale * 1},
-        {x_scale * 99, y_scale * 1},
-        {x_scale * 99,y_scale * 79 / 4},
-        {x_scale * 1, y_scale * 79 / 4}
+        {x_scale * 1,y_scale * 1 + 30 * y_scale},
+        {x_scale * 99, y_scale * 1 + 30 * y_scale},
+        {x_scale * 99,y_scale * 79 / 4 + 30 * y_scale},
+        {x_scale * 1, y_scale * 79 / 4 + 30 * y_scale}
     };
     painter->setBrush (Qt::white);
     painter->drawPolygon ({polygon_shape}, Qt::WindingFill);

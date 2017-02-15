@@ -17,7 +17,6 @@ std::unique_ptr<information> information::make(QPointF pos, QColor color)
     ret->set_color( std::move (color));
     ret->type_ = "信息";
     return ret;
-
 }
 
 void information::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
@@ -49,8 +48,6 @@ void information::paint(QPainter *painter, const QStyleOptionGraphicsItem *optio
     auto height = metrics.height();
     auto center = QPointF (item_width_ / 2, (p1.y() + p4.y()) / 2);
     painter->drawText(QRectF (center - QPointF (width / 2, height / 2), QSizeF (width, height)), item_name.data());
-
-
 }
 
 information::information(item *parent)

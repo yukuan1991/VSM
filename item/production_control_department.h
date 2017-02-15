@@ -13,7 +13,8 @@ public :
 protected:
     production_control_department(item* parent = nullptr);
     void paint (QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = nullptr) override;
-
+    void mouseDoubleClickEvent(QGraphicsSceneMouseEvent *event) override;
+    void paint_attribute (QPainter* painter) override;
 };
 }
 #endif // PRODUCTION_CONTROL_DEPARTMENT_H

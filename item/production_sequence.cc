@@ -50,7 +50,7 @@ void production_sequence::paint(QPainter *painter, const QStyleOptionGraphicsIte
     the_pen.setWidthF(item_width_ * 0.02);
     painter->setPen(the_pen);
     painter->setBrush(Qt::white);
-    painter->drawRect(QRectF (p1_,QSizeF ((p6_ - p1_).x(), (p6_ - p1_).y())));
+    painter->drawRect(QRectF (p1_,p6_));
     painter->drawLine(p3_,p4_);
     auto item_name = name();
     if(item_name.empty())
@@ -61,7 +61,7 @@ void production_sequence::paint(QPainter *painter, const QStyleOptionGraphicsIte
     QFontMetricsF metrics (painter->font());
     auto width = metrics.width(item_name.data());
     auto height = metrics.height();
-    auto center = QPointF (item_width_ / 2, (p6_.y() + p4_.y()) / 2);
+    auto center = QRectF (p1_, p4_).center();
     painter->drawText(QRectF (center - QPointF (width / 2, height / 2), QSizeF (width, height)), item_name.data());
 }
 
