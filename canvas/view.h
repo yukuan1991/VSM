@@ -61,7 +61,7 @@ private:
     template<typename CALLABLE>
     static void hold_position (QGraphicsItem* item, CALLABLE&& c);
 private:
-    optional<unique_ptr<item::item>> tmp_arrow_;
+    std::experimental::optional<unique_ptr<item::item>> tmp_arrow_;
     QString arrow_state_;
     QPointF last_pressed_;
     vector<unique_ptr<QGraphicsLineItem>> board_tmp_item_;
