@@ -2,7 +2,6 @@
 #include <QGraphicsItem>
 #include "utility/raii.hpp"
 #include <QGraphicsSceneMouseEvent>
-#include <QDebug>
 #include <QPainter>
 #include "item/production_sequence.h"
 #include "utility/algorithm.hpp"
@@ -72,7 +71,6 @@ void scene::drawBackground(QPainter *painter, const QRectF &rect)
     effective_rect_ = QRectF (center_point - QPointF (width / 2, height / 2), QSizeF (width, height));
 
     painter->drawRect(effective_rect_);
-    qDebug () << effective_rect_.width () << " " << effective_rect_.height ();
 
     vector<pair<qreal, qreal>> sequences;
     for (auto it : items ())
