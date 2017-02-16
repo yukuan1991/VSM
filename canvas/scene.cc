@@ -6,7 +6,6 @@
 #include "item/production_sequence.h"
 #include "utility/algorithm.hpp"
 #include "utility/containers.hpp"
-#include <assert.h>
 
 namespace canvas
 <%
