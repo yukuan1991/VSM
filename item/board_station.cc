@@ -10,7 +10,7 @@ bool board_station::init()
 {
      set_item_type("看板站");
      set_z_value(311);
-
+     return true;
 }
 
 std::unique_ptr<board_station> board_station::make(json data, QPointF pos, item* parent)

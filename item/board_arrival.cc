@@ -33,28 +33,26 @@ std::unique_ptr<board_arrival> board_arrival::make(json data, QPointF pos, item*
 board_arrival::board_arrival(json data, QPointF pos, item* parent)
     :fixed_item(::move(data), pos, parent)
 {
-
-
 //    item_width_ /= small_object_ratio;
 //    item_height_ /= small_object_ratio;
-
-
 }
 
 void board_arrival::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
+    auto item_width = width ();
+    auto item_height = width ();
     std::array<QPointF, 5> polygon_shape
     {
-        QPointF{0.3 * item_width_, 0.3 * item_height_},
-        QPointF{0.6375 * item_width_, 0.3 * item_height_},
-        QPointF{0.7 * item_width_, 0.3625 * item_height_},
-        QPointF{0.7 * item_width_, 0.675 * item_height_},
-        QPointF{0.3 * item_width_, 0.675 * item_height_}
+        QPointF{0.3 * item_width, 0.3 * item_height},
+        QPointF{0.6375 * item_width, 0.3 * item_height},
+        QPointF{0.7 * item_width, 0.3625 * item_height},
+        QPointF{0.7 * item_width, 0.675 * item_height},
+        QPointF{0.3 * item_width, 0.675 * item_height}
     };
 
     auto the_pen = painter->pen();
     the_pen.setColor(Qt::black);
-    the_pen.setWidthF(std::max(item_width_ * 0.02, 2.0));
+    the_pen.setWidthF(2.0);
     painter->setPen(the_pen);
     painter->setBrush(Qt::white);
 
@@ -62,13 +60,13 @@ void board_arrival::paint(QPainter *painter, const QStyleOptionGraphicsItem *opt
 
     for (auto&& it : polygon_shape)
     {
-        it += QPointF (-0.1 * item_width_, 0.1 * item_height_);
+        it += QPointF (-0.1 * item_width, 0.1 * item_height);
     }
     painter->drawPolygon(polygon_shape.data(), polygon_shape.size(), Qt::WindingFill);
 
     for (auto&& it : polygon_shape)
     {
-        it += QPointF (-0.1 * item_width_, 0.1 * item_height_);
+        it += QPointF (-0.1 * item_width, 0.1 * item_height);
     }
     painter->drawPolygon(polygon_shape.data(), polygon_shape.size(), Qt::WindingFill);
 

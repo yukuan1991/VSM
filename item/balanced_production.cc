@@ -37,13 +37,15 @@ balanced_production::balanced_production(nlohmann::json data, QPointF pos, item*
 void balanced_production::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
     Q_UNUSED(widget);
+    auto item_width = width ();
+    auto item_height = height ();
 
     auto the_pen = painter->pen ();
     the_pen.setColor(Qt::black);
-    the_pen.setWidthF(0.02 * item_width_);
+    the_pen.setWidthF(0.02 * item_width);
     painter->setPen(the_pen);
 
-    QRectF rect (0.05 * item_width_, 0.25 * item_height_, 0.9 * item_width_, 0.5 * item_height_);
+    QRectF rect (0.05 * item_width, 0.25 * item_height, 0.9 * item_width, 0.5 * item_height);
 
     auto font = painter->font();
     font.setBold(true);

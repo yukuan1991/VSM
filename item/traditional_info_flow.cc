@@ -14,7 +14,6 @@ std::unique_ptr<traditional_info_flow> traditional_info_flow::make(QPointF p1, Q
     {
         return nullptr;
     }
-    set_item_type("传统信息流");
     return ret;
 }
 
@@ -42,6 +41,7 @@ bool traditional_info_flow::init()
     {
         return false;
     }
+    set_item_type("传统信息流");
 
     auto body_length = arrow_length - tip_length;
     body_end_ = QLineF {start_, end_}.pointAt(body_length / arrow_length);

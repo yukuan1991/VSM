@@ -17,7 +17,7 @@ protected:
     constexpr static qreal standard_height () { return standard_height_; }
     QRectF boundingRect () const override;
 
-    virtual qreal width () { return standard_width(); }
+    virtual qreal width () const { return standard_width(); }
     virtual qreal height () const { return standard_height(); }
 protected:
     static constexpr qreal standard_width_ = 100;

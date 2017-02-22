@@ -208,13 +208,14 @@ void view::board_info_release_event(QMouseEvent *event)
 
 void view::add_text(QMouseEvent *event)
 {
-    auto scene_pos = mapToScene (event->pos ());
-    auto text = text_item::make (scene_pos);
-    auto center = text->mapToScene(text->boundingRect ().center ());
-    auto diff = center - scene_pos;
-    text->setPos(scene_pos - diff);
-    text->setTextInteractionFlags(Qt::TextEditorInteraction);
-    scene ()->addItem(text.release ());
+    //auto scene_pos = mapToScene (event->pos ());
+    //auto text = text_item::make (scene_pos);
+    //auto text = nullptr;
+    //auto center = text->mapToScene(text->boundingRect ().center ());
+    //auto diff = center - scene_pos;
+    //text->setPos(scene_pos - diff);
+    //text->setTextInteractionFlags(Qt::TextEditorInteraction);
+    //scene ()->addItem(text.release ());
     emit arrow_finished ();
 
 }
