@@ -52,7 +52,7 @@ void information::paint(QPainter *painter, const QStyleOptionGraphicsItem *optio
 }
 
 information::information(item *parent)
-    :item(parent)
+    :fixed_item(parent)
  {
     set_attribute("信息名称");
     set_z_value(317);

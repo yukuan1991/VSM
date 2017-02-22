@@ -2,12 +2,13 @@
 #define supermarket_rectangles_H
 #include <item/item.h>
 #include <memory>
+#include "item/fixed_item.h"
 
 ///库存超市
 namespace item {
 
 
-class storage_super_market : public item
+class storage_super_market : public fixed_item
 {
 public:
    static std::unique_ptr<storage_super_market> make(QPointF pos,QColor color);

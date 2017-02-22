@@ -2,11 +2,12 @@
 #define VS_ITEM_CONVEY_H
 #include <item/item.h>
 #include <memory>
+#include "item/fixed_item.h"
 ////操作员
 namespace item {
 
 
-class operating_personnel : public item
+class operating_personnel : public fixed_item
 {
 public:
     static std::unique_ptr <operating_personnel> make(QPointF pos,QColor color = Qt::black);

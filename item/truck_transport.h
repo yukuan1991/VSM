@@ -1,9 +1,10 @@
 ﻿#ifndef TRUCK_TRANSPORT_H
 #define TRUCK_TRANSPORT_H
 #include "item/item.h"
+#include "item/fixed_item.h"
 namespace  item {
 
-class truck_transport : public item
+class truck_transport : public fixed_item
 {
 public:
     static std::unique_ptr<truck_transport> make (QPointF pos, QColor color);

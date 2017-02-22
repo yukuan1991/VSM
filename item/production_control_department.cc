@@ -15,7 +15,7 @@ std::unique_ptr<production_control_department> production_control_department::ma
 }
 
 production_control_department::production_control_department(item *parent)
-    :item(parent)
+    :fixed_item(parent)
 {
     set_attribute("生产计划安排方式");
 }

@@ -1,11 +1,12 @@
 ﻿#ifndef OTHER_COMPANY_H
 #define OTHER_COMPANY_H
 #include "item/item.h"
+#include "item/fixed_item.h"
 
 namespace item {
 
 
-class other_company : public item
+class other_company : public fixed_item
 {
 public:
     static std::unique_ptr<other_company> make (QPointF pos, QColor color = Qt::black);
