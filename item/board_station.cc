@@ -42,7 +42,7 @@ void board_station::paint(QPainter *painter, const QStyleOptionGraphicsItem *opt
 }
 
 board_station::board_station(item* parent)
-    :item(parent)
+    :fixed_item(parent)
 {
     set_z_value(311);
 

@@ -11,7 +11,7 @@ namespace item {
 
 
 data_box::data_box(item* parent)
-    :item (parent)
+    :fixed_item (parent)
 {
     set_z_value(303);
    // connect(button_ok, SIGNAL(clicked()), this, SLOT(get_edit_text()));

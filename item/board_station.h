@@ -1,6 +1,6 @@
 ﻿#pragma once
-
-#include <item/item.h>
+#include "item/item.h"
+#include <item/fixed_item.h>
 #include <memory>
 
 ///看板站
@@ -8,7 +8,7 @@
 namespace item
 {
 
-class board_station : public item
+class board_station : public fixed_item
 {
 
 public:

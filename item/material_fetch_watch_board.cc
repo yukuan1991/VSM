@@ -21,7 +21,7 @@ std::unique_ptr<material_fetch_watch_board> material_fetch_watch_board::make(QPo
 }
 
 material_fetch_watch_board::material_fetch_watch_board(item *parent)
-    :item(parent)
+    :fixed_item(parent)
 {
     set_attribute("产品种类");
     set_attribute("产品数量");

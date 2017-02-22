@@ -18,7 +18,7 @@ std::unique_ptr<sequence_pull_ball> sequence_pull_ball::make(QPointF pos, QColor
 }
 
 sequence_pull_ball::sequence_pull_ball(item* parent)
-    :item(parent)
+    :fixed_item(parent)
 {
     item_width_ /= small_object_ratio;
     item_height_ /= small_object_ratio;

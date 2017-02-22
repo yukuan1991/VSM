@@ -9,7 +9,7 @@ namespace item {
 
 
 production_watcher_board::production_watcher_board(item *parent)
-    :item(parent)
+    :fixed_item(parent)
 {
     set_attribute("产品种类");
     set_attribute("生产数量");
