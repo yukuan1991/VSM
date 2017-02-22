@@ -45,8 +45,8 @@ void sequence_pull_ball::paint(QPainter *painter, const QStyleOptionGraphicsItem
 {
     Q_UNUSED(widget);
 
-    auto x_scale = item_width_ * 0.01;
-    auto y_scale = item_height_ / 80;
+    auto x_scale = width() * 0.01;
+    auto y_scale = height() / 80;
 
     auto the_pen = painter->pen ();
     the_pen.setColor(Qt::black);

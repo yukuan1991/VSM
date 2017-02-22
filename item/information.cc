@@ -37,8 +37,8 @@ void information::paint(QPainter *painter, const QStyleOptionGraphicsItem *optio
 {
     Q_UNUSED(widget);
     SCOPE_EXIT {item::paint(painter, option, widget);};
-    auto x_scale = (item_width_ / 100);
-    auto y_scale = (item_height_ / 80 );
+    auto x_scale = width() / 100;
+    auto y_scale = height() / 80;
 
     QPointF
     p1{1 * x_scale, 1 * y_scale},
@@ -59,17 +59,16 @@ void information::paint(QPainter *painter, const QStyleOptionGraphicsItem *optio
     }
 
     QFontMetricsF metrics (painter->font());
-    auto width = metrics.width(item_name.data());
-    auto height = metrics.height();
+    auto text_width = metrics.width(item_name.data());
+    auto text_height = metrics.height();
     auto center = QPointF (item_width_ / 2, (p1.y() + p4.y()) / 2);
-    painter->drawText(QRectF (center - QPointF (width / 2, height / 2), QSizeF (width, height)), item_name.data());
+    painter->drawText(QRectF (center - QPointF (text_width / 2, text_height / 2), QSizeF (text_width, text_height)), item_name.data());
 }
 
 information::information(json data, QPointF pos, item *parent)
     :fixed_item(move(data), pos, parent)
  {
 
-    //item_height_ /= small_object_height;
 }
 
 void information::mouseDoubleClickEvent(QGraphicsSceneMouseEvent *event)

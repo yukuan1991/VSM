@@ -44,15 +44,14 @@ other_company::other_company(json data, QPointF pos, item * parent)
 void other_company::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
     SCOPE_EXIT { item::paint(painter, option, widget); };
-
     auto the_pen = painter->pen ();
     the_pen.setColor(Qt::black);
     the_pen.setWidthF(2.0);
     painter->setPen(the_pen);
 
     painter->setBrush(Qt::white);
-    auto x_scale = item_width_ / 100;
-    auto y_scale =item_height_ / 80;
+    auto x_scale = width() / 100;
+    auto y_scale = height() / 80;
     const QPointF
             p1 {1 * x_scale, 30 * y_scale},
     p2 {33 * x_scale,1 * y_scale},
@@ -71,11 +70,11 @@ void other_company::paint(QPainter *painter, const QStyleOptionGraphicsItem *opt
     }
 
     QFontMetricsF metrics (painter->font());
-    auto width = metrics.width(item_name.data());
-    auto height = metrics.height();
+    auto text_width = metrics.width(item_name.data());
+    auto text_height = metrics.height();
     auto center = QPointF (item_width_ / 2, (p1.y() + p8.y()) / 2);
-    painter->drawText(QRectF (center - QPointF (width / 2, height / 2),
-                              QSizeF (width, height)), item_name.data());
+    painter->drawText(QRectF (center - QPointF (text_width / 2, text_height / 2),
+                              QSizeF (text_width, text_height)), item_name.data());
 }
 
 

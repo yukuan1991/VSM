@@ -7,8 +7,7 @@ namespace item {
 adjustment_on_scene::adjustment_on_scene(json data, QPointF pos, item* parent = nullptr)
     :fixed_item(::move (data), pos, parent)
 {
-//      item_width_ = item_width_ * ( 1 / small_object_ratio);
-//      item_height_ = item_height_ * ( 1 / small_object_ratio);
+
 }
 
 std::unique_ptr<adjustment_on_scene> adjustment_on_scene::make(json data, QPointF pos, item* parent)

@@ -24,8 +24,6 @@ storage::storage(json data, QPointF pos, item* parent)
     :fixed_item(::move(data), pos, parent)
 {
 
-//    item_width_ /= small_object_ratio;
-//    item_height_ /= small_object_ratio;
 }
 
 bool storage::init()
@@ -52,8 +50,8 @@ void storage::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, Q
     the_pen.setWidthF(std::max(item_width_ * 0.02, 2.0));
     painter->setPen(the_pen);
 
-    auto x_scale = item_width_ / 100;
-    auto y_scale = item_height_ / 80;
+    auto x_scale = width() / 100;
+    auto y_scale = height() / 80;
     QPointF p1{x_scale * 49, y_scale * 1},
     p2{x_scale * 99, y_scale * 79},
     p3{x_scale * 1, y_scale * 79};

@@ -43,20 +43,22 @@ cache_or_safe_storage::cache_or_safe_storage(json data, QPointF pos, item* paren
 
 void cache_or_safe_storage::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
+    auto item_width = width();
+    auto item_height = height();
     QPointF
-    p1_{0.39 * item_width_ ,0.0125 * item_height_},
-    p2_{0.60 * item_width_,0.0125 * item_height_},
-    p3_{0.39 * item_width_,0.3375 * item_height_},
-    p4_{0.60 * item_width_,0.3375 * item_height_},
-    p5_{0.39 * item_width_,0.6625 * item_height_},
-    p6_{0.60 * item_width_,0.6625 * item_height_},
-    p7_{0.39 * item_width_,0.9875 * item_height_},
-    p8_{0.6 * item_width_,0.9875 * item_height_};
+    p1_{0.39 * item_width ,0.0125 * item_height},
+    p2_{0.60 * item_width,0.0125 * item_height},
+    p3_{0.39 * item_width,0.3375 * item_height},
+    p4_{0.60 * item_width,0.3375 * item_height},
+    p5_{0.39 * item_width,0.6625 * item_height},
+    p6_{0.60 * item_width,0.6625 * item_height},
+    p7_{0.39 * item_width,0.9875 * item_height},
+    p8_{0.6 * item_width,0.9875 * item_height};
 
 
     auto the_pen = painter->pen();
     the_pen.setColor(Qt::black);
-    the_pen.setWidthF(item_width_ * 0.02);
+    the_pen.setWidthF(item_width * 0.02);
     painter->setPen(the_pen);
     painter->setBrush(Qt::blue);
     painter->setBrush(Qt::white);

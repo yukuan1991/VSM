@@ -53,16 +53,18 @@ void production_sequence::paint(QPainter *painter, const QStyleOptionGraphicsIte
     SCOPE_EXIT { item::paint(painter, option, widget); };
     Q_UNUSED(widget);
 
+    auto item_width = width();
+    auto item_height = height();
     QPointF
-    p1_ {0.01 * item_width_, 0.0125 * item_height_},
-    p3_ {0.01 * item_width_, 0.35 * item_height_},
-    p4_ {0.99 * item_width_, 0.35 * item_height_},
-    p6_ {0.99 * item_width_, 0.9875 * item_height_};
+    p1_ {0.01 * item_width, 0.0125 * item_height},
+    p3_ {0.01 * item_width, 0.35 * item_height},
+    p4_ {0.99 * item_width, 0.35 * item_height},
+    p6_ {0.99 * item_width, 0.9875 * item_height};
 
 
     auto the_pen = painter->pen ();
     the_pen.setColor(Qt::black);
-    the_pen.setWidthF(item_width_ * 0.02);
+    the_pen.setWidthF(item_width * 0.02);
     painter->setPen(the_pen);
     painter->setBrush(Qt::white);
     painter->drawRect(QRectF (p1_,p6_));
@@ -74,10 +76,10 @@ void production_sequence::paint(QPainter *painter, const QStyleOptionGraphicsIte
     }
 
     QFontMetricsF metrics (painter->font());
-    auto width = metrics.width(item_name.data());
-    auto height = metrics.height();
+    auto text_width = metrics.width(item_name.data());
+    auto text_height = metrics.height();
     auto center = QRectF (p1_, p4_).center();
-    painter->drawText(QRectF (center - QPointF (width / 2, height / 2), QSizeF (width, height)), item_name.data());
+    painter->drawText(QRectF (center - QPointF (text_width / 2, text_height / 2), QSizeF (text_width, text_height)), item_name.data());
 }
 
 void production_sequence::mouseDoubleClickEvent(QGraphicsSceneMouseEvent *event)

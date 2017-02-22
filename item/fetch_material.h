@@ -21,6 +21,8 @@ public:
 protected:
     explicit fetch_material(json data, QPointF pos, item* parent=nullptr);
     void paint (QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = nullptr) override;
+    qreal height() const override { return height() / small_object_ratio_; }
+    qreal width() const override {return width() / small_object_ratio_; }
 private:
     int startAngle = 1 * item_width_ * 16;
     int spanAngle = 1.7 * item_width_ * 16;

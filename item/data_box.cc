@@ -21,22 +21,24 @@ data_box::data_box(json data, QPointF pos, item* parent)
 void data_box::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
      Q_UNUSED(widget);
+    auto item_width = width();
+    auto item_height = height();
 
     QPointF
-    p1_ {0.01* item_width_, 0.0125 * item_height_},
-    p2_ {0.99 * item_width_, 0.0125 * item_height_},
-    p3_ {0.01 * item_width_, 0.25 * item_height_},
-    p4_ {0.99 * item_width_, 0.25 * item_height_},
-    p5_ {0.01 * item_width_, 0.5 * item_height_},
-    p6_ {0.99 * item_width_, 0.5 * item_height_},
-    p7_ {0.01 * item_width_, 0.7375 * item_height_},
-    p8_ {0.99 * item_width_, 0.7375 * item_height_},
-    p9_ {0.01 * item_width_, 0.9875 * item_height_},
-    p10_ {0.99 * item_width_, 0.9875 * item_height_};
+    p1_ {0.01* item_width, 0.0125 * item_height},
+    p2_ {0.99 * item_width, 0.0125 * item_height},
+    p3_ {0.01 * item_width, 0.25 * item_height},
+    p4_ {0.99 * item_width, 0.25 * item_height},
+    p5_ {0.01 * item_width, 0.5 * item_height},
+    p6_ {0.99 * item_width, 0.5 * item_height},
+    p7_ {0.01 * item_width, 0.7375 * item_height},
+    p8_ {0.99 * item_width, 0.7375 * item_height},
+    p9_ {0.01 * item_width, 0.9875 * item_height},
+    p10_ {0.99 * item_width, 0.9875 * item_height};
 
     auto the_pen = painter->pen ();
     the_pen.setColor(Qt::black);
-    the_pen.setWidthF(item_width_ * 0.02);
+    the_pen.setWidthF(item_width * 0.02);
     painter->setPen(the_pen);
     painter->setBrush(Qt::white);
     painter->drawPolygon({{p1_, p2_, p10_, p9_}},Qt::WindingFill);
@@ -45,27 +47,27 @@ void data_box::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, 
     painter->drawLine(p3_,p4_);
 
     QFontMetricsF metrics (painter->font());
-    auto height = metrics.height();
+    auto text_height = metrics.height();
 
-    auto center_1 = QPointF (item_width_ / 2, (p1_.y() + p3_.y() ) / 2);
-    auto center_2 = QPointF (item_width_ / 2, (p5_.y() + p7_.y() ) / 2);
-    auto center_3 = QPointF (item_width_ / 2, (p3_.y() + p5_.y() ) / 2);
-    auto center_4 = QPointF (item_width_ / 2, (p7_.y() + p9_.y() ) / 2);
+    auto center_1 = QPointF (item_width / 2, (p1_.y() + p3_.y() ) / 2);
+    auto center_2 = QPointF (item_width / 2, (p5_.y() + p7_.y() ) / 2);
+    auto center_3 = QPointF (item_width / 2, (p3_.y() + p5_.y() ) / 2);
+    auto center_4 = QPointF (item_width / 2, (p7_.y() + p9_.y() ) / 2);
 
     auto value_a = find_json_value("a", item_info_["etc"]);
     auto value_b = find_json_value("b", item_info_["etc"]);
     auto value_c = find_json_value("c", item_info_["etc"]);
     auto value_d = find_json_value("d", item_info_["etc"]);
 
-    qreal width = 0;
-    width = metrics.width (value_a.data());
-    painter->drawText(QRectF (center_1 - QPointF (width / 2, height / 2), QSizeF (width, height)), value_a.data ());
-    width = metrics.width (value_b.data ());
-    painter->drawText(QRectF (center_2 - QPointF (width / 2, height / 2), QSizeF (width, height)), value_b.data ());
-    width = metrics.width (value_c.data ());
-    painter->drawText(QRectF (center_3 - QPointF (width / 2, height / 2), QSizeF (width, height)), value_c.data ());
-    width = metrics.width (value_d.data ());
-    painter->drawText(QRectF (center_4 - QPointF (width / 2, height / 2), QSizeF (width, height)), value_d.data ());
+    qreal text_width = 0;
+    text_width = metrics.width (value_a.data());
+    painter->drawText(QRectF (center_1 - QPointF (text_width / 2, text_height / 2), QSizeF (text_width, text_height)), value_a.data ());
+    text_width = metrics.width (value_b.data ());
+    painter->drawText(QRectF (center_2 - QPointF (text_width / 2, text_height / 2), QSizeF (text_width, text_height)), value_b.data ());
+    text_width = metrics.width (value_c.data ());
+    painter->drawText(QRectF (center_3 - QPointF (text_width / 2, text_height / 2), QSizeF (text_width, text_height)), value_c.data ());
+    text_width = metrics.width (value_d.data ());
+    painter->drawText(QRectF (center_4 - QPointF (text_width / 2, text_height / 2), QSizeF (text_width, text_height)), value_d.data ());
 
     item::paint(painter, option, widget);
 }

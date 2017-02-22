@@ -40,8 +40,8 @@ void production_control_department::paint(QPainter *painter, const QStyleOptionG
 {
     SCOPE_EXIT { item::paint(painter,option,widget); };
 
-    auto const x_scale = item_width_ /100;
-    auto const y_scale = item_height_ /80;
+    auto const x_scale = width() /100;
+    auto const y_scale = height() /80;
     const QPointF p1{2 * x_scale, 2 * y_scale},
     p2{98 * x_scale, 2 * y_scale},
     p3{98 * x_scale, 78 * y_scale},
@@ -69,16 +69,16 @@ void production_control_department::paint(QPainter *painter, const QStyleOptionG
     }
 
     QFontMetricsF metrics (painter->font());
-    auto width = metrics.width(item_name.data());
-    auto height = metrics.height();
+    auto tetx_width = metrics.width(item_name.data());
+    auto text_height = metrics.height();
     auto center = QRectF (p1, p6).center();
-    painter->drawText(QRectF (center - QPointF (width / 2, height / 2), QSizeF (width, height)), item_name.data());
+    painter->drawText(QRectF (center - QPointF (tetx_width / 2, text_height / 2), QSizeF (tetx_width, text_height)), item_name.data());
 
     auto plan_method = attribute ("生产计划安排方式");
     center = QRectF (p7, p9).center ();
-    width = metrics.width(plan_method.data ());
+    tetx_width = metrics.width(plan_method.data ());
 
-    painter->drawText(QRectF (center - QPointF (width / 2, height / 2), QSizeF (width, height)), plan_method.data ());
+    painter->drawText(QRectF (center - QPointF (tetx_width / 2, text_height / 2), QSizeF (tetx_width, text_height)), plan_method.data ());
 }
 
 void production_control_department::mouseDoubleClickEvent(QGraphicsSceneMouseEvent *event)

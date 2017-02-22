@@ -10,9 +10,6 @@ production_watcher_board::production_watcher_board(json data, QPointF pos, item 
     :fixed_item(::move(data), pos, parent)
 {
 
-//    item_width_ /= small_object_ratio;
-//    item_height_ /= small_object_ratio;
-
 }
 std::unique_ptr<production_watcher_board> production_watcher_board::make(json data, QPointF pos, item* parent)
 {
@@ -45,16 +42,18 @@ bool production_watcher_board::init()
 
 void production_watcher_board::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
+    auto item_width = width();
+    auto item_height = height();
     QPointF
-    p1_ {0.01 * item_width_, 0.0125 * item_height_},
-    p2_ {0.85 * item_width_, 0.0125 * item_height_},
-    p3_ {0.99 * item_width_, 0.2 * item_height_},
-    p4_ {0.99 * item_width_, 0.9875 * item_height_},
-    p5_ {0.01 * item_width_, 0.9875 * item_height_};
+    p1_ {0.01 * item_width, 0.0125 * item_height},
+    p2_ {0.85 * item_width, 0.0125 * item_height},
+    p3_ {0.99 * item_width, 0.2 * item_height},
+    p4_ {0.99 * item_width, 0.9875 * item_height},
+    p5_ {0.01 * item_width, 0.9875 * item_height};
 
     auto the_pen = painter->pen();
     the_pen.setColor(Qt::black);
-    the_pen.setWidthF(std::max(item_width_ * 0.02 , 2.0));
+    the_pen.setWidthF(std::max(item_width * 0.02 , 2.0));
     painter->setPen(the_pen);
     painter->setBrush(Qt::white);
     painter->drawPolygon({{p1_, p2_, p3_,p4_,p5_}}, Qt::WindingFill);

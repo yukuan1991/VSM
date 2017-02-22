@@ -13,10 +13,7 @@ signal_board::signal_board(json data, QPointF pos, item *parent)
     :fixed_item (::move(data), pos, parent)
 {
 
-
-//    item_width_ = item_width_ * (1/small_object_ratio);
-//    item_height_ = item_height_ * ( 1/small_object_ratio);
- }
+}
 
 bool signal_board::init()
 {
@@ -32,7 +29,8 @@ bool signal_board::init()
 void signal_board::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
     Q_UNUSED(widget);
-
+    auto item_width_ = width();
+    auto item_height_ = height();
     QPointF
     p1 {0.05 * item_width_, item_height_ / 80},
     p2 {0.95 * item_width_, item_height_ / 80},

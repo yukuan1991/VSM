@@ -33,8 +33,7 @@ std::unique_ptr<board_arrival> board_arrival::make(json data, QPointF pos, item*
 board_arrival::board_arrival(json data, QPointF pos, item* parent)
     :fixed_item(::move(data), pos, parent)
 {
-//    item_width_ /= small_object_ratio;
-//    item_height_ /= small_object_ratio;
+
 }
 
 void board_arrival::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)

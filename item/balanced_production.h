@@ -20,8 +20,6 @@ protected:
     balanced_production(json data, QPointF pos, item* parent = nullptr);
     void paint (QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = nullptr) override;
 
-    qreal item_width_ = standard_width();
-    qreal item_height_ = standard_height();
 };
 }
 

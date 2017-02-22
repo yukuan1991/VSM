@@ -14,5 +14,8 @@ protected:
     void paint (QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = nullptr) override;
     adjustment_on_scene(json data, QPointF pos, item* parent = nullptr);
 private:
+    qreal height() const override { return height() / small_object_ratio_; }
+    qreal width() const override { return width() / small_object_ratio_; }
+
 };
 }

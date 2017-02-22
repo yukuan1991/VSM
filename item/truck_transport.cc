@@ -44,8 +44,8 @@ void truck_transport::paint(QPainter *painter, const QStyleOptionGraphicsItem *o
     the_pen.setWidthF(0.02 * item_width_);
     painter->setPen(the_pen);
 
-    auto x_scale = item_width_ / 100;
-    auto y_scale = item_height_ / 80;
+    auto x_scale = width() / 100;
+    auto y_scale = height() / 80;
 
     painter->setBrush(Qt::white);
 

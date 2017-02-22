@@ -41,34 +41,32 @@ std::unique_ptr<material_fetch_watch_board> material_fetch_watch_board::make(jso
 material_fetch_watch_board::material_fetch_watch_board(json data, QPointF pos,item *parent)
     :fixed_item(::move(data), pos, parent)
 {
-
-//    item_width_ /= small_object_ratio;
-//    item_height_ /= small_object_ratio;
 }
 
 void material_fetch_watch_board::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
-
+    auto item_width = width();
+    auto item_height = height();
     QPointF //shape1_, shape2_, shape3_, shape4_, shape5_;
-    p1_{0.01 * item_width_,0.0125 * item_height_},
-    p2_{0.25 * item_width_,0.0125 * item_height_},
-    p3_{0.5 * item_width_,0.0125 * item_height_},
-    p4_{0.74 * item_width_,0.0125 * item_height_},
-    p5_{0.85 * item_width_,0.0125 * item_height_},
-    p6_{0.95 * item_width_, 0.125 * item_height_},
-    p7_{0.99 * item_width_,0.2 * item_height_},
-    p8_{0.99 * item_width_,0.4875 * item_height_},
-    p9_{0.99 * item_width_,0.9875 * item_height_},
-    p10_{0.74* item_width_,0.9875 * item_height_},
-    p11_{0.50 * item_width_,0.9875 * item_height_},
-    p12_{0.25 * item_width_,0.9875 * item_height_},
-    p13_{0.01 * item_width_,0.9875 * item_height_},
-    p14_{0.01 * item_width_, 0.4875 * item_height_};
+    p1_{0.01 * item_width,0.0125 * item_height},
+    p2_{0.25 * item_width,0.0125 * item_height},
+    p3_{0.5 * item_width,0.0125 * item_height},
+    p4_{0.74 * item_width,0.0125 * item_height},
+    p5_{0.85 * item_width,0.0125 * item_height},
+    p6_{0.95 * item_width, 0.125 * item_height},
+    p7_{0.99 * item_width,0.2 * item_height},
+    p8_{0.99 * item_width,0.4875 * item_height},
+    p9_{0.99 * item_width,0.9875 * item_height},
+    p10_{0.74* item_width,0.9875 * item_height},
+    p11_{0.50 * item_width,0.9875 * item_height},
+    p12_{0.25 * item_width,0.9875 * item_height},
+    p13_{0.01 * item_width,0.9875 * item_height},
+    p14_{0.01 * item_width, 0.4875 * item_height};
 
 
     auto the_pen = painter->pen();
     the_pen.setColor(Qt::black);
-    the_pen.setWidthF(std::max(item_width_ * 0.02, 2.0));
+    the_pen.setWidthF(std::max(item_width * 0.02, 2.0));
     painter->setPen(the_pen);
 
     painter->setBrush(Qt::white);

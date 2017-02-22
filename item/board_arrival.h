@@ -15,9 +15,9 @@ public:
     static std::unique_ptr<board_arrival> make (json data, QPointF pos, item* parent);
 protected:
     board_arrival(json data, QPointF pos, item* parent = nullptr);
-     void paint (QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = nullptr) override;
-     qreal width () const override  {  return fixed_item::width() / small_object_ratio_; }
-     qreal height () const override  {  return fixed_item::height() / small_object_ratio_; }
+    void paint (QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = nullptr) override;
+    qreal width () const override  {  return fixed_item::width() / small_object_ratio_; }
+    qreal height () const override  {  return fixed_item::height() / small_object_ratio_; }
 
 
 };

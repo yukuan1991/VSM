@@ -34,28 +34,28 @@ bool fetch_material::init()
 fetch_material::fetch_material(json data, QPointF pos, item *parent)
     :fixed_item(::move(data), pos, parent)
 {
-//    item_width_ /= small_object_ratio;
-//    item_height_ /= small_object_ratio;
 
 
 }
 
 void fetch_material::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
+    auto item_width = width();
+    auto item_height = height();
     auto the_pen = painter->pen();
     the_pen.setColor(Qt::black);
-    the_pen.setWidthF(std::max(item_width_ * 0.02, 2.0));
+    the_pen.setWidthF(std::max(item_width * 0.02, 2.0));
     painter->setPen(the_pen);
 
     QPointF
-    p1 {0.75 * item_width_, 0.76 * item_height_},
-    p2 {0.82 * item_width_, 0.9 * item_height_},
-    p3 {0.86 * item_width_,0.65 * item_height_};
+    p1 {0.75 * item_width, 0.76 * item_height},
+    p2 {0.82 * item_width, 0.9 * item_height},
+    p3 {0.86 * item_width,0.65 * item_height};
 
     //给定坐标
     painter->setBrush(Qt::white);
 
-    painter->drawArc(QRectF{0.1 * item_width_, 0, 0.8 * item_width_, item_height_}, 45 * 16, 270 * 16);
+    painter->drawArc(QRectF{0.1 * item_width, 0, 0.8 * item_width, item_height}, 45 * 16, 270 * 16);
     painter->setBrush(Qt::black);
     painter->drawPolygon({{p1,p2,p3}},Qt::WindingFill);
 
