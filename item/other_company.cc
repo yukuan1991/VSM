@@ -35,8 +35,8 @@ void other_company::paint(QPainter *painter, const QStyleOptionGraphicsItem *opt
     the_pen.setColor(color ());
     the_pen.setWidthF(2.0);
     painter->setPen(the_pen);
-    painter->setBrush(Qt::white);
 
+    painter->setBrush(Qt::white);
     auto x_scale = item_width_ / 100;
     auto y_scale =item_height_ / 80;
     const QPointF

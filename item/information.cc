@@ -38,6 +38,7 @@ void information::paint(QPainter *painter, const QStyleOptionGraphicsItem *optio
     painter->setBrush(Qt::white);
     painter->drawPolygon({{p1,p2,p3,p4}}, Qt::WindingFill);
     auto item_name = name();
+
     if(item_name.empty())
     {
         return;

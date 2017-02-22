@@ -37,7 +37,8 @@ public:
     void set_name (string name) { item_info_ ["name"] = name; }
     string name ();
 
-    const QString& item_type () { return type_; }
+    string item_type () { return item_info_ ["type"]; }
+    void set_item_type (const string & type);
 
     const QColor& color () { return color_; }
     void set_color (QColor c) { color_ = ::move (c); emit color_changed (c); }
@@ -64,7 +65,6 @@ protected:
 protected:
     qreal item_width_ = 100;
     qreal item_height_ = 0.8 * item_width_;
-    QString type_;
     nlohmann::json item_info_;
     static constexpr qreal small_object_ratio = 2;
     static constexpr qreal small_object_height = 4;

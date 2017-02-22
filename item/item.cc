@@ -17,7 +17,7 @@ item::item(QGraphicsItem *parent) : QGraphicsObject (parent)
 
 void item::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
-    Q_UNUSED(widget);
+    Q_UNUSED (widget);
 
     painter->setPen(Qt::black);
 
@@ -80,6 +80,11 @@ string item::name()
     {
         return {};
     }
+}
+
+void item::set_item_type(const string &type)
+{
+    item_info_ ["type"] = type;
 }
 
 void item::set_attribute(string_view key, std::string value)

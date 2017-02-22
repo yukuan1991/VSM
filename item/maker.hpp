@@ -131,7 +131,7 @@ inline nlohmann::json dump_scene (not_null<QGraphicsScene*> scene)
         auto pos = casted_item->pos();
         item_dump["x"] = pos.x();
         item_dump["y"] = pos.y();
-        item_dump["type"] = casted_item->item_type().toStdString();
+        item_dump["type"] = casted_item->item_type();
 
         item_data.push_back(::move (item_dump));
     }

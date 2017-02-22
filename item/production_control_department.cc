@@ -22,9 +22,11 @@ production_control_department::production_control_department(item *parent)
 
 void production_control_department::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
-    auto x_scale = item_width_ /100;
-    auto y_scale = item_height_ /80;
-    QPointF p1{2 * x_scale, 2 * y_scale},
+    SCOPE_EXIT { item::paint(painter,option,widget); };
+
+    auto const x_scale = item_width_ /100;
+    auto const y_scale = item_height_ /80;
+    const QPointF p1{2 * x_scale, 2 * y_scale},
     p2{98 * x_scale, 2 * y_scale},
     p3{98 * x_scale, 78 * y_scale},
     p4{2 * x_scale, 78 * y_scale},
@@ -61,13 +63,11 @@ void production_control_department::paint(QPainter *painter, const QStyleOptionG
     width = metrics.width(plan_method.data ());
 
     painter->drawText(QRectF (center - QPointF (width / 2, height / 2), QSizeF (width, height)), plan_method.data ());
-
-
-    item::paint(painter,option,widget);
 }
 
 void production_control_department::mouseDoubleClickEvent(QGraphicsSceneMouseEvent *event)
 {
+    Q_UNUSED (event);
     auto old_name = name ();
     bool confirmed = false;
     auto company_name = QInputDialog::getText(nullptr, "", "名称:",
