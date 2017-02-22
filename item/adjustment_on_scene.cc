@@ -4,25 +4,40 @@
 #include <QStyleOptionGraphicsItem>
 namespace item {
 ///修改成item_width * 1/4
-adjustment_on_scene::adjustment_on_scene(fixed_item* parent)
-    :fixed_item(parent)
+adjustment_on_scene::adjustment_on_scene(json data, QPointF pos, item* parent = nullptr)
+    :fixed_item(::move (data), pos, parent)
 {
-      set_attribute ("库存量");
-      set_attribute ("原生产计划");
-      set_attribute ("更改后生产计划");
-      item_width_ = item_width_ * ( 1 / small_object_ratio);
-      item_height_ = item_height_ * ( 1 / small_object_ratio);
 
-      set_z_value(307);
+//      item_width_ = item_width_ * ( 1 / small_object_ratio);
+//      item_height_ = item_height_ * ( 1 / small_object_ratio);
+
+
 
 }
 
-std::unique_ptr<adjustment_on_scene> adjustment_on_scene::make(QPointF pos, QColor color)
+std::unique_ptr<adjustment_on_scene> adjustment_on_scene::make(json data, QPointF pos, item* parent)
 {
-    std::unique_ptr <adjustment_on_scene> ret (new adjustment_on_scene);
-    ret->setPos(pos);
+    std::unique_ptr<adjustment_on_scene>ret(new adjustment_on_scene (::move (data), pos, parent));
+    if (!ret->init ())
+    {
+        return nullptr;
+    }
+    else
+    {
+        return ret;
+    }
+
+}
+
+bool adjustment_on_scene::init()
+{
     set_item_type("现场调度");
-    return ret;
+    set_attribute ("库存量");
+    set_attribute ("原生产计划");
+    set_attribute ("更改后生产计划");
+    set_z_value(307);
+
+    return true;
 }
 
 void adjustment_on_scene::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)

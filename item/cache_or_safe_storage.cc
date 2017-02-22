@@ -7,24 +7,37 @@ namespace item {
 
 
 
-std::unique_ptr<cache_or_safe_storage> cache_or_safe_storage::make(QPointF pos, QColor color)
+bool cache_or_safe_storage::init()
 {
-    std::unique_ptr <cache_or_safe_storage> ret (new cache_or_safe_storage);
-    ret->setPos(pos);
-    ret->set_color(std::move(color));
-    set_item_type("缓冲或者安全库存");
-    return ret;
+     set_item_type("缓冲或者安全库存");
+
+     set_attribute ("产品名称");
+     set_attribute ("库存数量");
+     set_attribute ("库存周期");
+
+     set_z_value(308);
+
+     return true;
 
 }
 
-cache_or_safe_storage::cache_or_safe_storage(item* parent)
-    :fixed_item (parent)
+std::unique_ptr<cache_or_safe_storage> cache_or_safe_storage::make(json data, QPointF pos, item* parent)
 {
-    set_attribute ("产品名称");
-    set_attribute ("库存数量");
-    set_attribute ("库存周期");
+    std::unique_ptr <cache_or_safe_storage> ret (new cache_or_safe_storage(::move(data), pos, parent));
+    if(!ret->init ())
+    {
+        return nullptr;
+    }
+    else
+    {
+        return ret;
+    }
 
-    set_z_value(308);
+}
+
+cache_or_safe_storage::cache_or_safe_storage(json data, QPointF pos, item* parent)
+    :fixed_item (::move(data), pos, parent)
+{
 
 }
 

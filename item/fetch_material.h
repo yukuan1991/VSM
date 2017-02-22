@@ -14,10 +14,12 @@ namespace item {
 class fetch_material : public fixed_item
 {
 public:
-    static std::unique_ptr<fetch_material> make(QPointF pos, QColor color = Qt::black);
+    bool init ();
+
+    static std::unique_ptr<fetch_material> make(json data, QPointF pos, item* parent);
 
 protected:
-    explicit fetch_material(item* parent=nullptr);
+    explicit fetch_material(json data, QPointF pos, item* parent=nullptr);
     void paint (QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = nullptr) override;
 private:
     int startAngle = 1 * item_width_ * 16;

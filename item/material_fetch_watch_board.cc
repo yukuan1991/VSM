@@ -11,26 +11,39 @@
 namespace item {
 
 
-std::unique_ptr<material_fetch_watch_board> material_fetch_watch_board::make(QPointF pos, QColor color)
+bool material_fetch_watch_board::init()
 {
-    std::unique_ptr<material_fetch_watch_board>ret(new material_fetch_watch_board);
-    ret->setPos(pos);
-    ret->set_color(std::move(color));
     set_item_type("取料看板");
-    return ret;
-}
 
-material_fetch_watch_board::material_fetch_watch_board(item *parent)
-    :fixed_item(parent)
-{
     set_attribute("产品种类");
     set_attribute("产品数量");
     set_attribute("取货地点");
 
     set_z_value(314);
 
-    item_width_ /= small_object_ratio;
-    item_height_ /= small_object_ratio;
+    return true;
+
+}
+
+std::unique_ptr<material_fetch_watch_board> material_fetch_watch_board::make(json data, QPointF pos, item* parent)
+{
+    std::unique_ptr<material_fetch_watch_board>ret(new material_fetch_watch_board(::move(data), pos, parent));
+    if(!ret->init ())
+    {
+        return  nullptr;
+    }
+    else
+    {
+        return ret;
+    }
+}
+
+material_fetch_watch_board::material_fetch_watch_board(json data, QPointF pos,item *parent)
+    :fixed_item(::move(data), pos, parent)
+{
+
+//    item_width_ /= small_object_ratio;
+//    item_height_ /= small_object_ratio;
 }
 
 void material_fetch_watch_board::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)

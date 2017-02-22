@@ -6,27 +6,41 @@
 
 namespace item {
 
-production_watcher_board::production_watcher_board(item *parent)
-    :fixed_item(parent)
+production_watcher_board::production_watcher_board(json data, QPointF pos, item *parent)
+    :fixed_item(::move(data), pos, parent)
 {
-    set_attribute("产品种类");
-    set_attribute("生产数量");
-    set_attribute("需求地点");
-    set_attribute("供货时间");
 
-    set_z_value(313);
-
-    item_width_ /= small_object_ratio;
-    item_height_ /= small_object_ratio;
+//    item_width_ /= small_object_ratio;
+//    item_height_ /= small_object_ratio;
 
 }
-std::unique_ptr<production_watcher_board> production_watcher_board::make(QPointF pos, QColor color)
+std::unique_ptr<production_watcher_board> production_watcher_board::make(json data, QPointF pos, item* parent)
 {
-    std::unique_ptr<production_watcher_board> ret(new production_watcher_board);
-    ret->setPos(pos);
-    ret->set_color(std::move(color));
-    set_item_type("生产看板");
-    return ret;
+    std::unique_ptr<production_watcher_board> ret(new production_watcher_board(::move(data),pos, parent));
+    if(!ret->init ())
+    {
+        return nullptr;
+    }
+    else
+    {
+        return ret;
+    }
+}
+
+bool production_watcher_board::init()
+{
+     set_item_type("生产看板");
+
+
+     set_attribute("产品种类");
+     set_attribute("生产数量");
+     set_attribute("需求地点");
+     set_attribute("供货时间");
+
+     set_z_value(313);
+
+     return true;
+
 }
 
 void production_watcher_board::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)

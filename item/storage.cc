@@ -6,27 +6,42 @@
 namespace item {
 
 
-std::unique_ptr<storage> storage::make(QPointF pos, QColor color)
+std::unique_ptr<storage> storage::make(json data, QPointF pos, item* parent)
 {
-    std::unique_ptr <storage> ret(new storage);
-    ret->setPos(pos);
-    ret->set_color(std::move(color));
-    set_item_type("库存");
-    return ret;
+    std::unique_ptr <storage> ret(new storage(::move(data),pos, parent));
+    if(!ret->init ())
+    {
+        return nullptr;
+    }
+    else
+    {
+        return ret;
+    }
 }
 
 
-storage::storage(item* parent)
-    :fixed_item(parent)
+storage::storage(json data, QPointF pos, item* parent)
+    :fixed_item(::move(data), pos, parent)
 {
+
+//    item_width_ /= small_object_ratio;
+//    item_height_ /= small_object_ratio;
+}
+
+bool storage::init()
+{
+
     set_attribute("库存数量");
     set_attribute("库存天数");
     set_attribute("材料名");
 
+    set_item_type("库存");
+
     set_z_value(303);
 
-    item_width_ /= small_object_ratio;
-    item_height_ /= small_object_ratio;
+    return true;
+
+
 }
 
 void storage::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)

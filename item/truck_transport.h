@@ -7,10 +7,10 @@ namespace  item {
 class truck_transport : public fixed_item
 {
 public:
-    static std::unique_ptr<truck_transport> make (QPointF pos, QColor color);
-
+    static std::unique_ptr<truck_transport> make (json data,QPointF pos, item* parent);
+    bool init ();
 protected:
-    truck_transport(item* parent= nullptr);
+    truck_transport(json data, QPointF pos, item* parent= nullptr);
     void paint (QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = nullptr) override;
 
 };

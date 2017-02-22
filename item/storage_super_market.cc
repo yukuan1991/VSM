@@ -8,22 +8,35 @@
 namespace item {
 
 
-std::unique_ptr<storage_super_market> storage_super_market::make(QPointF pos, QColor color)
+std::unique_ptr<storage_super_market> storage_super_market::make(json data, QPointF pos, item* parent)
 {
-    std::unique_ptr <storage_super_market> ret(new storage_super_market);
-    ret->setPos(pos);
-    ret->set_color(std::move(color));
-    set_item_type("库存超市");
-    return ret;
+    std::unique_ptr <storage_super_market> ret(new storage_super_market(::move(data),pos, parent));
+    if(! ret->init ())
+    {
+        return nullptr;
+    }
+    else
+    {
+        return ret;
+    }
 }
 
-storage_super_market::storage_super_market(item* parent)
-    :fixed_item(parent)
+storage_super_market::storage_super_market(json data, QPointF pos, item* parent)
+    :fixed_item(::move(data), pos, parent)
+{
+
+}
+
+bool storage_super_market::init()
 {
     set_attribute("产品名");
     set_attribute("数量");
 
     set_z_value(306);
+    set_item_type("库存超市");
+
+    return true;
+
 }
 
 void storage_super_market::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)

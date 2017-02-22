@@ -4,23 +4,37 @@
 namespace item {
 
 
-std::unique_ptr<truck_transport> truck_transport::make(QPointF pos, QColor color)
+std::unique_ptr<truck_transport> truck_transport::make( json data, QPointF pos,item* parent)
 {
 
-    std::unique_ptr<truck_transport>ret(new truck_transport);
-    ret->setPos(pos);
-    ret->set_color(std::move(color));
-    set_item_type("卡车运输");
+    std::unique_ptr<truck_transport>ret(new truck_transport(::move(data), pos, parent));
+
+    if(!ret->init ())
+    {
+        return nullptr;
+    }
+    else
+    {
+
     return ret;
+    }
 }
 
-truck_transport::truck_transport(item * parent)
-    :fixed_item(parent)
+truck_transport::truck_transport(json data, QPointF pos, item * parent)
+    :fixed_item(::move(data), pos, parent)
+{
+
+}
+
+bool truck_transport::init()
 {
     set_attribute("运输频率");
 
     set_z_value(305);
 
+    set_item_type("卡车运输");
+
+    return true;
 }
 
 void truck_transport::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)

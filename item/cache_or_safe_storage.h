@@ -11,9 +11,10 @@ class cache_or_safe_storage : public fixed_item
 {
 
 public:
-   static std::unique_ptr <cache_or_safe_storage> make(QPointF pos, QColor color = Qt::black);
+    bool init ();
+   static std::unique_ptr <cache_or_safe_storage> make(json data, QPointF pos, item* parent);
 protected:
-    cache_or_safe_storage(item* parent = nullptr);
+    cache_or_safe_storage(json data, QPointF pos, item* parent = nullptr);
     void paint (QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = nullptr) override;
 private:
 

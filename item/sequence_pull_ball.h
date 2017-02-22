@@ -8,10 +8,10 @@ namespace item {
 class sequence_pull_ball : public fixed_item
 {
 public:
-    static std::unique_ptr <sequence_pull_ball> make(QPointF pos, QColor color = Qt::black);
-
+    static std::unique_ptr <sequence_pull_ball> make(json data, QPointF pos, item* parent);
+    bool init ();
 protected:
-    sequence_pull_ball(item* parent = nullptr);
+    sequence_pull_ball(json data, QPointF pos, item* parent = nullptr);
     void paint (QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = nullptr) override;
 private:
 };

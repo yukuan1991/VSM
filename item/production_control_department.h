@@ -10,9 +10,10 @@ namespace item {
 class production_control_department : public fixed_item
 {
 public :
-    static std::unique_ptr<production_control_department> make(QPointF pos, QColor color = Qt::black);
+    bool init ();
+    static std::unique_ptr<production_control_department> make(json data, QPointF pos, item* parent);
 protected:
-    production_control_department(item* parent = nullptr);
+    production_control_department(json data, QPointF pos, item* parent = nullptr);
     void paint (QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = nullptr) override;
     void mouseDoubleClickEvent(QGraphicsSceneMouseEvent *event) override;
     void paint_attribute (QPainter* painter) override;

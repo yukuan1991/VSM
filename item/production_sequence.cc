@@ -8,29 +8,44 @@
 namespace item {
 
 
-std::unique_ptr<production_sequence>production_sequence::make(QPointF pos, QColor color)
+std::unique_ptr<production_sequence>production_sequence::make(json data, QPointF pos, item* parent)
 {
-    std::unique_ptr <production_sequence> ret(new production_sequence);
-    ret->setPos(pos);
-    ret->set_color(std::move(color));
-    set_item_type("生产工序");
-    return ret;
+    std::unique_ptr <production_sequence> ret(new production_sequence(::move(data), pos, parent));
+    if(!ret->init ())
+    {
+        return nullptr;
+
+    }
+    else
+    {
+        return ret;
+    }
 }
 
-production_sequence::production_sequence(item* parent)
-    :fixed_item(parent)
+production_sequence::production_sequence(json data, QPointF pos, item* parent)
+    :fixed_item(::move(data), pos, parent)
 {   
-     set_attribute ("周期时间");
-     set_attribute("换模时间");
-     set_attribute("设备开机率");
-     set_attribute("产品批量大小");
-     set_attribute("操作工数量");
-     set_attribute("产品类别");
-     set_attribute("包装数量");
-     set_attribute("工作时间");
-     set_attribute("不良品");
 
-     set_z_value(301);
+}
+
+bool production_sequence::init()
+{
+    set_item_type("生产工序");
+
+    set_attribute ("周期时间");
+    set_attribute("换模时间");
+    set_attribute("设备开机率");
+    set_attribute("产品批量大小");
+    set_attribute("操作工数量");
+    set_attribute("产品类别");
+    set_attribute("包装数量");
+    set_attribute("工作时间");
+    set_attribute("不良品");
+
+    set_z_value(301);
+
+    return true;
+
 }
 
 void production_sequence::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)

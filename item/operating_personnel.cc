@@ -8,24 +8,38 @@
 namespace item
 {
 
-std::unique_ptr<operating_personnel> operating_personnel::make(QPointF pos, QColor color)
+std::unique_ptr<operating_personnel> operating_personnel::make(json data, QPointF pos, item* parent)
 {
-    std::unique_ptr<operating_personnel> ret(new operating_personnel);
-    ret->setPos(pos);
-    ret->set_color(std::move(color));
-    ret->type_ = "操作员";
-    return ret;
+    std::unique_ptr<operating_personnel> ret(new operating_personnel(::move(data), pos, parent));
+
+    if(!ret->init ())
+    {
+        return nullptr;
+    }
+    else
+    {
+       return ret;
+    }
 }
 
-operating_personnel::operating_personnel(item* parent)
-    :fixed_item (parent)
+bool operating_personnel::init()
 {
-    set_attribute("操作员数量");
+     set_item_type("操作员");
+     set_attribute("操作员数量");
 
-    set_z_value(309);
+     set_z_value(309);
 
-    item_width_ /= small_object_ratio;
-    item_height_ /= small_object_ratio;
+     return true;
+
+}
+
+operating_personnel::operating_personnel(json data, QPointF pos, item* parent)
+    :fixed_item (::move(data), pos, parent)
+{
+
+
+//    item_width_ /= small_object_ratio;
+//    item_height_ /= small_object_ratio;
 
 }
 

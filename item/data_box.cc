@@ -10,10 +10,10 @@
 namespace item {
 
 
-data_box::data_box(item* parent)
-    :fixed_item (parent)
+data_box::data_box(json data, QPointF pos, item* parent)
+    :fixed_item (::move(data), pos, parent)
 {
-    set_z_value(303);
+
    // connect(button_ok, SIGNAL(clicked()), this, SLOT(get_edit_text()));
 
 }
@@ -70,17 +70,6 @@ void data_box::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, 
     item::paint(painter, option, widget);
 }
 
-//void data_box::get_edit_text()
-//{
-
-//    auto text_1 = label_1->text().toStdString();
-//    auto text_2 = label_2->text().toStdString();
-//    auto text_3 = label_3->text().toStdString();
-//    auto text_4 = label_4->text().toStdString();
-//    qDebug() << "text_";
-
-//}
-
 void data_box::mouseDoubleClickEvent(QGraphicsSceneMouseEvent *event)
 {
 
@@ -100,56 +89,7 @@ void data_box::mouseDoubleClickEvent(QGraphicsSceneMouseEvent *event)
         item_info_["etc"]["d"] = get<3> (data_value);
     }
 }
-// data_box::~data_box()
-//{
-//     delete widget;
-//     qDebug () << "删除创建的对象";
 
-//}
-
-//void data_box::add_widget()
-//{
-//     label_1->setFixedSize(30,20);
-//     label_2->setFixedSize(30,20);
-//     label_3->setFixedSize(30,20);
-//     label_4->setFixedSize(30,20);
-
-//    button_ok->setFixedSize(40,20);
-//    button_cancle->setFixedSize(40,20);
-//    button_ok->setText(tr("确定"));
-//    button_cancle->setText(tr("取消"));
-//    edit_1->setFixedSize(200,20);
-//    edit_2->setFixedSize(200,20);
-//    edit_3->setFixedSize(200,20);
-//    edit_4->setFixedSize(200,20);
-
-//    layout_->addWidget(label_1);
-//    layout_->addWidget(edit_1);
-//    layout_1->addWidget(label_2);
-//    layout_1->addWidget(edit_2);
-//    layout_2->addWidget(label_3);
-//    layout_2->addWidget(edit_3);
-//    layout_3->addWidget(label_4);
-//    layout_3->addWidget(edit_4);
-//    layout_4->addWidget(button_ok);
-//    layout_4->addWidget(button_cancle);
-//    vb_layout->addLayout(layout_);
-//    vb_layout->addLayout(layout_1);
-//    vb_layout->addLayout(layout_2);
-//    vb_layout->addLayout(layout_3);
-//    vb_layout->addLayout(layout_4);
-//    widget->setLayout(vb_layout);
-
-//    widget->setMaximumSize(400,400);
-//    widget->show();
-
-
-//}
-
-//std::tuple<std::string, std::string, std::string, std::string> data_box::get_names(const std::tuple<std::string, std::string, std::string, std::string> &old_value)
-//{
-
-//}
 
 optional<tuple<string, string, string, string>> data_box::set_box_data(string a, string b, string c, string d)
 {
@@ -192,13 +132,25 @@ optional<tuple<string, string, string, string>> data_box::set_box_data(string a,
     return {};
 }
 
-std::unique_ptr<data_box> data_box::make(QPointF pos, QColor color)
+std::unique_ptr<data_box> data_box::make(json data, QPointF pos, item* parent)
 {
-    std::unique_ptr<data_box> ret(new data_box);
-    ret->setPos(pos);
-    ret->set_color(std::move(color));
+    std::unique_ptr<data_box> ret(new data_box(::move(data), pos, parent));
+    if(!ret->init ())
+    {
+        return nullptr;
+    }
+    else
+    {
+       return ret;
+    }
+}
+
+bool data_box::init()
+{
     set_item_type("数据箱");
-    return ret;
+    set_z_value(303);
+
+    return true;
 }
 
 }
