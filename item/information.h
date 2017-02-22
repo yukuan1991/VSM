@@ -5,11 +5,12 @@
 #include <memory>
 #include <item/item.h>
 #include <QPainterPath>
+#include "item/fixed_item.h"
 ///信息
 namespace item {
 
 
-class information : public item
+class information : public fixed_item
 {
 public:
     static std::unique_ptr<information> make (QPointF pos, QColor color = Qt::black);

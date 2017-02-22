@@ -1,12 +1,13 @@
 ﻿#ifndef PRODUCTION_CONTROL_DEPARTMENT_H
 #define PRODUCTION_CONTROL_DEPARTMENT_H
 #include "item/item.h"
+#include "item/fixed_item.h"
 
 ///生产控制部门
 namespace item {
 
 
-class production_control_department : public item
+class production_control_department : public fixed_item
 {
 public :
     static std::unique_ptr<production_control_department> make(QPointF pos, QColor color = Qt::black);

@@ -3,11 +3,12 @@
 #include "item/material_fetch_watch_board.h"
 #include "item/item.h"
 #include <memory>
+#include "item/fixed_item.h"
 ///取料看板
 namespace item {
 
 
-class material_fetch_watch_board : public item
+class material_fetch_watch_board : public fixed_item
 {
 public:
     static std::unique_ptr <material_fetch_watch_board> make(QPointF pos, QColor = Qt::black);

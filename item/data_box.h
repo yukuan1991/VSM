@@ -8,6 +8,7 @@
 #include <QPushButton>
 #include <utility>
 #include "utility/containers.hpp"
+#include "item/fixed_item.h"
 
 ///数据箱
 namespace item {
@@ -16,7 +17,7 @@ using std::tuple;
 using std::make_tuple;
 using std::get;
 
-class data_box : public item
+class data_box : public fixed_item
 {
 public:
     static std::unique_ptr<data_box> make(QPointF pos,QColor color);

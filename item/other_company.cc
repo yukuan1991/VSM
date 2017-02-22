@@ -19,7 +19,7 @@ std::unique_ptr<other_company> other_company::make(QPointF pos, QColor color)
 }
 
 other_company::other_company(item * parent)
-    :item(parent)
+    :fixed_item(parent)
 {
     set_attribute("需求量");
     set_attribute("包装方式");

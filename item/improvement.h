@@ -5,12 +5,13 @@
 #include <QColor>
 #include <QRectF>
 #include "item/item.h"
+#include "item/fixed_item.h"
 ///改善
 
 namespace item {
 
 
-class improvement : public item
+class improvement : public fixed_item
 {
 public:
     static std::unique_ptr<improvement> make(QPointF pos, QColor color = Qt::black);

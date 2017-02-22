@@ -5,12 +5,13 @@
 #include <QColor>
 #include <QRectF>
 #include "item/item.h"
+#include "item/fixed_item.h"
 ///取料
 
 namespace item {
 
 
-class fetch_material : public item
+class fetch_material : public fixed_item
 {
 public:
     static std::unique_ptr<fetch_material> make(QPointF pos, QColor color = Qt::black);
