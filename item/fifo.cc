@@ -120,17 +120,15 @@ fifo::fifo(QPointF begin, QPointF end, QColor color, item *parent)
     setPos (mid_point);
     set_attribute("最大批量");
 
-    set_color(::move (color));
-
     set_z_value(204);
 
 }
 
-QRectF fifo::shape_rect() const
-{
-    return QRectF (QPointF (- length_ / 2,  - item_height_ / 8),
-                   QSizeF (length_, item_height_ / 4));
-}
+//QRectF fifo::shape_rect() const
+//{
+//    return QRectF (QPointF (- length_ / 2,  - item_height_ / 8),
+//                   QSizeF (length_, item_height_ / 4));
+//}
 
 QRectF fifo::boundingRect() const
 {

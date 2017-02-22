@@ -39,19 +39,19 @@ void fixed_item::paint_attribute(QPainter *painter) try
         ++i;
     }
 }
-catch (const std::exception & e)
+catch (const std::exception &)
 {
-    qDebug () << e.what ();
     return;
 }
 
-void paint(QPainter *painter, QStyleOptionGraphicsItem *option, QWidget *widget)
+
+void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
     Q_UNUSED (widget);
 
     painter->setPen(Qt::black);
 
-    if ((option->state bitand QStyle::State_Selected) and show_frame_)
+    if ((option->state bitand QStyle::State_Selected) and show_frame ())
     {
         set_dash(painter);
         painter->drawRect (boundingRect ());
@@ -64,6 +64,14 @@ fixed_item::fixed_item(QGraphicsItem *parent)
     :item (parent)
 {
 
+}
+
+void fixed_item::set_dash(QPainter *painter)
+{
+    painter->setBrush(Qt::transparent);
+    QPen pen;
+    pen.setStyle(Qt::DashLine);
+    painter->setPen(pen);
 }
 
 

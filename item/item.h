@@ -44,11 +44,11 @@ public:
     QRectF boundingRect () const override;
 protected:
     explicit item(QGraphicsItem *parent = 0);
-    static void set_dash (QPainter* painter);
     void set_z_value (qreal value) { z_value_ = value; setZValue(value); }
     qreal z_value () { return z_value_; }
 
     string find_json_value (const string& key, const nlohmann::json& data);
+    bool show_frame () const { return show_frame_; }
 
     /// overrides
     QVariant itemChange(QGraphicsItem::GraphicsItemChange change, const QVariant &value) override;

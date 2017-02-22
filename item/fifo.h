@@ -13,7 +13,6 @@ public:
 protected:
     void paint (QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = nullptr) override;
     fifo (QPointF begin, QPointF end, QColor color, item* parent = nullptr);
-    QRectF shape_rect () const override;
 private:
     QRectF boundingRect () const override;
     QPainterPath shape () const override;
