@@ -40,7 +40,6 @@ toolbox::~toolbox()
 toolbox::toolbox(QWidget *parent, Qt::WindowFlags f)
     :QToolBox (parent, f)
 {
-
 }
 
 bool toolbox::init ()

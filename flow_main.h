@@ -26,7 +26,6 @@ public:
     void set_attribute ();
     ~flow_main();
 
-
 private slots:
     ///当窗口没有新建窗口是，显示为灰色
     void set_tool_action();
@@ -63,10 +62,6 @@ private:
     void update_remark ();
 
     void on_drawer_status (const QString& status);
-    //获取向导页面
-    //void get_new_page();
-    //void get_future_page();
-    //void get_improve_page();
 
 private:
     Ui::flow_main *ui;
