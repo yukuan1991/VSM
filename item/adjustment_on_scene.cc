@@ -22,7 +22,7 @@ std::unique_ptr<adjustment_on_scene> adjustment_on_scene::make(QPointF pos, QCol
     std::unique_ptr <adjustment_on_scene> ret (new adjustment_on_scene);
     ret->setPos(pos);
     ret->set_color(std::move(color));
-    ret->type_ = "现场调度";
+    set_item_type("现场调度");
     return ret;
 
 }

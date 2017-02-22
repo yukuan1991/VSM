@@ -9,7 +9,6 @@ namespace item {
 std::unique_ptr<electric_info_flow> electric_info_flow::make(QPointF p1, QPointF p2, QColor color, item *parent)
 {
     auto ret = std::unique_ptr<electric_info_flow> (new electric_info_flow (p1, p2, parent, color));
-
     if (!ret->init())
     {
         return nullptr;

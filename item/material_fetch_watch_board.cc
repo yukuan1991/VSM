@@ -16,7 +16,7 @@ std::unique_ptr<material_fetch_watch_board> material_fetch_watch_board::make(QPo
     std::unique_ptr<material_fetch_watch_board>ret(new material_fetch_watch_board);
     ret->setPos(pos);
     ret->set_color(std::move(color));
-    ret->type_ = "取料看板";
+    set_item_type("取料看板");
     return ret;
 }
 

@@ -15,7 +15,7 @@ std::unique_ptr<information> information::make(QPointF pos, QColor color)
     std::unique_ptr<information>ret(new information);
     ret->setPos(pos);
     ret->set_color( std::move (color));
-    ret->type_ = "信息";
+    set_item_type("信息");
     return ret;
 }
 

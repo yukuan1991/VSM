@@ -10,7 +10,7 @@ std::unique_ptr<production_control_department> production_control_department::ma
     std::unique_ptr <production_control_department> ret(new production_control_department);
     ret->setPos(pos);
     ret->set_color(std::move(color));
-    ret->type_ = "生产控制部门";
+    set_item_type("生产控制部门");
     return ret;
 }
 

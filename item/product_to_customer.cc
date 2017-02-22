@@ -15,7 +15,7 @@ std::unique_ptr<product_to_customer> product_to_customer::make(QPointF start, QP
     {
         return nullptr;
     }
-    ret->type_ = "成品发送至顾客";
+    set_item_type("成品发送至顾客");
     return ret;
 
 }

@@ -14,7 +14,7 @@ std::unique_ptr<traditional_info_flow> traditional_info_flow::make(QPointF p1, Q
     {
         return nullptr;
     }
-    ret->type_ = "传统信息流";
+    set_item_type("传统信息流");
     return ret;
 }
 

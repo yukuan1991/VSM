@@ -197,7 +197,7 @@ std::unique_ptr<data_box> data_box::make(QPointF pos, QColor color)
     std::unique_ptr<data_box> ret(new data_box);
     ret->setPos(pos);
     ret->set_color(std::move(color));
-    ret->type_ = "数据箱";
+    set_item_type("数据箱");
     return ret;
 }
 

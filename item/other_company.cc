@@ -14,7 +14,7 @@ std::unique_ptr<other_company> other_company::make(QPointF pos, QColor color)
     std::unique_ptr <other_company> ret(new other_company);
     ret->setPos(pos);
     ret->set_color(std::move(color));
-    ret->type_ = "其他公司";
+    set_item_type("其他公司");
     return ret;
 }
 

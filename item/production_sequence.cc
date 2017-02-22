@@ -13,7 +13,7 @@ std::unique_ptr<production_sequence>production_sequence::make(QPointF pos, QColo
     std::unique_ptr <production_sequence> ret(new production_sequence);
     ret->setPos(pos);
     ret->set_color(std::move(color));
-    ret->type_ = "生产工序";
+    set_item_type("生产工序");
     return ret;
 }
 

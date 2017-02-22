@@ -10,7 +10,7 @@ unique_ptr<board_info_flow> board_info_flow::make(vector<unique_ptr<QGraphicsLin
 {
     unique_ptr <board_info_flow> ret (new board_info_flow (parent));
     ret->set_color(std::move(color));
-    ret->type_ = "看板用信息流";
+    set_item_type("看板用信息流");
 
     if (! ret->init(::move (tmp_lines)))
     {

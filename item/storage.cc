@@ -11,7 +11,7 @@ std::unique_ptr<storage> storage::make(QPointF pos, QColor color)
     std::unique_ptr <storage> ret(new storage);
     ret->setPos(pos);
     ret->set_color(std::move(color));
-    ret->type_ = "库存";
+    set_item_type("库存");
     return ret;
 }
 

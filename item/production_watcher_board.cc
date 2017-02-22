@@ -27,7 +27,7 @@ std::unique_ptr<production_watcher_board> production_watcher_board::make(QPointF
     std::unique_ptr<production_watcher_board> ret(new production_watcher_board);
     ret->setPos(pos);
     ret->set_color(std::move(color));
-    ret->type_ = "生产看板";
+    set_item_type("生产看板");
     return ret;
 }
 

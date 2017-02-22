@@ -12,7 +12,7 @@ std::unique_ptr<cache_or_safe_storage> cache_or_safe_storage::make(QPointF pos, 
     std::unique_ptr <cache_or_safe_storage> ret (new cache_or_safe_storage);
     ret->setPos(pos);
     ret->set_color(std::move(color));
-    ret->type_ = "缓冲或者安全库存";
+    set_item_type("缓冲或者安全库存");
     return ret;
 
 }

@@ -13,7 +13,7 @@ std::unique_ptr<storage_super_market> storage_super_market::make(QPointF pos, QC
     std::unique_ptr <storage_super_market> ret(new storage_super_market);
     ret->setPos(pos);
     ret->set_color(std::move(color));
-    ret->type_ = "库存超市";
+    set_item_type("库存超市");
     return ret;
 }
 
