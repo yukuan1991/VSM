@@ -15,7 +15,7 @@ std::unique_ptr<board_arrival> board_arrival::make(QPointF pos, QColor color)
 }
 
 board_arrival::board_arrival(item* parent)
-    :item(parent)
+    :fixed_item(parent)
 {
     set_attribute ("生产批量");
 

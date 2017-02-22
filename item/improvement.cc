@@ -20,7 +20,7 @@ std::unique_ptr<improvement> improvement::make(QPointF pos, QColor color)
 }
 
 improvement::improvement(item *parent)
-    :item(parent)
+    :fixed_item(parent)
 {
     set_attribute("存在问题");
     set_attribute("改善方向");

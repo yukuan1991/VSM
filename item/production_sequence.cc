@@ -18,7 +18,7 @@ std::unique_ptr<production_sequence>production_sequence::make(QPointF pos, QColo
 }
 
 production_sequence::production_sequence(item* parent)
-    :item(parent)
+    :fixed_item(parent)
 {   
      set_attribute ("周期时间");
      set_attribute("换模时间");

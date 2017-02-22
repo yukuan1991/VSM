@@ -4,8 +4,8 @@
 #include <QStyleOptionGraphicsItem>
 namespace item {
 ///修改成item_width * 1/4
-adjustment_on_scene::adjustment_on_scene(item* parent)
-    :item(parent)
+adjustment_on_scene::adjustment_on_scene(fixed_item* parent)
+    :fixed_item(parent)
 {
       set_attribute ("库存量");
       set_attribute ("原生产计划");

@@ -17,7 +17,7 @@ std::unique_ptr<storage> storage::make(QPointF pos, QColor color)
 
 
 storage::storage(item* parent)
-    :item(parent)
+    :fixed_item(parent)
 {
     set_attribute("库存数量");
     set_attribute("库存天数");

@@ -13,7 +13,7 @@ std::unique_ptr<balanced_production> balanced_production::make(QPointF pos, QCol
 }
 
 balanced_production::balanced_production(item* parent)
-    :item(parent)
+    :fixed_item(parent)
 {
     set_attribute ("生产品类");
     set_attribute ("生产数量");

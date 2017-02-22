@@ -10,7 +10,7 @@ namespace item
 
 
 signal_board::signal_board(item *parent)
-    :item (parent)
+    :fixed_item (parent)
 {
     set_attribute("生产批量");
 

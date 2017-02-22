@@ -19,7 +19,7 @@ std::unique_ptr<fetch_material> fetch_material::make(QPointF pos, QColor color)
 }
 
 fetch_material::fetch_material(item *parent)
-    :item(parent)
+    :fixed_item(parent)
 {
     item_width_ /= small_object_ratio;
     item_height_ /= small_object_ratio;
