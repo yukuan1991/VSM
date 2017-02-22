@@ -9,9 +9,10 @@ namespace item {
 class other_company : public fixed_item
 {
 public:
-    static std::unique_ptr<other_company> make (QPointF pos, QColor color = Qt::black);
+    bool init ();
+    static std::unique_ptr<other_company> make (json data, QPointF pos, item* parent);
 protected:
-    other_company(item* parent = nullptr);
+    other_company(json data, QPointF pos, item* parent = nullptr);
     void paint (QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = nullptr) override;
     void mouseDoubleClickEvent(QGraphicsSceneMouseEvent *event) override;
 };

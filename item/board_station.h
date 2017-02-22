@@ -12,10 +12,11 @@ class board_station : public fixed_item
 {
 
 public:
-    static std::unique_ptr <board_station> make(QPointF pos, QColor color = Qt::black);
+    bool init ();
+    static std::unique_ptr <board_station> make(json data, QPointF pos, item* parent);
 protected:
     void paint (QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = nullptr) override;
-    board_station(item* parent = nullptr);
+    board_station(json data, QPointF pos, item* parent = nullptr);
 private:
 
 

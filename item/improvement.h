@@ -14,10 +14,11 @@ namespace item {
 class improvement : public fixed_item
 {
 public:
-    static std::unique_ptr<improvement> make(QPointF pos, QColor color = Qt::black);
+    bool init ();
+    static std::unique_ptr<improvement> make(json data, QPointF pos, item* parent);
 
 protected:
-    explicit improvement(item* parent=nullptr);
+    explicit improvement(json data, QPointF pos, item* parent=nullptr);
     void paint (QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = nullptr) override;
 private:
 

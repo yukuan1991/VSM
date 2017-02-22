@@ -8,22 +8,37 @@
 namespace item {
 
 
-std::unique_ptr<sequence_pull_ball> sequence_pull_ball::make(QPointF pos, QColor color)
+std::unique_ptr<sequence_pull_ball> sequence_pull_ball::make(json data, QPointF pos, item* parent)
 {
-    std::unique_ptr <sequence_pull_ball> ret(new sequence_pull_ball);
-    ret->setPos(pos);
-    ret->set_color(std::move(color));
-    set_item_type("顺序拉动球");
-    return ret;
+    std::unique_ptr <sequence_pull_ball> ret(new sequence_pull_ball(::move(data), pos, parent));
+
+    if(! ret->init ())
+    {
+        return nullptr;
+    }
+    else
+    {
+
+        return ret;
+    }
 }
 
-sequence_pull_ball::sequence_pull_ball(item* parent)
-    :fixed_item(parent)
+sequence_pull_ball::sequence_pull_ball(json data, QPointF pos, item* parent)
+    :fixed_item(::move(data), pos, parent)
 {
-    item_width_ /= small_object_ratio;
-    item_height_ /= small_object_ratio;
+//    item_width_ /= small_object_ratio;
+//    item_height_ /= small_object_ratio;
 
+
+}
+
+bool sequence_pull_ball::init()
+{
     set_z_value(310);
+
+    set_item_type("顺序拉动球");
+
+    return true;
 }
 
 void sequence_pull_ball::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)

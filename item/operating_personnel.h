@@ -10,10 +10,11 @@ namespace item {
 class operating_personnel : public fixed_item
 {
 public:
-    static std::unique_ptr <operating_personnel> make(QPointF pos,QColor color = Qt::black);
+    bool init ();
+    static std::unique_ptr <operating_personnel> make(json data, QPointF pos, item* parent);
 
 protected:
-    operating_personnel(item* parent = nullptr);
+    operating_personnel(json data, QPointF pos, item* parent = nullptr);
     void paint (QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = nullptr) override;
 };
 }

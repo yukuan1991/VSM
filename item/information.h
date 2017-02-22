@@ -13,10 +13,11 @@ namespace item {
 class information : public fixed_item
 {
 public:
-    static std::unique_ptr<information> make (QPointF pos, QColor color = Qt::black);
+    bool init ();
+    static std::unique_ptr<information> make (json data, QPointF pos, item* parent);
 protected:
     void paint (QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = nullptr) override;
-    explicit information(item* parent = nullptr);
+    explicit information(json data, QPointF pos, item* parent = nullptr);
 
 private:
     void mouseDoubleClickEvent(QGraphicsSceneMouseEvent *event);

@@ -6,13 +6,25 @@
 ///修改完成
 namespace item {
 
-std::unique_ptr<board_station> board_station::make(QPointF pos, QColor color)
+bool board_station::init()
 {
-    std::unique_ptr <board_station> ret(new board_station);
-    ret->setPos(pos);
-    ret->set_color(std::move(color));
-    set_item_type("看板站");
-    return ret;
+     set_item_type("看板站");
+     set_z_value(311);
+
+}
+
+std::unique_ptr<board_station> board_station::make(json data, QPointF pos, item* parent)
+{
+    std::unique_ptr <board_station> ret(new board_station(::move(data), pos, parent));
+    if( !ret->init ())
+    {
+        return nullptr;
+    }
+    else
+    {
+         return ret;
+    }
+
 }
 
 void board_station::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
@@ -41,10 +53,10 @@ void board_station::paint(QPainter *painter, const QStyleOptionGraphicsItem *opt
     item::paint(painter, option, widget);
 }
 
-board_station::board_station(item* parent)
-    :fixed_item(parent)
+board_station::board_station(json data, QPointF pos,item* parent)
+    :fixed_item(::move(data), pos, parent)
 {
-    set_z_value(311);
+
 
 }
 }

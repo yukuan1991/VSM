@@ -10,13 +10,27 @@
 /// 高度修改成20
 namespace item {
 
-std::unique_ptr<information> information::make(QPointF pos, QColor color)
+std::unique_ptr<information> information::make(json data, QPointF pos, item* parent)
 {
-    std::unique_ptr<information>ret(new information);
-    ret->setPos(pos);
-    ret->set_color( std::move (color));
+    std::unique_ptr<information>ret(new information(move(data), pos, parent));
+    if(!ret->init ())
+    {
+        return nullptr;
+    }
+    else
+    {
+       return ret;
+    }
+}
+
+bool information::init()
+{
     set_item_type("信息");
-    return ret;
+    set_attribute("信息名称");
+    set_z_value(317);
+
+    return true;
+
 }
 
 void information::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
@@ -51,12 +65,11 @@ void information::paint(QPainter *painter, const QStyleOptionGraphicsItem *optio
     painter->drawText(QRectF (center - QPointF (width / 2, height / 2), QSizeF (width, height)), item_name.data());
 }
 
-information::information(item *parent)
-    :fixed_item(parent)
+information::information(json data, QPointF pos, item *parent)
+    :fixed_item(move(data), pos, parent)
  {
-    set_attribute("信息名称");
-    set_z_value(317);
-    item_height_ /= small_object_height;
+
+    //item_height_ /= small_object_height;
 }
 
 void information::mouseDoubleClickEvent(QGraphicsSceneMouseEvent *event)

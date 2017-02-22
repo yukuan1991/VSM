@@ -11,10 +11,10 @@ namespace item {
 class production_watcher_board : public fixed_item
 {
 public:
-    static std::unique_ptr<production_watcher_board>make(QPointF pos, QColor color = Qt::black);
-
+    static std::unique_ptr<production_watcher_board>make(json data, QPointF pos, item* parent);
+    bool init ();
 protected:
-    explicit production_watcher_board(item* parent = nullptr);
+    explicit production_watcher_board(json data, QPointF pos, item* parent = nullptr);
     void paint (QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = nullptr) override;
 private:
 

@@ -10,22 +10,36 @@
 namespace item {
 
 
-std::unique_ptr<improvement> improvement::make(QPointF pos, QColor color)
+bool improvement::init()
 {
-    std::unique_ptr<improvement>ret(new improvement);
-    ret->setPos(pos);
-    ret->set_color(std::move(color));
-    set_item_type("改善");
-    return ret;
+     set_item_type("改善");
+
+     set_attribute("存在问题");
+     set_attribute("改善方向");
+
+     set_z_value(401);
+
+     return true;
 }
 
-improvement::improvement(item *parent)
-    :fixed_item(parent)
+std::unique_ptr<improvement> improvement::make(json data, QPointF pos, item* parent)
 {
-    set_attribute("存在问题");
-    set_attribute("改善方向");
+    std::unique_ptr<improvement>ret(new improvement(::move(data), pos, parent));
 
-    set_z_value(401);
+    if(!ret->init ())
+    {
+        return nullptr;
+    }
+    else
+    {
+        return ret;
+    }
+}
+
+improvement::improvement(json data, QPointF pos, item *parent)
+    :fixed_item(::move(data), pos, parent)
+{
+
 }
 
 void improvement::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)

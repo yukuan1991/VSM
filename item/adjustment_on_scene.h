@@ -8,10 +8,11 @@ namespace item {
 class adjustment_on_scene : public fixed_item
 {
 public:
-    static std::unique_ptr<adjustment_on_scene> make(QPointF pos, QColor = Qt::black);
+    static std::unique_ptr<adjustment_on_scene> make(json data, QPointF pos, item* parent);
+    bool init();
 protected:
     void paint (QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = nullptr) override;
-    adjustment_on_scene(item* parent = nullptr);
+    adjustment_on_scene(json data, QPointF pos, item* parent = nullptr);
 private:
 };
 }

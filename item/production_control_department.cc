@@ -5,19 +5,35 @@
 #include <QInputDialog>
 namespace item {
 
-std::unique_ptr<production_control_department> production_control_department::make(QPointF pos, QColor color)
+std::unique_ptr<production_control_department> production_control_department::make(json data, QPointF pos, item* parent)
 {
-    std::unique_ptr <production_control_department> ret(new production_control_department);
-    ret->setPos(pos);
-    ret->set_color(std::move(color));
-    set_item_type("生产控制部门");
-    return ret;
+    std::unique_ptr <production_control_department> ret(new production_control_department(::move(data), pos, parent));
+
+    if(!ret->init ())
+    {
+       return nullptr;
+    }
+    else
+    {
+
+      return ret;
+    }
 }
 
-production_control_department::production_control_department(item *parent)
-    :fixed_item(parent)
+bool production_control_department::init()
 {
+    set_item_type("生产控制部门");
+
     set_attribute("生产计划安排方式");
+
+    return true;
+
+}
+
+production_control_department::production_control_department(json data, QPointF pos, item *parent)
+    :fixed_item(::move(data), pos, parent)
+{
+
 }
 
 void production_control_department::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)

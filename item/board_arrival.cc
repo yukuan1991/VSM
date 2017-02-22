@@ -5,24 +5,38 @@
 namespace item {
 
 ///修改成item_width * 1/4
-std::unique_ptr<board_arrival> board_arrival::make(QPointF pos, QColor color)
+bool board_arrival::init()
 {
-    std::unique_ptr <board_arrival> ret(new board_arrival);
-    ret->setPos(pos);
-    ret->set_color(std::move(color));
-    set_item_type("看板以批量方式传达");
-    return ret;
+   set_item_type("看板以批量方式传达");
+   set_attribute ("生产批量");
+
+   set_z_value(316);
+
+   return true;
+
 }
 
-board_arrival::board_arrival(item* parent)
-    :fixed_item(parent)
+std::unique_ptr<board_arrival> board_arrival::make(json data, QPointF pos, item* parent)
 {
-    set_attribute ("生产批量");
+    std::unique_ptr <board_arrival> ret(new board_arrival (::move(data), pos, parent));
 
-    set_z_value(316);
+    if(!ret->init ())
+    {
+        return nullptr;
+    }
+    else
+    {
+        return ret;
+    }
+}
 
-    item_width_ /= small_object_ratio;
-    item_height_ /= small_object_ratio;
+board_arrival::board_arrival(json data, QPointF pos, item* parent)
+    :fixed_item(::move(data), pos, parent)
+{
+
+
+//    item_width_ /= small_object_ratio;
+//    item_height_ /= small_object_ratio;
 
 
 }

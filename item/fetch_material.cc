@@ -9,22 +9,35 @@
 
 namespace item {
 
-std::unique_ptr<fetch_material> fetch_material::make(QPointF pos, QColor color)
+std::unique_ptr<fetch_material> fetch_material::make(json data, QPointF pos, item* parent)
 {
-    std::unique_ptr<fetch_material>ret(new fetch_material);
-    ret->setPos(pos);
-    ret->set_color(std::move(color));
-    set_item_type("取料");
-    return ret;
+    std::unique_ptr<fetch_material>ret(new fetch_material(::move(data), pos, parent));
+    if(! ret->init ())
+    {
+        return nullptr;
+    }
+    else
+    {
+
+        return ret;
+    }
 }
 
-fetch_material::fetch_material(item *parent)
-    :fixed_item(parent)
+bool fetch_material::init()
 {
-    item_width_ /= small_object_ratio;
-    item_height_ /= small_object_ratio;
-
+    set_item_type("取料");
     set_z_value(203);
+
+    return true;
+}
+
+fetch_material::fetch_material(json data, QPointF pos, item *parent)
+    :fixed_item(::move(data), pos, parent)
+{
+//    item_width_ /= small_object_ratio;
+//    item_height_ /= small_object_ratio;
+
+
 }
 
 void fetch_material::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)

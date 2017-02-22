@@ -11,9 +11,10 @@ namespace item {
 class board_arrival : public fixed_item
 {
 public:
-    static std::unique_ptr<board_arrival> make (QPointF pos, QColor color = Qt::black);
+    bool init ();
+    static std::unique_ptr<board_arrival> make (json data, QPointF pos, item* parent);
 protected:
-    board_arrival(item* parent = nullptr);
+    board_arrival(json data, QPointF pos, item* parent = nullptr);
      void paint (QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = nullptr) override;
 
 };

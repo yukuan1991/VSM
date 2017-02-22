@@ -12,19 +12,33 @@ namespace item {
 std::unique_ptr<other_company> other_company::make(QPointF pos, QColor color)
 {
     std::unique_ptr <other_company> ret(new other_company);
-    ret->setPos(pos);
-    ret->set_color(std::move(color));
-    set_item_type("其他公司");
-    return ret;
+    if(!ret->init ())
+    {
+        return nullptr;
+    }
+    else
+    {
+        return ret;
+    }
 }
 
-other_company::other_company(item * parent)
-    :fixed_item(parent)
+bool other_company::init()
 {
+    set_item_type("其他公司");
+
     set_attribute("需求量");
     set_attribute("包装方式");
     set_attribute("工作班数");
+
     set_z_value(302);
+
+    return true;
+}
+
+other_company::other_company(json data, QPointF pos, item * parent)
+    :fixed_item(::move(data), pos, parent)
+{
+
 }
 
 void other_company::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)

@@ -5,11 +5,21 @@
 namespace item {
 
 
-value_added_radtio::value_added_radtio(item* parent)
-    :fixed_item(parent)
+value_added_radtio::value_added_radtio(json data, QPointF pos, item* parent)
+    :fixed_item(::move(data), pos, parent)
+{
+
+
+}
+
+bool value_added_radtio::init()
 {
     set_attribute("生产交付周期");
     set_attribute("增值时间");
+
+    set_item_type("增值比");
+
+    return true;
 
 }
 
@@ -87,13 +97,16 @@ QRectF value_added_radtio::boundingRect() const
     return {0, 0, 150 * x_scale, 80 * y_scale};
 }
 
-std::unique_ptr<value_added_radtio> value_added_radtio::make(QPointF pos, QColor color)
+std::unique_ptr<value_added_radtio> value_added_radtio::make(json data, QPointF pos, item* parent)
 {
-    std::unique_ptr<value_added_radtio> ret(new value_added_radtio);
-    ret->setPos(pos);
-    ret->set_color(std::move(color));
-    set_item_type("增值比");
-    ret->type_ = "增值比";
-    return ret;
+    std::unique_ptr<value_added_radtio> ret(new value_added_radtio(::move(data), pos, parent));
+    if(!ret->init ())
+    {
+        return nullptr;
+    }
+    else
+    {
+        return ret;
+    }
 }
 }

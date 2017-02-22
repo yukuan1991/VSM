@@ -9,15 +9,24 @@ namespace item
 <%
 
 
-signal_board::signal_board(item *parent)
-    :fixed_item (parent)
+signal_board::signal_board(json data, QPointF pos, item *parent)
+    :fixed_item (::move(data), pos, parent)
+{
+
+
+//    item_width_ = item_width_ * (1/small_object_ratio);
+//    item_height_ = item_height_ * ( 1/small_object_ratio);
+ }
+
+bool signal_board::init()
 {
     set_attribute("生产批量");
 
     set_z_value(315);
+    set_item_type("信号看板");
 
-    item_width_ = item_width_ * (1/small_object_ratio);
-    item_height_ = item_height_ * ( 1/small_object_ratio);
+    return true;
+
 }
 
 void signal_board::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
@@ -41,13 +50,18 @@ void signal_board::paint(QPainter *painter, const QStyleOptionGraphicsItem *opti
 
 }
 
-std::unique_ptr<signal_board> signal_board::make(QPointF pos, QColor color)
+std::unique_ptr<signal_board> signal_board::make(json data, QPointF pos, item* parent)
 {
-    std::unique_ptr <signal_board> ret (new signal_board);
-    ret->setPos(pos);
-    ret->set_color(std::move(color));
-    set_item_type("信号看板");
-    return ret;
+    std::unique_ptr <signal_board> ret (new signal_board(::move(data), pos, parent));
+    if(!ret->init ())
+    {
+        return nullptr;
+
+    }
+    else
+    {
+        return ret;
+    }
 
 }
 %>

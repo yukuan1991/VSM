@@ -11,9 +11,10 @@ namespace item {
 class material_fetch_watch_board : public fixed_item
 {
 public:
-    static std::unique_ptr <material_fetch_watch_board> make(QPointF pos, QColor = Qt::black);
+    bool init ();
+    static std::unique_ptr <material_fetch_watch_board> make(json data, QPointF pos, item* parent);
 protected:
-     explicit  material_fetch_watch_board(item* parent=nullptr);
+     explicit  material_fetch_watch_board(json data, QPointF pos, item* parent=nullptr);
      void paint (QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = nullptr) override;
 private:
 

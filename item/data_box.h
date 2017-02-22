@@ -20,10 +20,10 @@ using std::get;
 class data_box : public fixed_item
 {
 public:
-    static std::unique_ptr<data_box> make(QPointF pos,QColor color);
-//    ~data_box();
+    static std::unique_ptr<data_box> make(json data, QPointF pos,item* parent);
+    bool init ();
 protected:
-    data_box(item* parent = nullptr);
+    data_box(json data, QPointF pos, item* parent = nullptr);
     void paint (QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = nullptr) override;
 //public slots:
 //    void get_edit_text();
