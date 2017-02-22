@@ -92,6 +92,7 @@ std::unique_ptr<value_added_radtio> value_added_radtio::make(QPointF pos, QColor
     std::unique_ptr<value_added_radtio> ret(new value_added_radtio);
     ret->setPos(pos);
     ret->set_color(std::move(color));
+    set_item_type("增值比");
     ret->type_ = "增值比";
     return ret;
 }

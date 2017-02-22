@@ -10,7 +10,7 @@ std::unique_ptr<truck_transport> truck_transport::make(QPointF pos, QColor color
     std::unique_ptr<truck_transport>ret(new truck_transport);
     ret->setPos(pos);
     ret->set_color(std::move(color));
-    ret->type_ = "卡车运输";
+    set_item_type("卡车运输");
     return ret;
 }
 
