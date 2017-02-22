@@ -1,12 +1,10 @@
 ﻿#ifndef polygon_H
 #define polygon_H
 #include <item/item.h>
-#include <memory>//智能指针
+#include <memory>
 #include "item/fixed_item.h"
-#include
 ///生产看板
 namespace item {
-
 
 class production_watcher_board : public fixed_item
 {

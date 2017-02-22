@@ -3,7 +3,7 @@
 #include "utility/raii.hpp"
 #include "defs.hpp"
 #include <QDir>
-#include "item/maker.hpp"
+#include "item/item.h"
 
 namespace canvas
 <%
@@ -24,13 +24,12 @@ void body::file_new_title()
 
 std::string body::dump()
 {
-    return item::dump_scene (scene ()).dump(4);
+    return item::item::dump_scene (scene ());
 }
 
 bool body::load(const std::string &data) try
 {
     Q_UNUSED (data);
-    qDebug () << data.data();
     return true;
 }
 catch (const std::exception& e)

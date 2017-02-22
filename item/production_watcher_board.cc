@@ -3,10 +3,8 @@
 #include <QLineF>
 #include <QStyleOptionGraphicsItem>
 #include <QDebug>
-///修改完成
-/// 修改成1/4
-namespace item {
 
+namespace item {
 
 production_watcher_board::production_watcher_board(item *parent)
     :fixed_item(parent)
@@ -41,7 +39,7 @@ void production_watcher_board::paint(QPainter *painter, const QStyleOptionGraphi
     p5_ {0.01 * item_width_, 0.9875 * item_height_};
 
     auto the_pen = painter->pen();
-    the_pen.setColor(color());
+    the_pen.setColor(Qt::black);
     the_pen.setWidthF(std::max(item_width_ * 0.02 , 2.0));
     painter->setPen(the_pen);
     painter->setBrush(Qt::white);

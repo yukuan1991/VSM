@@ -30,7 +30,7 @@ fetch_material::fetch_material(item *parent)
 void fetch_material::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
     auto the_pen = painter->pen();
-    the_pen.setColor(color());
+    the_pen.setColor(Qt::black);
     the_pen.setWidthF(std::max(item_width_ * 0.02, 2.0));
     painter->setPen(the_pen);
 

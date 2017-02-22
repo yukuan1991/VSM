@@ -30,7 +30,8 @@ class item : public QGraphicsObject
 {
     Q_OBJECT
 public:
-    static unique_ptr<item> make (nlohmann::json data, QPointF pos, item* parent);
+    static unique_ptr<item> make (nlohmann::json data, QPointF pos, item* parent = nullptr);
+    static json dump_scene (not_null<QGraphicsScene*> scene);
 
     void set_name (const string & name) { item_info_ ["name"] = name; }
     string name ();

@@ -71,7 +71,7 @@ void electric_info_flow::paint(QPainter *painter, const QStyleOptionGraphicsItem
     Q_UNUSED (widget);
     QPen pen;
     pen.setWidthF (2.0);
-    pen.setColor (color ());
+    pen.setColor (Qt::blue);
 
     if (option->state bitand QStyle::State_Selected)
     {
@@ -85,7 +85,7 @@ void electric_info_flow::paint(QPainter *painter, const QStyleOptionGraphicsItem
     painter->drawLine(mid_p1_, mid_p2_);
     painter->drawLine(mid_p2_, body_end_);
 
-    painter->setBrush(color ());
+    painter->setBrush(Qt::black);
     painter->drawPolygon({{neck1_, neck2_, end_}}, Qt::WindingFill);
 }
 

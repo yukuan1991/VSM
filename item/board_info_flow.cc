@@ -67,9 +67,9 @@ void board_info_flow::paint(QPainter *painter, const QStyleOptionGraphicsItem *o
 
     QPen pen;
     pen.setWidthF(2.0);
-    pen.setColor (color ());
+    pen.setColor (Qt::black);
 
-    painter->setBrush(color ());
+    painter->setBrush(Qt::black);
     if (option->state bitand QStyle::State_Selected)
     {
         pen.setColor(Qt::red);

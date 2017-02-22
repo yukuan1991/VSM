@@ -32,7 +32,6 @@ material_flow::material_flow(QPointF p1, QPointF p2, QColor color, item *parent)
     start_ = p1 - mid_pos;
     end_ = p2 - mid_pos;
 
-    set_color(::move (color));
     set_z_value(201);
 
     item_info_["begin"]["x"] = start_.x();
@@ -115,7 +114,7 @@ void material_flow::paint(QPainter *painter, const QStyleOptionGraphicsItem *opt
     Q_UNUSED(widget);
 
     QPen pen;
-    pen.setColor(color ());
+    pen.setColor(Qt::black);
     painter->setPen(pen);
 
     painter->drawLine(body_p1_, body_p2_);
@@ -128,14 +127,14 @@ void material_flow::paint(QPainter *painter, const QStyleOptionGraphicsItem *opt
 
     auto rate = fill_distance * 2 / line1.length();
     decltype (rate) fill_step = 0;
-    painter->setBrush(color ());
+    painter->setBrush(Qt::black);
     bool color_or_white = false;
 
     painter->save();
     while (fill_step < 1)
     {
         color_or_white = !color_or_white;
-        painter->setBrush(color_or_white ? color () : Qt::white);
+        painter->setBrush(color_or_white ? Qt::black : Qt::white);
         auto end_paint = fill_step + rate;
 
         auto p1_fill = line1.pointAt(fill_step);

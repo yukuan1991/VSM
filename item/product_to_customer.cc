@@ -111,7 +111,7 @@ void product_to_customer::paint(QPainter *painter, const QStyleOptionGraphicsIte
     Q_UNUSED(widget);
 
     QPen pen;
-    pen.setColor(color ());
+    pen.setColor(Qt::black);
     painter->setPen(pen);
     painter->setBrush(Qt::white);
     painter->drawPolygon({{body_p1_, body_p2_, neck1_, arrow_tip_, neck2_, body_p4_, body_p3_}},

@@ -32,7 +32,7 @@ void other_company::paint(QPainter *painter, const QStyleOptionGraphicsItem *opt
     SCOPE_EXIT { item::paint(painter, option, widget); };
 
     auto the_pen = painter->pen ();
-    the_pen.setColor(color ());
+    the_pen.setColor(Qt::black);
     the_pen.setWidthF(2.0);
     painter->setPen(the_pen);
 

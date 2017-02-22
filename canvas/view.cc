@@ -18,8 +18,7 @@
 #include "item/board_info_flow.h"
 #include <QPainter>
 #include <QMenu>
-#include "item/maker.hpp"
-#include "item/text_item.h"
+#include "item/item.h"
 
 
 namespace canvas
@@ -111,7 +110,7 @@ void view::mouseMoveEvent(QMouseEvent *event)
     {
         auto end_ptr = mapToScene(event->pos ());
 
-        tmp_arrow_ = item::make_arrow(arrow_state_, last_pressed_, end_ptr);
+        tmp_arrow_ = item::item::make({}, {0.0, 0.0});
 
         if (tmp_arrow_.value() != nullptr)
         {
@@ -318,7 +317,7 @@ void view::item_drop_action(QDropEvent *event)
     QString type = event->mimeData ()->data ("item");
 
     auto scene_pos = mapToScene(event->pos());
-    auto the_item = item::make_item (type, scene_pos);
+    auto the_item = item::item::make({}, scene_pos);
 
     if (the_item == nullptr)
     {

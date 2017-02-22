@@ -35,7 +35,7 @@ void data_box::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, 
     p10_ {0.99 * item_width_, 0.9875 * item_height_};
 
     auto the_pen = painter->pen ();
-    the_pen.setColor(color ());
+    the_pen.setColor(Qt::black);
     the_pen.setWidthF(item_width_ * 0.02);
     painter->setPen(the_pen);
     painter->setBrush(Qt::white);

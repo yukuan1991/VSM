@@ -33,7 +33,6 @@ traditional_info_flow::traditional_info_flow(QPointF p1, QPointF p2, item *paren
 
     set_z_value(101);
 
-    set_color(::move (color));
 }
 
 bool traditional_info_flow::init()
@@ -73,7 +72,7 @@ void traditional_info_flow::paint(QPainter *painter, const QStyleOptionGraphicsI
 {
     Q_UNUSED(widget);
     QPen pen;
-    pen.setColor(color ());
+    pen.setColor(Qt::blue);
 
     if (option->state bitand QStyle::State_Selected)
     {
@@ -84,7 +83,7 @@ void traditional_info_flow::paint(QPainter *painter, const QStyleOptionGraphicsI
     painter->setPen(pen);
 
     painter->drawLine(start_, body_end_);
-    painter->setBrush(color ());
+    painter->setBrush(Qt::blue);
     pen.setWidthF(1);
     painter->drawPolygon({{neck1_, neck2_, end_}}, Qt::WindingFill);
 }

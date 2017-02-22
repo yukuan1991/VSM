@@ -21,10 +21,8 @@ std::unique_ptr<adjustment_on_scene> adjustment_on_scene::make(QPointF pos, QCol
 {
     std::unique_ptr <adjustment_on_scene> ret (new adjustment_on_scene);
     ret->setPos(pos);
-    ret->set_color(std::move(color));
     set_item_type("现场调度");
     return ret;
-
 }
 
 void adjustment_on_scene::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
@@ -39,7 +37,7 @@ void adjustment_on_scene::paint(QPainter *painter, const QStyleOptionGraphicsIte
     p7 {0.82 * item_width_, 0.25 * item_height_},
     p8 {0.85 * item_width_, 0.35 * item_height_};
     auto the_pen = painter->pen();
-    the_pen.setColor(color());
+    the_pen.setColor(Qt::black);
     the_pen.setWidthF(std::max(item_width_ * 0.02,2.0));
     painter->setPen(the_pen);
     //给定坐标

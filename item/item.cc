@@ -10,6 +10,45 @@ namespace item
 <%
 using namespace std;
 
+nlohmann::json item::dump_scene(not_null<QGraphicsScene *> scene)
+{
+    return {};
+}
+
+void item::set_attribute(string_view key, string value) try
+{
+    auto& attribute = item_info_ ["attribute"];
+    if (!attribute.is_array())
+    {
+        attribute = json::array ();
+        attribute.push_back({{key.to_string (), value}});
+        return;
+    }
+
+    for (auto & it : attribute)
+    {
+        if (!it.is_object() or it.empty())
+        {
+            continue;
+        }
+
+        std::string current_key = it.begin().key();
+        if (key == current_key)
+        {
+            auto& target = *(it.begin());
+            target = value;
+            return;
+        }
+    }
+
+    attribute.push_back({{key.to_string (), value}});
+}
+catch (const std::exception& e)
+{
+    qDebug () << __PRETTY_FUNCTION__ << " " << e.what();
+    return;
+}
+
 item::item(nlohmann::json data, QPointF pos, item *parent)
     :item (parent)
 {
@@ -100,28 +139,6 @@ string item::item_type() const noexcept
 void item::set_item_type(const string &type)
 {
     item_info_ ["type"] = type;
-}
-
-void item::set_attribute(string_view key, std::string value)
-{
-    auto& attribute = item_info_ ["attribute"];
-    for (auto & it : attribute)
-    {
-        if (!it.is_object() or it.empty())
-        {
-            continue;
-        }
-
-        std::string current_key = it.begin().key();
-        if (key == current_key)
-        {
-            auto& target = *(it.begin());
-            target = value;
-            return;
-        }
-    }
-
-    attribute.push_back({{key.to_string (), value}});
 }
 
 string item::attribute(const string &key) try
