@@ -3,22 +3,34 @@
 namespace item {
 
 
-std::unique_ptr<balanced_production> balanced_production::make(QPointF pos, QColor color)
+std::unique_ptr<balanced_production> balanced_production::make(nlohmann::json data, QPointF pos, item *parent)
 {
-    std::unique_ptr<balanced_production>ret(new balanced_production);
-    ret->setPos(pos);
-    ret->set_color( std::move (color));
-    set_item_type("均衡生产");
-    return ret;
+    std::unique_ptr<balanced_production>ret(new balanced_production (::move (data), pos, parent));
+    if (!ret->init ())
+    {
+        return nullptr;
+    }
+    else
+    {
+        return ret;
+    }
 }
 
-balanced_production::balanced_production(item* parent)
-    :fixed_item(parent)
+bool balanced_production::init()
 {
+    set_item_type("均衡生产");
+
     set_attribute ("生产品类");
     set_attribute ("生产数量");
 
     set_z_value(317);
+
+    return true;
+}
+
+balanced_production::balanced_production(nlohmann::json data, QPointF pos, item* parent)
+    :fixed_item(::move (data), pos, parent)
+{
 
 }
 

@@ -14,10 +14,14 @@ class balanced_production : public fixed_item
 {
 
 public:
-    static std::unique_ptr<balanced_production> make (QPointF pos, QColor color = Qt::black);
+    static std::unique_ptr<balanced_production> make (json data, QPointF pos, item* parent);
+    bool init ();
 protected:
-    balanced_production(item* parent = nullptr);
+    balanced_production(json data, QPointF pos, item* parent = nullptr);
     void paint (QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = nullptr) override;
+
+    qreal item_width_ = standard_width();
+    qreal item_height_ = standard_height();
 };
 }
 

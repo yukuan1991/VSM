@@ -10,13 +10,20 @@ namespace item
 <%
 using namespace std;
 
+item::item(nlohmann::json data, QPointF pos, item *parent)
+    :item (parent)
+{
+    item_info_ = ::move (data);
+    setPos (pos);
+}
+
 item::item(QGraphicsItem *parent) : QGraphicsObject (parent)
 {
     setFlags (ItemIsSelectable | ItemIsMovable);
 }
 
 using up_item = unique_ptr<item>;
-using generator = up_item (*) (nlohmann::json, QPointF, item*);
+using generator = up_item (*) (json, QPointF, item*);
 const map<string, generator> item_map
 {
     {"看板以批量方式传达", [] ((json j, QPointF p, item* o))->up_item { return board_arrival::make (::move (j), p, o); }},
@@ -43,7 +50,7 @@ const map<string, generator> item_map
     {"增值比", [] ((json j, QPointF p, item* o))->up_item { return value_added_radtio::make(::move (j), p, o);}},
 };
 
-unique_ptr<item> item::make(nlohmann::json data, QPointF pos, item *parent) try
+unique_ptr<item> item::make(json data, QPointF pos, item *parent) try
 {
     auto type = data ["type"];
     auto found = item_map.find (type);
@@ -172,7 +179,7 @@ QVariant item::itemChange(QGraphicsItem::GraphicsItemChange change, const QVaria
     return QGraphicsItem::itemChange (change, value);
 }
 
-string item::find_json_value(const string& key, const nlohmann::json& data)
+string item::find_json_value(const string& key, const json& data)
 {
     auto iter = data.find(key);
     if (iter != data.end () and iter->is_string ())

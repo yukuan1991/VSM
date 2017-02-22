@@ -44,6 +44,12 @@ catch (const std::exception &)
     return;
 }
 
+fixed_item(json data, QPointF pos, item *parent)
+    :item (::move (data), pos, parent)
+{
+
+}
+
 
 void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
@@ -72,6 +78,11 @@ void fixed_item::set_dash(QPainter *painter)
     QPen pen;
     pen.setStyle(Qt::DashLine);
     painter->setPen(pen);
+}
+
+QRectF fixed_item::boundingRect() const
+{
+    return QRectF (0, 0, width (), height ());
 }
 
 

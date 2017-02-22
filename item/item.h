@@ -10,11 +10,14 @@
 #include "utility/interface.hpp"
 #include "utility/containers.hpp"
 
+
+
 namespace item
 <%
 using std::experimental::string_view;
 using std::experimental::optional;
 using std::experimental::nullopt;
+using nlohmann::json;
 using namespace std;
 
 enum class selected_item : bool
@@ -39,6 +42,7 @@ public:
     nlohmann::json attributes () { return item_info_ ["attribute"]; }
 
 protected:
+    explicit item (json data, QPointF pos, item* parent);
     explicit item(QGraphicsItem *parent = 0);
     void set_z_value (qreal value) { z_value_ = value; setZValue(value); }
     qreal z_value () { return z_value_; }
