@@ -6,6 +6,7 @@
 class flow_app : public application
 {
 public:
+    using INT = int;
     explicit flow_app(int argc, char** argv);
     bool run () override;
 private:

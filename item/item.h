@@ -26,28 +26,20 @@ enum class selected_item : bool
 class item : public QGraphicsObject
 {
     Q_OBJECT
-signals:
-    void name_changed (const QString&);
-    void color_changed (const QColor&);
 public:
     friend nlohmann::json dump_scene (not_null<QGraphicsScene*> scene);
-    qreal width () { return item_width_; }
-    qreal height () { return item_height_; }
 
-    void set_name (string name) { item_info_ ["name"] = name; }
+    void set_name (const string & name) { item_info_ ["name"] = name; }
     string name ();
 
-    string item_type () { return item_info_ ["type"]; }
-    void set_item_type (const string & type);
+    string item_type () const noexcept;
 
-    const QColor& color () { return color_; }
-    void set_color (QColor c) { color_ = ::move (c); emit color_changed (c); }
+    void set_item_type (const string & type);
 
     void set_attribute (string_view key, std::string value = {});
     std::string attribute (const string& key);
     void apply_z_value (selected_item yes_or_no);
     nlohmann::json attributes () { return item_info_ ["attribute"]; }
-    virtual QRectF shape_rect () const { return boundingRect(); }
 
     QRectF boundingRect () const override;
 protected:
@@ -60,8 +52,6 @@ protected:
 
     /// overrides
     QVariant itemChange(QGraphicsItem::GraphicsItemChange change, const QVariant &value) override;
-    void paint (QPainter * painter, const QStyleOptionGraphicsItem* option, QWidget* widget) override;
-    virtual void paint_attribute (QPainter* painter);
 protected:
     qreal item_width_ = 100;
     qreal item_height_ = 0.8 * item_width_;
@@ -73,7 +63,6 @@ private:
     void load_item_info (nlohmann::json item_info) { item_info_ = ::move (item_info); }
     nlohmann::json save_item_info () { return item_info_; }
 private:
-    QColor color_ = Qt::black;
     qreal z_value_ = 0;
 };
 

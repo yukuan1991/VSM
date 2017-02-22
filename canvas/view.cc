@@ -42,9 +42,7 @@ view::view(QGraphicsScene *scene, QWidget *parent)
 void view::init()
 {
     setRenderHint (QPainter::Antialiasing, true);
-    //setDragMode (RubberBandDrag);
-    //setRubberBandSelectionMode (Qt::IntersectsItemShape);
-    setViewport(new QGLWidget(QGLFormat(QGL::SampleBuffers)));
+    setViewportUpdateMode (QGraphicsView::FullViewportUpdate);
     connect (this, &view::set_arrow_state, this, &view::on_state_changed);
 }
 

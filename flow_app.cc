@@ -31,7 +31,7 @@ bool flow_app::run()
     main_ = std::make_unique<flow_main> ();
     main_->set_drawer ();
     main_->show ();
-   return true ;
+    return true ;
 }
 
 void flow_app::exec_update(std::vector<std::pair<string, string>> file_info)
