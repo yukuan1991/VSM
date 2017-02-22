@@ -19,6 +19,7 @@ protected:
 protected:
     static constexpr qreal standard_width_ = 100;
     static constexpr qreal standard_height_ = 80;
+    static constexpr qreal small_object_ratio = 2;
 };
 
 } // namespace item

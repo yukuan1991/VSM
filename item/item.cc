@@ -15,6 +15,54 @@ item::item(QGraphicsItem *parent) : QGraphicsObject (parent)
     setFlags (ItemIsSelectable | ItemIsMovable);
 }
 
+using up_item = unique_ptr<item>;
+using generator = up_item (*) (nlohmann::json, QPointF, item*);
+const map<string, generator> item_map
+{
+    {"看板以批量方式传达", [] ((json j, QPointF p, item* o))->up_item { return board_arrival::make (::move (j), p, o); }},
+    {"生产工序", [] ((json j, QPointF p, item* o))->up_item { return production_sequence::make(::move (j), p, o); }},
+    { "其他公司",[] ((json j, QPointF p, item* o))->up_item { return other_company::make(::move (j), p, o); }},
+    //{"数据箱", [] ((json j, QPointF p, item* o))->up_item { return data_box::make(p, Qt::black); }},
+    {"库存", [] ((json j, QPointF p, item* o))->up_item { return storage::make(::move (j), p, o); }},
+    {"卡车运输", [] ((json j, QPointF p, item* o))->up_item { return truck_transport::make(::move (j), p, o); }},
+    {"库存超市", [] ((json j, QPointF p, item* o))->up_item { return storage_super_market::make(::move (j), p, o); }},
+    {"信息", [] ((json j, QPointF p, item* o))->up_item { return information::make(::move (j), p, o); }},
+    {"生产看板",  [] ((json j, QPointF p, item* o))->up_item { return production_watcher_board::make(::move (j), p, o); }},
+    {"取料看板",  [] ((json j, QPointF p, item* o))->up_item { return material_fetch_watch_board::make(::move (j), p, o); }},
+    {"信号看板",  [] ((json j, QPointF p, item* o))->up_item { return signal_board::make(::move (j), p, o); }},
+    {"顺序拉动球",  [] ((json j, QPointF p, item* o))->up_item { return sequence_pull_ball::make(::move (j), p, o); }},
+    {"看板以批量方式传达",  [] ((json j, QPointF p, item* o))->up_item { return board_arrival::make(::move (j), p, o); }},
+    {"均衡生产",  [] ((json j, QPointF p, item* o))->up_item { return balanced_production::make(::move (j), p, o); }},
+    {"现场调度",  [] ((json j, QPointF p, item* o))->up_item { return adjustment_on_scene::make(::move (j), p, o); }},
+    {"改善",  [] ((json j, QPointF p, item* o))->up_item { return improvement::make(::move (j), p, o); }},
+    {"取料",  [] ((json j, QPointF p, item* o))->up_item { return fetch_material::make(::move (j), p, o); }},
+    {"缓冲或安全库存",  [] ((json j, QPointF p, item* o))->up_item { return cache_or_safe_storage::make(::move (j), p, o); }},
+    {"操作员", [] ((json j, QPointF p, item* o))->up_item { return operating_personnel::make (::move (j), p, o); }},
+    {"看板站", [] ((json j, QPointF p, item* o))->up_item { return board_station::make (::move (j), p, o); }},
+    {"生产控制部门", [] ((json j, QPointF p, item* o))->up_item { return production_control_department::make (::move (j), p, o); }},
+    {"增值比", [] ((json j, QPointF p, item* o))->up_item { return value_added_radtio::make(::move (j), p, o);}},
+};
+
+unique_ptr<item> item::make(nlohmann::json data, QPointF pos, item *parent) try
+{
+    auto type = data ["type"];
+    auto found = item_map.find (type);
+    if (found == end (item_map))
+    {
+        return nullptr;
+    }
+
+    if (found->second == nullptr)
+    {
+        return nullptr;
+    }
+
+    return (found->second) (::move (data), pos, parent);
+}
+catch (const std::exception & e)
+{
+    return nullptr;
+}
 
 string item::name()
 {
@@ -107,19 +155,6 @@ void item::apply_z_value(selected_item yes_or_no)
     }
 }
 
-QRectF item::boundingRect() const
-{
-    return {0, 0, item_width_, item_height_};
-}
-
-
-void item::set_dash(QPainter *painter)
-{
-    painter->setBrush(Qt::transparent);
-    QPen pen;
-    pen.setStyle(Qt::DashLine);
-    painter->setPen(pen);
-}
 
 QVariant item::itemChange(QGraphicsItem::GraphicsItemChange change, const QVariant &value)
 {
