@@ -55,6 +55,6 @@ void sequence_pull_ball::paint(QPainter *painter, const QStyleOptionGraphicsItem
     painter->drawEllipse(QRectF {20 * x_scale, 10 * y_scale, 60 * x_scale, 60 * y_scale});
     painter->drawEllipse(QRectF {35 * x_scale, 25 * y_scale, 30 * x_scale, 30 * y_scale});
 
-    item::paint(painter, option, widget);
+    fixed_item::paint(painter, option, widget);
 }
 }

@@ -1,12 +1,9 @@
 ﻿#pragma once
 
 
-#include <QObject>
-#include <QGraphicsItem>
+#include <QGraphicsObject>
 #include "utility/raii.hpp"
 #include "json.hpp"
-#include <experimental/string_view>
-#include <experimental/optional>
 #include "utility/interface.hpp"
 #include "utility/containers.hpp"
 

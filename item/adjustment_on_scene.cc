@@ -4,7 +4,7 @@
 #include <QStyleOptionGraphicsItem>
 namespace item {
 ///修改成item_width * 1/4
-adjustment_on_scene::adjustment_on_scene(json data, QPointF pos, item* parent = nullptr)
+adjustment_on_scene::adjustment_on_scene(json data, QPointF pos, item* parent)
     :fixed_item(::move (data), pos, parent)
 {
 
@@ -62,7 +62,7 @@ void adjustment_on_scene::paint(QPainter *painter, const QStyleOptionGraphicsIte
     painter->drawLine(p4,p5);
     painter->drawLine(p6,p7);
     painter->drawLine(p7,p8);
-    item::paint(painter, option, widget);
+    fixed_item::paint(painter, option, widget);
 }
 
 }

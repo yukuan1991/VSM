@@ -44,7 +44,7 @@ void signal_board::paint(QPainter *painter, const QStyleOptionGraphicsItem *opti
     painter->setBrush(Qt::white);
     painter->drawPolygon({{p1, p2, p3}}, Qt::WindingFill);
 
-    item::paint(painter, option, widget);
+    fixed_item::paint(painter, option, widget);
 
 }
 

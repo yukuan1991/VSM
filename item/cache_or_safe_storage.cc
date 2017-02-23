@@ -65,7 +65,7 @@ void cache_or_safe_storage::paint(QPainter *painter, const QStyleOptionGraphicsI
     painter->drawPolygon({{p1_,p2_,p8_,p7_}},Qt::WindingFill);
     painter->drawLine(p3_,p4_);
     painter->drawLine(p5_,p6_);
-    item::paint(painter, option, widget);
+    fixed_item::paint(painter, option, widget);
 
 }
 }

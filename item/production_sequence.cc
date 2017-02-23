@@ -50,7 +50,7 @@ bool production_sequence::init()
 
 void production_sequence::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
-    SCOPE_EXIT { item::paint(painter, option, widget); };
+    SCOPE_EXIT { fixed_item::paint(painter, option, widget); };
     Q_UNUSED(widget);
 
     auto item_width = width();

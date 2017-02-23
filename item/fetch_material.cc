@@ -59,7 +59,7 @@ void fetch_material::paint(QPainter *painter, const QStyleOptionGraphicsItem *op
     painter->setBrush(Qt::black);
     painter->drawPolygon({{p1,p2,p3}},Qt::WindingFill);
 
-    item::paint(painter, option, widget);
+    //fixed_item::paint(painter, option, widget);
 }
 
 }

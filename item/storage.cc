@@ -2,7 +2,6 @@
 #include "QPainter"
 #include "QStyleOptionGraphicsItem"
 #include "QWidget"
-///修改成了item_width * 1/2
 namespace item {
 
 
@@ -47,7 +46,7 @@ void storage::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, Q
     Q_UNUSED (widget);
     auto the_pen = painter->pen ();
     the_pen.setColor(Qt::black);
-    the_pen.setWidthF(std::max(item_width_ * 0.02, 2.0));
+    the_pen.setWidthF(2.0);
     painter->setPen(the_pen);
 
     auto x_scale = width() / 100;
@@ -63,7 +62,7 @@ void storage::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, Q
 //    painter->drawLine (QPointF {x_scale * 1, y_scale * 79}, {x_scale * 99, y_scale * 79});
 //    painter->drawLine (QPointF {x_scale * 1,y_scale * 79}, {x_scale * 49, y_scale * 1});
     QFont font;
-    font.setPointSizeF (item_width_ / 5);
+    font.setPointSizeF (20 * x_scale);
     QFontMetricsF metrics (font);
     auto text_height = metrics.height();
     auto text_width = metrics.width("I");
@@ -71,6 +70,6 @@ void storage::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, Q
     painter->setFont(font);
     painter->drawText(text_rect, "I", Qt::AlignVCenter | Qt::AlignCenter);
 
-    item::paint (painter, option, widget);
+    fixed_item::paint (painter, option, widget);
 }
 }

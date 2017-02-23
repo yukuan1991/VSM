@@ -53,6 +53,6 @@ void operating_personnel::paint(QPainter *painter, const QStyleOptionGraphicsIte
     painter->setBrush(Qt::white);
     painter->drawEllipse (QRectF(0.3 * item_width, item_height * 20 / 80, 0.4 * item_width, item_height * 40 / 80));
 
-    item::paint(painter, option, widget);
+    fixed_item::paint(painter, option, widget);
 }
 }

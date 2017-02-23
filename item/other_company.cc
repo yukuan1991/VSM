@@ -9,19 +9,6 @@
 namespace item {
 
 
-std::unique_ptr<other_company> other_company::make(QPointF pos, QColor color)
-{
-    std::unique_ptr <other_company> ret(new other_company);
-    if(!ret->init ())
-    {
-        return nullptr;
-    }
-    else
-    {
-        return ret;
-    }
-}
-
 bool other_company::init()
 {
     set_item_type("其他公司");
@@ -35,6 +22,20 @@ bool other_company::init()
     return true;
 }
 
+std::unique_ptr<other_company> other_company::make(nlohmann::json data, QPointF pos, item *parent)
+{
+    std::unique_ptr <other_company> ret(new other_company (::move (data), pos, parent));
+    if(!ret->init ())
+    {
+        return nullptr;
+    }
+    else
+    {
+        return ret;
+    }
+
+}
+
 other_company::other_company(json data, QPointF pos, item * parent)
     :fixed_item(::move(data), pos, parent)
 {
@@ -43,7 +44,7 @@ other_company::other_company(json data, QPointF pos, item * parent)
 
 void other_company::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
-    SCOPE_EXIT { item::paint(painter, option, widget); };
+    SCOPE_EXIT { fixed_item::paint(painter, option, widget); };
     auto the_pen = painter->pen ();
     the_pen.setColor(Qt::black);
     the_pen.setWidthF(2.0);
@@ -72,7 +73,7 @@ void other_company::paint(QPainter *painter, const QStyleOptionGraphicsItem *opt
     QFontMetricsF metrics (painter->font());
     auto text_width = metrics.width(item_name.data());
     auto text_height = metrics.height();
-    auto center = QPointF (item_width_ / 2, (p1.y() + p8.y()) / 2);
+    auto center = QPointF (x_scale * 50, (p1.y() + p8.y()) / 2);
     painter->drawText(QRectF (center - QPointF (text_width / 2, text_height / 2),
                               QSizeF (text_width, text_height)), item_name.data());
 }

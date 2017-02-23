@@ -52,7 +52,7 @@ void board_station::paint(QPainter *painter, const QStyleOptionGraphicsItem *opt
     painter->drawLine(p5,p2);
     painter->drawLine(p4,p7);
     painter->drawLine(p6,p8);
-    item::paint(painter, option, widget);
+    fixed_item::paint(painter, option, widget);
 }
 
 board_station::board_station(json data, QPointF pos,item* parent)

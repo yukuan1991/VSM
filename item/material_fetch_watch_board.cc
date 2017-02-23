@@ -76,6 +76,6 @@ void material_fetch_watch_board::paint(QPainter *painter, const QStyleOptionGrap
     painter->drawLine(p12_,p4_);
     painter->drawLine(p11_,p6_);
     painter->drawLine(p10_,p8_);
-    item::paint(painter, option, widget);
+    fixed_item::paint(painter, option, widget);
 }
 }

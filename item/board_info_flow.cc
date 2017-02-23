@@ -9,8 +9,6 @@ namespace item {
 unique_ptr<board_info_flow> board_info_flow::make(vector<unique_ptr<QGraphicsLineItem> > tmp_lines, QColor color, item *parent)
 {
     unique_ptr <board_info_flow> ret (new board_info_flow (parent));
-    ret->set_color(std::move(color));
-    set_item_type("看板用信息流");
 
     if (! ret->init(::move (tmp_lines)))
     {
@@ -27,6 +25,7 @@ board_info_flow::board_info_flow(item* parent)
 
 bool board_info_flow::init(vector<unique_ptr<QGraphicsLineItem> > tmp_lines)
 {
+    set_item_type("看板用信息流");
     if (tmp_lines.empty ())
     {
         return false;

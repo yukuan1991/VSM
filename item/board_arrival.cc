@@ -69,6 +69,6 @@ void board_arrival::paint(QPainter *painter, const QStyleOptionGraphicsItem *opt
     }
     painter->drawPolygon(polygon_shape.data(), polygon_shape.size(), Qt::WindingFill);
 
-    item::paint(painter, option, widget);
+    fixed_item::paint(painter, option, widget);
 }
 }

@@ -38,7 +38,7 @@ production_control_department::production_control_department(json data, QPointF 
 
 void production_control_department::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
-    SCOPE_EXIT { item::paint(painter,option,widget); };
+    SCOPE_EXIT { fixed_item::paint(painter,option,widget); };
 
     auto const x_scale = width() /100;
     auto const y_scale = height() /80;
@@ -54,7 +54,7 @@ void production_control_department::paint(QPainter *painter, const QStyleOptionG
 
     auto the_pen = painter->pen();
     the_pen.setColor(Qt::black);
-    the_pen.setWidthF(std::max(0.02 * item_width_,2.0));
+    the_pen.setWidthF(2.0);
     painter->setPen(the_pen);
     painter->setBrush(Qt::white);
     painter->drawPolygon({{p1,p2,p3,p4}},Qt::WindingFill);

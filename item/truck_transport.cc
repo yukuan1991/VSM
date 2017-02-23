@@ -41,7 +41,7 @@ void truck_transport::paint(QPainter *painter, const QStyleOptionGraphicsItem *o
 {
     auto the_pen = painter->pen();
     the_pen.setColor(Qt::black);
-    the_pen.setWidthF(0.02 * item_width_);
+    the_pen.setWidthF(2.0);
     painter->setPen(the_pen);
 
     auto x_scale = width() / 100;
@@ -71,7 +71,7 @@ void truck_transport::paint(QPainter *painter, const QStyleOptionGraphicsItem *o
     painter->drawEllipse (QPointF {x_scale * 17, y_scale * 65}, x_scale * 12, x_scale * 12);
     painter->drawEllipse (QPointF {x_scale * 72, y_scale * 65}, x_scale * 12, x_scale * 12);
 
-    item::paint(painter, option, widget);
+    fixed_item::paint(painter, option, widget);
 
 
 }

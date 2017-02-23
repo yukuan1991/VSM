@@ -5,9 +5,6 @@
 #include <QPainterPath>
 #include <QDebug>
 #include <QInputDialog>
-///长方形
-/// 修改完成
-/// 高度修改成20
 namespace item {
 
 std::unique_ptr<information> information::make(json data, QPointF pos, item* parent)
@@ -36,9 +33,11 @@ bool information::init()
 void information::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
     Q_UNUSED(widget);
-    SCOPE_EXIT {item::paint(painter, option, widget);};
-    auto x_scale = width() / 100;
-    auto y_scale = height() / 80;
+    SCOPE_EXIT {fixed_item::paint(painter, option, widget);};
+    const auto item_width = width ();
+    const auto item_height = height ();
+    const auto x_scale = item_width / 100;
+    const auto y_scale = item_height / 80;
 
     QPointF
     p1{1 * x_scale, 1 * y_scale},
@@ -47,7 +46,7 @@ void information::paint(QPainter *painter, const QStyleOptionGraphicsItem *optio
     p4{ 1 * x_scale, 79 * y_scale};
     auto the_pen = painter->pen ();
     the_pen.setColor(Qt::black);
-    the_pen.setWidthF(std::max(item_width_ * 0.02, 2.0));
+    the_pen.setWidthF(2.0);
     painter->setPen(the_pen);
     painter->setBrush(Qt::white);
     painter->drawPolygon({{p1,p2,p3,p4}}, Qt::WindingFill);
@@ -61,7 +60,7 @@ void information::paint(QPainter *painter, const QStyleOptionGraphicsItem *optio
     QFontMetricsF metrics (painter->font());
     auto text_width = metrics.width(item_name.data());
     auto text_height = metrics.height();
-    auto center = QPointF (item_width_ / 2, (p1.y() + p4.y()) / 2);
+    auto center = QPointF (item_width / 2, (p1.y() + p4.y()) / 2);
     painter->drawText(QRectF (center - QPointF (text_width / 2, text_height / 2), QSizeF (text_width, text_height)), item_name.data());
 }
 

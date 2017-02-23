@@ -69,7 +69,7 @@ void data_box::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, 
     text_width = metrics.width (value_d.data ());
     painter->drawText(QRectF (center_4 - QPointF (text_width / 2, text_height / 2), QSizeF (text_width, text_height)), value_d.data ());
 
-    item::paint(painter, option, widget);
+    fixed_item::paint(painter, option, widget);
 }
 
 void data_box::mouseDoubleClickEvent(QGraphicsSceneMouseEvent *event)

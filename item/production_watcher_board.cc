@@ -58,6 +58,6 @@ void production_watcher_board::paint(QPainter *painter, const QStyleOptionGraphi
     painter->setBrush(Qt::white);
     painter->drawPolygon({{p1_, p2_, p3_,p4_,p5_}}, Qt::WindingFill);
 
-    item::paint(painter, option, widget);
+    fixed_item::paint(painter, option, widget);
  }
 }

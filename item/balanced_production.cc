@@ -63,6 +63,6 @@ void balanced_production::paint(QPainter *painter, const QStyleOptionGraphicsIte
     painter->setFont(font);
     painter->drawText(text_rect,"O X O X", Qt::AlignVCenter | Qt::AlignCenter);
 
-    item::paint(painter, option, widget);
+    fixed_item::paint(painter, option, widget);
 }
 }

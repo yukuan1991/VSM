@@ -2,6 +2,7 @@
 #include <QPainter>
 #include <QFontMetricsF>
 #include <boost/algorithm/string.hpp>
+#include "utility/raii.hpp"
 #include <QStyleOptionGraphicsItem>
 
 namespace item {
@@ -44,17 +45,16 @@ catch (const std::exception &)
     return;
 }
 
-fixed_item(json data, QPointF pos, item *parent)
+fixed_item::fixed_item (json data, QPointF pos, item *parent)
     :item (::move (data), pos, parent)
 {
 
 }
 
 
-void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
+void fixed_item::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
     Q_UNUSED (widget);
-
     painter->setPen(Qt::black);
 
     if ((option->state bitand QStyle::State_Selected) and show_frame ())
@@ -66,11 +66,6 @@ void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *w
     paint_attribute(painter);
 }
 
-fixed_item::fixed_item(QGraphicsItem *parent)
-    :item (parent)
-{
-
-}
 
 void fixed_item::set_dash(QPainter *painter)
 {

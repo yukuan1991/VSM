@@ -37,13 +37,13 @@ void value_added_radtio::paint(QPainter *painter, const QStyleOptionGraphicsItem
 
     auto the_pen = painter->pen();
     the_pen.setColor(Qt::black);
-    the_pen.setWidthF(std::max(item_width_ * 0.02,2.0));
+    the_pen.setWidthF(2.0);
     painter->setBrush(Qt::white);
     painter->setPen(the_pen);
     painter->drawPolygon({{p1,p2,p6,p5}},Qt::WindingFill);
     painter->drawLine(p3,p4);
 
-    item::paint(painter,option,widget);
+    fixed_item::paint(painter,option,widget);
 
 }
 
@@ -51,14 +51,15 @@ void value_added_radtio::paint_attribute(QPainter *painter)
 {
     auto production_period = attribute ("生产交付周期");
     auto added_timespan = attribute ("增值时间");
-    qDebug () << production_period.data ();
-    qDebug () << added_timespan.data ();
 
     boost::trim (production_period);
     boost::trim (added_timespan);
 
-    auto x_scale = (item_width_ / 100);
-    auto y_scale = item_height_ / 80;
+    auto item_width = width ();
+    auto item_height = height ();
+
+    auto x_scale = (item_width / 100);
+    auto y_scale = item_height / 80;
     QPointF p1{1 * x_scale, 1 * y_scale},
     p2{149 * x_scale, 1 * y_scale},
     p3{1 * x_scale, 40 * y_scale},
@@ -92,9 +93,7 @@ void value_added_radtio::paint_attribute(QPainter *painter)
 
 QRectF value_added_radtio::boundingRect() const
 {
-    auto x_scale = (item_width_ / 100);
-    auto y_scale = item_height_ / 80;
-    return {0, 0, 150 * x_scale, 80 * y_scale};
+    return {0, 0, 150, 80};
 }
 
 std::unique_ptr<value_added_radtio> value_added_radtio::make(json data, QPointF pos, item* parent)

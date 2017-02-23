@@ -14,7 +14,7 @@ namespace item {
 class signal_board : public fixed_item
 {
 public:
-    static std::unique_ptr<signal_board> make (json data, QPointF pos, iten* parent);
+    static std::unique_ptr<signal_board> make (json data, QPointF pos, item* parent);
     bool init ();
 protected:
     signal_board(json data, QPointF pos, item* parent= nullptr);

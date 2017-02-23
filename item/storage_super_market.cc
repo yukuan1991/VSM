@@ -68,7 +68,7 @@ void storage_super_market::paint(QPainter *painter, const QStyleOptionGraphicsIt
     painter->drawLine(p6_,p8_);
     painter->drawLine(p8_,p7_);
 
-    item::paint(painter, option, widget);
+    fixed_item::paint(painter, option, widget);
 }
 
 }
