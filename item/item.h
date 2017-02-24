@@ -37,7 +37,8 @@ public:
     void set_attribute (string_view key, std::string value = {});
     std::string attribute (const string& key);
     void apply_z_value (selected_item yes_or_no);
-    nlohmann::json attributes () { return item_info_ ["attribute"]; }
+    json attributes () { return item_info_ ["attribute"]; }
+    const json & dump () { return item_info_; }
 
 protected:
     explicit item (json data, QPointF pos, item* parent);

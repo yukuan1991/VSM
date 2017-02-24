@@ -318,7 +318,11 @@ void view::item_drop_action(QDropEvent *event)
     QString type = event->mimeData ()->data ("item");
 
     auto scene_pos = mapToScene(event->pos());
-    auto the_item = item::item::make({}, scene_pos);
+    nlohmann::json create_data {{"type", type.toStdString()}, {"name", "xxx"}, {"attribute", {{{"123", "456"}}}}};
+
+    auto the_item = item::item::make(::move (create_data), scene_pos);
+
+    qDebug () << the_item->dump().dump(4).data();
 
     if (the_item == nullptr)
     {

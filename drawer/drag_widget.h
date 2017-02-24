@@ -1,5 +1,4 @@
-﻿#ifndef DRAWER_DRAG_WIDGET_H
-#define DRAWER_DRAG_WIDGET_H
+﻿#pragma once
 
 #include <QWidget>
 #include "utility/memory.hpp"
@@ -40,4 +39,3 @@ private:
 
 } // namespace drawer
 
-#endif // DRAWER_DRAG_WIDGET_H

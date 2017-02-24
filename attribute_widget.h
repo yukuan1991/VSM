@@ -1,5 +1,4 @@
-﻿#ifndef ATTRIBUTE_WIDGET_H
-#define ATTRIBUTE_WIDGET_H
+﻿#pragma once
 
 #include <QWidget>
 #include <memory>
@@ -29,4 +28,3 @@ private:
     QPushButton* button_commit_ = nullptr;
 };
 
-#endif // ATTRIBUTE_WIDGET_H
