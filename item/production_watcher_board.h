@@ -1,5 +1,4 @@
-﻿#ifndef polygon_H
-#define polygon_H
+﻿#pragma once
 #include <item/item.h>
 #include <memory>
 #include "item/fixed_item.h"
@@ -21,4 +20,3 @@ private:
 };
 }
 
-#endif // polygon_H

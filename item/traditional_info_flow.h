@@ -1,5 +1,4 @@
-﻿#ifndef ITEM_TRADITIONAL_INFO_FLOW_H
-#define ITEM_TRADITIONAL_INFO_FLOW_H
+﻿#pragma once
 #include "item/item.h"
 
 namespace item {
@@ -32,4 +31,3 @@ private:
 
 } // namespace item
 
-#endif // ITEM_TRADITIONAL_INFO_FLOW_H

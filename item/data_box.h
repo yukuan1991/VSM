@@ -1,5 +1,4 @@
-﻿#ifndef data_box_H
-#define data_box_H
+﻿#pragma once
 #include <item/item.h>
 #include <memory>
 #include <QVBoxLayout>
@@ -36,4 +35,3 @@ private:
 
   };
 }
-#endif // data_box_H

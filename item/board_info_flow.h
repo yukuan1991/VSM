@@ -1,5 +1,4 @@
-﻿#ifndef VS_ITEM_INFORMATION_H
-#define VS_ITEM_INFORMATION_H
+﻿#pragma once
 #include <item/item.h>
 #include "utility/memory.hpp"
 #include "utility/containers.hpp"
@@ -25,4 +24,3 @@ private:
 };
 }
 
-#endif // VS_ITEM_INFORMATION_H

@@ -1,5 +1,4 @@
-﻿#ifndef TRUCK_TRANSPORT_H
-#define TRUCK_TRANSPORT_H
+﻿#pragma once
 #include "item/item.h"
 #include "item/fixed_item.h"
 namespace  item {
@@ -15,4 +14,3 @@ protected:
 
 };
 }
-#endif // TRUCK_TRANSPORT_H

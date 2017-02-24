@@ -1,5 +1,4 @@
-﻿#ifndef BUFFER_H
-#define BUFFER_H
+﻿#pragma once
 #include "item/fixed_item.h"
 #include "item/item.h"
 #include <memory.h>
@@ -21,4 +20,3 @@ private:
 };
 }
 
-#endif // BUFFER_H

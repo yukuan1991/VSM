@@ -1,5 +1,4 @@
-﻿#ifndef OTHER_COMPANY_H
-#define OTHER_COMPANY_H
+﻿#pragma once
 #include "item/item.h"
 #include "item/fixed_item.h"
 
@@ -17,4 +16,3 @@ protected:
     void mouseDoubleClickEvent(QGraphicsSceneMouseEvent *event) override;
 };
 }
-#endif // OTHER_COMPANY_H

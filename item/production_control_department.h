@@ -1,5 +1,4 @@
-﻿#ifndef PRODUCTION_CONTROL_DEPARTMENT_H
-#define PRODUCTION_CONTROL_DEPARTMENT_H
+﻿#pragma once
 #include "item/item.h"
 #include "item/fixed_item.h"
 
@@ -19,4 +18,3 @@ protected:
     void paint_attribute (QPainter* painter) override;
 };
 }
-#endif // PRODUCTION_CONTROL_DEPARTMENT_H

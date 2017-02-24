@@ -1,5 +1,4 @@
-﻿#ifndef STORAGE_H
-#define STORAGE_H
+﻿#pragma once
 #include "item/item.h"
 #include "item/fixed_item.h"
 
@@ -18,4 +17,3 @@ protected:
     qreal width () const override { return width() / small_object_ratio_; }
 };
 }
-#endif // STORAGE_H

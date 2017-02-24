@@ -1,5 +1,5 @@
-﻿#ifndef VALUE_ADDED_RADTIO_H
-#define VALUE_ADDED_RADTIO_H
+﻿#pragma once
+
 #include "item/item.h"
 #include "item/fixed_item.h"
 
@@ -19,4 +19,3 @@ protected:
 
 };
 }
-#endif // VALUE_ADDED_RADTIO_H

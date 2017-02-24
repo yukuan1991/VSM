@@ -43,9 +43,9 @@ protected:
     explicit item (json data, QPointF pos, item* parent);
     explicit item(QGraphicsItem *parent = 0);
     void set_z_value (qreal value) { z_value_ = value; setZValue(value); }
-    qreal z_value () { return z_value_; }
+    qreal z_value () const { return z_value_; }
 
-    string find_json_value (const string& key, const nlohmann::json& data);
+    static string find_json_value (const string& key, const nlohmann::json& data);
     bool show_frame () const { return show_frame_; }
 
     /// overrides

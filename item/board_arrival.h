@@ -1,5 +1,4 @@
-﻿#ifndef COMMUNICATE_H
-#define COMMUNICATE_H
+﻿#pragma once
 #include <memory.h>
 #include "item/fixed_item.h"
 #include "item/item.h"
@@ -23,4 +22,3 @@ protected:
 };
 }
 
-#endif // COMMUNICATE_H

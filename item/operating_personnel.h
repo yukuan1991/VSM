@@ -1,5 +1,4 @@
-﻿#ifndef VS_ITEM_CONVEY_H
-#define VS_ITEM_CONVEY_H
+﻿#pragma once
 #include <item/item.h>
 #include <memory>
 #include "item/fixed_item.h"
@@ -22,4 +21,3 @@ protected:
 };
 }
 
-#endif // VS_ITEM_CONVEY_H

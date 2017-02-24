@@ -1,5 +1,4 @@
-﻿#ifndef supermarket_rectangles_H
-#define supermarket_rectangles_H
+﻿#pragma once
 #include <item/item.h>
 #include <memory>
 #include "item/fixed_item.h"
@@ -22,4 +21,3 @@ private:
   };
 }
 
-#endif // supermarket_rectangles_H

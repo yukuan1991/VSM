@@ -1,5 +1,4 @@
-﻿#ifndef information_H
-#define information_H
+﻿#pragma once
 #include <QPainter>
 #include <QColor>
 #include <memory>
@@ -25,4 +24,3 @@ private:
 };
 }
 
-#endif // information_H
