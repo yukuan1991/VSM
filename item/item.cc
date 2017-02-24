@@ -118,7 +118,87 @@ unique_ptr<item> item::make(json data, QPointF pos, item *parent) try
     {
         return production_sequence::make(::move (data), pos, parent);
     }
+    else if (type == "库存")
+    {
+        return storage::make(::move (data), pos, parent);
+
+    }
+    else if(type == "卡车运输")
+    {
+        return truck_transport::make(::move (data), pos, parent);
+    }
+    else if(type == "库存超市")
+    {
+        return storage_super_market::make(::move (data), pos, parent);
+    }
+    else if(type == "看板以批量方式传达")
+    {
+         return board_arrival::make(::move (data), pos, parent);
+    }
+    else if(type == "其他公司")
+    {
+        return other_company::make(::move(data), pos, parent);
+    }
+    else if(type == "信息")
+    {
+        return information::make(::move(data), pos, parent);
+    }
+    else if(type == "生产看板")
+    {
+        return production_watcher_board::make(::move(data), pos, parent);
+    }
+    else if(type == "取料看板")
+    {
+        return material_fetch_watch_board ::make(::move(data), pos, parent);
+    }
+    else if(type == "信号看板")
+    {
+        return signal_board ::make(::move(data), pos, parent);
+    }
+    else if(type == "顺序拉动求")
+    {
+        return sequence_pull_ball::make(::move(data), pos, parent);
+    }
+    else if(type == "均衡生产")
+    {
+        return balanced_production::make(::move(data), pos, parent);
+    }
+    else if(type == "现场调度")
+    {
+        return adjustment_on_scene::make(::move(data), pos, parent);
+    }
+    else if(type == "改善")
+    {
+        return improvement::make(::move(data), pos, parent);
+    }
+    else if(type == "取料")
+    {
+        return fetch_material ::make(::move(data), pos, parent);
+    }
+    else if(type == "缓冲或安全库存")
+    {
+        return cache_or_safe_storage ::make(::move(data), pos, parent);
+    }
+    else if(type == "操作员")
+    {
+        return operating_personnel::make(::move(data), pos, parent);
+    }
+    else if(type == "看板站")
+    {
+        return board_station::make(::move(data), pos, parent);
+    }
+    else if(type == "生产控制部门")
+    {
+        return production_control_department::make(::move(data), pos, parent);
+    }
+    else if(type == "增值比")
+    {
+        return value_added_radtio::make(::move(data), pos, parent);
+    }
+    else
+    {
     return nullptr;
+    }
 }
 catch (const std::exception & e)
 {
