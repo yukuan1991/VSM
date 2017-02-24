@@ -16,8 +16,8 @@ public:
 protected:
     operating_personnel(json data, QPointF pos, item* parent = nullptr);
     void paint (QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = nullptr) override;
-    qreal height() const override { return height() / small_object_ratio_; }
-    qreal width() const override { return width() / small_object_ratio_; }
+    qreal height() const override { return fixed_item::height() / small_object_ratio_; }
+    qreal width() const override { return fixed_item::width() / small_object_ratio_; }
 };
 }
 
