@@ -16,7 +16,7 @@ void fixed_item::paint_attribute(QPainter *painter) try
     QPointF start_point (bounding_rect.left (), bounding_rect.bottom ());
 
     int i = 0;
-    for (auto& it : item_info_ ["attribute"])
+    for (auto& it : attributes ())
     {
         if (!it.is_object() or it.empty())
         {

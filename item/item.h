@@ -27,17 +27,18 @@ class item : public QGraphicsObject
 {
     Q_OBJECT
 public:
-    static unique_ptr<item> make (nlohmann::json data, QPointF pos, item* parent = nullptr);
+    static unique_ptr<item> make (nlohmann::json data, item* parent = nullptr);
     static json dump_scene (not_null<QGraphicsScene*> scene);
 
     void set_name (const string & name) { item_info_ ["name"] = name; }
+    static const json & json_find (const json& data, const string & key);
     string name ();
     string item_type () const noexcept;
     void set_item_type (const string & type);
     void set_attribute (string_view key, std::string value = {});
     std::string attribute (const string& key);
     void apply_z_value (selected_item yes_or_no);
-    json attributes () { return item_info_ ["attribute"]; }
+    const json& attributes () { return item_info_ ["attribute"]; }
     const json & dump () { return item_info_; }
 
 protected:
@@ -51,10 +52,9 @@ protected:
 
     /// overrides
     QVariant itemChange(QGraphicsItem::GraphicsItemChange change, const QVariant &value) override;
-protected:
-    nlohmann::json item_info_;
-    bool show_frame_ = false;
 private:
+    bool show_frame_ = false;
+    nlohmann::json item_info_;
     qreal z_value_ = 0;
 };
 

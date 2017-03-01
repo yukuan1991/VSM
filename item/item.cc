@@ -36,6 +36,17 @@ nlohmann::json item::dump_scene(not_null<QGraphicsScene *> scene)
     return {};
 }
 
+const json & item::json_find(const json &data, const string &key)
+{
+    auto found = data.find (key);
+    if (found == end (data))
+    {
+        throw std::logic_error ("cannot find key in json");
+    }
+
+    return *found;
+}
+
 void item::set_attribute(string_view key, string value) try
 {
     auto& attribute = item_info_ ["attribute"];
@@ -111,9 +122,14 @@ using generator = up_item (*) (json, QPointF, item*);
 //    {"增值比", [] (json j, QPointF p, item* o)->up_item { return value_added_radtio::make(::move (j), p, o);}},
 //};
 
-unique_ptr<item> item::make(json data, QPointF pos, item *parent) try
+unique_ptr<item> item::make(json data, item *parent) try
 {
-    const string type = data ["type"];
+    const string type = data ["detail"]["type"];
+    qreal x = data ["pos"]["x"];
+    qreal y = data ["pos"]["y"];
+
+    QPointF pos (x, y);
+
     if (type == "生产工序")
     {
         return production_sequence::make(::move (data), pos, parent);
@@ -155,7 +171,7 @@ unique_ptr<item> item::make(json data, QPointF pos, item *parent) try
     {
         return signal_board ::make(::move(data), pos, parent);
     }
-    else if(type == "顺序拉动求")
+    else if(type == "顺序拉动球")
     {
         return sequence_pull_ball::make(::move(data), pos, parent);
     }
@@ -197,7 +213,7 @@ unique_ptr<item> item::make(json data, QPointF pos, item *parent) try
     }
     else
     {
-    return nullptr;
+        return nullptr;
     }
 }
 catch (const std::exception & e)
