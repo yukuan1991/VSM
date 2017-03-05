@@ -10,7 +10,7 @@ class material_flow : public arrow_item
 public:
     Q_OBJECT
 public:
-    static unique_ptr<item> make (nlohmann::json data, QPointF pos, item* parent = nullptr);
+    static unique_ptr<material_flow> make (nlohmann::json data, QPointF pos, item* parent = nullptr);
     ~material_flow () override;
 protected:
     explicit material_flow (nlohmann::json data, QPointF pos, item* parent);
@@ -21,7 +21,6 @@ protected:
     QPainterPath shape () const override;
 
 private:
-    qreal angle_;
     QPointF body_p1_, body_p2_, body_p3_, body_p4_, body_neck1_, body_neck2_, arrow_tip_;
     QPainterPath shape_;
     QRectF bounding_rect_;

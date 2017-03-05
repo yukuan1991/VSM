@@ -72,7 +72,7 @@ void flow_main::set_drawer()
     drawer_->setWidget (drawer_content_.get ());
     connect(drawer_content_.get (), &drawer::toolbox::status_changed, this, &flow_main::on_drawer_status);
 
-    drawer_->setAllowedAreas (Qt::LeftDockWidgetArea);
+    drawer_->setAllowedAreas (Qt::LeftDockWidgetArea | Qt::RightDockWidgetArea);
     addDockWidget (Qt::LeftDockWidgetArea, drawer_.get ());
 }
 
@@ -80,7 +80,7 @@ void flow_main::set_attribute()
 {
     attribute_->setMaximumWidth(250);
     attribute_->setMinimumWidth(250);
-    attribute_->setAllowedAreas (Qt::RightDockWidgetArea);
+    attribute_->setAllowedAreas (Qt::LeftDockWidgetArea | Qt::RightDockWidgetArea);
     addDockWidget (Qt::RightDockWidgetArea, attribute_.get ());
 }
 

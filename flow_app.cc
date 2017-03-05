@@ -25,7 +25,6 @@ flow_app::flow_app(int argc, char **argv)
     }
 }
 
-
 bool flow_app::run()
 {
     main_ = std::make_unique<flow_main> ();

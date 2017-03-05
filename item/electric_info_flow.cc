@@ -102,3 +102,73 @@
 //}
 //
 //} // namespace item
+
+namespace item {
+
+unique_ptr<electric_info_flow> electric_info_flow::make(json data, QPointF pos, item *parent)
+{
+    auto ret = unique_ptr<electric_info_flow> (new electric_info_flow (::move (data), pos, parent));
+    if (ret == nullptr or ! ret->init ())
+    {
+        return nullptr;
+    }
+    return ret;
+}
+
+electric_info_flow::~electric_info_flow()
+{
+
+}
+
+electric_info_flow::electric_info_flow(json data, QPointF pos, item *parent)
+    :arrow_item (::move (data), pos, parent)
+{
+
+}
+
+bool electric_info_flow::init()
+{
+    if (!arrow_item::init())
+    {
+        return false;
+    }
+
+    if (::distance (p1 (), p2 ()) < tip_length)
+    {
+        return false;
+    }
+
+    set_item_type("电子信息流");
+
+    const auto rect = QRectF (start_pos().x(), - tip_width, 2 * radius (), 2 * tip_width);
+
+    const auto matrix = [angle = angle ()] () { QMatrix m; m.rotate (- angle); return m; } ();
+    const auto polygon = QPolygonF {{rect.topLeft(), rect.topRight (), rect.bottomRight (), rect.bottomLeft()}};
+    const auto mapped_polygon = matrix.map(polygon);
+
+    const auto mid_p1 = QPointF (width, width);
+    const auto mid_p2 = QPointF (- width, - width);
+
+
+    shape_.addPolygon(mapped_polygon);
+    bounding_rect_ = shape_.boundingRect ();
+
+    return true;
+}
+
+void electric_info_flow::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
+{
+
+}
+
+QRectF electric_info_flow::boundingRect() const
+{
+    return bounding_rect_;
+}
+
+QPainterPath electric_info_flow::shape() const
+{
+    return shape_;
+}
+
+}

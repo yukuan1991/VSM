@@ -67,7 +67,8 @@ SOURCES += \
     item/production_control_department.cc \
     item/value_added_radtio.cc \
     guide.cc \
-    item/fixed_item.cc
+    item/fixed_item.cc \
+    item/arrow_item.cc
 
 HEADERS += \
     flow_app.h \
@@ -112,7 +113,8 @@ HEADERS += \
     item/production_control_department.h \
     item/value_added_radtio.h \
     guide.h \
-    item/fixed_item.h
+    item/fixed_item.h \
+    item/arrow_item.h
 
 FORMS += \
     flow_main.ui \

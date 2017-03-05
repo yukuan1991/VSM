@@ -1,34 +1,28 @@
 ﻿#pragma once
-//#include "item/item.h"
-//
-//namespace item {
-//
-//class traditional_info_flow : public item::item
-//{
-//public:
-//    Q_OBJECT
-//    Q_INTERFACES(QGraphicsItem)
-//public:
-//    static std::unique_ptr<traditional_info_flow> make (QPointF p1, QPointF p2, QColor color = Qt::black,
-//                                                item* parent = nullptr);
-//    ~traditional_info_flow () override;
-//
-//protected:
-//    explicit traditional_info_flow (QPointF p1, QPointF p2, item* parent = nullptr, QColor color = Qt::black);
-//    bool init ();
-//
-//    void paint (QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = nullptr) override;
-//    QRectF boundingRect () const override;
-//    QPainterPath shape () const override;
-//private:
-//    QPointF start_, end_;
-//    QPointF body_end_, neck1_, neck2_;
-//    QPointF outer_p1_, outer_p2_, outer_neck1_, outer_tip_, outer_neck2_, outer_p4_, outer_p3_;
-//    constexpr static qreal tip_width = 3;
-//    constexpr static qreal tip_length = 10;
-//    constexpr static qreal bound_width = 5;
-//};
-//
-//} // namespace item
-//
-//
+#include "item/arrow_item.h"
+
+namespace item {
+
+class traditional_info_flow : public arrow_item
+{
+    Q_OBJECT
+public:
+    static unique_ptr<traditional_info_flow> make (nlohmann::json data, QPointF pos, item* parent = nullptr);
+    ~traditional_info_flow () override;
+protected:
+    explicit traditional_info_flow (nlohmann::json data, QPointF pos, item* parent);
+    bool init ();
+
+    void paint (QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = nullptr) override;
+    QRectF boundingRect () const override;
+    QPainterPath shape () const override;
+private:
+    constexpr static qreal tip_width = 3;
+    constexpr static qreal tip_length = 10;
+    QPainterPath shape_;
+    QRectF bounding_rect_;
+};
+
+} // namespace item
+
+

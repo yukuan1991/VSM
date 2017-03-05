@@ -25,7 +25,10 @@
 #include "item/storage.h"
 #include "item/storage_super_market.h"
 #include "item/truck_transport.h"
+#include <assert.h>
 #include "item/value_added_radtio.h"
+#include "item/material_flow.h"
+#include "item/traditional_info_flow.h"
 
 namespace item
 <%
@@ -122,11 +125,12 @@ using generator = up_item (*) (json, QPointF, item*);
 //    {"增值比", [] (json j, QPointF p, item* o)->up_item { return value_added_radtio::make(::move (j), p, o);}},
 //};
 
-unique_ptr<item> item::make(json data, item *parent) try
+unique_ptr<item> item::make(json full_data, item *parent) try
 {
-    const string type = data ["detail"]["type"];
-    qreal x = data ["pos"]["x"];
-    qreal y = data ["pos"]["y"];
+    const string type = full_data ["detail"]["type"];
+    qreal x = full_data ["pos"]["x"];
+    qreal y = full_data ["pos"]["y"];
+    auto & data = full_data ["detail"];
 
     QPointF pos (x, y);
 
@@ -211,10 +215,16 @@ unique_ptr<item> item::make(json data, item *parent) try
     {
         return value_added_radtio::make(::move(data), pos, parent);
     }
-    else
+    else if (type == "物流")
     {
-        return nullptr;
+        return material_flow::make (::move (data), pos, parent);
     }
+    else if (type == "传统信息流")
+    {
+        return traditional_info_flow::make (::move (data), pos, parent);
+    }
+    assert (false);
+    return nullptr;
 }
 catch (const std::exception & e)
 {

@@ -18,7 +18,7 @@
 #include "item/board_info_flow.h"
 #include <QPainter>
 #include <QMenu>
-#include "item/item.h"
+#include "item/material_flow.h"
 
 
 namespace canvas
@@ -108,9 +108,18 @@ void view::mouseMoveEvent(QMouseEvent *event)
 {
     if (tmp_arrow_)
     {
-        auto end_ptr = mapToScene(event->pos ());
+        const auto end_ptr = mapToScene(event->pos ());
+        const auto pos = (end_ptr + last_pressed_) / 2;
+        const auto p1 = last_pressed_ - pos;
+        const auto p2 = end_ptr - pos;
 
-        tmp_arrow_ = item::item::make({}, {0.0, 0.0});
+        nlohmann::json detail {{"p1", {{"x", p1.x()}, {"y", p1.y()} }},
+                                               {"p2", {{"x", p2.x()}, {"y", p2.y()}}},
+                              {"type", arrow_state_.toStdString()}};
+
+        nlohmann::json json_pos {{"x", pos.x()}, {"y", pos.y()}};
+        tmp_arrow_ = item::item::make ({{"pos", ::move (json_pos)}, {"detail", ::move (detail)}});
+
 
         if (tmp_arrow_.value() != nullptr)
         {
@@ -208,16 +217,7 @@ void view::board_info_release_event(QMouseEvent *event)
 
 void view::add_text(QMouseEvent *event)
 {
-    //auto scene_pos = mapToScene (event->pos ());
-    //auto text = text_item::make (scene_pos);
-    //auto text = nullptr;
-    //auto center = text->mapToScene(text->boundingRect ().center ());
-    //auto diff = center - scene_pos;
-    //text->setPos(scene_pos - diff);
-    //text->setTextInteractionFlags(Qt::TextEditorInteraction);
-    //scene ()->addItem(text.release ());
     emit arrow_finished ();
-
 }
 
 void view::dragEnterEvent(QDragEnterEvent *event)
@@ -318,17 +318,20 @@ void view::item_drop_action(QDropEvent *event)
     QString type = event->mimeData ()->data ("item");
 
     auto scene_pos = mapToScene(event->pos());
-    nlohmann::json create_data {{"type", type.toStdString()}, {"name", "xxx"}, {"attribute", {{{"123", "456"}}}}};
+    nlohmann::json create_data {{"pos", {{"x", scene_pos.x()}, {"y", scene_pos.y()}}},
+                                {"detail", {{"type", type.toStdString()}}}};
 
-    auto the_item = item::item::make(::move (create_data), scene_pos);
-
-    qDebug () << the_item->dump().dump(4).data();
+    auto the_item = item::item::make(::move (create_data));
 
     if (the_item == nullptr)
     {
         return;
     }
+
     scene ()->addItem(the_item.get ());
+
+    scene ()->clearSelection();
+    the_item->setSelected(true);
 
     auto new_center = the_item->mapRectToScene (the_item->boundingRect ()).center ();
 
@@ -353,7 +356,7 @@ void view::finish_board_info(vector<unique_ptr<QGraphicsLineItem>> lines)
     menu.addAction ("取消");
     connect (confirm, &QAction::triggered, [&]
     {
-        scene ()->addItem (item::board_info_flow::make (::move (lines), Qt::black).release ());
+        //scene ()->addItem (item::board_info_flow::make (::move (lines), Qt::black).release ());
         emit arrow_finished ();
     });
     menu.exec(QCursor::pos());

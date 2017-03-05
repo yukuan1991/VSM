@@ -8,7 +8,7 @@
 namespace item {
 
 
-unique_ptr<item> material_flow::make(nlohmann::json data, QPointF pos, item *parent)
+unique_ptr<material_flow> material_flow::make(nlohmann::json data, QPointF pos, item *parent)
 {
     std::unique_ptr<material_flow> ret (new material_flow (::move (data), pos, parent));
 
@@ -45,7 +45,6 @@ bool material_flow::init()
     set_item_type("物流");
 
     const auto line = QLineF (p1 (), p2 ());
-    auto angle = line.angle ();
     const auto length = line.length();
     const auto straight_line = QLineF (QPointF (- length / 2, 0), QPointF (length / 2, 0));
     const auto body_end_x = straight_line.p2 ().x () - head_distance;
@@ -61,7 +60,7 @@ bool material_flow::init()
     const auto body_neck2 = body_p3 - neck_diff;
     const auto arrow_tip = straight_line.p2 ();
 
-    const auto matrix = [angle] () { QMatrix m; m.rotate (- angle); return m; } ();
+    const auto matrix = [angle = angle ()] () { QMatrix m; m.rotate (- angle); return m; } ();
 
     QPainterPath path;
     path.moveTo (body_p1);
@@ -82,7 +81,6 @@ bool material_flow::init()
     body_neck1_ = body_neck1;
     body_neck2_ = body_neck2;
     arrow_tip_ = arrow_tip;
-    angle_ = angle;
 
 
     return true;
@@ -91,7 +89,7 @@ bool material_flow::init()
 void material_flow::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
     Q_UNUSED(widget);
-    const QColor fore_color (option->state bitand QStyle::State_Selected ? Qt::red : Qt::black);
+    const QColor fore_color (option->state bitand QStyle::State_Selected ? selected_color () : Qt::black);
 
     auto body_start_x = body_p1_.x ();
     auto body_end_x = body_p2_.x ();
@@ -102,7 +100,7 @@ void material_flow::paint(QPainter *painter, const QStyleOptionGraphicsItem *opt
         painter->setPen (fore_color);
         painter->setBrush (Qt::white);
 
-        painter->rotate(- angle_);
+        painter->rotate(- angle ());
         painter->drawPolygon({{body_p1_, body_p2_, body_neck1_, arrow_tip_, body_neck2_, body_p3_, body_p4_}},
                              Qt::WindingFill);
 
@@ -118,62 +116,8 @@ void material_flow::paint(QPainter *painter, const QStyleOptionGraphicsItem *opt
             painter->drawRect(QRectF (rect_top_left, rect_size));
 
             rect_top_left += QPointF (increment, 0);
-
         }
     }
-
-
-    //QPen pen;
-    //pen.setColor(Qt::black);
-    //painter->setPen(pen);
-
-    //painter->drawLine(body_p1_, body_p2_);
-    //painter->drawLine(body_p2_, body_p4_);
-    //painter->drawLine(body_p4_, body_p3_);
-    //painter->drawLine(body_p3_, body_p1_);
-
-    //QLineF line1 {body_p1_, body_p2_};
-    //QLineF line2 {body_p3_, body_p4_};
-
-    //auto rate = fill_distance * 2 / line1.length();
-    //decltype (rate) fill_step = 0;
-    //painter->setBrush(Qt::black);
-    //bool color_or_white = false;
-
-    //painter->save();
-    //while (fill_step < 1)
-    //{
-    //    color_or_white = !color_or_white;
-    //    painter->setBrush(color_or_white ? Qt::black : Qt::white);
-    //    auto end_paint = fill_step + rate;
-
-    //    auto p1_fill = line1.pointAt(fill_step);
-    //    auto p2_fill = line1.pointAt(end_paint > 1 ? 1 : end_paint);
-    //    auto p3_fill = line2.pointAt(fill_step);
-    //    auto p4_fill = line2.pointAt(end_paint > 1 ? 1 : end_paint);
-
-    //    painter->drawPolygon ({{p1_fill, p2_fill, p4_fill, p3_fill}}, Qt::WindingFill);
-    //    fill_step += (rate);
-    //}
-
-    //painter->restore();
-    //painter->drawPolygon({{neck1_, neck2_, arrow_tip_}}, Qt::WindingFill);
-    //if ((option->state bitand QStyle::State_Selected) and show_frame ())
-    //{
-    //    painter->setPen(Qt::DashLine);
-    //    painter->setBrush(Qt::transparent);
-
-    //    QPainterPath path;
-    //    path.moveTo(outer_p4_);
-    //    path.lineTo(outer_p3_);
-    //    path.lineTo(outer_p1_);
-    //    path.lineTo(outer_p2_);
-    //    path.lineTo(outer_neck1_);
-    //    path.lineTo(outer_tip_);
-    //    path.lineTo(outer_neck2_);
-    //    path.lineTo(outer_p4_);
-    //    painter->drawPath(path);
-    //}
 }
 
 QRectF material_flow::boundingRect() const

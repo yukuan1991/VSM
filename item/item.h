@@ -49,6 +49,7 @@ protected:
 
     static string find_json_value (const string& key, const nlohmann::json& data);
     bool show_frame () const { return show_frame_; }
+    const QColor & selected_color () { return selected_color_; }
 
     /// overrides
     QVariant itemChange(QGraphicsItem::GraphicsItemChange change, const QVariant &value) override;
@@ -56,6 +57,7 @@ private:
     bool show_frame_ = false;
     nlohmann::json item_info_;
     qreal z_value_ = 0;
+    const QColor selected_color_ = Qt::red;
 };
 
 %>

@@ -36,7 +36,6 @@ void drag_widget::on_button_pressed()
         return;
     }
 
-    ///
     if (button->isChecked())
     {
         for (auto it : buttons_)

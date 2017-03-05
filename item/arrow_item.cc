@@ -1,8 +1,13 @@
 ﻿#include "arrow_item.h"
+#include "item/material_flow.h"
 
 namespace item {
 
-unique_ptr<arrow_item> arrow_item::make(json data, item *parent)
+unique_ptr<arrow_item> arrow_item::make(json data, item *parent) try
+{
+    return nullptr;
+}
+catch (const std::exception &)
 {
     return nullptr;
 }
@@ -16,7 +21,11 @@ arrow_item::arrow_item (nlohmann::json data, QPointF pos, item *parent)
 bool arrow_item::init() try
 {
     std::tie (p1_, p2_) = get_pos (dump ());
-
+    auto line = QLineF (p1_, p2_);
+    angle_ = line.angle ();
+    radius_ = line.length () / 2;
+    start_pos_ = QPointF (- radius_, 0);
+    stop_pos_ = QPointF (radius_, 0);
     return true;
 }
 catch (const std::exception & e)
