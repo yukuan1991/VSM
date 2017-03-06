@@ -23,11 +23,11 @@ enum class selected_item : bool
     no = false
 };
 
-class item : public QGraphicsObject
+class abstract_item : public QGraphicsObject
 {
     Q_OBJECT
 public:
-    static unique_ptr<item> make (nlohmann::json data, item* parent = nullptr);
+    static unique_ptr<abstract_item> make (nlohmann::json data, abstract_item* parent = nullptr);
     static json dump_scene (not_null<QGraphicsScene*> scene);
 
     void set_name (const string & name) { item_info_ ["name"] = name; }
@@ -39,11 +39,11 @@ public:
     std::string attribute (const string& key);
     void apply_z_value (selected_item yes_or_no);
     const json& attributes () { return item_info_ ["attribute"]; }
-    const json & dump () { return item_info_; }
+    json & dump () { return item_info_; }
 
 protected:
-    explicit item (json data, QPointF pos, item* parent);
-    explicit item(QGraphicsItem *parent = 0);
+    explicit abstract_item (json data, QPointF pos, abstract_item* parent);
+    explicit abstract_item(QGraphicsItem *parent = 0);
     void set_z_value (qreal value) { z_value_ = value; setZValue(value); }
     qreal z_value () const { return z_value_; }
 

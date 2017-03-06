@@ -22,7 +22,7 @@ bool other_company::init()
     return true;
 }
 
-std::unique_ptr<other_company> other_company::make(nlohmann::json data, QPointF pos, item *parent)
+std::unique_ptr<other_company> other_company::make(nlohmann::json data, QPointF pos, abstract_item *parent)
 {
     std::unique_ptr <other_company> ret(new other_company (::move (data), pos, parent));
     if(!ret->init ())
@@ -36,7 +36,7 @@ std::unique_ptr<other_company> other_company::make(nlohmann::json data, QPointF 
 
 }
 
-other_company::other_company(json data, QPointF pos, item * parent)
+other_company::other_company(json data, QPointF pos, abstract_item * parent)
     :fixed_item(::move(data), pos, parent)
 {
 

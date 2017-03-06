@@ -1,30 +1,33 @@
 ﻿#pragma once
-#include "item/item.h"
+#include "item/abstract_item.h"
+#include "item/arrow_item.h"
 #include <QFont>
+
 
 
 namespace item {
 
-//class fifo : public item
-//{
-//public:
-//    static std::unique_ptr<fifo> make(QPointF begin, QPointF end, QColor = Qt::black, item* parent = nullptr);
-//    bool init ();
-//protected:
-//    void paint (QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = nullptr) override;
-//    fifo (QPointF begin, QPointF end, QColor color, item* parent = nullptr);
-//private:
-//    QRectF boundingRect () const override;
-//    QPainterPath shape () const override;
-//    QPointF begin_, end_;
-//    qreal angle_, length_;
-//    QFont font_;
-//    qreal font_width_, font_height_;
-//    QPainterPath shape_;
-//    QRectF bounding_rect_;
-//    static constexpr qreal tip_length_ratio = 1.0 / 100.0 * 5.0;
-//
-//};
+class fifo : public arrow_item
+{
+public:
+    static unique_ptr<fifo> make (json data, QPointF pos, abstract_item* parent = nullptr);
+    bool init ();
+protected:
+    void paint (QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = nullptr) override;
+    fifo (json data, QPointF pos, abstract_item* parent = nullptr);
+    QRectF boundingRect () const override;
+    QPainterPath shape () const override;
+private:
+    QPointF begin_, end_;
+    qreal angle_, length_;
+    QFont font_;
+    qreal font_width_, font_height_;
+    QPainterPath shape_;
+    QRectF bounding_rect_;
+    static constexpr qreal tip_length = 5;
+    static constexpr qreal thickness = 20;
+
+};
 
 } // namespace item
 

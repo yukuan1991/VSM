@@ -13,7 +13,7 @@ bool board_station::init()
      return true;
 }
 
-std::unique_ptr<board_station> board_station::make(json data, QPointF pos, item* parent)
+std::unique_ptr<board_station> board_station::make(json data, QPointF pos, abstract_item* parent)
 {
     std::unique_ptr <board_station> ret(new board_station(::move(data), pos, parent));
     if( !ret->init ())
@@ -55,7 +55,7 @@ void board_station::paint(QPainter *painter, const QStyleOptionGraphicsItem *opt
     fixed_item::paint(painter, option, widget);
 }
 
-board_station::board_station(json data, QPointF pos,item* parent)
+board_station::board_station(json data, QPointF pos,abstract_item* parent)
     :fixed_item(::move(data), pos, parent)
 {
 

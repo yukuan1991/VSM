@@ -25,7 +25,7 @@ bool material_fetch_watch_board::init()
 
 }
 
-std::unique_ptr<material_fetch_watch_board> material_fetch_watch_board::make(json data, QPointF pos, item* parent)
+std::unique_ptr<material_fetch_watch_board> material_fetch_watch_board::make(json data, QPointF pos, abstract_item* parent)
 {
     std::unique_ptr<material_fetch_watch_board>ret(new material_fetch_watch_board(::move(data), pos, parent));
     if(!ret->init ())
@@ -38,7 +38,7 @@ std::unique_ptr<material_fetch_watch_board> material_fetch_watch_board::make(jso
     }
 }
 
-material_fetch_watch_board::material_fetch_watch_board(json data, QPointF pos,item *parent)
+material_fetch_watch_board::material_fetch_watch_board(json data, QPointF pos,abstract_item *parent)
     :fixed_item(::move(data), pos, parent)
 {
 }

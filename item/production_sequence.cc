@@ -8,7 +8,7 @@
 namespace item {
 
 
-std::unique_ptr<production_sequence>production_sequence::make(json data, QPointF pos, item* parent)
+std::unique_ptr<production_sequence>production_sequence::make(json data, QPointF pos, abstract_item* parent)
 {
     std::unique_ptr <production_sequence> ret(new production_sequence(::move(data), pos, parent));
     if(!ret->init ())
@@ -22,7 +22,7 @@ std::unique_ptr<production_sequence>production_sequence::make(json data, QPointF
     }
 }
 
-production_sequence::production_sequence(json data, QPointF pos, item* parent)
+production_sequence::production_sequence(json data, QPointF pos, abstract_item* parent)
     :fixed_item(::move(data), pos, parent)
 {   
 

@@ -9,7 +9,7 @@ namespace item
 <%
 
 
-signal_board::signal_board(json data, QPointF pos, item *parent)
+signal_board::signal_board(json data, QPointF pos, abstract_item *parent)
     :fixed_item (::move(data), pos, parent)
 {
 
@@ -48,7 +48,7 @@ void signal_board::paint(QPainter *painter, const QStyleOptionGraphicsItem *opti
 
 }
 
-std::unique_ptr<signal_board> signal_board::make(json data, QPointF pos, item* parent)
+std::unique_ptr<signal_board> signal_board::make(json data, QPointF pos, abstract_item* parent)
 {
     std::unique_ptr <signal_board> ret (new signal_board(::move(data), pos, parent));
     if(!ret->init ())

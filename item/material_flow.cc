@@ -8,7 +8,7 @@
 namespace item {
 
 
-unique_ptr<material_flow> material_flow::make(nlohmann::json data, QPointF pos, item *parent)
+unique_ptr<material_flow> material_flow::make(nlohmann::json data, QPointF pos, abstract_item *parent)
 {
     std::unique_ptr<material_flow> ret (new material_flow (::move (data), pos, parent));
 
@@ -25,7 +25,7 @@ material_flow::~material_flow()
 
 }
 
-material_flow::material_flow(nlohmann::json data, QPointF pos, item *parent)
+material_flow::material_flow(nlohmann::json data, QPointF pos, abstract_item *parent)
     :arrow_item (::move (data), pos, parent)
 {
 

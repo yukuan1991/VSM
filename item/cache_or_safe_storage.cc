@@ -21,7 +21,7 @@ bool cache_or_safe_storage::init()
 
 }
 
-std::unique_ptr<cache_or_safe_storage> cache_or_safe_storage::make(json data, QPointF pos, item* parent)
+std::unique_ptr<cache_or_safe_storage> cache_or_safe_storage::make(json data, QPointF pos, abstract_item* parent)
 {
     std::unique_ptr <cache_or_safe_storage> ret (new cache_or_safe_storage(::move(data), pos, parent));
     if(!ret->init ())
@@ -35,7 +35,7 @@ std::unique_ptr<cache_or_safe_storage> cache_or_safe_storage::make(json data, QP
 
 }
 
-cache_or_safe_storage::cache_or_safe_storage(json data, QPointF pos, item* parent)
+cache_or_safe_storage::cache_or_safe_storage(json data, QPointF pos, abstract_item* parent)
     :fixed_item (::move(data), pos, parent)
 {
 

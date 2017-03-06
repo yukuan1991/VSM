@@ -22,7 +22,7 @@ bool improvement::init()
      return true;
 }
 
-std::unique_ptr<improvement> improvement::make(json data, QPointF pos, item* parent)
+std::unique_ptr<improvement> improvement::make(json data, QPointF pos, abstract_item* parent)
 {
     std::unique_ptr<improvement>ret(new improvement(::move(data), pos, parent));
 
@@ -36,7 +36,7 @@ std::unique_ptr<improvement> improvement::make(json data, QPointF pos, item* par
     }
 }
 
-improvement::improvement(json data, QPointF pos, item *parent)
+improvement::improvement(json data, QPointF pos, abstract_item *parent)
     :fixed_item(::move(data), pos, parent)
 {
 
@@ -64,7 +64,7 @@ void improvement::paint(QPainter *painter, const QStyleOptionGraphicsItem *optio
 
     auto the_pen = painter->pen();
     the_pen.setWidthF(item_width * 0.02);
-    the_pen.setColor(Qt::black);
+    the_pen.setColor(Qt::red);
     painter->setPen(the_pen);
     painter->setBrush(Qt::white);
     painter->drawPolygon({{p1,p2,p3,p4,p5,p6,p7,p8,p9,p10,p11,p12,p13,p14,p15,p16,p17,p18,p19,p20,p21,p22,p23,p24}},Qt::WindingFill);

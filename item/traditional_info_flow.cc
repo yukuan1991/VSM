@@ -7,7 +7,7 @@
 
 namespace item {
 
-unique_ptr<traditional_info_flow> traditional_info_flow::make(json data, QPointF pos, item *parent)
+unique_ptr<traditional_info_flow> traditional_info_flow::make(json data, QPointF pos, abstract_item *parent)
 {
     auto ret = unique_ptr<traditional_info_flow> (new traditional_info_flow (::move (data), pos, parent));
     if (ret == nullptr or ! ret->init ())
@@ -23,7 +23,7 @@ traditional_info_flow::~traditional_info_flow()
 
 }
 
-traditional_info_flow::traditional_info_flow(nlohmann::json data, QPointF pos, item *parent)
+traditional_info_flow::traditional_info_flow(nlohmann::json data, QPointF pos, abstract_item *parent)
     :arrow_item (::move (data), pos, parent)
 {
 
@@ -46,7 +46,7 @@ bool traditional_info_flow::init()
     const auto rect = QRectF (start_pos().x(), - tip_width, 2 * radius (), 2 * tip_width);
 
     const auto matrix = [angle = angle ()] () { QMatrix m; m.rotate (- angle); return m; } ();
-    const auto polygon = QPolygonF {{rect.topLeft(), rect.topRight (), rect.bottomRight (), rect.bottomLeft()}};
+    const auto polygon = QPolygonF (rect);
     const auto mapped_polygon = matrix.map(polygon);
 
 

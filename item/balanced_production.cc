@@ -3,7 +3,7 @@
 namespace item {
 
 
-std::unique_ptr<balanced_production> balanced_production::make(nlohmann::json data, QPointF pos, item *parent)
+std::unique_ptr<balanced_production> balanced_production::make(nlohmann::json data, QPointF pos, abstract_item *parent)
 {
     std::unique_ptr<balanced_production>ret(new balanced_production (::move (data), pos, parent));
     if (!ret->init ())
@@ -28,7 +28,7 @@ bool balanced_production::init()
     return true;
 }
 
-balanced_production::balanced_production(nlohmann::json data, QPointF pos, item* parent)
+balanced_production::balanced_production(nlohmann::json data, QPointF pos, abstract_item* parent)
     :fixed_item(::move (data), pos, parent)
 {
 

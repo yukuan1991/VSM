@@ -7,7 +7,7 @@
 #include <QInputDialog>
 namespace item {
 
-std::unique_ptr<information> information::make(json data, QPointF pos, item* parent)
+std::unique_ptr<information> information::make(json data, QPointF pos, abstract_item* parent)
 {
     std::unique_ptr<information>ret(new information(move(data), pos, parent));
     if(!ret->init ())
@@ -64,7 +64,7 @@ void information::paint(QPainter *painter, const QStyleOptionGraphicsItem *optio
     painter->drawText(QRectF (center - QPointF (text_width / 2, text_height / 2), QSizeF (text_width, text_height)), item_name.data());
 }
 
-information::information(json data, QPointF pos, item *parent)
+information::information(json data, QPointF pos, abstract_item *parent)
     :fixed_item(move(data), pos, parent)
  {
 
@@ -72,7 +72,7 @@ information::information(json data, QPointF pos, item *parent)
 
 void information::mouseDoubleClickEvent(QGraphicsSceneMouseEvent *event)
 {
-    item::mouseDoubleClickEvent (event);
+    abstract_item::mouseDoubleClickEvent (event);
     auto old_name = name ();
     bool confirmed = false;
     auto name = QInputDialog::getText(nullptr, "", "信息名称:",

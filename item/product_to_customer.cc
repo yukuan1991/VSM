@@ -1,153 +1,112 @@
-﻿//#include "product_to_customer.h"
-//#include "qt-tools/graphics.hpp"
-//#include <QtMath>
-//#include <QPainter>
-//#include <QBrush>
-//#include <QPen>
-//#include <QStyleOptionGraphicsItem>
-//
-//namespace item {
-//
-//std::unique_ptr<product_to_customer> product_to_customer::make(QPointF start, QPointF end, QColor color, item *parent)
-//{
-//    auto ret = unique_ptr<product_to_customer> (new product_to_customer (start, end, parent, ::move (color)));
-//    if (!ret->init())
-//    {
-//        return nullptr;
-//    }
-//    return ret;
-//
-//}
-//
-//product_to_customer::~product_to_customer()
-//{
-//
-//}
-//
-//product_to_customer::product_to_customer(QPointF start, QPointF end, item *parent, QColor color)
-//    :item (parent)
-//{
-//    auto mid_pos = (start + end) / 2;
-//    setPos(mid_pos);
-//    start_ = start - mid_pos;
-//    end_ = end - mid_pos;
-//
-//    set_z_value(202);
-//}
-//
-//bool product_to_customer::init()
-//{
-//    set_item_type("成品发送至顾客");
-//    constexpr auto min_distance = head_ratio * width;
-//    auto p1 = start_, p2 = end_;
-//
-//    if (distance(p1, p2) <= min_distance)
-//    {
-//        return false;
-//    }
-//
-//    arrow_tip_ = p2;
-//
-//    QLineF line (p1, p2);
-//    auto body_end_p = line.pointAt((line.length() - min_distance) / line.length());
-//    QLineF line_body (p1, body_end_p);
-//
-//    auto top_angle = line_body.angle() + 90;
-//    auto x_diff = -qCos (qDegreesToRadians (top_angle)) * width;
-//    auto y_diff = qSin (qDegreesToRadians (top_angle)) * width;
-//
-//    auto start = line_body.p1();
-//    auto end = line_body.p2();
-//
-//    body_p1_ = QPointF {start.x() + x_diff, start.y() + y_diff};
-//    body_p2_ = QPointF {end.x() + x_diff, end.y() + y_diff};
-//    body_p3_ = QPointF {start.x() - x_diff, start.y() - y_diff};
-//    body_p4_ = QPointF {end.x() - x_diff, end.y() - y_diff};
-//
-//    QLineF head_line {body_p2_, body_p4_};
-//    neck1_ = head_line.pointAt(-0.5);
-//    neck2_ = head_line.pointAt(1.5);
-//
-//
-//    /// 初始化边框信息
-//    auto outer_start = line_body.pointAt (-outer_gap / line_body.length());
-//
-//    auto outer_x_diff = -qCos (qDegreesToRadians (top_angle)) * (width + outer_gap);
-//    auto outer_y_diff = qSin (qDegreesToRadians (top_angle)) * (width + outer_gap);
-//
-//    auto line_outer = QLineF (outer_start,
-//                              line_body.pointAt((line_body.length() - outer_gap) / line_body.length()));
-//    auto outer_end = line_outer.p2();
-//
-//    outer_p1_ = QPointF {outer_start.x() + outer_x_diff, outer_start.y() + outer_y_diff};
-//    outer_p2_ = QPointF {outer_end.x() + outer_x_diff, outer_end.y() + outer_y_diff};
-//    outer_p3_ = QPointF {outer_start.x() - outer_x_diff, outer_start.y() - outer_y_diff};
-//    outer_p4_ = QPointF {outer_end.x() - outer_x_diff, outer_end.y() - outer_y_diff};
-//
-//    QLineF arrow_normal (body_end_p, arrow_tip_);
-//    QLineF arrow_side1 (body_end_p, neck1_);
-//    QLineF arrow_slope1 (arrow_tip_, neck1_);
-//
-//    auto tip_diff = outer_gap * (arrow_slope1.length() / arrow_side1.length());
-//    outer_tip_ = arrow_normal.pointAt((arrow_normal.length() + tip_diff) / arrow_normal.length());
-//
-//    QLineF tmp_side1_outer = arrow_side1.translated(outer_end - body_end_p);
-//    QLineF tmp_slope1_outer = arrow_slope1.translated(outer_tip_ - arrow_tip_);
-//
-//    tmp_side1_outer.intersect(tmp_slope1_outer, & (outer_neck1_));
-//
-//    if (outer_neck1_.isNull())
-//    {
-//        return false;
-//    }
-//
-//    outer_neck2_ = QLineF (outer_end, outer_neck1_).pointAt(-1);
-//    return true;
-//}
-//
-//void product_to_customer::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
-//{
-//    Q_UNUSED(widget);
-//
-//    QPen pen;
-//    pen.setColor(Qt::black);
-//    painter->setPen(pen);
-//    painter->setBrush(Qt::white);
-//    painter->drawPolygon({{body_p1_, body_p2_, neck1_, arrow_tip_, neck2_, body_p4_, body_p3_}},
-//                         Qt::WindingFill);
-//
-//
-//    if (/*option->state bitand QStyle::State_Selected*/false)
-//    {
-//        set_dash(painter);
-//
-//        QPainterPath path;
-//        path.moveTo(outer_p4_);
-//        path.lineTo(outer_p3_);
-//        path.lineTo(outer_p1_);
-//        path.lineTo(outer_p2_);
-//        path.lineTo(outer_neck1_);
-//        path.lineTo(outer_tip_);
-//        path.lineTo(outer_neck2_);
-//        path.lineTo(outer_p4_);
-//        painter->drawPath(path);
-//    }
-//}
-//
-//QRectF product_to_customer::boundingRect() const
-//{
-//    return QPolygonF {{body_p1_, body_p2_, neck1_, arrow_tip_, neck2_, body_p4_, body_p3_}}.boundingRect();
-//}
-//
-//QPainterPath product_to_customer::shape() const
-//{
-//    QPainterPath path;
-//    path.addPolygon({{outer_p1_, outer_p2_, outer_neck1_, outer_tip_,
-//                      outer_neck2_, outer_p4_, outer_p3_}});
-//    path.lineTo(outer_p1_);
-//    return path;
-//}
-//
-//
-//} // namespace item
-//
+﻿#include "product_to_customer.h"
+#include "qt-tools/graphics.hpp"
+#include <QPainter>
+#include <QStyleOptionGraphicsItem>
+
+namespace item {
+
+unique_ptr<product_to_customer> product_to_customer::make(json data, QPointF pos, abstract_item *parent)
+{
+    auto ret = unique_ptr<product_to_customer> (new product_to_customer (::move (data), pos, parent));
+    if (ret == nullptr or ! ret->init ())
+    {
+        return nullptr;
+    }
+
+    return ret;
+}
+
+product_to_customer::~product_to_customer()
+{
+
+}
+
+product_to_customer::product_to_customer(nlohmann::json data, QPointF pos, abstract_item *parent)
+    :arrow_item (::move (data), pos, parent)
+{
+
+}
+
+bool product_to_customer::init()
+{
+    if (!arrow_item::init ())
+    {
+        return false;
+    }
+
+    if (distance (p1 (), p2 ()) < head_distance)
+    {
+        return false;
+    }
+    set_item_type("成品发送至顾客");
+
+    const auto straight_line = QLineF (start_pos (), stop_pos ());
+    const auto body_end_x = straight_line.p2 ().x () - head_distance;
+    const auto body_start_x = straight_line.p1().x();
+
+    const auto body_p1 = QPointF (body_start_x, width);
+    const auto body_p2 = QPointF (body_end_x, width);
+    const auto body_p3 = QPointF (body_end_x, - width);
+    const auto body_p4 = QPointF (body_start_x, - width);
+
+    auto neck_diff = QPointF (0, width / 2);
+    const auto body_neck1 = body_p2 + neck_diff;
+    const auto body_neck2 = body_p3 - neck_diff;
+    const auto arrow_tip = straight_line.p2 ();
+
+    const auto matrix = [angle = angle ()] () { QMatrix m; m.rotate (- angle); return m; } ();
+
+    QPainterPath path;
+    path.moveTo (body_p1);
+
+    for (auto it : {body_p1, body_p2,body_neck1, arrow_tip, body_neck2, body_p3, body_p4})
+    {
+        path.lineTo (it);
+    }
+    path.lineTo (body_p1);
+
+    shape_ = matrix.map(path);
+    bounding_rect_ = shape_.boundingRect();
+
+    body_p1_ = body_p1;
+    body_p2_ = body_p2;
+    body_p3_ = body_p3;
+    body_p4_ = body_p4;
+    body_neck1_ = body_neck1;
+    body_neck2_ = body_neck2;
+    arrow_tip_ = arrow_tip;
+
+
+    return true;
+
+}
+
+void product_to_customer::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
+{
+    Q_UNUSED(widget);
+    const QColor fore_color (option->state bitand QStyle::State_Selected ? selected_color () : Qt::black);
+
+    {
+        painter->save();
+        SCOPE_EXIT { painter->restore(); };
+        painter->setPen (fore_color);
+        painter->setBrush (Qt::white);
+
+        painter->rotate(- angle ());
+        painter->drawPolygon({{body_p1_, body_p2_, body_neck1_, arrow_tip_, body_neck2_, body_p3_, body_p4_}},
+                             Qt::WindingFill);
+    }
+
+}
+
+QRectF product_to_customer::boundingRect() const
+{
+    return bounding_rect_;
+}
+
+QPainterPath product_to_customer::shape() const
+{
+    return shape_;
+}
+
+}

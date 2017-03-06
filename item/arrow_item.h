@@ -1,15 +1,15 @@
 ﻿#pragma once
-#include "item/item.h"
+#include "item/abstract_item.h"
 
 
 namespace item {
 
-class arrow_item : public item::item
+class arrow_item : public abstract_item::abstract_item
 {
 public:
-    static unique_ptr<arrow_item> make (json data, item* parent = nullptr);
+    static unique_ptr<arrow_item> make (json data, abstract_item* parent = nullptr);
 protected:
-    explicit arrow_item (json data, QPointF pos, item* parent);
+    explicit arrow_item (json data, QPointF pos, abstract_item* parent);
     bool init ();
     QPointF p1 () { return p1_; }
     QPointF p2 () { return p2_; }

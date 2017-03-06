@@ -8,7 +8,7 @@
 namespace item {
 
 
-std::unique_ptr<sequence_pull_ball> sequence_pull_ball::make(json data, QPointF pos, item* parent)
+std::unique_ptr<sequence_pull_ball> sequence_pull_ball::make(json data, QPointF pos, abstract_item* parent)
 {
     std::unique_ptr <sequence_pull_ball> ret(new sequence_pull_ball(::move(data), pos, parent));
 
@@ -23,7 +23,7 @@ std::unique_ptr<sequence_pull_ball> sequence_pull_ball::make(json data, QPointF 
     }
 }
 
-sequence_pull_ball::sequence_pull_ball(json data, QPointF pos, item* parent)
+sequence_pull_ball::sequence_pull_ball(json data, QPointF pos, abstract_item* parent)
     :fixed_item(::move(data), pos, parent)
 {
 //    item_width_ /= small_object_ratio;

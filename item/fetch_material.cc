@@ -9,7 +9,7 @@
 
 namespace item {
 
-std::unique_ptr<fetch_material> fetch_material::make(json data, QPointF pos, item* parent)
+std::unique_ptr<fetch_material> fetch_material::make(json data, QPointF pos, abstract_item* parent)
 {
     std::unique_ptr<fetch_material>ret(new fetch_material(::move(data), pos, parent));
     if(! ret->init ())
@@ -31,7 +31,7 @@ bool fetch_material::init()
     return true;
 }
 
-fetch_material::fetch_material(json data, QPointF pos, item *parent)
+fetch_material::fetch_material(json data, QPointF pos, abstract_item *parent)
     :fixed_item(::move(data), pos, parent)
 {
 
@@ -40,11 +40,13 @@ fetch_material::fetch_material(json data, QPointF pos, item *parent)
 
 void fetch_material::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
+    Q_UNUSED (widget);
+    Q_UNUSED (option);
     auto item_width = width();
     auto item_height = height();
     auto the_pen = painter->pen();
     the_pen.setColor(Qt::black);
-    the_pen.setWidthF(std::max(item_width * 0.02, 2.0));
+    the_pen.setWidthF(2.0);
     painter->setPen(the_pen);
 
     QPointF
@@ -58,8 +60,6 @@ void fetch_material::paint(QPainter *painter, const QStyleOptionGraphicsItem *op
     painter->drawArc(QRectF{0.1 * item_width, 0, 0.8 * item_width, item_height}, 45 * 16, 270 * 16);
     painter->setBrush(Qt::black);
     painter->drawPolygon({{p1,p2,p3}},Qt::WindingFill);
-
-    //fixed_item::paint(painter, option, widget);
 }
 
 }

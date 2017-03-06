@@ -45,8 +45,8 @@ catch (const std::exception &)
     return;
 }
 
-fixed_item::fixed_item (json data, QPointF pos, item *parent)
-    :item (::move (data), pos, parent)
+fixed_item::fixed_item (json data, QPointF pos, abstract_item *parent)
+    :abstract_item (::move (data), pos, parent)
 {
 
 }

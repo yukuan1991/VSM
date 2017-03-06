@@ -4,13 +4,13 @@
 #include <QStyleOptionGraphicsItem>
 namespace item {
 ///修改成item_width * 1/4
-adjustment_on_scene::adjustment_on_scene(json data, QPointF pos, item* parent)
+adjustment_on_scene::adjustment_on_scene(json data, QPointF pos, abstract_item* parent)
     :fixed_item(::move (data), pos, parent)
 {
 
 }
 
-std::unique_ptr<adjustment_on_scene> adjustment_on_scene::make(json data, QPointF pos, item* parent)
+std::unique_ptr<adjustment_on_scene> adjustment_on_scene::make(json data, QPointF pos, abstract_item* parent)
 {
     std::unique_ptr<adjustment_on_scene>ret(new adjustment_on_scene (::move (data), pos, parent));
     if (!ret->init ())

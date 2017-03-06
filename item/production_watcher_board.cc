@@ -6,12 +6,12 @@
 
 namespace item {
 
-production_watcher_board::production_watcher_board(json data, QPointF pos, item *parent)
+production_watcher_board::production_watcher_board(json data, QPointF pos, abstract_item *parent)
     :fixed_item(::move(data), pos, parent)
 {
 
 }
-std::unique_ptr<production_watcher_board> production_watcher_board::make(json data, QPointF pos, item* parent)
+std::unique_ptr<production_watcher_board> production_watcher_board::make(json data, QPointF pos, abstract_item* parent)
 {
     std::unique_ptr<production_watcher_board> ret(new production_watcher_board(::move(data),pos, parent));
     if(!ret->init ())

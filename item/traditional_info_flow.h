@@ -7,10 +7,10 @@ class traditional_info_flow : public arrow_item
 {
     Q_OBJECT
 public:
-    static unique_ptr<traditional_info_flow> make (nlohmann::json data, QPointF pos, item* parent = nullptr);
+    static unique_ptr<traditional_info_flow> make (nlohmann::json data, QPointF pos, abstract_item* parent = nullptr);
     ~traditional_info_flow () override;
 protected:
-    explicit traditional_info_flow (nlohmann::json data, QPointF pos, item* parent);
+    explicit traditional_info_flow (nlohmann::json data, QPointF pos, abstract_item* parent);
     bool init ();
 
     void paint (QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = nullptr) override;

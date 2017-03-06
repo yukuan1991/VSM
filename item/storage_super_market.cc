@@ -8,7 +8,7 @@
 namespace item {
 
 
-std::unique_ptr<storage_super_market> storage_super_market::make(json data, QPointF pos, item* parent)
+std::unique_ptr<storage_super_market> storage_super_market::make(json data, QPointF pos, abstract_item* parent)
 {
     std::unique_ptr <storage_super_market> ret(new storage_super_market(::move(data),pos, parent));
     if(! ret->init ())
@@ -21,7 +21,7 @@ std::unique_ptr<storage_super_market> storage_super_market::make(json data, QPoi
     }
 }
 
-storage_super_market::storage_super_market(json data, QPointF pos, item* parent)
+storage_super_market::storage_super_market(json data, QPointF pos, abstract_item* parent)
     :fixed_item(::move(data), pos, parent)
 {
 

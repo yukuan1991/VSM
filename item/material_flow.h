@@ -10,10 +10,10 @@ class material_flow : public arrow_item
 public:
     Q_OBJECT
 public:
-    static unique_ptr<material_flow> make (nlohmann::json data, QPointF pos, item* parent = nullptr);
+    static unique_ptr<material_flow> make (nlohmann::json data, QPointF pos, abstract_item* parent = nullptr);
     ~material_flow () override;
 protected:
-    explicit material_flow (nlohmann::json data, QPointF pos, item* parent);
+    explicit material_flow (nlohmann::json data, QPointF pos, abstract_item* parent);
     bool init ();
 
     void paint (QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = nullptr) override;

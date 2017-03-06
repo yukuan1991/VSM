@@ -5,7 +5,7 @@
 #include <QInputDialog>
 namespace item {
 
-std::unique_ptr<production_control_department> production_control_department::make(json data, QPointF pos, item* parent)
+std::unique_ptr<production_control_department> production_control_department::make(json data, QPointF pos, abstract_item* parent)
 {
     std::unique_ptr <production_control_department> ret(new production_control_department(::move(data), pos, parent));
 
@@ -30,7 +30,7 @@ bool production_control_department::init()
 
 }
 
-production_control_department::production_control_department(json data, QPointF pos, item *parent)
+production_control_department::production_control_department(json data, QPointF pos, abstract_item *parent)
     :fixed_item(::move(data), pos, parent)
 {
 

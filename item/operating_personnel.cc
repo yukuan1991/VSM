@@ -8,7 +8,7 @@
 namespace item
 {
 
-std::unique_ptr<operating_personnel> operating_personnel::make(json data, QPointF pos, item* parent)
+std::unique_ptr<operating_personnel> operating_personnel::make(json data, QPointF pos, abstract_item* parent)
 {
     std::unique_ptr<operating_personnel> ret(new operating_personnel(::move(data), pos, parent));
 
@@ -33,7 +33,7 @@ bool operating_personnel::init()
 
 }
 
-operating_personnel::operating_personnel(json data, QPointF pos, item* parent)
+operating_personnel::operating_personnel(json data, QPointF pos, abstract_item* parent)
     :fixed_item (::move(data), pos, parent)
 {
 

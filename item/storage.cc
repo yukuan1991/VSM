@@ -5,7 +5,7 @@
 namespace item {
 
 
-std::unique_ptr<storage> storage::make(json data, QPointF pos, item* parent)
+std::unique_ptr<storage> storage::make(json data, QPointF pos, abstract_item* parent)
 {
     std::unique_ptr <storage> ret(new storage(::move(data),pos, parent));
     if(!ret->init ())
@@ -19,7 +19,7 @@ std::unique_ptr<storage> storage::make(json data, QPointF pos, item* parent)
 }
 
 
-storage::storage(json data, QPointF pos, item* parent)
+storage::storage(json data, QPointF pos, abstract_item* parent)
     :fixed_item(::move(data), pos, parent)
 {
 

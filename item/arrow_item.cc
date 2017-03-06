@@ -3,7 +3,7 @@
 
 namespace item {
 
-unique_ptr<arrow_item> arrow_item::make(json data, item *parent) try
+unique_ptr<arrow_item> arrow_item::make(json data, abstract_item *parent) try
 {
     return nullptr;
 }
@@ -12,8 +12,8 @@ catch (const std::exception &)
     return nullptr;
 }
 
-arrow_item::arrow_item (nlohmann::json data, QPointF pos, item *parent)
-    :item (::move (data), pos, parent)
+arrow_item::arrow_item (nlohmann::json data, QPointF pos, abstract_item *parent)
+    :abstract_item (::move (data), pos, parent)
 {
 
 }

@@ -4,7 +4,7 @@
 namespace item {
 
 
-std::unique_ptr<truck_transport> truck_transport::make( json data, QPointF pos,item* parent)
+std::unique_ptr<truck_transport> truck_transport::make( json data, QPointF pos,abstract_item* parent)
 {
 
     std::unique_ptr<truck_transport>ret(new truck_transport(::move(data), pos, parent));
@@ -20,7 +20,7 @@ std::unique_ptr<truck_transport> truck_transport::make( json data, QPointF pos,i
     }
 }
 
-truck_transport::truck_transport(json data, QPointF pos, item * parent)
+truck_transport::truck_transport(json data, QPointF pos, abstract_item * parent)
     :fixed_item(::move(data), pos, parent)
 {
 

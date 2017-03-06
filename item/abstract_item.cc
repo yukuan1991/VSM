@@ -1,4 +1,4 @@
-﻿#include "item.h"
+﻿#include "abstract_item.h"
 #include <QStyleOptionGraphicsItem>
 #include <QPen>
 #include <QDebug>
@@ -29,17 +29,37 @@
 #include "item/value_added_radtio.h"
 #include "item/material_flow.h"
 #include "item/traditional_info_flow.h"
+#include "item/electric_info_flow.h"
+#include "item/product_to_customer.h"
+#include "item/fifo.h"
+#include "item/text_item.h"
+#include <QGraphicsScene>
 
 namespace item
 <%
 using namespace std;
 
-nlohmann::json item::dump_scene(not_null<QGraphicsScene *> scene)
+nlohmann::json abstract_item::dump_scene(not_null<QGraphicsScene *> scene)
 {
-    return {};
+    const auto list_item = scene->items ();
+    json json_items;
+    for (auto it : list_item)
+    {
+        auto casted_item = dynamic_cast<abstract_item*> (it);
+        if (casted_item == nullptr)
+        {
+            continue;
+        }
+
+        const auto pos = casted_item->pos ();
+
+        json json_pos {{"x", pos.x ()}, {"y", pos.y ()}};
+        json_items.push_back ({{"pos", ::move (json_pos)}, {"detail", casted_item->dump ()}});
+    }
+    return json_items;
 }
 
-const json & item::json_find(const json &data, const string &key)
+const json & abstract_item::json_find(const json &data, const string &key)
 {
     auto found = data.find (key);
     if (found == end (data))
@@ -50,7 +70,7 @@ const json & item::json_find(const json &data, const string &key)
     return *found;
 }
 
-void item::set_attribute(string_view key, string value) try
+void abstract_item::set_attribute(string_view key, string value) try
 {
     auto& attribute = item_info_ ["attribute"];
     if (!attribute.is_array())
@@ -84,48 +104,22 @@ catch (const std::exception& e)
     return;
 }
 
-item::item(nlohmann::json data, QPointF pos, item *parent)
-    :item (parent)
+abstract_item::abstract_item(nlohmann::json data, QPointF pos, abstract_item *parent)
+    :abstract_item (parent)
 {
     item_info_ = ::move (data);
     setPos (pos);
 }
 
-item::item(QGraphicsItem *parent) : QGraphicsObject (parent)
+abstract_item::abstract_item(QGraphicsItem *parent) : QGraphicsObject (parent)
 {
     setFlags (ItemIsSelectable | ItemIsMovable);
 }
 
-using up_item = unique_ptr<item>;
-using generator = up_item (*) (json, QPointF, item*);
-//const map<string, generator> item_map
-//{
-//    {"看板以批量方式传达", [] (json j, QPointF p, item* o)->up_item { return board_arrival::make (::move (j), p, o); }},
-//    {"生产工序", [] (json j, QPointF p, item* o)->up_item { auto ret = production_sequence::make(::move (j), p, o);
-//                                                        return ret; }},
-//    { "其他公司",[] (json j, QPointF p, item* o)->up_item { return other_company::make(::move (j), p, o); }},
-//    //{"数据箱", [] ((json j, QPointF p, item* o))->up_item { return data_box::make(p, Qt::black); }},
-//    {"库存", [] (json j, QPointF p, item* o)->up_item { return storage::make(::move (j), p, o); }},
-//    {"卡车运输", [] (json j, QPointF p, item* o)->up_item { return truck_transport::make(::move (j), p, o); }},
-//    {"库存超市", [] (json j, QPointF p, item* o)->up_item { return storage_super_market::make(::move (j), p, o); }},
-//    {"信息", [] (json j, QPointF p, item* o)->up_item { return information::make(::move (j), p, o); }},
-//    {"生产看板",  [] (json j, QPointF p, item* o)->up_item { return production_watcher_board::make(::move (j), p, o); }},
-//    {"取料看板",  [] (json j, QPointF p, item* o)->up_item { return material_fetch_watch_board::make(::move (j), p, o); }},
-//    {"信号看板",  [] (json j, QPointF p, item* o)->up_item { return signal_board::make(::move (j), p, o); }},
-//    {"顺序拉动球",  [] (json j, QPointF p, item* o)->up_item { return sequence_pull_ball::make(::move (j), p, o); }},
-//    {"看板以批量方式传达",  [] (json j, QPointF p, item* o)->up_item { return board_arrival::make(::move (j), p, o); }},
-//    {"均衡生产",  [] (json j, QPointF p, item* o)->up_item { return balanced_production::make(::move (j), p, o); }},
-//    {"现场调度",  [] (json j, QPointF p, item* o)->up_item { return adjustment_on_scene::make(::move (j), p, o); }},
-//    {"改善",  [] (json j, QPointF p, item* o)->up_item { return improvement::make(::move (j), p, o); }},
-//    {"取料",  [] (json j, QPointF p, item* o)->up_item { return fetch_material::make(::move (j), p, o); }},
-//    {"缓冲或安全库存",  [] (json j, QPointF p, item* o)->up_item { return cache_or_safe_storage::make(::move (j), p, o); }},
-//    {"操作员", [] (json j, QPointF p, item* o)->up_item { return operating_personnel::make (::move (j), p, o); }},
-//    {"看板站", [] (json j, QPointF p, item* o)->up_item { return board_station::make (::move (j), p, o); }},
-//    {"生产控制部门", [] (json j, QPointF p, item* o)->up_item { return production_control_department::make (::move (j), p, o); }},
-//    {"增值比", [] (json j, QPointF p, item* o)->up_item { return value_added_radtio::make(::move (j), p, o);}},
-//};
+using up_item = unique_ptr<abstract_item>;
+using generator = up_item (*) (json, QPointF, abstract_item*);
 
-unique_ptr<item> item::make(json full_data, item *parent) try
+unique_ptr<abstract_item> abstract_item::make(json full_data, abstract_item *parent) try
 {
     const string type = full_data ["detail"]["type"];
     qreal x = full_data ["pos"]["x"];
@@ -223,6 +217,26 @@ unique_ptr<item> item::make(json full_data, item *parent) try
     {
         return traditional_info_flow::make (::move (data), pos, parent);
     }
+    else if (type == "电子信息流")
+    {
+        return electric_info_flow::make (::move (data), pos, parent);
+    }
+    else if (type == "成品发送至顾客")
+    {
+        return product_to_customer::make(::move (data), pos, parent);
+    }
+    else if (type == "先进先出")
+    {
+        return fifo::make (::move (data), pos, parent);
+    }
+    else if (type == "看板用信息流")
+    {
+        return board_info_flow::make (::move (data), pos, parent);
+    }
+    else if (type == "文字")
+    {
+        return text_item::make (::move (data), pos, parent);
+    }
     assert (false);
     return nullptr;
 }
@@ -231,7 +245,7 @@ catch (const std::exception & e)
     return nullptr;
 }
 
-string item::name()
+string abstract_item::name()
 {
     auto iter = item_info_.find("name");
     if (iter != item_info_.end () and iter->is_string ())
@@ -244,7 +258,7 @@ string item::name()
     }
 }
 
-string item::item_type() const noexcept
+string abstract_item::item_type() const noexcept
 {
     auto found = item_info_.find ("type");
     if (found == end (item_info_) or !found->is_string ())
@@ -257,12 +271,12 @@ string item::item_type() const noexcept
     }
 }
 
-void item::set_item_type(const string &type)
+void abstract_item::set_item_type(const string &type)
 {
     item_info_ ["type"] = type;
 }
 
-string item::attribute(const string &key) try
+string abstract_item::attribute(const string &key) try
 {
     auto& attribute = item_info_ ["attribute"];
 
@@ -288,7 +302,7 @@ catch (std::exception const &)
     return {};
 }
 
-void item::apply_z_value(selected_item yes_or_no)
+void abstract_item::apply_z_value(selected_item yes_or_no)
 {
     if (yes_or_no == selected_item::yes)
     {
@@ -301,7 +315,7 @@ void item::apply_z_value(selected_item yes_or_no)
 }
 
 
-QVariant item::itemChange(QGraphicsItem::GraphicsItemChange change, const QVariant &value)
+QVariant abstract_item::itemChange(QGraphicsItem::GraphicsItemChange change, const QVariant &value)
 {
     if (change == QGraphicsItem::ItemSelectedChange)
     {
@@ -317,7 +331,7 @@ QVariant item::itemChange(QGraphicsItem::GraphicsItemChange change, const QVaria
     return QGraphicsItem::itemChange (change, value);
 }
 
-string item::find_json_value(const string& key, const json& data)
+string abstract_item::find_json_value(const string& key, const json& data)
 {
     auto iter = data.find(key);
     if (iter != data.end () and iter->is_string ())

@@ -16,7 +16,7 @@ bool board_arrival::init()
 
 }
 
-std::unique_ptr<board_arrival> board_arrival::make(json data, QPointF pos, item* parent)
+std::unique_ptr<board_arrival> board_arrival::make(json data, QPointF pos, abstract_item* parent)
 {
     std::unique_ptr <board_arrival> ret(new board_arrival (::move(data), pos, parent));
 
@@ -30,7 +30,7 @@ std::unique_ptr<board_arrival> board_arrival::make(json data, QPointF pos, item*
     }
 }
 
-board_arrival::board_arrival(json data, QPointF pos, item* parent)
+board_arrival::board_arrival(json data, QPointF pos, abstract_item* parent)
     :fixed_item(::move(data), pos, parent)
 {
 
