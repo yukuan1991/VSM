@@ -40,12 +40,13 @@ private:
     void report_selection ();
     void product_sequence_deletion ();
 private:
-    item::item* selected_item_ = nullptr;
+    item::abstract_item* selected_item_ = nullptr;
     qreal height = 1000;
     qreal width = 1000 * 1.4142135;
 
     const static QColor background_color;
     QRectF effective_rect_;
+    QMetaObject::Connection conn_;
 };
 
 %>

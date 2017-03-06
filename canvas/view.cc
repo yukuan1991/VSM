@@ -13,7 +13,6 @@
 #include "defs.hpp"
 #include <QGraphicsSvgItem>
 #include <assert.h>
-#include <QGLWidget>
 #include "qt-tools/graphics.hpp"
 #include "item/board_info_flow.h"
 #include <QPainter>
@@ -26,14 +25,12 @@ namespace canvas
 
 view::view(QWidget *parent)
     :QGraphicsView (parent)
-    , tmp_arrow_ (nullptr)
 {
     init ();
 }
 
 view::view(QGraphicsScene *scene, QWidget *parent)
     :QGraphicsView (scene, parent)
-    ,tmp_arrow_ (nullptr)
 {
     init ();
 }
@@ -118,7 +115,7 @@ void view::mouseMoveEvent(QMouseEvent *event)
                               {"type", arrow_state_.toStdString()}};
 
         nlohmann::json json_pos {{"x", pos.x()}, {"y", pos.y()}};
-        tmp_arrow_ = item::item::make ({{"pos", ::move (json_pos)}, {"detail", ::move (detail)}});
+        tmp_arrow_ = item::abstract_item::make ({{"pos", ::move (json_pos)}, {"detail", ::move (detail)}});
 
 
         if (tmp_arrow_.value() != nullptr)
@@ -166,6 +163,18 @@ void view::board_info_press_event(QMouseEvent *event)
 {
     auto scene_pos = mapToScene(event->pos());
 
+
+    if (!board_tmp_item_.empty ())
+    {
+        auto& last_item = board_tmp_item_.back ();
+        auto last_ptr = last_item->line ().p1 ();
+
+        if (distance (scene_pos, last_ptr) < 10)
+        {
+            return;
+        }
+    }
+
     if (event->button() == Qt::LeftButton)
     {
         if (board_tmp_item_.empty())
@@ -177,10 +186,6 @@ void view::board_info_press_event(QMouseEvent *event)
 
         auto& last_item = board_tmp_item_.back ();
         auto last_ptr = last_item->line ().p1 ();
-        if (distance (scene_pos, last_ptr) < 10)
-        {
-            return;
-        }
 
         last_item->setLine({last_ptr, scene_pos});
         board_tmp_item_.emplace_back (make_line (scene_pos, scene_pos));
@@ -215,8 +220,49 @@ void view::board_info_release_event(QMouseEvent *event)
     Q_UNUSED (event);
 }
 
+void view::board_info_make(vector<unique_ptr<QGraphicsLineItem> > lines)
+{
+    if (lines.empty ())
+    {
+        return;
+    }
+
+    auto start_pos = lines.front ()->line ().p1 ();
+
+    nlohmann::json json_lines;
+    for (auto & it : lines)
+    {
+        const auto line = it->line ();
+        const auto p1 = line.p1 ();
+        const auto p2 = line.p2 ();
+
+        json_lines.push_back ({
+                                  {"x1", p1.x ()},
+                                  {"x2", p2.x ()},
+                                  {"y1", p1.y ()},
+                                  {"y2", p2.y ()}
+                              });
+    }
+
+    nlohmann::json create_data {{"pos", {{"x", start_pos.x()}, {"y", start_pos.y()}}},
+                                {"detail", {{"type", "看板用信息流"}, {"lines", ::move (json_lines)}}}};
+
+    auto the_item = item::abstract_item::make (::move (create_data));
+    scene ()->addItem (the_item.release ());
+
+}
+
 void view::add_text(QMouseEvent *event)
 {
+    const auto pos = event->pos ();
+    const auto scene_pos = mapToScene (pos);
+
+    nlohmann::json create_data {{"pos", {{"x", scene_pos.x()}, {"y", scene_pos.y()}}},
+                                {"detail", {{"type", "文字"}, {"text", "双击加入文字"}}}};
+
+    auto the_item = item::abstract_item::make (::move (create_data));
+    scene ()->addItem (the_item.release ());
+
     emit arrow_finished ();
 }
 
@@ -259,7 +305,7 @@ void view::dropEvent(QDropEvent *event)
 
 void view::select_all()
 {
-    auto list = items ();
+    const auto list = items ();
     for (auto & item : list)
     {
         item->setSelected (true);
@@ -317,11 +363,11 @@ void view::item_drop_action(QDropEvent *event)
 {
     QString type = event->mimeData ()->data ("item");
 
-    auto scene_pos = mapToScene(event->pos());
+    const auto scene_pos = mapToScene(event->pos());
     nlohmann::json create_data {{"pos", {{"x", scene_pos.x()}, {"y", scene_pos.y()}}},
                                 {"detail", {{"type", type.toStdString()}}}};
 
-    auto the_item = item::item::make(::move (create_data));
+    auto the_item = item::abstract_item::make(::move (create_data));
 
     if (the_item == nullptr)
     {
@@ -335,7 +381,7 @@ void view::item_drop_action(QDropEvent *event)
 
     auto new_center = the_item->mapRectToScene (the_item->boundingRect ()).center ();
 
-    auto diff = new_center - scene_pos;
+    const auto diff = new_center - scene_pos;
     the_item->moveBy (- diff.x (), - diff.y ());
 
     the_item.release();
@@ -356,7 +402,7 @@ void view::finish_board_info(vector<unique_ptr<QGraphicsLineItem>> lines)
     menu.addAction ("取消");
     connect (confirm, &QAction::triggered, [&]
     {
-        //scene ()->addItem (item::board_info_flow::make (::move (lines), Qt::black).release ());
+        board_info_make (::move (lines));
         emit arrow_finished ();
     });
     menu.exec(QCursor::pos());

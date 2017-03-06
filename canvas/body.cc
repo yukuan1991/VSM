@@ -3,7 +3,7 @@
 #include "utility/raii.hpp"
 #include "defs.hpp"
 #include <QDir>
-#include "item/item.h"
+#include "item/abstract_item.h"
 
 namespace canvas
 <%
@@ -24,12 +24,18 @@ void body::file_new_title()
 
 std::string body::dump()
 {
-    return item::item::dump_scene (scene ());
+    return item::abstract_item::dump_scene (scene ()).dump (4);
 }
 
 bool body::load(const std::string &data) try
 {
-    Q_UNUSED (data);
+    auto content = nlohmann::json::parse (data);
+
+    for (auto & it : content)
+    {
+        auto the_item = item::abstract_item::make (it);
+        scene ()->addItem (the_item.release ());
+    }
     return true;
 }
 catch (const std::exception& e)

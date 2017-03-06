@@ -83,6 +83,7 @@ QPixmap make_pixmap(const QString &name, qreal width, qreal height)
 
 
     QPainter painter (&pm);
+    painter.setRenderHint(QPainter::Antialiasing);
 
     auto found = item_map.find(name);
 

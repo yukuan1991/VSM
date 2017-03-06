@@ -17,7 +17,7 @@ const QColor scene::background_color (230, 230, 230);
 
 void scene::init()
 {
-    connect (this, &scene::selectionChanged, [this] { report_selection (); });
+    conn_ = connect (this, &scene::selectionChanged, [this] { report_selection (); });
     setSceneRect ({0, 0, 1500, 1200});
     setBackgroundBrush(background_color);
 }
@@ -30,7 +30,7 @@ nlohmann::json scene::selected_item_attribute()
         return {};
     }
 
-    auto item_selected = dynamic_cast<item::item*> (selected [0]);
+    auto item_selected = dynamic_cast<item::abstract_item*> (selected [0]);
 
     if (item_selected == nullptr)
     {
@@ -47,7 +47,7 @@ void scene::set_item_attribute(string_view key, string value)
     {
         return;
     }
-    auto item_selected = dynamic_cast<item::item*> (selected [0]);
+    auto item_selected = dynamic_cast<item::abstract_item*> (selected [0]);
     if (item_selected == nullptr)
     {
         return;
@@ -58,7 +58,7 @@ void scene::set_item_attribute(string_view key, string value)
 
 scene::~scene()
 {
-
+    disconnect (conn_);
 }
 
 void scene::drawBackground(QPainter *painter, const QRectF &rect)
@@ -74,7 +74,7 @@ void scene::drawBackground(QPainter *painter, const QRectF &rect)
     vector<pair<qreal, qreal>> sequences;
     for (auto it : items ())
     {
-        auto sequence = dynamic_cast<item::item*>(it);
+        auto sequence = dynamic_cast<item::abstract_item*>(it);
         if (sequence == nullptr)
         {
             continue;
@@ -112,15 +112,15 @@ void scene::drawBackground(QPainter *painter, const QRectF &rect)
             auto second1 = sequences [i].second;
             auto second2 = sequences [j].second;
 
-            if ((first1 > first2 and first1 < second2)  or
-                    (second1 > first2 and second1 < second2) or
-                    (first2 > first1 and first2 < second1) or
-                    (second2 > first1 and second2 < second1))
+            if ((first1 >= first2 and first1 <= second2)  or
+                    (second1 >= first2 and second1 <= second2) or
+                    (first2 >= first1 and first2 <= second1) or
+                    (second2 >= first1 and second2 <= second1))
             {
                 auto final_first = std::min (first1, first2);
                 auto final_second = std::max (second1, second2);
                 sequences [i] = {final_first, final_second};
-                sequences.erase(begin (sequences) + j);
+                sequences.erase(begin (sequences) + static_cast<ssize_t> (j));
             }
             else
             {
@@ -143,6 +143,7 @@ void scene::drawBackground(QPainter *painter, const QRectF &rect)
         painter->drawLine(QPointF (it.second, high_ground), QPointF (it.second, low_ground));
         last = it.second;
     }
+
     painter->drawLine(QPointF (last, high_ground), QPointF (effective_rect_.right (), high_ground));
 }
 

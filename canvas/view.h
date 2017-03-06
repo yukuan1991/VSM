@@ -10,7 +10,7 @@
 
 namespace item
 {
-class item;
+class abstract_item;
 }
 
 namespace canvas
@@ -44,6 +44,7 @@ protected:
     void board_info_press_event (QMouseEvent* event);
     void board_info_move_event (QMouseEvent* event);
     void board_info_release_event (QMouseEvent* event);
+    void board_info_make (vector<unique_ptr<QGraphicsLineItem>> lines);
 
     void add_text (QMouseEvent* event);
 
@@ -61,7 +62,7 @@ private:
     template<typename CALLABLE>
     static void hold_position (QGraphicsItem* item, CALLABLE&& c);
 private:
-    std::experimental::optional<unique_ptr<item::item>> tmp_arrow_;
+    std::experimental::optional<unique_ptr<item::abstract_item>> tmp_arrow_;
     QString arrow_state_;
     QPointF last_pressed_;
     vector<unique_ptr<QGraphicsLineItem>> board_tmp_item_;

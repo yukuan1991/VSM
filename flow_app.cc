@@ -8,8 +8,6 @@
 #include "drawer/toolbox.h"
 #include <QGraphicsScene>
 #include <QMatrix>
-#include <QGLWidget>
-#include <QGLWidget>
 
 APP_REGISTER (flow_app)
 
@@ -35,7 +33,7 @@ bool flow_app::run()
 
 void flow_app::exec_update(std::vector<std::pair<string, string>> file_info)
 {
-    if (!::ask (nullptr, "更新", "有新的版本，是否更新"))
+    if (QMessageBox::question (nullptr, "更新", "有新的版本，是否更新") == QMessageBox::Ok)
     {
         return;
     }

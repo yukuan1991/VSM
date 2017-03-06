@@ -34,7 +34,6 @@ SOURCES += \
     canvas/body.cc \
     canvas/scene.cc \
     canvas/view.cc \
-    item/item.cc \
     item/material_flow.cc \
     item/traditional_info_flow.cc \
     item/electric_info_flow.cc \
@@ -68,7 +67,8 @@ SOURCES += \
     item/value_added_radtio.cc \
     guide.cc \
     item/fixed_item.cc \
-    item/arrow_item.cc
+    item/arrow_item.cc \
+    item/abstract_item.cc
 
 HEADERS += \
     flow_app.h \
@@ -79,7 +79,6 @@ HEADERS += \
     canvas/body.h \
     canvas/scene.h \
     canvas/view.h \
-    item/item.h \
     item/maker.hpp \
     item/material_flow.h \
     item/traditional_info_flow.h \
@@ -114,7 +113,8 @@ HEADERS += \
     item/value_added_radtio.h \
     guide.h \
     item/fixed_item.h \
-    item/arrow_item.h
+    item/arrow_item.h \
+    item/abstract_item.h
 
 FORMS += \
     flow_main.ui \

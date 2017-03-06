@@ -5,10 +5,12 @@
 #include <QMimeData>
 #include <QVBoxLayout>
 #include <QPushButton>
-
 #include "utility/raii.hpp"
 #include "item/maker.hpp"
 #include "drawer/drag_pixmap.h"
+#include "item/abstract_item.h"
+#include <QStyleOptionGraphicsItem>
+#include <QPainter>
 
 
 namespace drawer {
@@ -150,8 +152,21 @@ void drag_widget::mousePressEvent(QMouseEvent *event)
         return;
     }
 
-    auto pm = drawer::make_pixmap(object_name, 100, 80);
+    //auto pm = drawer::make_pixmap(object_name, 100, 80);
+    nlohmann::json create_data {{"pos", {{"x", 0.0}, {"y", 0.0}}},
+                                {"detail", {{"type", object_name.toStdString()}}}};
 
+    auto the_item = item::abstract_item::make(::move (create_data));
+    auto rect = the_item->boundingRect().toRect();
+    QPixmap pm (rect.width(), rect.height());
+    pm.fill(Qt::transparent);
+    {
+        QPainter painter (&pm);
+        painter.setRenderHint(QPainter::Antialiasing);
+
+        QStyleOptionGraphicsItem item;
+        the_item->paint(&painter, &item, nullptr);
+    }
 
     QDrag drag (this);
     auto data = std::make_unique<QMimeData> ();
