@@ -17,7 +17,7 @@ signal_board::signal_board(json data, QPointF pos, abstract_item *parent)
 
 bool signal_board::init()
 {
-    set_attribute("生产批量");
+    enable_attribute ("生产批量");
 
     set_z_value(315);
     set_item_type("信号看板");

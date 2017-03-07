@@ -27,9 +27,9 @@ std::unique_ptr<adjustment_on_scene> adjustment_on_scene::make(json data, QPoint
 bool adjustment_on_scene::init()
 {
     set_item_type("现场调度");
-    set_attribute ("库存量");
-    set_attribute ("原生产计划");
-    set_attribute ("更改后生产计划");
+    enable_attribute ("库存量");
+    enable_attribute ("原生产计划");
+    enable_attribute ("更改后生产计划");
     set_z_value(307);
 
     return true;

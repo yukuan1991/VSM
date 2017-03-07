@@ -14,8 +14,8 @@ bool improvement::init()
 {
      set_item_type("改善");
 
-     set_attribute("存在问题");
-     set_attribute("改善方向");
+     enable_attribute ("存在问题");
+     enable_attribute ("改善方向");
 
      set_z_value(401);
 

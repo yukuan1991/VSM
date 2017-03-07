@@ -13,9 +13,9 @@ bool other_company::init()
 {
     set_item_type("其他公司");
 
-    set_attribute("需求量");
-    set_attribute("包装方式");
-    set_attribute("工作班数");
+    enable_attribute ("需求量");
+    enable_attribute ("包装方式");
+    enable_attribute ("工作班数");
 
     set_z_value(302);
 
@@ -82,8 +82,6 @@ void other_company::paint(QPainter *painter, const QStyleOptionGraphicsItem *opt
 void other_company::mouseDoubleClickEvent(QGraphicsSceneMouseEvent *event)
 {
     Q_UNUSED (event);
-    auto old_name = name ();
-    bool confirmed = false;
     QInputDialog dlg;
     dlg.setInputMode (QInputDialog::TextInput);
     dlg.setLabelText("公司名称");

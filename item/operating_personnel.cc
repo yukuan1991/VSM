@@ -25,7 +25,7 @@ std::unique_ptr<operating_personnel> operating_personnel::make(json data, QPoint
 bool operating_personnel::init()
 {
      set_item_type("操作员");
-     set_attribute("操作员数量");
+     enable_attribute ("操作员数量");
 
      set_z_value(309);
 

@@ -36,6 +36,7 @@ public:
     string item_type () const noexcept;
     void set_item_type (const string & type);
     void set_attribute (string_view key, std::string value = {});
+    void enable_attribute (string_view key);
     std::string attribute (const string& key);
     void apply_z_value (selected_item yes_or_no);
     const json& attributes () { return item_info_ ["attribute"]; }

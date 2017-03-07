@@ -28,7 +28,7 @@ truck_transport::truck_transport(json data, QPointF pos, abstract_item * parent)
 
 bool truck_transport::init()
 {
-    set_attribute("运输频率");
+    enable_attribute ("运输频率");
 
     set_z_value(305);
 

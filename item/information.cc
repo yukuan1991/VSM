@@ -23,7 +23,7 @@ std::unique_ptr<information> information::make(json data, QPointF pos, abstract_
 bool information::init()
 {
     set_item_type("信息");
-    set_attribute("信息名称");
+    enable_attribute ("信息名称");
     set_z_value(317);
 
     return true;

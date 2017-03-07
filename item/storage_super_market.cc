@@ -29,8 +29,8 @@ storage_super_market::storage_super_market(json data, QPointF pos, abstract_item
 
 bool storage_super_market::init()
 {
-    set_attribute("产品名");
-    set_attribute("数量");
+    enable_attribute ("产品名");
+    enable_attribute ("数量");
 
     set_z_value(306);
     set_item_type("库存超市");

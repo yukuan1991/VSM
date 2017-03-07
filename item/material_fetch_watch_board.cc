@@ -15,9 +15,9 @@ bool material_fetch_watch_board::init()
 {
     set_item_type("取料看板");
 
-    set_attribute("产品种类");
-    set_attribute("产品数量");
-    set_attribute("取货地点");
+    enable_attribute ("产品种类");
+    enable_attribute ("产品数量");
+    enable_attribute ("取货地点");
 
     set_z_value(314);
 

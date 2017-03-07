@@ -11,9 +11,9 @@ bool cache_or_safe_storage::init()
 {
      set_item_type("缓冲或者安全库存");
 
-     set_attribute ("产品名称");
-     set_attribute ("库存数量");
-     set_attribute ("库存周期");
+     enable_attribute ("产品名称");
+     enable_attribute ("库存数量");
+     enable_attribute ("库存周期");
 
      set_z_value(308);
 

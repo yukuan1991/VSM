@@ -53,10 +53,9 @@ catch (const std::exception &)
 
 void text_item::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
+    Q_UNUSED (widget);
     painter->setFont (font_);
     painter->drawText (bounding_rect_, text_);
-
-
 
     if (option->state bitand QStyle::State_Selected)
     {

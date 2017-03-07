@@ -104,6 +104,37 @@ catch (const std::exception& e)
     return;
 }
 
+void abstract_item::enable_attribute(string_view key) try
+{
+    auto& attribute = item_info_ ["attribute"];
+    if (!attribute.is_array())
+    {
+        attribute = json::array ();
+        attribute.push_back({{key.to_string (), ""}});
+        return;
+    }
+
+    for (auto & it : attribute)
+    {
+        if (!it.is_object() or it.empty())
+        {
+            continue;
+        }
+
+        std::string current_key = it.begin().key();
+        if (key == current_key)
+        {
+            return;
+        }
+    }
+
+    attribute.push_back({{key.to_string (), ""}});
+}
+catch (const std::exception & )
+{
+    return;
+}
+
 abstract_item::abstract_item(nlohmann::json data, QPointF pos, abstract_item *parent)
     :abstract_item (parent)
 {

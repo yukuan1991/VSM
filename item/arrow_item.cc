@@ -3,15 +3,6 @@
 
 namespace item {
 
-unique_ptr<arrow_item> arrow_item::make(json data, abstract_item *parent) try
-{
-    return nullptr;
-}
-catch (const std::exception &)
-{
-    return nullptr;
-}
-
 arrow_item::arrow_item (nlohmann::json data, QPointF pos, abstract_item *parent)
     :abstract_item (::move (data), pos, parent)
 {
@@ -28,7 +19,7 @@ bool arrow_item::init() try
     stop_pos_ = QPointF (radius_, 0);
     return true;
 }
-catch (const std::exception & e)
+catch (const std::exception &)
 {
     return false;
 }

@@ -20,8 +20,8 @@ bool balanced_production::init()
 {
     set_item_type("均衡生产");
 
-    set_attribute ("生产品类");
-    set_attribute ("生产数量");
+    enable_attribute ("生产品类");
+    enable_attribute ("生产数量");
 
     set_z_value(317);
 

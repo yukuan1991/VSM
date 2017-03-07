@@ -32,15 +32,15 @@ bool production_sequence::init()
 {
     set_item_type("生产工序");
 
-    set_attribute ("周期时间");
-    set_attribute("换模时间");
-    set_attribute("设备开机率");
-    set_attribute("产品批量大小");
-    set_attribute("操作工数量");
-    set_attribute("产品类别");
-    set_attribute("包装数量");
-    set_attribute("工作时间");
-    set_attribute("不良品");
+    enable_attribute  ("周期时间");
+    enable_attribute ("换模时间");
+    enable_attribute ("设备开机率");
+    enable_attribute ("产品批量大小");
+    enable_attribute ("操作工数量");
+    enable_attribute ("产品类别");
+    enable_attribute ("包装数量");
+    enable_attribute ("工作时间");
+    enable_attribute ("不良品");
 
     set_z_value(301);
 

@@ -28,9 +28,9 @@ storage::storage(json data, QPointF pos, abstract_item* parent)
 bool storage::init()
 {
 
-    set_attribute("库存数量");
-    set_attribute("库存天数");
-    set_attribute("材料名");
+    enable_attribute ("库存数量");
+    enable_attribute ("库存天数");
+    enable_attribute ("材料名");
 
     set_item_type("库存");
 

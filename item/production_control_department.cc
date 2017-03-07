@@ -24,7 +24,7 @@ bool production_control_department::init()
 {
     set_item_type("生产控制部门");
 
-    set_attribute("生产计划安排方式");
+    enable_attribute ("生产计划安排方式");
 
     return true;
 

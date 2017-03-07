@@ -29,10 +29,10 @@ bool production_watcher_board::init()
      set_item_type("生产看板");
 
 
-     set_attribute("产品种类");
-     set_attribute("生产数量");
-     set_attribute("需求地点");
-     set_attribute("供货时间");
+     enable_attribute ("产品种类");
+     enable_attribute ("生产数量");
+     enable_attribute ("需求地点");
+     enable_attribute ("供货时间");
 
      set_z_value(313);
 

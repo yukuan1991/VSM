@@ -8,7 +8,7 @@ namespace item {
 bool board_arrival::init()
 {
    set_item_type("看板以批量方式传达");
-   set_attribute ("生产批量");
+   enable_attribute ("生产批量");
 
    set_z_value(316);
 

@@ -13,8 +13,8 @@ value_added_radtio::value_added_radtio(json data, QPointF pos, abstract_item* pa
 
 bool value_added_radtio::init()
 {
-    set_attribute("生产交付周期");
-    set_attribute("增值时间");
+    enable_attribute ("生产交付周期");
+    enable_attribute ("增值时间");
 
     set_item_type("增值比");
 
