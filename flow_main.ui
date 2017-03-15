@@ -20,7 +20,7 @@
      <x>0</x>
      <y>0</y>
      <width>800</width>
-     <height>23</height>
+     <height>25</height>
     </rect>
    </property>
    <widget class="QMenu" name="menu_file">
@@ -48,31 +48,9 @@
     </property>
     <addaction name="action_drawer"/>
    </widget>
-   <widget class="QMenu" name="menu">
-    <property name="title">
-     <string>帮助</string>
-    </property>
-    <widget class="QMenu" name="menu_guide">
-     <property name="focusPolicy">
-      <enum>Qt::NoFocus</enum>
-     </property>
-     <property name="title">
-      <string>向导</string>
-     </property>
-     <property name="icon">
-      <iconset>
-       <normaloff>image/guide.png</normaloff>image/guide.png</iconset>
-     </property>
-     <addaction name="action_new_guide"/>
-     <addaction name="action_future_guide"/>
-     <addaction name="action_improve_guide"/>
-    </widget>
-    <addaction name="menu_guide"/>
-   </widget>
    <addaction name="menu_file"/>
    <addaction name="menu_edit"/>
    <addaction name="menu_window"/>
-   <addaction name="menu"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
   <action name="action_file_new">

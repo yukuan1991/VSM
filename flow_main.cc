@@ -13,7 +13,6 @@
 #include <QWizardPage>
 #include <QPrintDialog>
 #include <QHBoxLayout>
-#include "guide.h"
 
 flow_main::flow_main(QWidget *parent) :
     QMainWindow(parent),
@@ -238,9 +237,9 @@ void flow_main::init_conn()
     connect (ui->action_zoom_in, &QAction::triggered, this, &flow_main::zoom_in_active);
     connect (ui->action_zoom_out, &QAction::triggered, this, &flow_main::zoom_out_active);
 
-    connect(ui->action_new_guide, &QAction::triggered, [] { invoke_guide ("current"); });
-    connect(ui->action_future_guide, &QAction::triggered, [] { invoke_guide ("future"); });
-    connect(ui->action_improve_guide, &QAction::triggered, [] { invoke_guide ("improve"); });
+    //connect(ui->action_new_guide, &QAction::triggered, [] { invoke_guide ("current"); });
+    //connect(ui->action_future_guide, &QAction::triggered, [] { invoke_guide ("future"); });
+    //connect(ui->action_improve_guide, &QAction::triggered, [] { invoke_guide ("improve"); });
 }
 
 void flow_main::zoom_in_active()
