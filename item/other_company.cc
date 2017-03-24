@@ -51,8 +51,8 @@ void other_company::paint(QPainter *painter, const QStyleOptionGraphicsItem *opt
     painter->setPen(the_pen);
 
     painter->setBrush(Qt::white);
-    auto x_scale = width() / 100;
-    auto y_scale = height() / 80;
+    const auto x_scale = width() / 100;
+    const auto y_scale = height() / 80;
     const QPointF
             p1 {1 * x_scale, 30 * y_scale},
     p2 {33 * x_scale,1 * y_scale},
@@ -64,16 +64,16 @@ void other_company::paint(QPainter *painter, const QStyleOptionGraphicsItem *opt
     p8 {1 * x_scale,79 * y_scale};
     painter->drawPolygon({{p1,p2,p3,p4,p5,p6,p7,p8}},Qt::WindingFill);
 
-    auto item_name = name ();
+    const auto item_name = name ();
     if (item_name.empty())
     {
         return;
     }
 
     QFontMetricsF metrics (painter->font());
-    auto text_width = metrics.width(item_name.data());
-    auto text_height = metrics.height();
-    auto center = QPointF (x_scale * 50, (p1.y() + p8.y()) / 2);
+    const auto text_width = metrics.width(item_name.data());
+    const auto text_height = metrics.height();
+    const auto center = QPointF (x_scale * 50, (p1.y() + p8.y()) / 2);
     painter->drawText(QRectF (center - QPointF (text_width / 2, text_height / 2),
                               QSizeF (text_width, text_height)), item_name.data());
 }

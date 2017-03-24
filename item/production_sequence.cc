@@ -84,7 +84,7 @@ void production_sequence::paint(QPainter *painter, const QStyleOptionGraphicsIte
 
 void production_sequence::mouseDoubleClickEvent(QGraphicsSceneMouseEvent *event)
 {
-    Q_UNUSED (event);
+    fixed_item::mouseDoubleClickEvent (event);
     auto old_name = name ();
     bool confirmed = false;
     auto company_name = QInputDialog::getText(nullptr, "", "名称:",
