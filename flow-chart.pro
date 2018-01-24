@@ -68,7 +68,8 @@ SOURCES += \
     guide.cc \
     item/fixed_item.cc \
     item/arrow_item.cc \
-    item/abstract_item.cc
+    item/abstract_item.cc \
+    verification/verification.cpp
 
 HEADERS += \
     flow_app.h \
@@ -114,7 +115,8 @@ HEADERS += \
     guide.h \
     item/fixed_item.h \
     item/arrow_item.h \
-    item/abstract_item.h
+    item/abstract_item.h \
+    verification/verification.h
 
 FORMS += \
     flow_main.ui \
